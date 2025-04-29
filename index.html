@@ -20,6 +20,22 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <style>
+            @keyframes pulse {
+              0% {
+                transform: scale(1);
+              }
+              50% {
+                transform: scale(1.05);
+              }
+              100% {
+                transform: scale(1);
+              }
+            }
+            .pulse-animation {
+              animation: pulse 1.5s infinite;
+            }
+        </style>
     </head>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
@@ -46,7 +62,7 @@
                                 <div class="fs-4 fw-light text-muted">Berbagi moment spesial dengan :</div>
                                 <h1 class="display-4 fw-bolder mb-5"><span class="text-gradient d-inline">Undangan Digital</span></h1>
                                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xxl-start mb-3">
-                                    <a class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" href="https://wa.me/6285262658655" target="_blank"><i class="fab fa-whatsapp"></i> Pesan sekarang</a>
+                                    <a class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder pulse-animation" href="https://wa.me/6285262658655" target="_blank"><i class="fab fa-whatsapp"></i> Pesan sekarang</a>
                                     <a class="btn btn-outline-dark btn-lg px-5 py-3 fs-6 fw-bolder" href="katalog.html">Katalog</a>
                                 </div>
                             </div>

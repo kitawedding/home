@@ -180,29 +180,6 @@
         }
     </script>
     <script>
-        const buttons = document.querySelectorAll('.filter-btn');
-        let currentFilter = 'all';
-
-        buttons.forEach(button => {
-          button.addEventListener('click', () => {
-            const filter = button.dataset.filter;
-
-            if (filter === currentFilter) {
-              // Jika diklik dua kali, reset ke "All"
-              currentFilter = 'all';
-              buttons.forEach(btn => btn.classList.remove('active'));
-              document.querySelector('[data-filter="all"]').classList.add('active');
-              // TODO: tampilkan semua item
-            } else {
-              currentFilter = filter;
-              buttons.forEach(btn => btn.classList.remove('active'));
-              button.classList.add('active');
-              // TODO: filter item sesuai currentFilter
-            }
-          });
-        });
-    </script>
-    <script>
         function filterKatalog(category) {
             const items = document.querySelectorAll('.katalog-item');
             items.forEach(item => {

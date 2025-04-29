@@ -71,11 +71,11 @@
                     <div class="badge bg-gradient-primary-to-secondary text-white mb-4 pulse-animation"><div class="text-uppercase">PROMO HARGA 50K UNTUK SEMUA DESAIN</div></div>
                 </div>
                 <div class="d-flex flex-wrap justify-content-center gap-2 my-3">
-                    <button class="btn btn-outline-primary me-2 filter-btn active" onclick="filterKatalog('all')">All</button>
-                    <button class="btn btn-outline-primary me-2 filter-btn" onclick="filterKatalog('spesial')">Spesial</button>
-                    <button class="btn btn-outline-primary me-2 filter-btn" onclick="filterKatalog('luxury')">Luxury</button>
-                    <button class="btn btn-outline-primary me-2 filter-btn" onclick="filterKatalog('premium')">Premium</button>
-                    <button class="btn btn-outline-primary me-2 filter-btn" onclick="filterKatalog('adat')">Adat</button>
+                    <button class="btn btn-outline-primary me-2 filter-btn active" onclick="filterKatalog('all', this)">All</button>
+                    <button class="btn btn-outline-primary me-2 filter-btn" onclick="filterKatalog('spesial', this)">Spesial</button>
+                    <button class="btn btn-outline-primary me-2 filter-btn" onclick="filterKatalog('luxury', this)">Luxury</button>
+                    <button class="btn btn-outline-primary me-2 filter-btn" onclick="filterKatalog('premium', this)">Premium</button>
+                    <button class="btn btn-outline-primary me-2 filter-btn" onclick="filterKatalog('adat', this)">Adat</button>
                 </div>
                 <div class="row gx-4 gy-3 justify-content-center" id="katalog-container">
                     <!-- Katalog item akan dimasukkan secara dinamis -->
@@ -179,27 +179,31 @@
             return str.charAt(0).toUpperCase() + str.slice(1);
         }
     </script>
-    <script>
-        function filterKatalog(category) {
-            const items = document.querySelectorAll('.katalog-item');
-            items.forEach(item => {
-                const itemCategory = item.getAttribute('data-category');
-                if (category === 'all' || itemCategory === category) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+<script>
+    function filterKatalog(category, clickedButton) {
+        const items = document.querySelectorAll('.katalog-item');
+        items.forEach(item => {
+            const itemCategory = item.getAttribute('data-category');
+            if (category === 'all' || itemCategory === category) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
 
-            // Update tombol aktif
-            const buttons = document.querySelectorAll('.text-center button');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-        }
+        // Update tombol aktif
+        const buttons = document.querySelectorAll('.text-center button');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        clickedButton.classList.add('active');
+    }
 
-        // Tampilkan semua saat halaman pertama kali dibuka
-        window.onload = () => filterKatalog('all');
-    </script>
+    // Saat halaman pertama kali dimuat, jalankan filter "all" dan aktifkan tombolnya
+    window.onload = function () {
+        const btnAll = document.getElementById('btn-all');
+        filterKatalog('all', btnAll);
+    };
+</script>
+
 </body>
 
 </html>

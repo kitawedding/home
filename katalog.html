@@ -71,11 +71,11 @@
                     <div class="badge bg-gradient-primary-to-secondary text-white mb-4 pulse-animation"><div class="text-uppercase">PROMO HARGA 50K UNTUK SEMUA DESAIN</div></div>
                 </div>
                 <div class="d-flex flex-wrap justify-content-center gap-2 my-3">
-                    <button class="btn btn-outline-primary me-2 active" onclick="filterKatalog('all')">All</button>
-                    <button class="btn btn-outline-primary me-2" onclick="filterKatalog('spesial')">Spesial</button>
-                    <button class="btn btn-outline-primary me-2" onclick="filterKatalog('luxury')">Luxury</button>
-                    <button class="btn btn-outline-primary me-2" onclick="filterKatalog('premium')">Premium</button>
-                    <button class="btn btn-outline-primary" onclick="filterKatalog('adat')">Adat</button>
+                    <button class="btn btn-outline-primary me-2 filter-btn active" onclick="filterKatalog('all')">All</button>
+                    <button class="btn btn-outline-primary me-2 filter-btn" onclick="filterKatalog('spesial')">Spesial</button>
+                    <button class="btn btn-outline-primary me-2 filter-btn" onclick="filterKatalog('luxury')">Luxury</button>
+                    <button class="btn btn-outline-primary me-2 filter-btn" onclick="filterKatalog('premium')">Premium</button>
+                    <button class="btn btn-outline-primary me-2 filter-btn" onclick="filterKatalog('adat')">Adat</button>
                 </div>
                 <div class="row gx-4 gy-3 justify-content-center" id="katalog-container">
                     <!-- Katalog item akan dimasukkan secara dinamis -->
@@ -178,6 +178,29 @@
         function capitalize(str) {
             return str.charAt(0).toUpperCase() + str.slice(1);
         }
+    </script>
+    <script>
+        const buttons = document.querySelectorAll('.filter-btn');
+        let currentFilter = 'all';
+
+        buttons.forEach(button => {
+          button.addEventListener('click', () => {
+            const filter = button.dataset.filter;
+
+            if (filter === currentFilter) {
+              // Jika diklik dua kali, reset ke "All"
+              currentFilter = 'all';
+              buttons.forEach(btn => btn.classList.remove('active'));
+              document.querySelector('[data-filter="all"]').classList.add('active');
+              // TODO: tampilkan semua item
+            } else {
+              currentFilter = filter;
+              buttons.forEach(btn => btn.classList.remove('active'));
+              button.classList.add('active');
+              // TODO: filter item sesuai currentFilter
+            }
+          });
+        });
     </script>
     <script>
         function filterKatalog(category) {

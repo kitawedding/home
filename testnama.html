@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Undangan dari Google Sheets</title>
+    <style>
+        .nama-tamu { color: #e74c3c; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Selamat Datang, <span id="nama-tamu">Tamu Undangan</span>!</h1>
+
+    <script>
+        // URL Google Sheets (ganti [ID_SHEET] dengan ID Anda)
+        const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTD17SiMK_1dHnFhyr42kOyU0B14Jp5UXptUnRHaQsPW4SUGuHMP1PHjHSytLoibahWrdCbYf5mKgNB/pub?gid=0&single=true&output=csv";
+
+        // Ambil parameter nama dari URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const namaParam = urlParams.get('nama')?.toLowerCase();
+
+        // Fetch data dari Google Sheets
+        fetch(SHEET_URL)
+            .then(res => res.text())
+            .then(data => {
+                // Parse data JSON unik dari Google Sheets
+                const json = JSON.parse(data.substr(47).slice(0, -2));
+                const namaList = json.table.rows.map(row => row.c[0].v.toLowerCase());
+                
+                // Cek apakah nama ada di daftar
+                if (namaParam && namaList.includes(namaParam)) {
+                    document.getElementById('nama-tamu').textContent = 
+                        namaParam.charAt(0).toUpperCase() + namaParam.slice(1);
+                }
+            })
+            .catch(err => console.error("Error mengambil data:", err));
+    </script>
+</body>
+</html>

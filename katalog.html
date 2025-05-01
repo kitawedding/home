@@ -61,6 +61,7 @@
       height: 300px;
       object-fit: cover;
     }
+
     .feature-list {
       list-style-type: none;
       padding-left: 0;
@@ -74,6 +75,19 @@
     .feature-list li.cross:before {
       content: "✗ ";
       color: red;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 4px;
+      background: #f1f1f1;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #3498db;
+      transition: width 0.3s ease;
     }
   </style>
 </head>
@@ -429,12 +443,25 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
         <div class="modal-body p-0">
-          <iframe id="demoIframe" src="" width="100%" height="100%" style="min-height: 650px;" frameborder="0"></iframe>
+          <iframe id="demoIframe" src="" width="100%" height="100%" style="min-height: 650px;" frameborder="0"
+            onload="hideProgressBar()"></iframe>
         </div>
       </div>
     </div>
   </div>
   <script>
+    // Simulasi progress (bisa diganti dengan event loading asli)
+    let progress = 0;
+    const progressBar = document.getElementById("progress-bar");
+    const interval = setInterval(() => {
+      progress += 10;
+      progressBar.style.width = progress + "%";
+      if (progress >= 100) clearInterval(interval);
+    }, 300);
+
+    function hideProgressBar() {
+      document.querySelector(".progress-container").style.display = "none";
+    }
     // Event delegation untuk tombol "Lihat Demo"
     document.addEventListener('click', function (e) {
       if (e.target.classList.contains('lihat-demo-btn')) {

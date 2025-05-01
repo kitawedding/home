@@ -61,6 +61,20 @@
       height: 300px;
       object-fit: cover;
     }
+    .feature-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .feature-list li:before {
+      content: "✓ ";
+      color: green;
+    }
+
+    .feature-list li.cross:before {
+      content: "✗ ";
+      color: red;
+    }
   </style>
 </head>
 
@@ -85,12 +99,62 @@
     </nav>
     <section class="py-5">
       <div class="container px-5 mb-5">
-        <div class="text-center mb-5">
-          <h1 class="display-5 fw-bolder mb-0">
-            <span class="text-gradient d-inline">Katalog</span>
-          </h1>
-          <div class="badge bg-gradient-primary-to-secondary text-white mb-4 pulse-animation">
-            <div class="text-uppercase">PROMO HARGA 20K UNTUK SEMUA DESAIN</div>
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-success">
+              <div class="card-header py-3 text-bg-success border-success">
+                <h4 class="my-0 fw-normal">Murmer</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">Rp. 20.000</small></h1>
+                <ul class="list-unstyled mt-3 mb-4 feature-list">
+                  <li>Masa Aktif 5 bulan</li>
+                  <li>Gratis konsultasi</li>
+                  <li class="cross">Nama tamu undangan*</li>
+                  <li class="cross">Komentar*</li>
+                  <li>Gratis jasa admin</li>
+                  <li class="cross">Revisi tanpa batas</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-primary">
+              <div class="card-header py-3 text-bg-primary border-primary">
+                <h4 class="my-0 fw-normal">Medium</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">Rp. 25.000</small>
+                </h1>
+                <ul class="list-unstyled mt-3 mb-4 feature-list">
+                  <li>Masa Aktif 5 bulan</li>
+                  <li>Gratis konsultasi</li>
+                  <li>Nama tamu undangan</li>
+                  <li class="cross">Komentar*</li>
+                  <li>Gratis jasa admin</li>
+                  <li class="cross">Revisi tanpa batas</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-danger">
+              <div class="card-header py-3 text-bg-danger border-danger">
+                <h4 class="my-0 fw-normal">Enterprise</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">Rp. 30.000</small>
+                </h1>
+                <ul class="list-unstyled mt-3 mb-4 feature-list">
+                  <li>Masa Aktif 5 bulan</li>
+                  <li>Gratis konsultasi</li>
+                  <li>Nama tamu undangan</li>
+                  <li>Komentar</li>
+                  <li>Gratis jasa admin</li>
+                  <li>Revisi tanpa batas</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -98,12 +162,16 @@
         <!-- Filter Buttons -->
         <div class="filter-buttons">
           <button class="btn btn-outline-primary active" onclick="filterKatalog('all', this)">All</button>
+          <!--
+          <button class="btn btn-outline-primary" onclick="filterKatalog('rekomendasi', this)">Pilihan Admin</button>
+          -->
           <button class="btn btn-outline-primary" onclick="filterKatalog('spesial', this)">Spesial</button>
           <button class="btn btn-outline-primary" onclick="filterKatalog('luxury', this)">Luxury</button>
           <button class="btn btn-outline-primary" onclick="filterKatalog('premium', this)">Premium</button>
           <button class="btn btn-outline-primary" onclick="filterKatalog('adat', this)">Adat</button>
           <button class="btn btn-outline-primary" onclick="filterKatalog('luxury_++', this)">Luxury ++</button>
-          <button class="btn btn-outline-primary" onclick="filterKatalog('wedding_floral', this)">Wedding Floral</button>
+          <button class="btn btn-outline-primary" onclick="filterKatalog('wedding_floral', this)">Wedding
+            Floral</button>
         </div>
 
         <!-- Catalog Items Container -->
@@ -119,51 +187,55 @@
   <script src="js/scripts.js"></script>
   <script>
     const katalogItems = [
-      { category: "spesial", id: "01", demoLink: "https://inv.punakawandigital.id/spesial-01" },
-      { category: "spesial", id: "02", demoLink: "https://inv.punakawandigital.id/spesial-02" },
-      { category: "spesial", id: "03", demoLink: "https://inv.punakawandigital.id/spesial-03" },
-      { category: "spesial", id: "04", demoLink: "https://inv.punakawandigital.id/spesial-04" },
-      { category: "spesial", id: "05", demoLink: "https://inv.punakawandigital.id/spesial-05" },
-      { category: "spesial", id: "06", demoLink: "https://inv.punakawandigital.id/spesial-06" },
-      { category: "spesial", id: "07", demoLink: "https://inv.punakawandigital.id/spesial-07" },
-      { category: "spesial", id: "08", demoLink: "https://inv.punakawandigital.id/spesial-08" },
-      { category: "spesial", id: "09", demoLink: "https://inv.punakawandigital.id/spesial-09" },
-      { category: "spesial", id: "10", demoLink: "https://inv.punakawandigital.id/spesial-10" },
 
-      // Luxury category
-      { category: "luxury", id: "01", demoLink: "https://inv.punakawandigital.id/luxury-01" },
-      { category: "luxury", id: "02", demoLink: "https://inv.punakawandigital.id/luxury-02" },
-      { category: "luxury", id: "03", demoLink: "https://inv.punakawandigital.id/luxury-03" },
-      { category: "luxury", id: "04", demoLink: "https://inv.punakawandigital.id/luxury-04" },
-      { category: "luxury", id: "05", demoLink: "https://inv.punakawandigital.id/luxury-05" },
-      { category: "luxury", id: "06", demoLink: "https://inv.punakawandigital.id/luxury-06" },
-      { category: "luxury", id: "07", demoLink: "https://inv.punakawandigital.id/luxury-07" },
-      { category: "luxury", id: "08", demoLink: "https://inv.punakawandigital.id/luxury-08" },
-      { category: "luxury", id: "09", demoLink: "https://inv.punakawandigital.id/luxury-09" },
-      { category: "luxury", id: "10", demoLink: "https://inv.punakawandigital.id/luxury-10" },
-      { category: "luxury", id: "11", demoLink: "https://inv.punakawandigital.id/luxury-11" },
+      //Pilihan Admin
 
-      // Premium category
-      { category: "premium", id: "01", demoLink: "https://inv.punakawandigital.id/premium-01" },
-      { category: "premium", id: "02", demoLink: "https://inv.punakawandigital.id/premium-02" },
-      { category: "premium", id: "03", demoLink: "https://inv.punakawandigital.id/premium-03" },
-      { category: "premium", id: "04", demoLink: "https://inv.punakawandigital.id/premium-04" },
-      { category: "premium", id: "05", demoLink: "https://inv.punakawandigital.id/premium-05" },
-      { category: "premium", id: "06", demoLink: "https://inv.punakawandigital.id/premium-06" },
-      { category: "premium", id: "07", demoLink: "https://inv.punakawandigital.id/premium-07" },
-      { category: "premium", id: "08", demoLink: "https://inv.punakawandigital.id/premium-08" },
+      // Spesial category (sudah ada index.html)
+      { category: "spesial", id: "01", demoLink: "datakatalog/spesial/spesial-01/index.html" },
+      { category: "spesial", id: "02", demoLink: "datakatalog/spesial/spesial-02/index.html" },
+      { category: "spesial", id: "03", demoLink: "datakatalog/spesial/spesial-03/index.html" },
+      { category: "spesial", id: "04", demoLink: "datakatalog/spesial/spesial-04/index.html" },
+      { category: "spesial", id: "05", demoLink: "datakatalog/spesial/spesial-05/index.html" },
+      { category: "spesial", id: "06", demoLink: "datakatalog/spesial/spesial-06/index.html" },
+      { category: "spesial", id: "07", demoLink: "datakatalog/spesial/spesial-07/index.html" },
+      { category: "spesial", id: "08", demoLink: "datakatalog/spesial/spesial-08/index.html" },
+      { category: "spesial", id: "09", demoLink: "datakatalog/spesial/spesial-09/index.html" },
+      { category: "spesial", id: "10", demoLink: "datakatalog/spesial/spesial-10/index.html" },
 
-      // Adat category (first 10 items)
-      { category: "adat", id: "01", demoLink: "https://inv.punakawandigital.id/wayang-01" },
-      { category: "adat", id: "02", demoLink: "https://inv.punakawandigital.id/wayang-02" },
-      { category: "adat", id: "03", demoLink: "https://inv.punakawandigital.id/wayang-03" },
-      { category: "adat", id: "04", demoLink: "https://inv.punakawandigital.id/wayang-04" },
-      { category: "adat", id: "05", demoLink: "https://inv.punakawandigital.id/bugis" },
-      { category: "adat", id: "06", demoLink: "https://inv.punakawandigital.id/minang" },
-      { category: "adat", id: "07", demoLink: "https://inv.punakawandigital.id/bali" },
-      { category: "adat", id: "08", demoLink: "https://inv.punakawandigital.id/batak" },
-      { category: "adat", id: "09", demoLink: "https://inv.punakawandigital.id/chinese" },
-      { category: "adat", id: "10", demoLink: "https://inv.punakawandigital.id/melayu" },
+      // Luxury category (ditambahkan index.html)
+      { category: "luxury", id: "01", demoLink: "datakatalog/luxury/luxury-01/index.html" },
+      { category: "luxury", id: "02", demoLink: "datakatalog/luxury/luxury-02/index.html" },
+      { category: "luxury", id: "03", demoLink: "datakatalog/luxury/luxury-03/index.html" },
+      { category: "luxury", id: "04", demoLink: "datakatalog/luxury/luxury-04/index.html" },
+      { category: "luxury", id: "05", demoLink: "datakatalog/luxury/luxury-05/index.html" },
+      { category: "luxury", id: "06", demoLink: "datakatalog/luxury/luxury-06/index.html" },
+      { category: "luxury", id: "07", demoLink: "datakatalog/luxury/luxury-07/index.html" },
+      { category: "luxury", id: "08", demoLink: "datakatalog/luxury/luxury-08/index.html" },
+      { category: "luxury", id: "09", demoLink: "datakatalog/luxury/luxury-09/index.html" },
+      { category: "luxury", id: "10", demoLink: "datakatalog/luxury/luxury-10/index.html" },
+      { category: "luxury", id: "11", demoLink: "datakatalog/luxury/luxury-11/index.html" },
+
+      // Premium category (ditambahkan index.html)
+      { category: "premium", id: "01", demoLink: "datakatalog/premium/premium-01/index.html" },
+      { category: "premium", id: "02", demoLink: "datakatalog/premium/premium-02/index.html" },
+      { category: "premium", id: "03", demoLink: "datakatalog/premium/premium-03/index.html" },
+      { category: "premium", id: "04", demoLink: "datakatalog/premium/premium-04/index.html" },
+      { category: "premium", id: "05", demoLink: "datakatalog/premium/premium-05/index.html" },
+      { category: "premium", id: "06", demoLink: "datakatalog/premium/premium-06/index.html" },
+      { category: "premium", id: "07", demoLink: "datakatalog/premium/premium-07/index.html" },
+      { category: "premium", id: "08", demoLink: "datakatalog/premium/premium-08/index.html" },
+
+      // Adat category (ditambahkan index.html)
+      { category: "adat", id: "01", demoLink: "datakatalog/adat/wayang-01/index.html" },
+      { category: "adat", id: "02", demoLink: "datakatalog/adat/wayang-02/index.html" },
+      { category: "adat", id: "03", demoLink: "datakatalog/adat/wayang-03/index.html" },
+      { category: "adat", id: "04", demoLink: "datakatalog/adat/wayang-04/index.html" },
+      { category: "adat", id: "05", demoLink: "datakatalog/adat/bugis/index.html" },
+      { category: "adat", id: "06", demoLink: "datakatalog/adat/minang/index.html" },
+      { category: "adat", id: "07", demoLink: "datakatalog/adat/bali/index.html" },
+      { category: "adat", id: "08", demoLink: "datakatalog/adat/batak/index.html" },
+      { category: "adat", id: "09", demoLink: "datakatalog/adat/chinese/index.html" },
+      { category: "adat", id: "10", demoLink: "datakatalog/adat/melayu/index.html" },
       { category: "adat", id: "11", imageUrl: "https://foreverr.net/wp-content/uploads/ar010-768x768.webp", demoLink: "https://foreverr.id/demo/ar010" },
       { category: "adat", id: "12", imageUrl: "https://foreverr.net/wp-content/uploads/ar009-768x768.webp", demoLink: "https://foreverr.id/demo/ar009" },
       { category: "adat", id: "13", imageUrl: "https://foreverr.net/wp-content/uploads/uw48-768x768.jpg", demoLink: "https://foreverr.id/demo/uw048" },
@@ -250,9 +322,6 @@
       { category: "wedding_floral", id: "40", imageUrl: "https://foreverr.net/wp-content/uploads/003-768x768.jpg", demoLink: "https://foreverr.id/demo/uw003" },
       { category: "wedding_floral", id: "41", imageUrl: "https://foreverr.net/wp-content/uploads/002-768x768.jpg", demoLink: "https://foreverr.id/demo/uw002" },
       { category: "wedding_floral", id: "42", imageUrl: "https://foreverr.net/wp-content/uploads/001-1-768x768.jpg", demoLink: "https://foreverr.id/demo/uw001" }
-
-      // Wedding Luxury
-
     ];
 
     const baseImageUrl = "assets/";
@@ -292,7 +361,7 @@
             <span class="fw-bold text-dark">Rp. 20.000</span>
           </p>
           <div class="d-flex justify-content-between align-items-center gap-2 mt-auto">
-            <a href="${item.demoLink}" target="_blank" class="btn btn-outline-primary flex-grow-1">Lihat Demo</a>
+            <a href="#" class="btn btn-outline-primary flex-grow-1 lihat-demo-btn" data-demo-link="${item.demoLink}" data-bs-toggle="modal" data-title="${title}" data-bs-target="#demoModal">Lihat Demo</a>
             <a href="https://wa.me/6289698486246?text=Halo%20kak.%0ASepertinya%20saya%20minat%20untuk%20desain%20ini%20%3A%20${title}" target="_blank" class="btn btn-success px-3 py-2 pulse-animation"><i class="fab fa-whatsapp"></i></a>
           </div>
         </div>
@@ -333,6 +402,56 @@
       const btnAll = document.querySelector('.filter-buttons .btn');
       filterKatalog('all', btnAll);
     };
+
+  </script>
+  <script>
+    document.querySelectorAll('.lihat-demo-btn').forEach(button => {
+      button.addEventListener('click', function () {
+        const link = this.getAttribute('data-demo-link');
+        document.getElementById('demoIframe').src = link;
+      });
+    });
+
+    // Kosongkan iframe saat modal ditutup agar tidak tetap memutar di background
+    const demoModal = document.getElementById('demoModal');
+    demoModal.addEventListener('hidden.bs.modal', function () {
+      document.getElementById('demoIframe').src = '';
+    });
+  </script>
+  <!-- Modal Global -->
+  <div class="modal fade" id="demoModal" tabindex="-1" aria-labelledby="demoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content">
+        <div class="modal-header">
+          <a type="button" class="btn btn-success" href="#">
+            <i class="fab fa-whatsapp"></i> Pesan sekarang
+          </a>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body p-0">
+          <iframe id="demoIframe" src="" width="100%" height="100%" style="min-height: 650px;" frameborder="0"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Event delegation untuk tombol "Lihat Demo"
+    document.addEventListener('click', function (e) {
+      if (e.target.classList.contains('lihat-demo-btn')) {
+        const demoLink = e.target.getAttribute('data-demo-link');
+        const title = e.target.getAttribute('data-title');
+
+        document.getElementById('demoIframe').src = demoLink;
+
+        const whatsappBtn = document.querySelector('#demoModal .btn-success');
+        whatsappBtn.href = `https://wa.me/6289698486246?text=Halo%20kak.%0ASepertinya%20saya%20minat%20untuk%20desain%20ini%20%3A%20${encodeURIComponent(title)}`;
+      }
+    });
+
+    // Reset iframe saat modal ditutup
+    document.getElementById('demoModal').addEventListener('hidden.bs.modal', function () {
+      document.getElementById('demoIframe').src = '';
+    });
   </script>
 </body>
 

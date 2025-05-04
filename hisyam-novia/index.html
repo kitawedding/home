@@ -2510,8 +2510,45 @@
 							data-id="7336b2f9" data-element_type="widget" data-aos="zoom-in" data-aos-delay="5"
 							data-aos-duration="2500" data-aos-easing="lease-in-cube" data-aos-offset="10"
 							data-widget_type="text-editor.default">
-							<div class="elementor-widget-container">
+							<div class="elementor-widget-container" id="nama-tamu-undangan">
 								Nama Tamu </div>
+								<script>
+									// URL Google Sheets (ganti dengan URL publik Anda)
+									const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSyclmSUWlBfDcuFwOWlVpALOxD3V-MI_jMSqbQHC3mtp7jb9uQWKukZr1ikjdvNPKoLNuDwqlLA8rw/pub?gid=0&single=true&output=csv";
+	
+									// Ambil parameter nama dari URL
+									const urlParams = new URLSearchParams(window.location.search);
+									const namaParam = urlParams.get('nama')?.toLowerCase();
+	
+									// Fetch data dari Google Sheets
+									fetch(SHEET_URL)
+										.then(res => {
+											if (!res.ok) throw new Error("Network response was not ok");
+											return res.text();
+										})
+										.then(csvData => {
+											// Parse CSV data
+											const namaList = csvData.split('\n')
+												.map(row => row.split(',')[0].trim().toLowerCase())
+												.filter(name => name.length > 0);
+	
+											console.log("Daftar nama dari sheet:", namaList); // Debug log
+	
+											// Cek apakah nama ada di daftar
+											if (namaParam && namaList.includes(namaParam)) {
+												document.getElementById('nama-tamu').textContent =
+													namaParam.charAt(0).toUpperCase() + namaParam.slice(1);
+											}
+										})
+										.catch(err => {
+											console.error("Error mengambil data:", err);
+											// Fallback jika terjadi error
+											if (namaParam) {
+												document.getElementById('nama-tamu-undangan').textContent =
+													namaParam.charAt(0).toUpperCase() + namaParam.slice(1);
+											}
+										});
+								</script>
 						</div>
 						<div class="elementor-element elementor-element-3c958ca3 elementor-align-left elementor-widget elementor-widget-button"
 							data-id="3c958ca3" data-element_type="widget" id="open" data-aos="zoom-out-left"

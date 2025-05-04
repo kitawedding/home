@@ -2253,15 +2253,16 @@
 					<div class="elementor-element elementor-element-578bc01f elementor-widget elementor-widget-heading"
 						data-id="578bc01f" data-element_type="widget" data-widget_type="heading.default">
 						<div class="elementor-widget-container">
-							<h2 class="elementor-heading-title elementor-size-default" class="diisi"><span id="nama-tamu-undangan">Tamu Undangan</span></h2>
+							<h2 class="elementor-heading-title elementor-size-default" class="diisi"><span
+									id="nama-tamu-undangan">Tamu Undangan</span></h2>
 							<script>
 								// URL Google Sheets (ganti dengan URL publik Anda)
 								const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTD17SiMK_1dHnFhyr42kOyU0B14Jp5UXptUnRHaQsPW4SUGuHMP1PHjHSytLoibahWrdCbYf5mKgNB/pub?gid=0&single=true&output=csv";
-						
+
 								// Ambil parameter nama dari URL
 								const urlParams = new URLSearchParams(window.location.search);
 								const namaParam = urlParams.get('nama')?.toLowerCase();
-						
+
 								// Fetch data dari Google Sheets
 								fetch(SHEET_URL)
 									.then(res => {
@@ -2273,12 +2274,12 @@
 										const namaList = csvData.split('\n')
 											.map(row => row.split(',')[0].trim().toLowerCase())
 											.filter(name => name.length > 0);
-										
+
 										console.log("Daftar nama dari sheet:", namaList); // Debug log
-										
+
 										// Cek apakah nama ada di daftar
 										if (namaParam && namaList.includes(namaParam)) {
-											document.getElementById('nama-tamu').textContent = 
+											document.getElementById('nama-tamu').textContent =
 												namaParam.charAt(0).toUpperCase() + namaParam.slice(1);
 										}
 									})
@@ -2286,7 +2287,7 @@
 										console.error("Error mengambil data:", err);
 										// Fallback jika terjadi error
 										if (namaParam) {
-											document.getElementById('nama-tamu-undangan').textContent = 
+											document.getElementById('nama-tamu-undangan').textContent =
 												namaParam.charAt(0).toUpperCase() + namaParam.slice(1);
 										}
 									});
@@ -3172,7 +3173,7 @@
 							<div class="elementor-element elementor-element-32f9e6a3 elementor-widget elementor-widget-heading"
 								data-id="32f9e6a3" data-element_type="widget" data-widget_type="heading.default">
 								<div class="elementor-widget-container">
-									<p class="elementor-heading-title elementor-size-default" id="rekening1">
+									<p class="elementor-heading-title elementor-size-default" id="text1">
 										089667100522</p>
 								</div>
 							</div>
@@ -3193,53 +3194,16 @@
 									<div class="elementor-button-wrapper">
 										<div class="copy-content spancontent" style="display: none;"></div>
 
-										<a style="cursor:pointer;" onclick="copyText1('rekening1')"
-											data-message="berhasil disalin" class="elementor-button" role="button">
+										<a style="cursor:pointer;" class="elementor-button" role="button"
+											onclick="copyText('text1', this)">
 
 											<div class="elementor-button-content-wrapper">
 												<span class="elementor-button-icon elementor-align-icon-">
 													<i aria-hidden="true" class="fas fa-copy"></i> </span>
 												<span class="elementor-button-text">Copy</span>
-
-												<!-- Tempat munculnya notifikasi -->
-												<span id="copy-alert1"
-													style="display:none; position:absolute; top:100%; left:0; background:#d4edda; color:#155724; padding:5px 10px; border-radius:5px; margin-top:5px; font-size:12px;">
-													Nomor berhasil disalin!
-												</span>
 											</div>
 										</a>
 									</div>
-									<style type="text/css">
-										.spancontent {
-											padding-bottom: 20px;
-										}
-
-										.copy-content {
-											color: #6EC1E4;
-											text-align: center;
-										}
-
-										.head-title {
-											color: #6EC1E4;
-											text-align: center;
-										}
-									</style>
-									<script>
-										function copyText1() {
-											var text = document.getElementById('rekening1').innerText;
-											var alertBox = document.getElementById("copy-alert1");
-
-											navigator.clipboard.writeText(text).then(function () {
-												// Tampilkan pesan sukses
-												alertBox.style.display = "inline-block";
-
-												// Sembunyikan lagi setelah 2 detik
-												setTimeout(function () {
-													alertBox.style.display = "none";
-												}, 2000);
-											});
-										}
-									</script>
 								</div>
 							</div>
 						</div>
@@ -3266,7 +3230,7 @@
 							<div class="elementor-element elementor-element-32f9e6a3 elementor-widget elementor-widget-heading"
 								data-id="32f9e6a3" data-element_type="widget" data-widget_type="heading.default">
 								<div class="elementor-widget-container">
-									<p class="elementor-heading-title elementor-size-default" id="rekening2">
+									<p class="elementor-heading-title elementor-size-default" id="text2">
 										3015025854</p>
 								</div>
 							</div>
@@ -3287,53 +3251,16 @@
 									<div class="elementor-button-wrapper">
 										<div class="copy-content spancontent" style="display: none;"></div>
 
-										<a style="cursor:pointer;" onclick="copyText2('rekening2')"
-											data-message="berhasil disalin" class="elementor-button" role="button">
+										<a style="cursor:pointer;" class="elementor-button" role="button"
+											onclick="copyText('text2', this)">
 
 											<div class="elementor-button-content-wrapper">
 												<span class="elementor-button-icon elementor-align-icon-">
 													<i aria-hidden="true" class="fas fa-copy"></i> </span>
 												<span class="elementor-button-text">Copy</span>
-												<!-- Tempat munculnya notifikasi -->
-												<span id="copy-alert2"
-													style="display:none; position:absolute; top:100%; left:0; background:#d4edda; color:#155724; padding:5px 10px; border-radius:5px; margin-top:5px; font-size:12px;">
-													Nomor berhasil disalin!
-												</span>
 											</div>
 										</a>
-
 									</div>
-									<style type="text/css">
-										.spancontent {
-											padding-bottom: 20px;
-										}
-
-										.copy-content {
-											color: #6EC1E4;
-											text-align: center;
-										}
-
-										.head-title {
-											color: #6EC1E4;
-											text-align: center;
-										}
-									</style>
-									<script>
-										function copyText2() {
-											var text = document.getElementById('rekening2').innerText;
-											var alertBox = document.getElementById("copy-alert2");
-
-											navigator.clipboard.writeText(text).then(function () {
-												// Tampilkan pesan sukses
-												alertBox.style.display = "inline-block";
-
-												// Sembunyikan lagi setelah 2 detik
-												setTimeout(function () {
-													alertBox.style.display = "none";
-												}, 2000);
-											});
-										}
-									</script>
 								</div>
 							</div>
 						</div>
@@ -3360,14 +3287,15 @@
 							<div class="elementor-element elementor-element-32f9e6a3 elementor-widget elementor-widget-heading"
 								data-id="32f9e6a3" data-element_type="widget" data-widget_type="heading.default">
 								<div class="elementor-widget-container">
-									<p class="elementor-heading-title elementor-size-default" id="rekening3">
+									<p class="elementor-heading-title elementor-size-default" id="text3">
 										0726429093</p>
 								</div>
 							</div>
 							<div class="elementor-element elementor-element-3e07d4 elementor-widget elementor-widget-heading"
 								data-id="3e07d4" data-element_type="widget" data-widget_type="heading.default">
 								<div class="elementor-widget-container">
-									<p class="elementor-heading-title elementor-size-default">Meda Muhammad Anggulian</p>
+									<p class="elementor-heading-title elementor-size-default">Meda Muhammad Anggulian
+									</p>
 								</div>
 							</div>
 							<div class="elementor-element elementor-element-6e6db108 elementor-align-right elementor-tablet-align-right elementor-mobile-align-right elementor-widget elementor-widget-weddingpress-copy-text"
@@ -3381,57 +3309,49 @@
 									<div class="elementor-button-wrapper">
 										<div class="copy-content spancontent" style="display: none;"></div>
 
-										<a style="cursor:pointer;" onclick="copyText3('rekening3')"
-											data-message="berhasil disalin" class="elementor-button" role="button">
+										<a style="cursor:pointer;" class="elementor-button" role="button"
+											onclick="copyText('text3', this)">
 
 											<div class="elementor-button-content-wrapper">
 												<span class="elementor-button-icon elementor-align-icon-">
 													<i aria-hidden="true" class="fas fa-copy"></i> </span>
 												<span class="elementor-button-text">Copy</span>
-												<!-- Tempat munculnya notifikasi -->
-												<span id="copy-alert3"
-													style="display:none; position:absolute; top:100%; left:0; background:#d4edda; color:#155724; padding:5px 10px; border-radius:5px; margin-top:5px; font-size:12px;">
-													Nomor berhasil disalin!
-												</span>
 											</div>
 										</a>
-
 									</div>
-									<style type="text/css">
-										.spancontent {
-											padding-bottom: 20px;
-										}
-
-										.copy-content {
-											color: #6EC1E4;
-											text-align: center;
-										}
-
-										.head-title {
-											color: #6EC1E4;
-											text-align: center;
-										}
-									</style>
-									<script>
-										function copyText3() {
-											var text = document.getElementById('rekening3').innerText;
-											var alertBox = document.getElementById("copy-alert3");
-
-											navigator.clipboard.writeText(text).then(function () {
-												// Tampilkan pesan sukses
-												alertBox.style.display = "inline-block";
-
-												// Sembunyikan lagi setelah 2 detik
-												setTimeout(function () {
-													alertBox.style.display = "none";
-												}, 2000);
-											});
-										}
-									</script>
 								</div>
 							</div>
 						</div>
+						<style type="text/css">
+							.spancontent {
+								padding-bottom: 20px;
+							}
 
+							.copy-content {
+								color: #6EC1E4;
+								text-align: center;
+							}
+
+							.head-title {
+								color: #6EC1E4;
+								text-align: center;
+							}
+						</style>
+						<script>
+							async function copyText(textId, button) {
+								const textToCopy = document.getElementById(textId).textContent;
+								try {
+									await navigator.clipboard.writeText(textToCopy);
+									button.querySelector('.elementor-button-text').textContent = 'Tersalin';
+								} catch (err) {
+									button.querySelector('.elementor-button-text').textContent = 'Tidak Tersalin';
+								}
+								// Reset button text after 2 seconds
+								setTimeout(() => {
+									button.querySelector('.elementor-button-text').textContent = 'Copy';
+								}, 2000);
+							}
+						</script>
 						<div class="elementor-element elementor-element-2845cacf elementor-widget elementor-widget-html"
 							data-id="2845cacf" data-element_type="widget" data-widget_type="html.default">
 							<div class="elementor-widget-container">
@@ -3823,7 +3743,8 @@
 						data-id="1446f695" data-element_type="widget" data-widget_type="text-editor.default">
 						<div class="elementor-widget-container">
 							<p>Made with <img decoding="async" class="emoji" role="img" draggable="false"
-									src="https://s.w.org/images/core/emoji/13.0.1/svg/2764.svg" alt="❤" /> by momenin</p>
+									src="https://s.w.org/images/core/emoji/13.0.1/svg/2764.svg" alt="❤" /> by momenin
+							</p>
 						</div>
 					</div>
 					<div class="elementor-element elementor-element-a3d025e elementor-view-stacked elementor-shape-circle elementor-widget elementor-widget-weddingpress-audio"

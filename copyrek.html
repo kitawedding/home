@@ -1,0 +1,90 @@
+                        <div class="elementor-element elementor-element-3f39e7f8 e-con-full animated-slow e-flex elementor-invisible e-con e-child"
+							data-id="3f39e7f8" data-element_type="container"
+							data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;animation&quot;:&quot;zoomIn&quot;}">
+							<div class="elementor-element elementor-element-1a57f8a elementor-widget elementor-widget-image"
+								data-id="1a57f8a" data-element_type="widget" data-widget_type="image.default">
+								<div class="elementor-widget-container">
+									<img fetchpriority="high" decoding="async" width="2048" height="650"
+										src="assets/icon/bni.webp" class="attachment-full size-full wp-image-27488"
+										alt="" srcset="assets/icon/bni.webp"
+										sizes="(max-width: 2048px) 100vw, 2048px" />
+								</div>
+							</div>
+							<div class="elementor-element elementor-element-7ddfce4c elementor-widget elementor-widget-image"
+								data-id="7ddfce4c" data-element_type="widget" data-widget_type="image.default">
+								<div class="elementor-widget-container">
+									<img decoding="async" width="150" height="150"
+										src="https://inv.punakawandigital.id/wp-content/uploads/2024/11/chip-atm-1-2-1-2-3.png"
+										class="attachment-full size-full wp-image-27489" alt="" />
+								</div>
+							</div>
+							<div class="elementor-element elementor-element-32f9e6a3 elementor-widget elementor-widget-heading"
+								data-id="32f9e6a3" data-element_type="widget" data-widget_type="heading.default">
+								<div class="elementor-widget-container">
+                                    <!--DISINIIIIIIIIIIIII-->
+									<p class="elementor-heading-title elementor-size-default" id="text3">
+										0726429093</p>
+								</div>
+							</div>
+							<div class="elementor-element elementor-element-3e07d4 elementor-widget elementor-widget-heading"
+								data-id="3e07d4" data-element_type="widget" data-widget_type="heading.default">
+								<div class="elementor-widget-container">
+									<p class="elementor-heading-title elementor-size-default">Meda Muhammad Anggulian
+									</p>
+								</div>
+							</div>
+							<div class="elementor-element elementor-element-6e6db108 elementor-align-right elementor-tablet-align-right elementor-mobile-align-right elementor-widget elementor-widget-weddingpress-copy-text"
+								data-id="6e6db108" data-element_type="widget"
+								data-widget_type="weddingpress-copy-text.default">
+								<div class="elementor-widget-container">
+
+									<div class="elementor-image img"></div>
+
+									<div class="head-title"></div>
+									<div class="elementor-button-wrapper">
+										<div class="copy-content spancontent" style="display: none;"></div>
+                                        <!--DISINIIIIIII-->
+										<a style="cursor:pointer;" class="elementor-button" role="button"
+											onclick="copyText('text3', this)">
+
+											<div class="elementor-button-content-wrapper">
+												<span class="elementor-button-icon elementor-align-icon-">
+													<i aria-hidden="true" class="fas fa-copy"></i> </span>
+												<span class="elementor-button-text">Copy</span>
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+                        <!--INI PALING BAWAH-->
+						<style type="text/css">
+							.spancontent {
+								padding-bottom: 20px;
+							}
+
+							.copy-content {
+								color: #6EC1E4;
+								text-align: center;
+							}
+
+							.head-title {
+								color: #6EC1E4;
+								text-align: center;
+							}
+						</style>
+						<script>
+							async function copyText(textId, button) {
+								const textToCopy = document.getElementById(textId).textContent;
+								try {
+									await navigator.clipboard.writeText(textToCopy);
+									button.querySelector('.elementor-button-text').textContent = 'Tersalin';
+								} catch (err) {
+									button.querySelector('.elementor-button-text').textContent = 'Tidak Tersalin';
+								}
+								// Reset button text after 2 seconds
+								setTimeout(() => {
+									button.querySelector('.elementor-button-text').textContent = 'Copy';
+								}, 2000);
+							}
+						</script>

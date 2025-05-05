@@ -2243,6 +2243,69 @@
 	<div id="loading-screen">
         <div class="loading-spinner"></div>
     </div>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+    // Tunggu sampai semua resource selesai dimuat
+    window.addEventListener('load', function() {
+        // Tunggu sedikit untuk memastikan semua benar-benar selesai
+        setTimeout(function() {
+            const loadingScreen = document.getElementById('loading-screen');
+            const content = document.getElementById('content');
+            
+            // Hilangkan loading screen
+            loadingScreen.style.opacity = '0';
+            
+            // Setelah transisi selesai, sembunyikan sepenuhnya
+            loadingScreen.addEventListener('transitionend', function() {
+                loadingScreen.style.display = 'none';
+                content.style.display = 'block';
+            });
+        }, 500); // Tambahan delay untuk memastikan
+    });
+});
+
+// Alternatif: Jika Anda ingin memastikan gambar juga terload
+function waitForImages() {
+    const images = document.querySelectorAll('img');
+    let totalImages = images.length;
+    let loadedImages = 0;
+    
+    if (totalImages === 0) {
+        hideLoadingScreen();
+        return;
+    }
+    
+    images.forEach(img => {
+        if (img.complete) {
+            imageLoaded();
+        } else {
+            img.addEventListener('load', imageLoaded);
+            img.addEventListener('error', imageLoaded); // Juga tangani jika gambar error
+        }
+    });
+    
+    function imageLoaded() {
+        loadedImages++;
+        if (loadedImages === totalImages) {
+            hideLoadingScreen();
+        }
+    }
+}
+
+function hideLoadingScreen() {
+    const loadingScreen = document.getElementById('loading-screen');
+    const content = document.getElementById('content');
+    
+    loadingScreen.style.opacity = '0';
+    loadingScreen.addEventListener('transitionend', function() {
+        loadingScreen.style.display = 'none';
+        content.style.display = 'block';
+    });
+}
+
+// Panggil fungsi waitForImages jika ingin memastikan gambar terload
+// document.addEventListener('DOMContentLoaded', waitForImages);
+	</script>
 	<style>
 		.elementor-button-wrapper {
 			margin-top: 10px;

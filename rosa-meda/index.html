@@ -2291,11 +2291,33 @@
 						data-id="7b103353" data-element_type="widget" id="open" data-widget_type="button.default">
 						<div class="elementor-widget-container">
 							<div class="elementor-button-wrapper">
-								<a class="elementor-button elementor-size-sm" role="button">
+								<a class="elementor-button elementor-size-sm" role="button" id="fullscreenBtn">
 									<span class="elementor-button-content-wrapper">
 										<span class="elementor-button-text">Buka Undangan</span>
 									</span>
 								</a>
+								<script>
+									const fullscreenBtn = document.getElementById('fullscreenBtn');
+									
+									fullscreenBtn.addEventListener('click', () => {
+									  // Meminta fullscreen untuk seluruh halaman
+									  if (document.documentElement.requestFullscreen) {
+										document.documentElement.requestFullscreen();
+									  } 
+									  // Untuk browser berbasis Webkit (Safari)
+									  else if (document.documentElement.webkitRequestFullscreen) {
+										document.documentElement.webkitRequestFullscreen();
+									  } 
+									  // Untuk browser Firefox
+									  else if (document.documentElement.mozRequestFullScreen) {
+										document.documentElement.mozRequestFullScreen();
+									  } 
+									  // Untuk browser IE/Edge
+									  else if (document.documentElement.msRequestFullscreen) {
+										document.documentElement.msRequestFullscreen();
+									  }
+									});
+								  </script>
 							</div>
 						</div>
 					</div>

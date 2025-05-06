@@ -57,37 +57,31 @@
             cursor: pointer;
         }
 
+
         #rotatingImage {
             width: 500px;
-            /* Atur lebar gambar */
-            animation: rotateZoom 2s linear infinite;
-            /* Animasi berputar dan zoom */
+            animation: rotate 4s linear infinite, beat 0.5s ease-in-out infinite;
         }
 
-        @keyframes rotateZoom {
+        @keyframes rotate {
             0% {
-                transform: rotate(0deg) scale(0);
-                /* Posisi awal */
-            }
-
-            25% {
-                transform: rotate(100deg) scale(1);
-                /* Berputar ke kanan dan zoom in */
-            }
-
-            50% {
-                transform: rotate(0deg) scale(0);
-                /* Kembali ke posisi awal */
-            }
-
-            75% {
-                transform: rotate(100deg) scale(1);
-                /* Berputar ke kiri dan zoom out */
+                transform: rotate(0deg);
             }
 
             100% {
-                transform: rotate(0deg) scale(0);
-                /* Kembali ke posisi awal */
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes beat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
             }
         }
 

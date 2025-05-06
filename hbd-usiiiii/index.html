@@ -58,24 +58,70 @@
         }
 
         #rotatingImage {
-            width: 500px; /* Atur lebar gambar */
-            animation: rotateZoom 4s linear infinite; /* Animasi berputar dan zoom */
+            width: 500px;
+            /* Atur lebar gambar */
+            animation: rotateZoom 2s linear infinite;
+            /* Animasi berputar dan zoom */
         }
+
         @keyframes rotateZoom {
             0% {
-                transform: rotate(0deg) scale(1); /* Posisi awal */
+                transform: rotate(0deg) scale(1);
+                /* Posisi awal */
             }
+
             25% {
-                transform: rotate(180deg) scale(1.2); /* Berputar ke kanan dan zoom in */
+                transform: rotate(180deg) scale(1.5);
+                /* Berputar ke kanan dan zoom in */
             }
+
             50% {
-                transform: rotate(360deg) scale(1); /* Kembali ke posisi awal */
+                transform: rotate(360deg) scale(1);
+                /* Kembali ke posisi awal */
             }
+
             75% {
-                transform: rotate(180deg) scale(0.8); /* Berputar ke kiri dan zoom out */
+                transform: rotate(180deg) scale(0.5);
+                /* Berputar ke kiri dan zoom out */
             }
+
             100% {
-                transform: rotate(0deg) scale(1); /* Kembali ke posisi awal */
+                transform: rotate(0deg) scale(1);
+                /* Kembali ke posisi awal */
+            }
+        }
+
+        #rotati {
+            width: 500px;
+            /* Atur lebar gambar */
+            animation: rotZoom 2s linear infinite;
+            /* Animasi berputar dan zoom */
+        }
+
+        @keyframes rotZoom {
+            0% {
+                transform: rotate(0deg) scale(1);
+                /* Posisi awal */
+            }
+
+            25% {
+                transform: rotate(180deg) scale(0.5);
+                /* Berputar ke kanan dan zoom in */
+            }
+
+            50% {
+                transform: rotate(360deg) scale(1);
+                /* Kembali ke posisi awal */
+            }
+
+            75% {
+                transform: rotate(180deg) scale(1.5);
+                /* Berputar ke kiri dan zoom out */
+            }
+
+            100% {
+                transform: rotate(0deg) scale(1);
+                /* Kembali ke posisi awal */
             }
         }
     </style>
@@ -94,17 +140,27 @@
             Browser Anda tidak mendukung pemutar audio.
         </audio>
         <canvas id=c></canvas>
-        <img id="rotatingImage"
-            src="35123771_2064521693764610_7095256475156611072_n.jpg"
+        <img id="rotatingImage" src="35123771_2064521693764610_7095256475156611072_n.jpg"
             style="position: absolute; z-index: 2; width: 200px; align-items: center center;">
-            <img id="rotatingImage"
-            src="37534528_1653942628065816_6097359358377590784_n.jpg"
-            style="position: absolute; left: 50px; bottom: 100px; z-index: 2; width: 200px; align-items: center center;">
-            <img id="rotatingImage"
-            src="42994795_2146339068916205_4808304991263522816_n.jpg"
-            style="position: absolute; right: 50px; bottom: 100px; z-index: 2; width: 200px; align-items: center center;">
-            <img id="rotatingImage"
-            src="462806964_3769123856637710_4886628924096091409_n.jpg"
+        <img id="rotImage1" src="dasdazc-ezgif.com-loop-count.gif"
+            style="position: absolute; left: 50px; bottom: 100px; z-index: 2; width: 200px;">
+
+        <img id="rotImage2" src="dasdazc-ezgif.com-loop-count.gif"
+            style="position: absolute; right: 50px; bottom: 100px; z-index: 2; width: 200px;">
+
+        <script>
+            function forceGifLoop(gifId, duration) {
+                const gif = document.getElementById(gifId);
+                setInterval(() => {
+                    gif.src = gif.src; // Reset sumber GIF
+                }, duration);
+            }
+
+            // Durasi harus lebih panjang dari durasi GIF
+            forceGifLoop('rotImage1', 3000); // 3 detik
+            forceGifLoop('rotImage2', 3000);
+        </script>
+        <img id="rotati" src="462806964_3769123856637710_4886628924096091409_n.jpg"
             style="position: absolute; right: 50px; z-index: 2; width: 200px; align-items: center center;">
     </div>
     <script>

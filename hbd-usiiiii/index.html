@@ -58,43 +58,27 @@
         }
 
 
-        #rotatingImage {
-            width: 300px;
-            animation: rotate 1s linear infinite, beat 0.5s ease-in-out infinite;
-        }
-        #rotati {
-            width: 200px;
-            animation: rotate 1s linear infinite, beat 0.5s ease-in-out infinite;
-        }
-        #rotImage1 {
-            animation: rotate 1s linear infinite, beat 0.5s ease-in-out infinite;
-        }
+        #rotatingImage,
+        #rotati,
+        #rotImage1,
         #rotImage2 {
-            animation: rotate 1s linear infinite, beat 0.5s ease-in-out infinite;
+            width: 200px;
+            animation: rotateBeat 1s linear infinite;
         }
 
-        @keyframes rotate {
+        @keyframes rotateBeat {
             0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(45deg);
-            }
-        }
-
-        @keyframes beat {
-
-            0%,
-            100% {
-                transform: scale(1);
+                transform: rotate(0deg) scale(1);
             }
 
             50% {
-                transform: scale(1.1);
+                transform: rotate(22.5deg) scale(1.1);
+            }
+
+            100% {
+                transform: rotate(45deg) scale(1);
             }
         }
-
     </style>
 </head>
 

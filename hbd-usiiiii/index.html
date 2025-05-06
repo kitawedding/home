@@ -71,17 +71,17 @@
             }
 
             25% {
-                transform: rotate(50deg) scale(1.5);
+                transform: rotate(100deg) scale(2);
                 /* Berputar ke kanan dan zoom in */
             }
 
             50% {
-                transform: rotate(100deg) scale(1);
+                transform: rotate(0deg) scale(1);
                 /* Kembali ke posisi awal */
             }
 
             75% {
-                transform: rotate(50deg) scale(0.5);
+                transform: rotate(100deg) scale(2);
                 /* Berputar ke kiri dan zoom out */
             }
 
@@ -105,17 +105,17 @@
             }
 
             25% {
-                transform: rotate(180deg) scale(0.5);
+                transform: rotate(100deg) scale(2);
                 /* Berputar ke kanan dan zoom in */
             }
 
             50% {
-                transform: rotate(360deg) scale(1);
+                transform: rotate(0deg) scale(1);
                 /* Kembali ke posisi awal */
             }
 
             75% {
-                transform: rotate(180deg) scale(1.5);
+                transform: rotate(100deg) scale(2);
                 /* Berputar ke kiri dan zoom out */
             }
 
@@ -147,6 +147,8 @@
 
         <img id="rotImage2" src="dasdazc-ezgif.com-loop-count.gif"
             style="position: absolute; right: 50px; bottom: 100px; z-index: 2; width: 200px;">
+        <img id="rotati" src="462806964_3769123856637710_4886628924096091409_n.jpg"
+            style="position: absolute; right: 50px; z-index: 2; width: 200px; align-items: center center;">
 
         <script>
             function forceGifLoop(gifId, duration) {
@@ -160,8 +162,7 @@
             forceGifLoop('rotImage1', 3000); // 3 detik
             forceGifLoop('rotImage2', 3000);
         </script>
-        <img id="rotati" src="462806964_3769123856637710_4886628924096091409_n.jpg"
-            style="position: absolute; right: 50px; z-index: 2; width: 200px; align-items: center center;">
+
     </div>
     <script>
         function bukaHalamanDua() {

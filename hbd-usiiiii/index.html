@@ -59,7 +59,11 @@
 
 
         #rotatingImage {
-            width: 500px;
+            width: 300px;
+            animation: rotate 4s linear infinite, beat 0.5s ease-in-out infinite;
+        }
+        #rotati {
+            width: 300px;
             animation: rotate 4s linear infinite, beat 0.5s ease-in-out infinite;
         }
 
@@ -85,39 +89,6 @@
             }
         }
 
-        #rotati {
-            width: 500px;
-            /* Atur lebar gambar */
-            animation: rotZoom 2s linear infinite;
-            /* Animasi berputar dan zoom */
-        }
-
-        @keyframes rotZoom {
-            0% {
-                transform: rotate(0deg) scale(0);
-                /* Posisi awal */
-            }
-
-            25% {
-                transform: rotate(-100deg) scale(1);
-                /* Berputar ke kanan dan zoom in */
-            }
-
-            50% {
-                transform: rotate(0deg) scale(0);
-                /* Kembali ke posisi awal */
-            }
-
-            75% {
-                transform: rotate(-100deg) scale(1);
-                /* Berputar ke kiri dan zoom out */
-            }
-
-            100% {
-                transform: rotate(0deg) scale(0);
-                /* Kembali ke posisi awal */
-            }
-        }
     </style>
 </head>
 

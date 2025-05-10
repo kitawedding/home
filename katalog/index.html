@@ -44,18 +44,6 @@
       animation: pulse 1.5s infinite;
     }
 
-    /* Additional styles for the new layout */
-    .filter-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin: 20px 0;
-    }
-
-    .filter-buttons .btn {
-      margin: 0;
-    }
 
     .katalog-item .card-img-top {
       height: 300px;
@@ -130,8 +118,8 @@
       }
     }
 
-        /* Tablet (lebar ≤ 991px) */
-      @media (max-width: 1200px) {
+    /* Tablet (lebar ≤ 991px) */
+    @media (max-width: 1200px) {
       .card-header h4 {
         font-size: 1.5rem;
       }
@@ -152,7 +140,7 @@
         max-height: 16rem;
       }
     }
-    
+
 
     /* Tablet (lebar ≤ 991px) */
     @media (max-width: 991px) {
@@ -196,6 +184,7 @@
         max-height: 12rem;
       }
     }
+
     @media (max-width: 520px) {
       .card-header h4 {
         font-size: 1rem;
@@ -274,7 +263,7 @@
                 <h4 class="my-0 fw-normal">Medium</h4>
               </div>
               <div class="card-body">
-                <h1 class="card-title pricing-card-title">Rp. 25.000</h1>
+                <h1 class="card-title pricing-card-title">+ 5.000</h1>
                 <ul class="list-unstyled mt-3 mb-4 feature-list">
                   <li>Masa Aktif 5 bulan</li>
                   <li>Gratis konsultasi</li>
@@ -294,7 +283,7 @@
                 <h4 class="my-0 fw-normal">Enterprise</h4>
               </div>
               <div class="card-body">
-                <h1 class="card-title pricing-card-title">Rp. 30.000</h1>
+                <h1 class="card-title pricing-card-title">+ 10.000</h1>
                 <ul class="list-unstyled mt-3 mb-4 feature-list">
                   <li>Masa Aktif 5 bulan</li>
                   <li>Gratis konsultasi</li>
@@ -309,8 +298,8 @@
 
           <!-- Card 4 -->
           <div class="col">
-            <div class="card mb-4 rounded-3 shadow-sm border-dark">
-              <div class="card-header py-3 text-bg-dark border-dark">
+            <div class="card mb-4 rounded-3 shadow-sm border-warning">
+              <div class="card-header py-3 text-bg-warning border-warning">
                 <h4 class="my-0 fw-normal">Couple</h4>
               </div>
               <div class="card-body">
@@ -325,21 +314,36 @@
         </div>
       </div>
       <div class="container px-5 mb-5">
-        <!-- Filter Buttons -->
-        <div class="filter-buttons">
-          <button class="btn btn-outline-primary active" onclick="filterKatalog('all', this)">All</button>
-          <!--
-          <button class="btn btn-outline-primary" onclick="filterKatalog('rekomendasi', this)">Pilihan Admin</button>
-          -->
-          <button class="btn btn-outline-primary" onclick="filterKatalog('spesial', this)">Spesial</button>
-          <button class="btn btn-outline-primary" onclick="filterKatalog('luxury', this)">Luxury</button>
-          <button class="btn btn-outline-primary" onclick="filterKatalog('premium', this)">Premium</button>
-          <button class="btn btn-outline-primary" onclick="filterKatalog('adat', this)">Adat</button>
-          <!--<button class="btn btn-outline-primary" onclick="filterKatalog('luxury_++', this)">Luxury ++</button>
-          <button class="btn btn-outline-primary" onclick="filterKatalog('wedding_floral', this)">Wedding
-            Floral</button>-->
+        <div class="row row-cols-2 row-cols-md-4 g-3 filter-buttons">
+          <div class="col d-grid">
+            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('spesial', this)">Spesial Foto</button>
+          </div>
+          <div class="col d-grid">
+            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('spesial_lineart', this)">Spesial Tanpa Foto</button>
+          </div>
+          <div class="col d-grid">
+            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('luxury', this)">Minimalist Luxury
+              Foto</button>
+          </div>
+          <div class="col d-grid">
+            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('luxury_lineart', this)">Minimalist Luxury Tanpa Foto</button>
+          </div>
+          <div class="col d-grid">
+            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('premium', this)">Premium Vintage
+              Foto</button>
+          </div>
+          <div class="col d-grid">
+            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('premium_lineart', this)">Premium Vintage Tanpa Foto</button>
+          </div>
+          <div class="col d-grid">
+            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('adat', this)">Adat Foto</button>
+          </div>
+          <div class="col d-grid">
+            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('adat_lineart', this)">Adat Tanpa Foto</button>
+          </div>
         </div>
-
+      </div>
+      <div class="container px-5 mb-5">
         <!-- Catalog Items Container -->
         <div class="row gx-4 gy-3 justify-content-center" id="katalog-container">
           <!-- Items will be dynamically inserted here -->
@@ -368,6 +372,18 @@
       { category: "spesial", id: "09", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-09/index.html" },
       { category: "spesial", id: "10", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-10/index.html" },
 
+
+      { category: "spesial_lineart", id: "01", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/TEMA-01-1.webp", demoLink: "../datakatalog/spesial/spesial-01-animasi/index.html" },
+      { category: "spesial_lineart", id: "02", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/TEMA-02-1.webp", demoLink: "../datakatalog/spesial/spesial-02-animasi/index.html" },
+      { category: "spesial_lineart", id: "03", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/TEMA-03-1.webp", demoLink: "../datakatalog/spesial/spesial-03-animasi/index.html" },
+      { category: "spesial_lineart", id: "04", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/TEMA-04-1.webp", demoLink: "../datakatalog/spesial/spesial-04-animasi/index.html" },
+      { category: "spesial_lineart", id: "05", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/TEMA-05-1.webp", demoLink: "../datakatalog/spesial/spesial-05-animasi/index.html" },
+      { category: "spesial_lineart", id: "06", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/TEMA-06-1.webp", demoLink: "../datakatalog/spesial/spesial-06-animasi/index.html" },
+      { category: "spesial_lineart", id: "07", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/TEMA-07-1.webp", demoLink: "../datakatalog/spesial/spesial-07-animasi/index.html" },
+      { category: "spesial_lineart", id: "08", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/TEMA-08-1.webp", demoLink: "../datakatalog/spesial/spesial-08-animasi/index.html" },
+      { category: "spesial_lineart", id: "09", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/TEMA-09-1.webp", demoLink: "../datakatalog/spesial/spesial-09-animasi/index.html" },
+      { category: "spesial_lineart", id: "10", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/TEMA-10-1.webp", demoLink: "../datakatalog/spesial/spesial-10-animasi/index.html" },
+
       // Luxury category (ditambahkan index.html)
       { category: "luxury", id: "01", demoLink: "https://momenin.my.id/datakatalog/luxury/luxury-01/index.html" },
       { category: "luxury", id: "02", demoLink: "https://momenin.my.id/datakatalog/luxury/luxury-02/index.html" },
@@ -381,6 +397,20 @@
       { category: "luxury", id: "10", demoLink: "https://momenin.my.id/datakatalog/luxury/luxury-10/index.html" },
       { category: "luxury", id: "11", demoLink: "https://momenin.my.id/datakatalog/luxury/luxury-11/index.html" },
 
+      { category: "luxury_lineart", id: "01", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/09/LUXURY-01-AN.webp", demoLink: "../datakatalog/luxury/animasi-luxury-01/index.html" },
+      { category: "luxury_lineart", id: "02", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/LUXURY-02-2.webp", demoLink: "../datakatalog/luxury/animasi-luxury-02/index.html" },
+      { category: "luxury_lineart", id: "03", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/LUXURY-03-1.webp", demoLink: "../datakatalog/luxury/animasi-luxury-03/index.html" },
+      { category: "luxury_lineart", id: "04", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/LUXURY-04-2.webp", demoLink: "../datakatalog/luxury/animasi-luxury-04/index.html" },
+      { category: "luxury_lineart", id: "05", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/11/MINIMALIST-LUXURY-05-2.webp", demoLink: "../datakatalog/luxury/animasi-luxury-05/index.html" },
+      { category: "luxury_lineart", id: "06", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/11/MINIMALIST-LUXURY-06-2.webp", demoLink: "../datakatalog/luxury/animasi-luxury-06/index.html" },
+      { category: "luxury_lineart", id: "07", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/11/MINIMALIST-LUXURY-07-3.webp", demoLink: "../datakatalog/luxury/animasi-luxury-07/index.html" },
+      { category: "luxury_lineart", id: "08", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/11/MINIMALIST-LUXURY-08-1.webp", demoLink: "../datakatalog/luxury/animasi-luxury-08/index.html" },
+      { category: "luxury_lineart", id: "09", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/11/MINIMALIST-LUXURY-09-1.webp", demoLink: "../datakatalog/luxury/animasi-luxury-09/index.html" },
+      { category: "luxury_lineart", id: "10", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/11/MINIMALIST-LUXURY-10-2.webp", demoLink: "../datakatalog/luxury/animasi-luxury-10/index.html" },
+      { category: "luxury_lineart", id: "11", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/11/MINIMALIST-LUXURY-11-1.webp", demoLink: "../datakatalog/luxury/animasi-luxury-11/index.html" },
+
+
+
       // Premium category (ditambahkan index.html)
       { category: "premium", id: "01", demoLink: "https://momenin.my.id/datakatalog/premium/premium-01/index.html" },
       { category: "premium", id: "02", demoLink: "https://momenin.my.id/datakatalog/premium/premium-02/index.html" },
@@ -390,6 +420,15 @@
       { category: "premium", id: "06", demoLink: "https://momenin.my.id/datakatalog/premium/premium-06/index.html" },
       { category: "premium", id: "07", demoLink: "https://momenin.my.id/datakatalog/premium/premium-07/index.html" },
       { category: "premium", id: "08", demoLink: "https://momenin.my.id/datakatalog/premium/premium-08/index.html" },
+      
+      { category: "premium_lineart", id: "01", imageUrl: "https://punakawandigital.id/wp-content/uploads/2025/05/Premium-Vintage-01-1.webp", demoLink: "../datakatalog/premium/vintage-01-animasi/index.html" },
+      { category: "premium_lineart", id: "02", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/11/Premium-Vintage-02-1.webp", demoLink: "../datakatalog/premium/vintage-02-animasi/index.html" },
+      { category: "premium_lineart", id: "03", imageUrl: "https://punakawandigital.id/wp-content/uploads/2025/05/Premium-Vintage-03-2.webp", demoLink: "../datakatalog/premium/vintage-03-animasi/index.html" },
+      { category: "premium_lineart", id: "04", imageUrl: "https://punakawandigital.id/wp-content/uploads/2025/05/Premium-Vintage-04-3.webp", demoLink: "../datakatalog/premium/vintage-04-animasi/index.html" },
+      { category: "premium_lineart", id: "05", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/vintage-05-1.webp", demoLink: "../datakatalog/premium/vintage-05-animasi/index.html" },
+      { category: "premium_lineart", id: "06", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/vintage-06-2.webp", demoLink: "../datakatalog/premium/vintage-06-animasi/index.html" },
+      { category: "premium_lineart", id: "07", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/11/Premium-Vintage-08-2.webp", demoLink: "../datakatalog/premium/vintage-07-animasi/index.html" },
+      { category: "premium_lineart", id: "08", imageUrl: "https://punakawandigital.id/wp-content/uploads/2025/05/Premium-Vintage-08-2.webp", demoLink: "../datakatalog/premium/vintage-08-animasi/index.html" },
 
       // Adat category (ditambahkan index.html)
       { category: "adat", id: "01", demoLink: "https://momenin.my.id/datakatalog/adat/wayang-01/index.html" },
@@ -402,6 +441,19 @@
       { category: "adat", id: "08", demoLink: "https://momenin.my.id/datakatalog/adat/batak/index.html" },
       { category: "adat", id: "09", demoLink: "https://momenin.my.id/datakatalog/adat/chinese/index.html" },
       { category: "adat", id: "10", demoLink: "https://momenin.my.id/datakatalog/adat/melayu/index.html" },
+
+     // Adat category (ditambahkan index.html)
+      { category: "adat_lineart", id: "01", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/08/Slide11-1.webp", demoLink: "../datakatalog/adat/animasi-wayang-01/index.html" },
+      { category: "adat_lineart", id: "02", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/08/Slide12-1.webp", demoLink: "../datakatalog/adat/animasi-wayang-02/index.html" },
+      { category: "adat_lineart", id: "03", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/WAYANG-03-4.webp", demoLink: "../datakatalog/adat/animasi-wayang-03/index.html" },
+      { category: "adat_lineart", id: "04", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/WAYANG-04-1.webp", demoLink: "../datakatalog/adat/animasi-wayang-04/index.html" },
+      { category: "adat_lineart", id: "05", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/08/Tema-bugis-an.webp", demoLink: "../datakatalog/adat/animasi-bugis/index.html" },
+      { category: "adat_lineart", id: "06", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/08/tema-minang-animasi.webp", demoLink: "../datakatalog/adat/animasi-minang/index.html" },
+      { category: "adat_lineart", id: "07", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/08/Slide2-1.webp)", demoLink: "../datakatalog/adat/animasi-bali/index.html" },
+      { category: "adat_lineart", id: "08", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/08/TUMB-TEMA-BATAK-ANIMASI.webp", demoLink: "../datakatalog/adat/animasi-batak/index.html" },
+      { category: "adat_lineart", id: "09", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/08/CHINESE-AN.webp", demoLink: "../datakatalog/adat/animasi-chinese/index.html" },
+      { category: "adat_lineart", id: "10", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/08/TEMA-MELAYU-AN.webp", demoLink: "../datakatalog/adat/animasi-melayu/index.html" },
+
       /*
       { category: "adat", id: "11", imageUrl: "https://foreverr.net/wp-content/uploads/ar010-768x768.webp", demoLink: "https://foreverr.id/demo/ar010" },
       { category: "adat", id: "12", imageUrl: "https://foreverr.net/wp-content/uploads/ar009-768x768.webp", demoLink: "https://foreverr.id/demo/ar009" },
@@ -497,6 +549,10 @@
 
     function formatCategoryName(category) {
       const nameMap = {
+        'spesial_lineart' : 'Spesial Lineart',
+        'luxury_lineart' : 'Luxury Lineart',
+        'premium_lineart' : 'Premium Lineart',
+        'adat_lineart' : 'Adat Lineart'
         //'luxury_++': 'Luxury ++',
         //'wedding_floral': 'Wedding Floral',
         // Add other special cases if needed
@@ -526,7 +582,11 @@
         <div class="card-body d-flex flex-column">
           <h5 class="card-title fw-bold">${title}</h5>
           <p class="card-text flex-grow-1">
-            <span class="fw-bold text-dark">Rp. 20.000</span>
+            ${
+              ['adat_lineart', 'premium_lineart', 'luxury_lineart', 'spesial_lineart'].includes(item.category)
+              ? '<span class="fw-bold text-dark">Rp. 15.000</span>'
+              : '<span class="fw-bold text-dark">Rp. 20.000</span>'
+            }
           </p>
           <div class="d-flex justify-content-between align-items-center gap-2 mt-auto">
             <a href="#" class="btn btn-outline-primary flex-grow-1 lihat-demo-btn" data-demo-link="${item.demoLink}" data-bs-toggle="modal" data-title="${title}" data-bs-target="#demoModal">Lihat Demo</a>
@@ -605,17 +665,17 @@
   </div>
   <script>
     // Simulasi progress (bisa diganti dengan event loading asli)
-    let progress = 0;
-    const progressBar = document.getElementById("progress-bar");
-    const interval = setInterval(() => {
-      progress += 10;
-      progressBar.style.width = progress + "%";
-      if (progress >= 100) clearInterval(interval);
-    }, 300);
+    //let progress = 0;
+    //const progressBar = document.getElementById("progress-bar");
+    //const interval = setInterval(() => {
+    //  progress += 10;
+    //  progressBar.style.width = progress + "%";
+    //  if (progress >= 100) clearInterval(interval);
+    //}, 300);
 
-    function hideProgressBar() {
-      document.querySelector(".progress-container").style.display = "none";
-    }
+    //function hideProgressBar() {
+    //  document.querySelector(".progress-container").style.display = "none";
+    //}
     // Event delegation untuk tombol "Lihat Demo"
     document.addEventListener('click', function (e) {
       if (e.target.classList.contains('lihat-demo-btn')) {

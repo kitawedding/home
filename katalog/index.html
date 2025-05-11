@@ -212,6 +212,13 @@
     .card {
       height: 100%;
     }
+
+    /* Media query untuk menyembunyikan container pada layar kurang dari 450px */
+    @media screen and (max-width: 450px) {
+      .container.px-5.mb-5 {
+        display: none;
+      }
+    }
   </style>
 </head>
 
@@ -234,8 +241,8 @@
       </div>
     </nav>
     <section class="py-5">
-      <div class="container px-5 mb-5">
-        <div class="row row-cols-2 row-cols-lg-4 g-4 mb-3 text-center"> <!-- Modified row columns -->
+      <div class="container px-5 mb-5 pricing-container">
+        <div class="row row-cols-2 row-cols-lg-4 g-4 mb-3 text-center">
           <!-- Card 1 -->
           <div class="col">
             <div class="card mb-4 rounded-3 shadow-sm border-success">
@@ -313,33 +320,60 @@
           </div>
         </div>
       </div>
+      <div class="container px-3 py-4 d-none d-block" id="mobile-message">
+        <div class="alert alert-info text-center">
+          Untuk detail paketnya silahkan hubungi whatsapp kami.
+        </div>
+      </div>
+
+      <script>
+        // Script untuk menampilkan pesan pada mobile device
+        document.addEventListener('DOMContentLoaded', function () {
+          const mobileMessage = document.getElementById('mobile-message');
+          if (window.innerWidth <= 450) {
+            mobileMessage.classList.remove('d-none');
+          }
+
+          window.addEventListener('resize', function () {
+            if (window.innerWidth <= 450) {
+              mobileMessage.classList.remove('d-none');
+            } else {
+              mobileMessage.classList.add('d-none');
+            }
+          });
+        });
+      </script>
       <div class="container px-5 mb-5">
         <div class="row row-cols-2 row-cols-md-4 g-3 filter-buttons">
           <div class="col d-grid">
             <button class="btn btn-outline-primary h-100" onclick="filterKatalog('spesial', this)">Spesial Foto</button>
           </div>
           <div class="col d-grid">
-            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('spesial_lineart', this)">Spesial Tanpa Foto</button>
+            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('spesial_lineart', this)">Spesial Tanpa
+              Foto</button>
           </div>
           <div class="col d-grid">
             <button class="btn btn-outline-primary h-100" onclick="filterKatalog('luxury', this)">Minimalist Luxury
               Foto</button>
           </div>
           <div class="col d-grid">
-            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('luxury_lineart', this)">Minimalist Luxury Tanpa Foto</button>
+            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('luxury_lineart', this)">Minimalist
+              Luxury Tanpa Foto</button>
           </div>
           <div class="col d-grid">
             <button class="btn btn-outline-primary h-100" onclick="filterKatalog('premium', this)">Premium Vintage
               Foto</button>
           </div>
           <div class="col d-grid">
-            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('premium_lineart', this)">Premium Vintage Tanpa Foto</button>
+            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('premium_lineart', this)">Premium
+              Vintage Tanpa Foto</button>
           </div>
           <div class="col d-grid">
             <button class="btn btn-outline-primary h-100" onclick="filterKatalog('adat', this)">Adat Foto</button>
           </div>
           <div class="col d-grid">
-            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('adat_lineart', this)">Adat Tanpa Foto</button>
+            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('adat_lineart', this)">Adat Tanpa
+              Foto</button>
           </div>
         </div>
       </div>
@@ -420,7 +454,7 @@
       { category: "premium", id: "06", demoLink: "https://momenin.my.id/datakatalog/premium/premium-06/index.html" },
       { category: "premium", id: "07", demoLink: "https://momenin.my.id/datakatalog/premium/premium-07/index.html" },
       { category: "premium", id: "08", demoLink: "https://momenin.my.id/datakatalog/premium/premium-08/index.html" },
-      
+
       { category: "premium_lineart", id: "01", imageUrl: "https://punakawandigital.id/wp-content/uploads/2025/05/Premium-Vintage-01-1.webp", demoLink: "../datakatalog/premium/vintage-01-animasi/index.html" },
       { category: "premium_lineart", id: "02", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/11/Premium-Vintage-02-1.webp", demoLink: "../datakatalog/premium/vintage-02-animasi/index.html" },
       { category: "premium_lineart", id: "03", imageUrl: "https://punakawandigital.id/wp-content/uploads/2025/05/Premium-Vintage-03-2.webp", demoLink: "../datakatalog/premium/vintage-03-animasi/index.html" },
@@ -442,7 +476,7 @@
       { category: "adat", id: "09", demoLink: "https://momenin.my.id/datakatalog/adat/chinese/index.html" },
       { category: "adat", id: "10", demoLink: "https://momenin.my.id/datakatalog/adat/melayu/index.html" },
 
-     // Adat category (ditambahkan index.html)
+      // Adat category (ditambahkan index.html)
       { category: "adat_lineart", id: "01", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/08/Slide11-1.webp", demoLink: "../datakatalog/adat/animasi-wayang-01/index.html" },
       { category: "adat_lineart", id: "02", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/08/Slide12-1.webp", demoLink: "../datakatalog/adat/animasi-wayang-02/index.html" },
       { category: "adat_lineart", id: "03", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/WAYANG-03-4.webp", demoLink: "../datakatalog/adat/animasi-wayang-03/index.html" },
@@ -549,10 +583,10 @@
 
     function formatCategoryName(category) {
       const nameMap = {
-        'spesial_lineart' : 'Spesial Lineart',
-        'luxury_lineart' : 'Luxury Lineart',
-        'premium_lineart' : 'Premium Lineart',
-        'adat_lineart' : 'Adat Lineart'
+        'spesial_lineart': 'Spesial Lineart',
+        'luxury_lineart': 'Luxury Lineart',
+        'premium_lineart': 'Premium Lineart',
+        'adat_lineart': 'Adat Lineart'
         //'luxury_++': 'Luxury ++',
         //'wedding_floral': 'Wedding Floral',
         // Add other special cases if needed
@@ -582,11 +616,10 @@
         <div class="card-body d-flex flex-column">
           <h5 class="card-title fw-bold">${title}</h5>
           <p class="card-text flex-grow-1">
-            ${
-              ['adat_lineart', 'premium_lineart', 'luxury_lineart', 'spesial_lineart'].includes(item.category)
-              ? '<span class="fw-bold text-dark">Rp. 15.000</span>'
-              : '<span class="fw-bold text-dark">Rp. 20.000</span>'
-            }
+            ${['adat_lineart', 'premium_lineart', 'luxury_lineart', 'spesial_lineart'].includes(item.category)
+          ? '<span class="fw-bold text-dark">Rp. 15.000</span>'
+          : '<span class="fw-bold text-dark">Rp. 20.000</span>'
+        }
           </p>
           <div class="d-flex justify-content-between align-items-center gap-2 mt-auto">
             <a href="#" class="btn btn-outline-primary flex-grow-1 lihat-demo-btn" data-demo-link="${item.demoLink}" data-bs-toggle="modal" data-title="${title}" data-bs-target="#demoModal">Lihat Demo</a>

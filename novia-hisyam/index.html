@@ -2511,34 +2511,42 @@
 							<div class="elementor-widget-container" id="nama">
 								Nama Tamu </div>
 							<script>
-								// Ganti dengan link CSV dari spreadsheet kamu
-								const spreadsheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSNKJoRqR0iMfHJPQFM6h1PuvYYcI4M9FqS9uvMnuWXc4mzJKAVrCEPMHm6NU2wOEB62p59V2E6IhNB/pub?gid=0&single=true&output=csv';
-
+								// Ambil parameter dari URL
 								const params = new URLSearchParams(window.location.search);
-								const namaURL = params.get("nama");
+								const paramNama = params.get("nama");
 
-								fetch(spreadsheetURL)
-									.then(response => response.text())
+								// Fungsi encoding nama dari spreadsheet ke versi URL-friendly
+								function encodeNama(nama) {
+									return nama
+										.toLowerCase()
+										.replace(/[()]/g, '')       // hapus tanda kurung
+										.replace(/\s+/g, '-')       // ganti spasi jadi -
+										.replace(/[^a-z0-9\-]/g, ''); // hapus simbol aneh
+								}
+
+								// ID spreadsheet kamu
+								const sheetId = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSNKJoRqR0iMfHJPQFM6h1PuvYYcI4M9FqS9uvMnuWXc4mzJKAVrCEPMHm6NU2wOEB62p59V2E6IhNB/pubhtml?gid=0&single=true'; // Ganti dengan ID kamu
+								const sheetUrl = `https://opensheet.elk.sh/${sheetId}/Sheet1`;
+
+								// Ambil data dari spreadsheet
+								fetch(sheetUrl)
+									.then(response => response.json())
 									.then(data => {
-										const rows = data.trim().split('\n').map(row => row.split(','));
-										const headers = rows.shift(); // ambil header kolom
-										const indexURL = headers.indexOf('nama_url');
-										const indexAsli = headers.indexOf('nama_asli');
+										// Loop semua nama, cocokkan dengan encoded nama dari URL
+										const match = data.find(row => {
+											const encoded = encodeNama(row.Nama);
+											return encoded === paramNama;
+										});
 
-										let namaAsli = 'Tamu';
-
-										for (const row of rows) {
-											if (row[indexURL] === namaURL) {
-												namaAsli = row[indexAsli];
-												break;
-											}
+										if (match) {
+											document.getElementById("nama").textContent = match.Nama;
+										} else {
+											document.getElementById("nama").textContent = "Nama tidak ditemukan";
 										}
-
-										document.getElementById("nama").textContent = namaAsli;
 									})
 									.catch(error => {
-										document.getElementById("nama").textContent = 'Tidak bisa ambil data';
-										console.error('Gagal fetch:', error);
+										console.error("Gagal memuat data:", error);
+										document.getElementById("nama").textContent = "Gagal memuat data";
 									});
 							</script>
 							<!--<script>

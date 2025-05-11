@@ -191,7 +191,7 @@
       }
 
       .pricing-card-title {
-        font-size: 1.75rem;
+        font-size: 1.2rem;
       }
 
       .feature-list li {
@@ -200,7 +200,13 @@
 
       .card-body {
         padding: 1rem !important;
-        max-height: 14rem;
+        max-height: 11rem;
+      }
+      .filter-buttons .btn{
+        font-size: 0.8rem !important;
+        height: 3.3rem;
+        align-items: center;
+        
       }
     }
 
@@ -211,13 +217,38 @@
 
     .card {
       height: 100%;
+    }@media (max-width: 450px) {
+      .card-header h4 {
+        font-size: 0.8rem;
+      }
+
+      .pricing-card-title {
+        font-size: 1rem;
+      }
+
+      .feature-list li {
+        font-size: 0.8rem;
+      }
+
+      .card-body {
+        padding: 1rem !important;
+        max-height: 16rem;
+      }
+      .filter-buttons .btn{
+        font-size: 0.8rem !important;
+        height: 3.3rem;
+        align-items: center;
+        
+      }
     }
 
-    /* Media query untuk menyembunyikan container pada layar kurang dari 450px */
-    @media screen and (max-width: 450px) {
-      .paketan {
-        display: none;
-      }
+    .feature-list .cross {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+    .card {
+      height: 100%;
     }
   </style>
 </head>
@@ -320,59 +351,36 @@
           </div>
         </div>
       </div>
-      <div class="container px-3 py-4 d-none d-block" id="mobile-message">
-        <div class="alert alert-info text-center">
-          Untuk detail paketnya silahkan hubungi whatsapp kami.
-        </div>
-      </div>
-
-      <script>
-        // Script untuk menampilkan pesan pada mobile device
-        document.addEventListener('DOMContentLoaded', function () {
-          const mobileMessage = document.getElementById('mobile-message');
-          if (window.innerWidth <= 450) {
-            mobileMessage.classList.remove('d-none');
-          }
-
-          window.addEventListener('resize', function () {
-            if (window.innerWidth <= 450) {
-              mobileMessage.classList.remove('d-none');
-            } else {
-              mobileMessage.classList.add('d-none');
-            }
-          });
-        });
-      </script>
       <div class="container px-5 mb-5">
         <div class="row row-cols-2 row-cols-md-4 g-3 filter-buttons">
           <div class="col d-grid">
-            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('spesial', this)">Spesial Foto</button>
+            <button class="btn btn-outline-primary" onclick="filterKatalog('spesial', this)">Spesial Foto</button>
           </div>
           <div class="col d-grid">
-            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('spesial_lineart', this)">Spesial Tanpa
+            <button class="btn btn-outline-primary" onclick="filterKatalog('spesial_lineart', this)">Spesial Tanpa
               Foto</button>
           </div>
           <div class="col d-grid">
-            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('luxury', this)">Minimalist Luxury
+            <button class="btn btn-outline-primary" onclick="filterKatalog('luxury', this)">Minimalist Luxury
               Foto</button>
           </div>
           <div class="col d-grid">
-            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('luxury_lineart', this)">Minimalist
+            <button class="btn btn-outline-primary" onclick="filterKatalog('luxury_lineart', this)">Minimalist
               Luxury Tanpa Foto</button>
           </div>
           <div class="col d-grid">
-            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('premium', this)">Premium Vintage
+            <button class="btn btn-outline-primary" onclick="filterKatalog('premium', this)">Premium Vintage
               Foto</button>
           </div>
           <div class="col d-grid">
-            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('premium_lineart', this)">Premium
+            <button class="btn btn-outline-primary" onclick="filterKatalog('premium_lineart', this)">Premium
               Vintage Tanpa Foto</button>
           </div>
           <div class="col d-grid">
-            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('adat', this)">Adat Foto</button>
+            <button class="btn btn-outline-primary" onclick="filterKatalog('adat', this)">Adat Foto</button>
           </div>
           <div class="col d-grid">
-            <button class="btn btn-outline-primary h-100" onclick="filterKatalog('adat_lineart', this)">Adat Tanpa
+            <button class="btn btn-outline-primary" onclick="filterKatalog('adat_lineart', this)">Adat Tanpa
               Foto</button>
           </div>
         </div>

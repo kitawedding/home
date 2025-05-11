@@ -2508,43 +2508,82 @@
 							data-widget_type="text-editor.default">
 							<div class="elementor-widget-container" id="nama-tamu-undangan">
 								Nama Tamu </div>
-								<script>
-									// URL Google Sheets (ganti dengan URL publik Anda)
-									const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRu7mUTDnOZx0hStCiNRg4OikhVehEAQl9rAMDlQfdlqKYq_txGod7cxt-PQOlH4B6XKCb5ALN5bXEO/pub?gid=0&single=true&output=csv";
-	
-									// Ambil parameter nama dari URL
-									const urlParams = new URLSearchParams(window.location.search);
-									const namaParam = urlParams.get('nama')?.toLowerCase();
-	
-									// Fetch data dari Google Sheets
-									fetch(SHEET_URL)
-										.then(res => {
-											if (!res.ok) throw new Error("Network response was not ok");
-											return res.text();
-										})
-										.then(csvData => {
-											// Parse CSV data
-											const namaList = csvData.split('\n')
-												.map(row => row.split(',')[0].trim().toLowerCase())
-												.filter(name => name.length > 0);
-	
-											console.log("Daftar nama dari sheet:", namaList); // Debug log
-	
-											// Cek apakah nama ada di daftar
-											if (namaParam && namaList.includes(namaParam)) {
-												document.getElementById('nama-tamu').textContent =
-													namaParam.charAt(0).toUpperCase() + namaParam.slice(1);
+							<script>
+								// URL Google Sheets (ganti dengan URL publik Anda)
+								const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRu7mUTDnOZx0hStCiNRg4OikhVehEAQl9rAMDlQfdlqKYq_txGod7cxt-PQOlH4B6XKCb5ALN5bXEO/pub?gid=0&single=true&output=csv";
+
+								// Ambil parameter nama dari URL
+								const urlParams = new URLSearchParams(window.location.search);
+								const namaParam = urlParams.get('nama')?.toLowerCase();
+
+								// Fetch data dari Google Sheets
+								fetch(SHEET_URL)
+									.then(res => {
+										if (!res.ok) throw new Error("Network response was not ok");
+										return res.text();
+									})
+									.then(csvData => {
+										console.log("CSV data diterima:", csvData); // Debug log
+
+										// Parse CSV data - memisahkan baris
+										const rows = csvData.split('\n').filter(row => row.trim() !== '');
+
+										// Cek apakah ada parameter nama dari URL
+										if (namaParam) {
+											// Format nama dari parameter URL (ganti tanda - dengan spasi)
+											const formattedNamaParam = namaParam.replace(/-/g, ' ');
+											console.log("Mencari nama:", formattedNamaParam); // Debug log
+
+											// Cari nama yang cocok di data CSV (case insensitive)
+											let found = false;
+											for (let i = 0; i < rows.length; i++) {
+												const rowData = rows[i].split(',');
+												if (rowData.length > 0) {
+													const namaDariSheet = rowData[0].trim().toLowerCase();
+													console.log("Membandingkan dengan:", namaDariSheet); // Debug log
+
+													if (namaDariSheet === formattedNamaParam) {
+														// Jika nama ditemukan, tampilkan dengan format yang benar
+														const displayName = formattedNamaParam
+															.split(' ')
+															.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+															.join(' ');
+
+														document.getElementById('nama-tamu-undangan').innerHTML = displayName;
+														found = true;
+														break;
+													}
+												}
 											}
-										})
-										.catch(err => {
-											console.error("Error mengambil data:", err);
-											// Fallback jika terjadi error
-											if (namaParam) {
-												document.getElementById('nama-tamu-undangan').textContent =
-													namaParam.charAt(0).toUpperCase() + namaParam.slice(1);
+
+											// Jika nama tidak ditemukan di sheet, tetap tampilkan dari parameter URL
+											if (!found) {
+												const displayName = formattedNamaParam
+													.split(' ')
+													.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+													.join(' ');
+
+												document.getElementById('nama-tamu-undangan').innerHTML = displayName;
+												console.log("Nama tidak ditemukan di sheet, menampilkan dari URL:", displayName);
 											}
-										});
-								</script>
+										} else {
+											// Jika tidak ada parameter nama, tampilkan default
+											document.getElementById('nama-tamu-undangan').innerHTML = "Tamu Undangan";
+										}
+									})
+									.catch(err => {
+										console.error("Error mengambil data:", err);
+										// Fallback jika terjadi error
+										if (namaParam) {
+											const displayName = namaParam.replace(/-/g, ' ')
+												.split(' ')
+												.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+												.join(' ');
+
+											document.getElementById('nama-tamu-undangan').innerHTML = displayName;
+										}
+									});
+							</script>
 						</div>
 						<div class="elementor-element elementor-element-3c958ca3 elementor-align-left elementor-widget elementor-widget-button"
 							data-id="3c958ca3" data-element_type="widget" id="open" data-aos="zoom-out-left"
@@ -2910,8 +2949,7 @@
 						data-settings="{&quot;_animation&quot;:&quot;fadeInUp&quot;}" data-widget_type="button.default">
 						<div class="elementor-widget-container">
 							<div class="elementor-button-wrapper">
-								<a class="elementor-button elementor-button-link elementor-size-sm"
-									href="#date">
+								<a class="elementor-button elementor-button-link elementor-size-sm" href="#date">
 									<span class="elementor-button-content-wrapper">
 										<span class="elementor-button-text">Save The Date</span>
 									</span>
@@ -3145,7 +3183,8 @@
 						data-settings="{&quot;_animation_mobile&quot;:&quot;none&quot;}"
 						data-widget_type="heading.default">
 						<div class="elementor-widget-container">
-							<h2 class="elementor-heading-title elementor-size-default" style="font-size: 30px !important;">Rizki Cahyani, S. E</h2>
+							<h2 class="elementor-heading-title elementor-size-default"
+								style="font-size: 30px !important;">Rizki Cahyani, S. E</h2>
 						</div>
 					</div>
 					<div class="elementor-element elementor-element-476b4927 revealin elementor-widget elementor-widget-text-editor"
@@ -3204,7 +3243,8 @@
 						data-settings="{&quot;_animation_mobile&quot;:&quot;none&quot;}"
 						data-widget_type="heading.default">
 						<div class="elementor-widget-container">
-							<h2 class="elementor-heading-title elementor-size-default" style="font-size: 30px !important;">Muchamad Fadle Assidiqi, S. M</h2>
+							<h2 class="elementor-heading-title elementor-size-default"
+								style="font-size: 30px !important;">Muchamad Fadle Assidiqi, S. M</h2>
 						</div>
 					</div>
 					<div class="elementor-element elementor-element-7413cb44 revealin elementor-widget elementor-widget-text-editor"
@@ -3543,7 +3583,8 @@
 						<div class="elementor-widget-container">
 							<p class="elementor-heading-title elementor-size-default">Doa Restu Anda merupakan
 								<br>karunia yang sangat berarti bagi kami.<br><br>Dan jika memberi adalah ungkapan tanda
-								kasih<br> Anda, Anda dapat memberi kado secara cashless.</p>
+								kasih<br> Anda, Anda dapat memberi kado secara cashless.
+							</p>
 						</div>
 					</div>
 					<div class="elementor-element elementor-element-35eca5e2 elementor-align-center revealin elementor-widget elementor-widget-button"
@@ -3572,7 +3613,7 @@
 										src="wp-content/uploads/2024/09/1200px-Logo_dana_blue.svg-1-1.png"
 										class="attachment-full size-full wp-image-22876" alt=""
 										sizes="(max-width: 2000px) 100vw, 2048px" />
-										<img loading="lazy" decoding="async" width="2048" height="650"
+									<img loading="lazy" decoding="async" width="2048" height="650"
 										src="wp-content/uploads/2024/09/shopeepay.png"
 										class="attachment-full size-full wp-image-22876" alt=""
 										sizes="(max-width: 2000px) 100vw, 2048px" />
@@ -3610,7 +3651,7 @@
 										<div class="copy-content spancontent" style="display: none;"></div>
 
 										<a style="cursor:pointer;" class="elementor-button" role="button"
-										onclick="copyText('rek1', this)">
+											onclick="copyText('rek1', this)">
 
 											<div class="elementor-button-content-wrapper">
 												<span class="elementor-button-icon elementor-align-icon-">
@@ -3666,7 +3707,7 @@
 										<div class="copy-content spancontent" style="display: none;"></div>
 
 										<a style="cursor:pointer;" class="elementor-button" role="button"
-										onclick="copyText('rek2', this)">
+											onclick="copyText('rek2', this)">
 
 											<div class="elementor-button-content-wrapper">
 												<span class="elementor-button-icon elementor-align-icon-">
@@ -3790,8 +3831,8 @@
 									data-elementor-lightbox-title="24SB031-TN.jpg"
 									data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjI4ODEsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNFwvMDlcLzI0U0IwMzEtVE4uanBnIiwic2xpZGVzaG93IjoiN2ZmMDIxZDMifQ%3D%3D">
 									<div class="e-gallery-image elementor-gallery-item__image"
-										data-thumbnail="wp-content/uploads/2024/09/24SB031-TN.jpg"
-										data-width="1024" data-height="1023" aria-label="" role="img"></div>
+										data-thumbnail="wp-content/uploads/2024/09/24SB031-TN.jpg" data-width="1024"
+										data-height="1023" aria-label="" role="img"></div>
 									<div class="elementor-gallery-item__overlay"></div>
 								</a>
 								<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
@@ -3845,43 +3886,39 @@
 									<div class="elementor-gallery-item__overlay"></div>
 								</a>
 								<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-									href="wp-content/uploads/2024/09/1.jpg"
-									data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="7ff021d3"
-									data-elementor-lightbox-title="1.jpg"
+									href="wp-content/uploads/2024/09/1.jpg" data-elementor-open-lightbox="yes"
+									data-elementor-lightbox-slideshow="7ff021d3" data-elementor-lightbox-title="1.jpg"
 									data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjI4ODQsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNFwvMDlcL3NtLVdBTklUQS1lMTcyNTUxMDQ4OTU4NS5qcGciLCJzbGlkZXNob3ciOiI3ZmYwMjFkMyJ9">
 									<div class="e-gallery-image elementor-gallery-item__image"
-										data-thumbnail="wp-content/uploads/2024/09/1.jpg"
-										data-width="953" data-height="653" aria-label="" role="img"></div>
+										data-thumbnail="wp-content/uploads/2024/09/1.jpg" data-width="953"
+										data-height="653" aria-label="" role="img"></div>
 									<div class="elementor-gallery-item__overlay"></div>
 								</a>
 								<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-									href="wp-content/uploads/2024/09/2.jpg"
-									data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="7ff021d3"
-									data-elementor-lightbox-title="2.jpg"
+									href="wp-content/uploads/2024/09/2.jpg" data-elementor-open-lightbox="yes"
+									data-elementor-lightbox-slideshow="7ff021d3" data-elementor-lightbox-title="2.jpg"
 									data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjI4ODQsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNFwvMDlcL3NtLVdBTklUQS1lMTcyNTUxMDQ4OTU4NS5qcGciLCJzbGlkZXNob3ciOiI3ZmYwMjFkMyJ9">
 									<div class="e-gallery-image elementor-gallery-item__image"
-										data-thumbnail="wp-content/uploads/2024/09/2.jpg"
-										data-width="953" data-height="653" aria-label="" role="img"></div>
+										data-thumbnail="wp-content/uploads/2024/09/2.jpg" data-width="953"
+										data-height="653" aria-label="" role="img"></div>
 									<div class="elementor-gallery-item__overlay"></div>
 								</a>
 								<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-									href="wp-content/uploads/2024/09/3.jpg"
-									data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="7ff021d3"
-									data-elementor-lightbox-title="3.jpg"
+									href="wp-content/uploads/2024/09/3.jpg" data-elementor-open-lightbox="yes"
+									data-elementor-lightbox-slideshow="7ff021d3" data-elementor-lightbox-title="3.jpg"
 									data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjI4ODQsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNFwvMDlcL3NtLVdBTklUQS1lMTcyNTUxMDQ4OTU4NS5qcGciLCJzbGlkZXNob3ciOiI3ZmYwMjFkMyJ9">
 									<div class="e-gallery-image elementor-gallery-item__image"
-										data-thumbnail="wp-content/uploads/2024/09/3.jpg"
-										data-width="953" data-height="653" aria-label="" role="img"></div>
+										data-thumbnail="wp-content/uploads/2024/09/3.jpg" data-width="953"
+										data-height="653" aria-label="" role="img"></div>
 									<div class="elementor-gallery-item__overlay"></div>
 								</a>
 								<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-									href="wp-content/uploads/2024/09/4.jpg"
-									data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="7ff021d3"
-									data-elementor-lightbox-title="4.jpg"
+									href="wp-content/uploads/2024/09/4.jpg" data-elementor-open-lightbox="yes"
+									data-elementor-lightbox-slideshow="7ff021d3" data-elementor-lightbox-title="4.jpg"
 									data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjI4ODQsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNFwvMDlcL3NtLVdBTklUQS1lMTcyNTUxMDQ4OTU4NS5qcGciLCJzbGlkZXNob3ciOiI3ZmYwMjFkMyJ9">
 									<div class="e-gallery-image elementor-gallery-item__image"
-										data-thumbnail="wp-content/uploads/2024/09/4.jpg"
-										data-width="953" data-height="653" aria-label="" role="img"></div>
+										data-thumbnail="wp-content/uploads/2024/09/4.jpg" data-width="953"
+										data-height="653" aria-label="" role="img"></div>
 									<div class="elementor-gallery-item__overlay"></div>
 								</a>
 							</div>
@@ -4087,7 +4124,10 @@
 								data-settings="{&quot;_animation_mobile&quot;:&quot;none&quot;}"
 								data-widget_type="text-editor.default">
 								<div class="elementor-widget-container">
-									<p>Pertemuan pertama kali pada saat SMP tahun 2013. Namun, kami baru benar-benar terhubung saat kuliah beberapa tahun kemudian. Saat itu, setiap pertemuan dan obrolan kami terasa sangat spesial. Akhirnya, kami menyadari bahwa kami memiliki perasaan yang sama, dan cinta kami mulai tumbuh.
+									<p>Pertemuan pertama kali pada saat SMP tahun 2013. Namun, kami baru benar-benar
+										terhubung saat kuliah beberapa tahun kemudian. Saat itu, setiap pertemuan dan
+										obrolan kami terasa sangat spesial. Akhirnya, kami menyadari bahwa kami memiliki
+										perasaan yang sama, dan cinta kami mulai tumbuh.
 									</p>
 								</div>
 							</div>
@@ -4116,7 +4156,12 @@
 								data-settings="{&quot;_animation_mobile&quot;:&quot;none&quot;}"
 								data-widget_type="text-editor.default">
 								<div class="elementor-widget-container">
-									<p>Pada tanggal 30 Juni 2024, dengan penuh kasih, cincin cantik dikeluarkan dan pertanyaan yang mengubah hidup diajukan. Jawaban "ya" penuh kebahagiaan menyegel momen tak terlupakan itu. Kami berdua saling memandang dengan perasaan yang amat dalam, merasakan kebahagiaan yang tak terhingga. Cincin yang dipasang di jari menjadi simbol cinta dan komitmen abadi. Momen itu akan selalu dikenang sebagai awal dari perjalanan hidup bersama.
+									<p>Pada tanggal 30 Juni 2024, dengan penuh kasih, cincin cantik dikeluarkan dan
+										pertanyaan yang mengubah hidup diajukan. Jawaban "ya" penuh kebahagiaan menyegel
+										momen tak terlupakan itu. Kami berdua saling memandang dengan perasaan yang amat
+										dalam, merasakan kebahagiaan yang tak terhingga. Cincin yang dipasang di jari
+										menjadi simbol cinta dan komitmen abadi. Momen itu akan selalu dikenang sebagai
+										awal dari perjalanan hidup bersama.
 									</p>
 								</div>
 							</div>
@@ -4145,7 +4190,11 @@
 								data-settings="{&quot;_animation_mobile&quot;:&quot;none&quot;}"
 								data-widget_type="text-editor.default">
 								<div class="elementor-widget-container">
-									<p>Tanggal 20 Juni 2025, janji suci akan diucapkan di hadapan keluarga dan teman-teman tercinta. Dengan cinta dan komitmen, hidup baru akan dimulai, menciptakan kenangan indah yang akan bertahan seumur hidup. Kami akan menjalani hidup bersama, melewati suka dan duka, dan membangun masa depan yang cerah. InsyaAllah...</p>
+									<p>Tanggal 20 Juni 2025, janji suci akan diucapkan di hadapan keluarga dan
+										teman-teman tercinta. Dengan cinta dan komitmen, hidup baru akan dimulai,
+										menciptakan kenangan indah yang akan bertahan seumur hidup. Kami akan menjalani
+										hidup bersama, melewati suka dan duka, dan membangun masa depan yang cerah.
+										InsyaAllah...</p>
 								</div>
 							</div>
 						</div>
@@ -4211,7 +4260,7 @@
 										margin: 10px 0;
 										text-align: center;
 									}
-	
+
 									.stat-box {
 										background: white;
 										width: 90px;
@@ -4220,26 +4269,26 @@
 										align-content: center;
 										box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 									}
-	
+
 									.stat-number {
 										font-size: 24px;
 										font-weight: bold;
 										color: #000000;
 									}
-	
+
 									form {
 										background: white;
 										padding: 20px;
 										border-radius: 8px;
 										box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 									}
-	
+
 									label {
 										display: block;
 										margin-bottom: 8px;
 										font-weight: bold;
 									}
-	
+
 									input,
 									textarea,
 									select {
@@ -4250,12 +4299,12 @@
 										border-radius: 4px;
 										box-sizing: border-box;
 									}
-	
+
 									textarea {
 										height: 100px;
 										resize: vertical;
 									}
-	
+
 									.kirimkomen {
 										color: white;
 										background-color: #af8600;
@@ -4266,12 +4315,12 @@
 										font-size: 16px;
 										width: 100%;
 									}
-	
+
 									.kirimkomen:hover {
 										background-color: #ffc400;
 										color: #000000;
 									}
-	
+
 									.wishes-container {
 										margin-top: 30px;
 										width: 400px;
@@ -4280,29 +4329,29 @@
 										padding: 10px;
 										overflow-y: auto;
 									}
-	
+
 									.wish {
 										padding: 5px;
 										margin-bottom: 5px;
 										border-radius: 14px;
 										box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 									}
-	
+
 									.wish-name {
 										font-weight: bold;
 										color: #ffffff;
 										margin-bottom: 2px;
 									}
-	
+
 									.wish-message {
 										margin-bottom: 2px;
 										color: #ffffff;
 									}
-	
+
 									.wish-attendance {
 										color: #ffffff;
 									}
-	
+
 									.attendance-icon {
 										display: inline-block;
 										width: 20px;
@@ -4312,13 +4361,13 @@
 										border-radius: 50%;
 										margin-right: 5px;
 									}
-	
+
 									.wish-attendance span[class="attendance-icon"] {
 										/* Checkmark (Hadir) */
 										background-color: #4CAF50;
 										color: white;
 									}
-	
+
 									.wish-attendance span[class="attendance-icon"] {
 										/* Cross (Tidak Hadir) - will override if Hadir */
 										background-color: #f44336;
@@ -4343,16 +4392,18 @@
 										<div id='cui-container-form-27181' class='cui-container-form cui-no-login'>
 											<div id='respond-27181' class='respond cui-clearfix'>
 												<form id="wishForm">
-													<input type="text" id="name" name="name" required placeholder="Nama">
+													<input type="text" id="name" name="name" required
+														placeholder="Nama">
 													<textarea id="message" name="message" required
 														placeholder="Ucapan"></textarea>
 													<select id="attendance" name="attendance" required>
-														<option value="" disabled selected hidden>Pilih Konfirmasi Kehadiran
+														<option value="" disabled selected hidden>Pilih Konfirmasi
+															Kehadiran
 														</option>
 														<option value="Hadir">Hadir</option>
 														<option value="Tidak Hadir">Tidak Hadir</option>
 													</select>
-	
+
 													<button class="kirimkomen" type="submit">KIRIM</button>
 												</form>
 											</div>
@@ -4365,19 +4416,19 @@
 								<script>
 									// Google Apps Script Web App URL
 									const scriptUrl = 'https://script.google.com/macros/s/AKfycbwPc-JMTuajbk2YLyXkgdUuBw6WlYbIiiXzKb0XX3hTBg6itD3CUkjpHDKr7HBGkLFJpQ/exec';
-	
+
 									document.addEventListener('DOMContentLoaded', function () {
 										// Load existing wishes when page loads
 										loadWishes();
-	
+
 										// Handle form submission
 										document.getElementById('wishForm').addEventListener('submit', function (e) {
 											e.preventDefault();
-	
+
 											const name = document.getElementById('name').value;
 											const message = document.getElementById('message').value;
 											const attendance = document.getElementById('attendance').value;
-	
+
 											// Send data to Google Sheets
 											fetch(scriptUrl, {
 												method: 'POST',
@@ -4395,7 +4446,7 @@
 												.then(() => {
 													// Clear form
 													document.getElementById('wishForm').reset();
-	
+
 													// Reload wishes
 													loadWishes();
 												})
@@ -4404,7 +4455,7 @@
 												});
 										});
 									});
-	
+
 									function loadWishes() {
 										// Get wishes from Google Sheets
 										fetch(`${scriptUrl}?action=get`)
@@ -4416,20 +4467,20 @@
 													data.filter(item => item.attendance === 'Hadir').length;
 												document.getElementById('not-attend-count').textContent =
 													data.filter(item => item.attendance === 'Tidak Hadir').length;
-	
+
 												// Display wishes
 												const container = document.getElementById('wishesContainer');
 												container.innerHTML = '';
-	
+
 												data.reverse().forEach(wish => {
 													const wishElement = document.createElement('div');
 													wishElement.className = 'wish';
-	
+
 													// Determine icon based on attendance
 													const attendanceIcon = wish.attendance === 'Hadir'
 														? '<span class="attendance-icon" style="background-color: #4CAF50">✓</span>'
 														: '<span class="attendance-icon" style="background-color: #f44336">✗</span>';
-	
+
 													wishElement.innerHTML = `
 														<div class="wish-name wish-attendance" style="font-color: white">${wish.name} ${attendanceIcon}</div>
 														<div class="wish-message" style="font-color: white">${wish.message}</div>`;

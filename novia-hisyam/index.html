@@ -2511,44 +2511,38 @@
 							<div class="elementor-widget-container" id="nama">
 								Nama Tamu </div>
 							<script>
-								// Ambil parameter dari URL
-								const params = new URLSearchParams(window.location.search);
-								const paramNama = params.get("nama");
+    const params = new URLSearchParams(window.location.search);
+    const paramNama = params.get("nama");
 
-								// Fungsi encoding nama dari spreadsheet ke versi URL-friendly
-								function encodeNama(nama) {
-									return nama
-										.toLowerCase()
-										.replace(/[()]/g, '')       // hapus tanda kurung
-										.replace(/\s+/g, '-')       // ganti spasi jadi -
-										.replace(/[^a-z0-9\-]/g, ''); // hapus simbol aneh
-								}
+    function encodeNama(nama) {
+      return nama
+        .toLowerCase()
+        .replace(/[()]/g, '')         // hapus tanda kurung
+        .replace(/\s+/g, '-')         // spasi jadi -
+        .replace(/[^a-z0-9\-]/g, ''); // hapus karakter aneh
+    }
 
-								// ID spreadsheet kamu
-								const sheetId = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSNKJoRqR0iMfHJPQFM6h1PuvYYcI4M9FqS9uvMnuWXc4mzJKAVrCEPMHm6NU2wOEB62p59V2E6IhNB/pubhtml?gid=0&single=true'; // Ganti dengan ID kamu
-								const sheetUrl = `https://opensheet.elk.sh/${sheetId}/Sheet1`;
+    const sheetUrl = 'https://opensheet.elk.sh/2PACX-1vSNKJoRqR0iMfHJPQFM6h1PuvYYcI4M9FqS9uvMnuWXc4mzJKAVrCEPMHm6NU2wOEB62p59V2E6IhNB/Sheet1';
 
-								// Ambil data dari spreadsheet
-								fetch(sheetUrl)
-									.then(response => response.json())
-									.then(data => {
-										// Loop semua nama, cocokkan dengan encoded nama dari URL
-										const match = data.find(row => {
-											const encoded = encodeNama(row.Nama);
-											return encoded === paramNama;
-										});
+    fetch(sheetUrl)
+      .then(res => res.json())
+      .then(data => {
+        const match = data.find(row => {
+          const encoded = encodeNama(row.Nama);
+          return encoded === paramNama;
+        });
 
-										if (match) {
-											document.getElementById("nama").textContent = match.Nama;
-										} else {
-											document.getElementById("nama").textContent = "Nama tidak ditemukan";
-										}
-									})
-									.catch(error => {
-										console.error("Gagal memuat data:", error);
-										document.getElementById("nama").textContent = "Gagal memuat data";
-									});
-							</script>
+        if (match) {
+          document.getElementById('nama').textContent = match.Nama;
+        } else {
+          document.getElementById('nama').textContent = "tidak ditemukan 😢";
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById('nama').textContent = "gagal mengambil data";
+      });
+  </script>
 							<!--<script>
 									// URL Google Sheets (ganti dengan URL publik Anda)
 									const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSNKJoRqR0iMfHJPQFM6h1PuvYYcI4M9FqS9uvMnuWXc4mzJKAVrCEPMHm6NU2wOEB62p59V2E6IhNB/pub?gid=0&single=true&output=csv";

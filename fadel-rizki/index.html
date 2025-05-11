@@ -2502,17 +2502,71 @@
 							<div class="elementor-widget-container">
 								Kepada Yth : </div>
 						</div>
-						<div class="elementor-element elementor-element-7336b2f9 elementor-widget elementor-widget-text-editor"
+												<div class="elementor-element elementor-element-7336b2f9 elementor-widget elementor-widget-text-editor"
 							data-id="7336b2f9" data-element_type="widget" data-aos="zoom-in" data-aos-delay="5"
 							data-aos-duration="2500" data-aos-easing="lease-in-cube" data-aos-offset="10"
 							data-widget_type="text-editor.default">
 							<div class="elementor-widget-container" id="nama-tamu-undangan">
 								Nama Tamu </div>
-								<script>
-									// URL Google Sheets (ganti dengan URL publik Anda)
-									const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRPvzg2pKpuEY5FJsolsL20IzPi-5m9J9hadQ1cSNdyLDWgCWsExa_z999AxHY6nV2-8MfWZAsdv8Gf/pub?gid=0&single=true&output=csv";
-	
-									// Ambil parameter nama dari URL
+							<script>
+								// Fungsi untuk memformat nama dengan memperhatikan kurung
+								function formatNamaWithParentheses(nama) {
+									// Pertama pisahkan bagian yang ada dalam kurung
+									let formattedName = '';
+									let insideParentheses = false;
+									let currentWord = '';
+									let result = [];
+
+									// Tangani kasus khusus untuk format "Aku-(Bensin)" -> "Aku (Bensin)"
+									nama = nama.replace(/-\(/g, ' (');
+
+									// Pisahkan menjadi array kata-kata
+									const words = nama.split(' ');
+
+									// Proses setiap kata
+									for (let i = 0; i < words.length; i++) {
+										let word = words[i];
+
+										// Cek apakah kata mengandung tanda kurung buka
+										if (word.includes('(')) {
+											// Pisahkan bagian sebelum kurung dan kurungnya
+											const parts = word.split('(');
+											if (parts[0]) {
+												// Kapitalkan bagian sebelum kurung
+												result.push(parts[0].charAt(0).toUpperCase() + parts[0].slice(1));
+											}
+											// Tambahkan kurung dengan huruf kapital di dalamnya
+											if (parts[1]) {
+												result.push('(' + parts[1].charAt(0).toUpperCase() + parts[1].slice(1));
+											} else {
+												result.push('(');
+											}
+										}
+										// Cek apakah kata mengandung tanda kurung tutup
+										else if (word.includes(')')) {
+											const parts = word.split(')');
+											if (parts[0]) {
+												result.push(parts[0] + ')');
+											} else {
+												result.push(')');
+											}
+											if (parts[1]) {
+												result.push(parts[1].charAt(0).toUpperCase() + parts[1].slice(1));
+											}
+										}
+										// Kata normal, kapitalkan huruf pertama
+										else {
+											result.push(word.charAt(0).toUpperCase() + word.slice(1));
+										}
+									}
+
+									return result.join(' ');
+								}
+
+								// URL Google Sheets (ganti dengan URL publik Anda)
+								const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRPvzg2pKpuEY5FJsolsL20IzPi-5m9J9hadQ1cSNdyLDWgCWsExa_z999AxHY6nV2-8MfWZAsdv8Gf/pub?gid=0&single=true&output=csv";
+
+								// Ambil parameter nama dari URL
 								const urlParams = new URLSearchParams(window.location.search);
 								const namaParam = urlParams.get('nama')?.toLowerCase();
 
@@ -2544,10 +2598,7 @@
 
 													if (namaDariSheet === formattedNamaParam) {
 														// Jika nama ditemukan, tampilkan dengan format yang benar
-														const displayName = formattedNamaParam
-															.split(' ')
-															.map(word => word.charAt(0).toUpperCase() + word.slice(1))
-															.join(' ');
+														const displayName = formatNamaWithParentheses(formattedNamaParam);
 
 														document.getElementById('nama-tamu-undangan').innerHTML = displayName;
 														found = true;
@@ -2558,10 +2609,7 @@
 
 											// Jika nama tidak ditemukan di sheet, tetap tampilkan dari parameter URL
 											if (!found) {
-												const displayName = formattedNamaParam
-													.split(' ')
-													.map(word => word.charAt(0).toUpperCase() + word.slice(1))
-													.join(' ');
+												const displayName = formatNamaWithParentheses(formattedNamaParam);
 
 												document.getElementById('nama-tamu-undangan').innerHTML = displayName;
 												console.log("Nama tidak ditemukan di sheet, menampilkan dari URL:", displayName);
@@ -2575,15 +2623,13 @@
 										console.error("Error mengambil data:", err);
 										// Fallback jika terjadi error
 										if (namaParam) {
-											const displayName = namaParam.replace(/-/g, ' ')
-												.split(' ')
-												.map(word => word.charAt(0).toUpperCase() + word.slice(1))
-												.join(' ');
+											const formattedNamaParam = namaParam.replace(/-/g, ' ');
+											const displayName = formatNamaWithParentheses(formattedNamaParam);
 
 											document.getElementById('nama-tamu-undangan').innerHTML = displayName;
 										}
 									});
-								</script>
+							</script>
 						</div>
 						<div class="elementor-element elementor-element-3c958ca3 elementor-align-left elementor-widget elementor-widget-button"
 							data-id="3c958ca3" data-element_type="widget" id="open" data-aos="zoom-out-left"

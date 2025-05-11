@@ -2508,42 +2508,9 @@
 							data-id="7336b2f9" data-element_type="widget" data-aos="zoom-in" data-aos-delay="5"
 							data-aos-duration="2500" data-aos-easing="lease-in-cube" data-aos-offset="10"
 							data-widget_type="text-editor.default">
-							<div class="elementor-widget-container" id="nama">
+							<div class="elementor-widget-container" id="nama-tamu-undangan">
 								Nama Tamu </div>
 							<script>
-    const params = new URLSearchParams(window.location.search);
-    const paramNama = params.get("nama");
-
-    function encodeNama(nama) {
-      return nama
-        .toLowerCase()
-        .replace(/[()]/g, '')         // hapus tanda kurung
-        .replace(/\s+/g, '-')         // spasi jadi -
-        .replace(/[^a-z0-9\-]/g, ''); // hapus karakter aneh
-    }
-
-    const sheetUrl = 'https://opensheet.elk.sh/2PACX-1vSNKJoRqR0iMfHJPQFM6h1PuvYYcI4M9FqS9uvMnuWXc4mzJKAVrCEPMHm6NU2wOEB62p59V2E6IhNB/Sheet1';
-
-    fetch(sheetUrl)
-      .then(res => res.json())
-      .then(data => {
-        const match = data.find(row => {
-          const encoded = encodeNama(row.Nama);
-          return encoded === paramNama;
-        });
-
-        if (match) {
-          document.getElementById('nama').textContent = match.Nama;
-        } else {
-          document.getElementById('nama').textContent = "tidak ditemukan 😢";
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        document.getElementById('nama').textContent = "gagal mengambil data";
-      });
-  </script>
-							<!--<script>
 									// URL Google Sheets (ganti dengan URL publik Anda)
 									const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSNKJoRqR0iMfHJPQFM6h1PuvYYcI4M9FqS9uvMnuWXc4mzJKAVrCEPMHm6NU2wOEB62p59V2E6IhNB/pub?gid=0&single=true&output=csv";
 	
@@ -2579,7 +2546,7 @@
 													namaParam.charAt(0).toUpperCase() + namaParam.slice(1);
 											}
 										});
-								</script>-->
+								</script>
 						</div>
 						<div class="elementor-element elementor-element-3c958ca3 elementor-align-left elementor-widget elementor-widget-button"
 							data-id="3c958ca3" data-element_type="widget" id="open" data-aos="zoom-out-left"

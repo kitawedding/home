@@ -2510,7 +2510,38 @@
 							data-widget_type="text-editor.default">
 							<div class="elementor-widget-container" id="nama-tamu-undangan">
 								Nama Tamu </div>
-								<script>
+							<script>
+								// Ganti dengan link CSV dari spreadsheet kamu
+								const spreadsheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSNKJoRqR0iMfHJPQFM6h1PuvYYcI4M9FqS9uvMnuWXc4mzJKAVrCEPMHm6NU2wOEB62p59V2E6IhNB/pub?gid=0&single=true&output=csv';
+
+								const params = new URLSearchParams(window.location.search);
+								const namaURL = params.get("nama");
+
+								fetch(spreadsheetURL)
+									.then(response => response.text())
+									.then(data => {
+										const rows = data.trim().split('\n').map(row => row.split(','));
+										const headers = rows.shift(); // ambil header kolom
+										const indexURL = headers.indexOf('nama_url');
+										const indexAsli = headers.indexOf('nama_asli');
+
+										let namaAsli = 'Tamu';
+
+										for (const row of rows) {
+											if (row[indexURL] === namaURL) {
+												namaAsli = row[indexAsli];
+												break;
+											}
+										}
+
+										document.getElementById("nama").textContent = namaAsli;
+									})
+									.catch(error => {
+										document.getElementById("nama").textContent = 'Tidak bisa ambil data';
+										console.error('Gagal fetch:', error);
+									});
+							</script>
+							<!--<script>
 									// URL Google Sheets (ganti dengan URL publik Anda)
 									const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSNKJoRqR0iMfHJPQFM6h1PuvYYcI4M9FqS9uvMnuWXc4mzJKAVrCEPMHm6NU2wOEB62p59V2E6IhNB/pub?gid=0&single=true&output=csv";
 	
@@ -2546,7 +2577,7 @@
 													namaParam.charAt(0).toUpperCase() + namaParam.slice(1);
 											}
 										});
-								</script>
+								</script>-->
 						</div>
 						<div class="elementor-element elementor-element-3c958ca3 elementor-align-left elementor-widget elementor-widget-button"
 							data-id="3c958ca3" data-element_type="widget" id="open" data-aos="zoom-out-left"
@@ -2912,8 +2943,7 @@
 						data-settings="{&quot;_animation&quot;:&quot;fadeInUp&quot;}" data-widget_type="button.default">
 						<div class="elementor-widget-container">
 							<div class="elementor-button-wrapper">
-								<a class="elementor-button elementor-button-link elementor-size-sm"
-									href="#date">
+								<a class="elementor-button elementor-button-link elementor-size-sm" href="#date">
 									<span class="elementor-button-content-wrapper">
 										<span class="elementor-button-text">Save The Date</span>
 									</span>
@@ -3166,7 +3196,8 @@
 							<div class="elementor-social-icons-wrapper elementor-grid">
 								<span class="elementor-grid-item">
 									<a class="elementor-icon elementor-social-icon elementor-social-icon-instagram elementor-animation-grow elementor-repeater-item-6154405"
-										href="https://www.instagram.com/noviarusdiana_rhm?igsh=MThsdXB5bTl5bGNiaQ%3D%3D&utm_source=qr" target="_blank">
+										href="https://www.instagram.com/noviarusdiana_rhm?igsh=MThsdXB5bTl5bGNiaQ%3D%3D&utm_source=qr"
+										target="_blank">
 										<span class="elementor-screen-only">Instagram</span>
 										<i class="fab fa-instagram"></i> </a>
 								</span>
@@ -3225,7 +3256,8 @@
 							<div class="elementor-social-icons-wrapper elementor-grid">
 								<span class="elementor-grid-item">
 									<a class="elementor-icon elementor-social-icon elementor-social-icon-instagram elementor-animation-grow elementor-repeater-item-6154405"
-										href="https://www.instagram.com/hisyam_feldspr?igsh=MW5qNHN4bG1meWoxYg==" target="_blank">
+										href="https://www.instagram.com/hisyam_feldspr?igsh=MW5qNHN4bG1meWoxYg=="
+										target="_blank">
 										<span class="elementor-screen-only">Instagram</span>
 										<i class="fab fa-instagram"></i> </a>
 								</span>
@@ -3545,7 +3577,8 @@
 						<div class="elementor-widget-container">
 							<p class="elementor-heading-title elementor-size-default">Doa Restu Anda merupakan
 								<br>karunia yang sangat berarti bagi kami.<br><br>Dan jika memberi adalah ungkapan tanda
-								kasih<br> Anda, Anda dapat memberi kado secara cashless.</p>
+								kasih<br> Anda, Anda dapat memberi kado secara cashless.
+							</p>
 						</div>
 					</div>
 					<div class="elementor-element elementor-element-35eca5e2 elementor-align-center revealin elementor-widget elementor-widget-button"
@@ -3588,7 +3621,8 @@
 							<div class="elementor-element elementor-element-21c730d0 elementor-widget elementor-widget-heading"
 								data-id="21c730d0" data-element_type="widget" data-widget_type="heading.default">
 								<div class="elementor-widget-container">
-									<p class="elementor-heading-title elementor-size-default" id="rek1">590001031127535</p>
+									<p class="elementor-heading-title elementor-size-default" id="rek1">590001031127535
+									</p>
 								</div>
 							</div>
 							<div class="elementor-element elementor-element-7eadce6d elementor-widget elementor-widget-heading"
@@ -3609,7 +3643,7 @@
 										<div class="copy-content spancontent" style="display: none;"></div>
 
 										<a style="cursor:pointer;" class="elementor-button" role="button"
-										onclick="copyText('rek1', this)">
+											onclick="copyText('rek1', this)">
 
 											<div class="elementor-button-content-wrapper">
 												<span class="elementor-button-icon elementor-align-icon-">
@@ -3733,8 +3767,8 @@
 									data-elementor-lightbox-title="24SB031-TN.jpg"
 									data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjI4ODEsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNFwvMDlcLzI0U0IwMzEtVE4uanBnIiwic2xpZGVzaG93IjoiN2ZmMDIxZDMifQ%3D%3D">
 									<div class="e-gallery-image elementor-gallery-item__image"
-										data-thumbnail="wp-content/uploads/2024/09/24SB031-TN.jpg"
-										data-width="1024" data-height="1023" aria-label="" role="img"></div>
+										data-thumbnail="wp-content/uploads/2024/09/24SB031-TN.jpg" data-width="1024"
+										data-height="1023" aria-label="" role="img"></div>
 									<div class="elementor-gallery-item__overlay"></div>
 								</a>
 								<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
@@ -3788,23 +3822,21 @@
 									<div class="elementor-gallery-item__overlay"></div>
 								</a>
 								<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-									href="wp-content/uploads/2024/09/1.jpg"
-									data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="7ff021d3"
-									data-elementor-lightbox-title="1.jpg"
+									href="wp-content/uploads/2024/09/1.jpg" data-elementor-open-lightbox="yes"
+									data-elementor-lightbox-slideshow="7ff021d3" data-elementor-lightbox-title="1.jpg"
 									data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjI4ODQsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNFwvMDlcL3NtLVdBTklUQS1lMTcyNTUxMDQ4OTU4NS5qcGciLCJzbGlkZXNob3ciOiI3ZmYwMjFkMyJ9">
 									<div class="e-gallery-image elementor-gallery-item__image"
-										data-thumbnail="wp-content/uploads/2024/09/1.jpg"
-										data-width="953" data-height="653" aria-label="" role="img"></div>
+										data-thumbnail="wp-content/uploads/2024/09/1.jpg" data-width="953"
+										data-height="653" aria-label="" role="img"></div>
 									<div class="elementor-gallery-item__overlay"></div>
 								</a>
 								<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-									href="wp-content/uploads/2024/09/2.jpg"
-									data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="7ff021d3"
-									data-elementor-lightbox-title="2.jpg"
+									href="wp-content/uploads/2024/09/2.jpg" data-elementor-open-lightbox="yes"
+									data-elementor-lightbox-slideshow="7ff021d3" data-elementor-lightbox-title="2.jpg"
 									data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjI4ODQsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNFwvMDlcL3NtLVdBTklUQS1lMTcyNTUxMDQ4OTU4NS5qcGciLCJzbGlkZXNob3ciOiI3ZmYwMjFkMyJ9">
 									<div class="e-gallery-image elementor-gallery-item__image"
-										data-thumbnail="wp-content/uploads/2024/09/2.jpg"
-										data-width="953" data-height="653" aria-label="" role="img"></div>
+										data-thumbnail="wp-content/uploads/2024/09/2.jpg" data-width="953"
+										data-height="653" aria-label="" role="img"></div>
 									<div class="elementor-gallery-item__overlay"></div>
 								</a>
 							</div>
@@ -4010,7 +4042,10 @@
 								data-settings="{&quot;_animation_mobile&quot;:&quot;none&quot;}"
 								data-widget_type="text-editor.default">
 								<div class="elementor-widget-container">
-									<p>Bertemu pada tahun 2017 di SMA N 1 Welahan. Berawal dari teman bimbingan lomba waktu SMA. bersama-sama melakukan bimbingan di perpustakaan ,  hingga selalu bertemu untuk sesekali makan bersama, lalu menjalin hubungan pacaran  18 mei 2018.
+									<p>Bertemu pada tahun 2017 di SMA N 1 Welahan. Berawal dari teman bimbingan lomba
+										waktu SMA. bersama-sama melakukan bimbingan di perpustakaan , hingga selalu
+										bertemu untuk sesekali makan bersama, lalu menjalin hubungan pacaran 18 mei
+										2018.
 									</p>
 								</div>
 							</div>
@@ -4039,7 +4074,9 @@
 								data-settings="{&quot;_animation_mobile&quot;:&quot;none&quot;}"
 								data-widget_type="text-editor.default">
 								<div class="elementor-widget-container">
-									<p>Pada tanggal 1 Juni 2024 kami mengikat diri pada pertunangan dan pada tanggal 22 Agustus 2025 kami pun mengadakan akad nikah. Alhamdulillah perjalanan ini sampai pada akhirnya,
+									<p>Pada tanggal 1 Juni 2024 kami mengikat diri pada pertunangan dan pada tanggal 22
+										Agustus 2025 kami pun mengadakan akad nikah. Alhamdulillah perjalanan ini sampai
+										pada akhirnya,
 									</p>
 								</div>
 							</div>
@@ -4068,7 +4105,8 @@
 								data-settings="{&quot;_animation_mobile&quot;:&quot;none&quot;}"
 								data-widget_type="text-editor.default">
 								<div class="elementor-widget-container">
-									<p>Kami bisa melakukan acara resepsi yang insyAllah diadakan pada Jumat 22 Agustus 2025</p>
+									<p>Kami bisa melakukan acara resepsi yang insyAllah diadakan pada Jumat 22 Agustus
+										2025</p>
 								</div>
 							</div>
 						</div>
@@ -4134,7 +4172,7 @@
 										margin: 10px 0;
 										text-align: center;
 									}
-	
+
 									.stat-box {
 										background: white;
 										width: 90px;
@@ -4143,26 +4181,26 @@
 										align-content: center;
 										box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 									}
-	
+
 									.stat-number {
 										font-size: 24px;
 										font-weight: bold;
 										color: #d46a6a;
 									}
-	
+
 									form {
 										background: white;
 										padding: 20px;
 										border-radius: 8px;
 										box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 									}
-	
+
 									label {
 										display: block;
 										margin-bottom: 8px;
 										font-weight: bold;
 									}
-	
+
 									input,
 									textarea,
 									select {
@@ -4173,12 +4211,12 @@
 										border-radius: 4px;
 										box-sizing: border-box;
 									}
-	
+
 									textarea {
 										height: 100px;
 										resize: vertical;
 									}
-	
+
 									button {
 										background-color: #d46a6a;
 										color: white;
@@ -4189,11 +4227,11 @@
 										font-size: 16px;
 										width: 100%;
 									}
-	
+
 									button:hover {
 										background-color: #c55a5a;
 									}
-	
+
 									.wishes-container {
 										margin-top: 30px;
 										width: 400px;
@@ -4202,29 +4240,29 @@
 										padding: 10px;
 										overflow-y: auto;
 									}
-	
+
 									.wish {
 										padding: 5px;
 										margin-bottom: 5px;
 										border-radius: 14px;
 										box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 									}
-	
+
 									.wish-name {
 										font-weight: bold;
 										color: #ffffff;
 										margin-bottom: 2px;
 									}
-	
+
 									.wish-message {
 										margin-bottom: 2px;
 										color: #ffffff;
 									}
-	
+
 									.wish-attendance {
 										color: #ffffff;
 									}
-	
+
 									.attendance-icon {
 										display: inline-block;
 										width: 20px;
@@ -4234,13 +4272,13 @@
 										border-radius: 50%;
 										margin-right: 5px;
 									}
-	
+
 									.wish-attendance span[class="attendance-icon"] {
 										/* Checkmark (Hadir) */
 										background-color: #4CAF50;
 										color: white;
 									}
-	
+
 									.wish-attendance span[class="attendance-icon"] {
 										/* Cross (Tidak Hadir) - will override if Hadir */
 										background-color: #f44336;
@@ -4265,16 +4303,18 @@
 										<div id='cui-container-form-27181' class='cui-container-form cui-no-login'>
 											<div id='respond-27181' class='respond cui-clearfix'>
 												<form id="wishForm">
-													<input type="text" id="name" name="name" required placeholder="Nama">
+													<input type="text" id="name" name="name" required
+														placeholder="Nama">
 													<textarea id="message" name="message" required
 														placeholder="Ucapan"></textarea>
 													<select id="attendance" name="attendance" required>
-														<option value="" disabled selected hidden>Pilih Konfirmasi Kehadiran
+														<option value="" disabled selected hidden>Pilih Konfirmasi
+															Kehadiran
 														</option>
 														<option value="Hadir">Hadir</option>
 														<option value="Tidak Hadir">Tidak Hadir</option>
 													</select>
-	
+
 													<button type="submit">KIRIM</button>
 												</form>
 											</div>
@@ -4287,19 +4327,19 @@
 								<script>
 									// Google Apps Script Web App URL
 									const scriptUrl = 'https://script.google.com/macros/s/AKfycbx75tz-yqmxRv-Lqup2nokll5qd1gciEFXQw-48L53d4MrZ3CAD_AP0pUu8leEI3cCQeA/exec';
-	
+
 									document.addEventListener('DOMContentLoaded', function () {
 										// Load existing wishes when page loads
 										loadWishes();
-	
+
 										// Handle form submission
 										document.getElementById('wishForm').addEventListener('submit', function (e) {
 											e.preventDefault();
-	
+
 											const name = document.getElementById('name').value;
 											const message = document.getElementById('message').value;
 											const attendance = document.getElementById('attendance').value;
-	
+
 											// Send data to Google Sheets
 											fetch(scriptUrl, {
 												method: 'POST',
@@ -4317,7 +4357,7 @@
 												.then(() => {
 													// Clear form
 													document.getElementById('wishForm').reset();
-	
+
 													// Reload wishes
 													loadWishes();
 												})
@@ -4326,7 +4366,7 @@
 												});
 										});
 									});
-	
+
 									function loadWishes() {
 										// Get wishes from Google Sheets
 										fetch(`${scriptUrl}?action=get`)
@@ -4338,20 +4378,20 @@
 													data.filter(item => item.attendance === 'Hadir').length;
 												document.getElementById('not-attend-count').textContent =
 													data.filter(item => item.attendance === 'Tidak Hadir').length;
-	
+
 												// Display wishes
 												const container = document.getElementById('wishesContainer');
 												container.innerHTML = '';
-	
+
 												data.reverse().forEach(wish => {
 													const wishElement = document.createElement('div');
 													wishElement.className = 'wish';
-	
+
 													// Determine icon based on attendance
 													const attendanceIcon = wish.attendance === 'Hadir'
 														? '<span class="attendance-icon" style="background-color: #4CAF50">✓</span>'
 														: '<span class="attendance-icon" style="background-color: #f44336">✗</span>';
-	
+
 													wishElement.innerHTML = `
 														<div class="wish-name wish-attendance" style="font-color: white">${wish.name} ${attendanceIcon}</div>
 														<div class="wish-message" style="font-color: white">${wish.message}</div>`;

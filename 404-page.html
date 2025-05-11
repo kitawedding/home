@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Halaman Tidak Ditemukan</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            height: 100vh;
+            background-color: #f8f9fa;
+            overflow: hidden;
+        }
+        
+        .error-container {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .error-content {
+            text-align: center;
+            max-width: 500px;
+        }
+        
+        .error-number {
+            font-size: 150px;
+            font-weight: 700;
+            color: #dc3545;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 0;
+            line-height: 1;
+        }
+        
+        .error-text {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            color: #6c757d;
+        }
+        
+        .home-btn {
+            padding: 10px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Animasi partikel */
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            display: block;
+            background-color: #dc3545;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+            opacity: 0.7;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.7;
+                border-radius: 50%;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 25%;
+            }
+        }
+        
+        /* Animasi untuk angka 404 */
+        .error-number {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        /* Animasi untuk pesan error */
+        .error-text {
+            opacity: 0;
+            animation: fadeIn 1s forwards 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Animasi untuk tombol home */
+        .btn-container {
+            opacity: 0;
+            animation: slideUp 1s forwards 1s;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Container untuk partikel animasi -->
+    <div class="particles-container" id="particles-container"></div>
+    
+    <div class="error-container container">
+        <div class="error-content">
+            <h1 class="error-number">404</h1>
+            <p class="error-text">Oops! Halaman yang Anda cari tidak ditemukan.</p>
+            <div class="btn-container">
+                <a href="momenin.my.id" class="btn btn-danger home-btn">Kembali ke Beranda</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5.3 JS Bundle -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script untuk animasi partikel -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('particles-container');
+            const particleCount = 50;
+            
+            // Membuat partikel dengan posisi acak
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('span');
+                particle.classList.add('particle');
+                
+                // Posisi acak
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                
+                // Ukuran acak
+                const size = Math.random() * 15 + 5;
+                
+                // Warna acak
+                const colors = ['#dc3545', '#fd7e14', '#0d6efd', '#6610f2'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Durasi animasi acak
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 5;
+                
+                // Menerapkan gaya ke partikel
+                particle.style.left = posX + '%';
+                particle.style.top = posY + '%';
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.backgroundColor = color;
+                particle.style.animationDuration = duration + 's';
+                particle.style.animationDelay = delay + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        });
+    </script>
+</body>
+</html>

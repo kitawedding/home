@@ -2509,44 +2509,84 @@
 							data-aos-duration="2500" data-aos-easing="lease-in-cube" data-aos-offset="10"
 							data-widget_type="text-editor.default">
 							<div class="elementor-widget-container" id="nama-tamu-undangan">
-								Nama Tamu </div>
+								Nama Tamu
+							</div>
 							<script>
-									// URL Google Sheets (ganti dengan URL publik Anda)
-									const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSNKJoRqR0iMfHJPQFM6h1PuvYYcI4M9FqS9uvMnuWXc4mzJKAVrCEPMHm6NU2wOEB62p59V2E6IhNB/pub?gid=0&single=true&output=csv";
-	
-									// Ambil parameter nama dari URL
-									const urlParams = new URLSearchParams(window.location.search);
-									const namaParam = urlParams.get('nama')?.toLowerCase();
-	
-									// Fetch data dari Google Sheets
-									fetch(SHEET_URL)
-										.then(res => {
-											if (!res.ok) throw new Error("Network response was not ok");
-											return res.text();
-										})
-										.then(csvData => {
-											// Parse CSV data
-											const namaList = csvData.split('\n')
-												.map(row => row.split(',')[0].trim().toLowerCase())
-												.filter(name => name.length > 0);
-	
-											console.log("Daftar nama dari sheet:", namaList); // Debug log
-	
-											// Cek apakah nama ada di daftar
-											if (namaParam && namaList.includes(namaParam)) {
-												document.getElementById('nama-tamu').textContent =
-													namaParam.charAt(0).toUpperCase() + namaParam.slice(1);
+								// URL Google Sheets (ganti dengan URL publik Anda)
+								const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSNKJoRqR0iMfHJPQFM6h1PuvYYcI4M9FqS9uvMnuWXc4mzJKAVrCEPMHm6NU2wOEB62p59V2E6IhNB/pub?gid=0&single=true&output=csv";
+
+								// Ambil parameter nama dari URL
+								const urlParams = new URLSearchParams(window.location.search);
+								const namaParam = urlParams.get('nama')?.toLowerCase();
+
+								// Fetch data dari Google Sheets
+								fetch(SHEET_URL)
+									.then(res => {
+										if (!res.ok) throw new Error("Network response was not ok");
+										return res.text();
+									})
+									.then(csvData => {
+										console.log("CSV data diterima:", csvData); // Debug log
+
+										// Parse CSV data - memisahkan baris
+										const rows = csvData.split('\n').filter(row => row.trim() !== '');
+
+										// Cek apakah ada parameter nama dari URL
+										if (namaParam) {
+											// Format nama dari parameter URL (ganti tanda - dengan spasi)
+											const formattedNamaParam = namaParam.replace(/-/g, ' ');
+											console.log("Mencari nama:", formattedNamaParam); // Debug log
+
+											// Cari nama yang cocok di data CSV (case insensitive)
+											let found = false;
+											for (let i = 0; i < rows.length; i++) {
+												const rowData = rows[i].split(',');
+												if (rowData.length > 0) {
+													const namaDariSheet = rowData[0].trim().toLowerCase();
+													console.log("Membandingkan dengan:", namaDariSheet); // Debug log
+
+													if (namaDariSheet === formattedNamaParam) {
+														// Jika nama ditemukan, tampilkan dengan format yang benar
+														const displayName = formattedNamaParam
+															.split(' ')
+															.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+															.join(' ');
+
+														document.getElementById('nama-tamu-undangan').innerHTML = displayName;
+														found = true;
+														break;
+													}
+												}
 											}
-										})
-										.catch(err => {
-											console.error("Error mengambil data:", err);
-											// Fallback jika terjadi error
-											if (namaParam) {
-												document.getElementById('nama-tamu-undangan').textContent =
-													namaParam.charAt(0).toUpperCase() + namaParam.slice(1);
+
+											// Jika nama tidak ditemukan di sheet, tetap tampilkan dari parameter URL
+											if (!found) {
+												const displayName = formattedNamaParam
+													.split(' ')
+													.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+													.join(' ');
+
+												document.getElementById('nama-tamu-undangan').innerHTML = displayName;
+												console.log("Nama tidak ditemukan di sheet, menampilkan dari URL:", displayName);
 											}
-										});
-								</script>
+										} else {
+											// Jika tidak ada parameter nama, tampilkan default
+											document.getElementById('nama-tamu-undangan').innerHTML = "Tamu Undangan";
+										}
+									})
+									.catch(err => {
+										console.error("Error mengambil data:", err);
+										// Fallback jika terjadi error
+										if (namaParam) {
+											const displayName = namaParam.replace(/-/g, ' ')
+												.split(' ')
+												.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+												.join(' ');
+
+											document.getElementById('nama-tamu-undangan').innerHTML = displayName;
+										}
+									});
+							</script>
 						</div>
 						<div class="elementor-element elementor-element-3c958ca3 elementor-align-left elementor-widget elementor-widget-button"
 							data-id="3c958ca3" data-element_type="widget" id="open" data-aos="zoom-out-left"

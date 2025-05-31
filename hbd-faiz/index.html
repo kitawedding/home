@@ -1,552 +1,520 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <style>
-        canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
+  <meta name="description" content="happy birthday to you IB-Empire">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Happy Birthday to your friends</title>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:900'>
 
-        p {
-            margin: 0 0;
-            position: absolute;
-            font: 16px Verdana;
-            color: #eee;
-            height: 25px;
-            top: calc(100vh - 30px);
-            text-shadow: 0 0 2px white;
-        }
-
-        p a {
-            text-decoration: none;
-            color: #aaa;
-        }
-
-        span {
-            font-size: 11px;
-        }
-
-        p>a:first-of-type {
-            font-size: 20px;
-        }
-
-        body {
-            overflow: hidden;
-        }
-
-        .section {
-            display: none;
-            padding: 50px;
-        }
-
-        #page1 {
-            position: relative;
-            height: 100vh;
-        }
-
-        #page2 {
-            background-color: #e0ffe0;
-            height: 100vh;
-        }
-
-        button {
-            position: absolute;
-            left: 50%;
-            bottom: 50px;
-            transform: translateX(-50%);
-            font-size: 18px;
-            background-color: red;
-            cursor: pointer;
-            padding: 10px 20px;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-
-
-        #rotatingImage,
-        #rotati,
-        #rotImage1,
-        #rotImage2 {
-            width: 100px;
-            animation: rotateBeat 1s linear infinite;
-        }
-
-        @keyframes rotateBeat {
-            0% {
-                transform: rotate(0deg) scale(1);
-            }
-
-            25% {
-                transform: rotate(45deg) scale(1.1);
-            }
-
-            50% {
-                transform: rotate(0deg) scale(1);
-            }
-
-            75% {
-                transform: rotate(-45deg) scale(1.1);
-            }
-
-            100% {
-                transform: rotate(0deg) scale(1);
-            }
-        }
-    </style>
 </head>
 
-<body>
-    <div id="page1" class="section">
-        <button onclick="bukaHalamanDua()">Tolong Buka Siii</button>
-    </div>
-    <div id="page2" class="section">
-        <h1>Halaman Konten</h1>
-        <p>Musik akan diputar di latar belakang.</p>
+<body onclick="play()">
 
-        <audio id="musik" loop autoplay>
-            <source src="snaptik_7501188338229972242.mp3" type="audio/mpeg">
-            Browser Anda tidak mendukung pemutar audio.
-        </audio>
-        <canvas id=c></canvas>
-        <img id="rotatingImage" src="1.jpg"
-            style="position: absolute; z-index: 2; width: 200px; align-items: center center;">
-        <img id="rotImage1" src="dasdazc-ezgif.com-loop-count.gif"
-            style="position: absolute; left: 50px; bottom: 100px; z-index: 2; width: 200px;">
+  <script>
+    function play() {
+      var audio = document.getElementById("audio");
+      audio.play();
+    }
+    
+    function startCelebration() {
+      // Hide the start container
+      document.querySelector('.start-container').style.display = 'none';
+      
+      // Show the celebration container and canvas
+      document.querySelector('.celebration-container').style.display = 'block';
+      document.getElementById('birthday').style.display = 'block';
+      
+      // Play the audio
+      var audio = document.getElementById("audio");
+      audio.play().catch(function(error) {
+        console.log("Audio play failed:", error);
+      });
+      
+      // Start automatic fireworks
+      setTimeout(() => {
+        birthday.onClick({clientX: window.innerWidth/2, clientY: window.innerHeight/2});
+      }, 500);
+    }
+  </script>
 
-        <img id="rotImage2" src="dasdazc-ezgif.com-loop-count.gif"
-            style="position: absolute; right: 50px; bottom: 100px; z-index: 2; width: 200px;">
-        <img id="rotati" src="2.jpg"
-            style="position: absolute; right: 50px; z-index: 2; width: 200px; align-items: center center;">
+  <audio id="audio" src="snaptik_7501188338229972242.mp3"></audio>
 
-        <script>
-            function forceGifLoop(gifId, duration) {
-                const gif = document.getElementById(gifId);
-                setInterval(() => {
-                    gif.src = gif.src; // Reset sumber GIF
-                }, duration);
-            }
+  <script>
+    var myTimeout = setTimeout(function () {
 
-            // Durasi harus lebih panjang dari durasi GIF
-            forceGifLoop('rotImage1', 3000); // 3 detik
-            forceGifLoop('rotImage2', 3000);
-        </script>
+    }, 3000);
+  </script>
 
-    </div>
-    <script>
-        function bukaHalamanDua() {
-            document.getElementById('page1').style.display = 'none';
-            document.getElementById('page2').style.display = 'block';
-            const audio = document.getElementById('musik');
-            audio.play();
-        };
+  <div class="start-container">
+    <button class="celebration-button" onclick="startCelebration()">
+      🎉 Mulai Perayaan 🎉
+    </button>
+  </div>
 
-        var w = c.width = window.innerWidth,
-            h = c.height = window.innerHeight,
-            ctx = c.getContext('2d'),
+  <div class="celebration-container" style="display: none;">
+    <h1 class="main-title">
+      <span class="heart">💝</span>
+      Selamat
+      <span class="heart">💝</span>
+    </h1>
+    <h1 class="main-title">
+      <span class="heart">💝</span>
+      Ulang Tahun
+      <span class="heart">💝</span>
+    </h1>
+    <h2 class="sub-title">
+      🌹 Istriku Tersayang 🌹
+    </h2>
+  </div>
+  <canvas id="birthday"></canvas>
 
-            hw = w / 2, // half-width
-            hh = h / 2,
+  <script>
+    // helper functions
+    const PI2 = Math.PI * 2
+    const random = (min, max) => Math.random() * (max - min + 1) + min | 0
+    const timestamp = _ => new Date().getTime()
 
-            opts = {
-                strings: ['HAPPY', 'BIRTHDAY!'],
-                charSize: 30,
-                charSpacing: 35,
-                lineHeight: 40,
+    // container
+    class Birthday {
+      constructor() {
+        this.resize()
 
-                cx: w / 2,
-                cy: h / 2,
+        // create a lovely place to store the firework
+        this.fireworks = []
+        this.counter = 0
 
-                fireworkPrevPoints: 10,
-                fireworkBaseLineWidth: 5,
-                fireworkAddedLineWidth: 8,
-                fireworkSpawnTime: 200,
-                fireworkBaseReachTime: 30,
-                fireworkAddedReachTime: 30,
-                fireworkCircleBaseSize: 20,
-                fireworkCircleAddedSize: 10,
-                fireworkCircleBaseTime: 30,
-                fireworkCircleAddedTime: 30,
-                fireworkCircleFadeBaseTime: 10,
-                fireworkCircleFadeAddedTime: 5,
-                fireworkBaseShards: 5,
-                fireworkAddedShards: 5,
-                fireworkShardPrevPoints: 3,
-                fireworkShardBaseVel: 4,
-                fireworkShardAddedVel: 2,
-                fireworkShardBaseSize: 3,
-                fireworkShardAddedSize: 3,
-                gravity: .1,
-                upFlow: -.1,
-                letterContemplatingWaitTime: 360,
-                balloonSpawnTime: 20,
-                balloonBaseInflateTime: 10,
-                balloonAddedInflateTime: 10,
-                balloonBaseSize: 20,
-                balloonAddedSize: 20,
-                balloonBaseVel: .4,
-                balloonAddedVel: .4,
-                balloonBaseRadian: -(Math.PI / 2 - .5),
-                balloonAddedRadian: -1,
-            },
-            calc = {
-                totalWidth: opts.charSpacing * Math.max(opts.strings[0].length, opts.strings[1].length)
-            },
+      }
 
-            Tau = Math.PI * 2,
-            TauQuarter = Tau / 4,
+      resize() {
+        this.width = canvas.width = window.innerWidth
+        let center = this.width / 2 | 0
+        this.spawnA = center - center / 4 | 0
+        this.spawnB = center + center / 4 | 0
 
-            letters = [];
+        this.height = canvas.height = window.innerHeight
+        this.spawnC = this.height * .1
+        this.spawnD = this.height * .5
 
-        ctx.font = opts.charSize + 'px Verdana';
+      }
 
-        function Letter(char, x, y) {
-            this.char = char;
-            this.x = x;
-            this.y = y;
+      onClick(evt) {
+        let x = evt.clientX || evt.touches && evt.touches[0].pageX
+        let y = evt.clientY || evt.touches && evt.touches[0].pageY
 
-            this.dx = -ctx.measureText(char).width / 2;
-            this.dy = +opts.charSize / 2;
+        let count = random(3, 5)
+        for (let i = 0; i < count; i++) this.fireworks.push(new Firework(
+          random(this.spawnA, this.spawnB),
+          this.height,
+          x,
+          y,
+          random(0, 260),
+          random(30, 110)))
 
-            this.fireworkDy = this.y - hh;
+        this.counter = -1
 
-            var hue = x / calc.totalWidth * 360;
+      }
 
-            this.color = 'hsl(hue,80%,50%)'.replace('hue', hue);
-            this.lightAlphaColor = 'hsla(hue,80%,light%,alp)'.replace('hue', hue);
-            this.lightColor = 'hsl(hue,80%,light%)'.replace('hue', hue);
-            this.alphaColor = 'hsla(hue,80%,50%,alp)'.replace('hue', hue);
+      update(delta) {
+        ctx.globalCompositeOperation = 'hard-light'
+        ctx.fillStyle = `rgba(20,20,20,${7 * delta})`
+        ctx.fillRect(0, 0, this.width, this.height)
 
-            this.reset();
+        ctx.globalCompositeOperation = 'lighter'
+        for (let firework of this.fireworks) firework.update(delta)
+
+        // if enough time passed... create new new firework
+        this.counter += delta * 3 // each second
+        if (this.counter >= 1) {
+          this.fireworks.push(new Firework(
+            random(this.spawnA, this.spawnB),
+            this.height,
+            random(0, this.width),
+            random(this.spawnC, this.spawnD),
+            random(0, 360),
+            random(30, 110)))
+          this.counter = 0
         }
-        Letter.prototype.reset = function () {
 
-            this.phase = 'firework';
-            this.tick = 0;
-            this.spawned = false;
-            this.spawningTime = opts.fireworkSpawnTime * Math.random() | 0;
-            this.reachTime = opts.fireworkBaseReachTime + opts.fireworkAddedReachTime * Math.random() | 0;
-            this.lineWidth = opts.fireworkBaseLineWidth + opts.fireworkAddedLineWidth * Math.random();
-            this.prevPoints = [[0, hh, 0]];
-        }
-        Letter.prototype.step = function () {
-
-            if (this.phase === 'firework') {
-
-                if (!this.spawned) {
-
-                    ++this.tick;
-                    if (this.tick >= this.spawningTime) {
-
-                        this.tick = 0;
-                        this.spawned = true;
-                    }
-
-                } else {
-
-                    ++this.tick;
-
-                    var linearProportion = this.tick / this.reachTime,
-                        armonicProportion = Math.sin(linearProportion * TauQuarter),
-
-                        x = linearProportion * this.x,
-                        y = hh + armonicProportion * this.fireworkDy;
-
-                    if (this.prevPoints.length > opts.fireworkPrevPoints)
-                        this.prevPoints.shift();
-
-                    this.prevPoints.push([x, y, linearProportion * this.lineWidth]);
-
-                    var lineWidthProportion = 1 / (this.prevPoints.length - 1);
-
-                    for (var i = 1; i < this.prevPoints.length; ++i) {
-
-                        var point = this.prevPoints[i],
-                            point2 = this.prevPoints[i - 1];
-
-                        ctx.strokeStyle = this.alphaColor.replace('alp', i / this.prevPoints.length);
-                        ctx.lineWidth = point[2] * lineWidthProportion * i;
-                        ctx.beginPath();
-                        ctx.moveTo(point[0], point[1]);
-                        ctx.lineTo(point2[0], point2[1]);
-                        ctx.stroke();
-
-                    }
-
-                    if (this.tick >= this.reachTime) {
-
-                        this.phase = 'contemplate';
-
-                        this.circleFinalSize = opts.fireworkCircleBaseSize + opts.fireworkCircleAddedSize * Math.random();
-                        this.circleCompleteTime = opts.fireworkCircleBaseTime + opts.fireworkCircleAddedTime * Math.random() | 0;
-                        this.circleCreating = true;
-                        this.circleFading = false;
-
-                        this.circleFadeTime = opts.fireworkCircleFadeBaseTime + opts.fireworkCircleFadeAddedTime * Math.random() | 0;
-                        this.tick = 0;
-                        this.tick2 = 0;
-
-                        this.shards = [];
-
-                        var shardCount = opts.fireworkBaseShards + opts.fireworkAddedShards * Math.random() | 0,
-                            angle = Tau / shardCount,
-                            cos = Math.cos(angle),
-                            sin = Math.sin(angle),
-
-                            x = 1,
-                            y = 0;
-
-                        for (var i = 0; i < shardCount; ++i) {
-                            var x1 = x;
-                            x = x * cos - y * sin;
-                            y = y * cos + x1 * sin;
-
-                            this.shards.push(new Shard(this.x, this.y, x, y, this.alphaColor));
-                        }
-                    }
-
-                }
-            } else if (this.phase === 'contemplate') {
-
-                ++this.tick;
-
-                if (this.circleCreating) {
-
-                    ++this.tick2;
-                    var proportion = this.tick2 / this.circleCompleteTime,
-                        armonic = -Math.cos(proportion * Math.PI) / 2 + .5;
-
-                    ctx.beginPath();
-                    ctx.fillStyle = this.lightAlphaColor.replace('light', 50 + 50 * proportion).replace('alp', proportion);
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, armonic * this.circleFinalSize, 0, Tau);
-                    ctx.fill();
-
-                    if (this.tick2 > this.circleCompleteTime) {
-                        this.tick2 = 0;
-                        this.circleCreating = false;
-                        this.circleFading = true;
-                    }
-                } else if (this.circleFading) {
-
-                    ctx.fillStyle = this.lightColor.replace('light', 70);
-                    ctx.fillText(this.char, this.x + this.dx, this.y + this.dy);
-
-                    ++this.tick2;
-                    var proportion = this.tick2 / this.circleFadeTime,
-                        armonic = -Math.cos(proportion * Math.PI) / 2 + .5;
-
-                    ctx.beginPath();
-                    ctx.fillStyle = this.lightAlphaColor.replace('light', 100).replace('alp', 1 - armonic);
-                    ctx.arc(this.x, this.y, this.circleFinalSize, 0, Tau);
-                    ctx.fill();
-
-                    if (this.tick2 >= this.circleFadeTime)
-                        this.circleFading = false;
-
-                } else {
-
-                    ctx.fillStyle = this.lightColor.replace('light', 70);
-                    ctx.fillText(this.char, this.x + this.dx, this.y + this.dy);
-                }
-
-                for (var i = 0; i < this.shards.length; ++i) {
-
-                    this.shards[i].step();
-
-                    if (!this.shards[i].alive) {
-                        this.shards.splice(i, 1);
-                        --i;
-                    }
-                }
-
-                if (this.tick > opts.letterContemplatingWaitTime) {
-
-                    this.phase = 'balloon';
-
-                    this.tick = 0;
-                    this.spawning = true;
-                    this.spawnTime = opts.balloonSpawnTime * Math.random() | 0;
-                    this.inflating = false;
-                    this.inflateTime = opts.balloonBaseInflateTime + opts.balloonAddedInflateTime * Math.random() | 0;
-                    this.size = opts.balloonBaseSize + opts.balloonAddedSize * Math.random() | 0;
-
-                    var rad = opts.balloonBaseRadian + opts.balloonAddedRadian * Math.random(),
-                        vel = opts.balloonBaseVel + opts.balloonAddedVel * Math.random();
-
-                    this.vx = Math.cos(rad) * vel;
-                    this.vy = Math.sin(rad) * vel;
-                }
-            } else if (this.phase === 'balloon') {
-
-                ctx.strokeStyle = this.lightColor.replace('light', 80);
-
-                if (this.spawning) {
-
-                    ++this.tick;
-                    ctx.fillStyle = this.lightColor.replace('light', 70);
-                    ctx.fillText(this.char, this.x + this.dx, this.y + this.dy);
-
-                    if (this.tick >= this.spawnTime) {
-                        this.tick = 0;
-                        this.spawning = false;
-                        this.inflating = true;
-                    }
-                } else if (this.inflating) {
-
-                    ++this.tick;
-
-                    var proportion = this.tick / this.inflateTime,
-                        x = this.cx = this.x,
-                        y = this.cy = this.y - this.size * proportion;
-
-                    ctx.fillStyle = this.alphaColor.replace('alp', proportion);
-                    ctx.beginPath();
-                    generateBalloonPath(x, y, this.size * proportion);
-                    ctx.fill();
-
-                    ctx.beginPath();
-                    ctx.moveTo(x, y);
-                    ctx.lineTo(x, this.y);
-                    ctx.stroke();
-
-                    ctx.fillStyle = this.lightColor.replace('light', 70);
-                    ctx.fillText(this.char, this.x + this.dx, this.y + this.dy);
-
-                    if (this.tick >= this.inflateTime) {
-                        this.tick = 0;
-                        this.inflating = false;
-                    }
-
-                } else {
-
-                    this.cx += this.vx;
-                    this.cy += this.vy += opts.upFlow;
-
-                    ctx.fillStyle = this.color;
-                    ctx.beginPath();
-                    generateBalloonPath(this.cx, this.cy, this.size);
-                    ctx.fill();
-
-                    ctx.beginPath();
-                    ctx.moveTo(this.cx, this.cy);
-                    ctx.lineTo(this.cx, this.cy + this.size);
-                    ctx.stroke();
-
-                    ctx.fillStyle = this.lightColor.replace('light', 70);
-                    ctx.fillText(this.char, this.cx + this.dx, this.cy + this.dy + this.size);
-
-                    if (this.cy + this.size < -hh || this.cx < -hw || this.cy > hw)
-                        this.phase = 'done';
-
-                }
-            }
-        }
-        function Shard(x, y, vx, vy, color) {
-
-            var vel = opts.fireworkShardBaseVel + opts.fireworkShardAddedVel * Math.random();
-
-            this.vx = vx * vel;
-            this.vy = vy * vel;
-
-            this.x = x;
-            this.y = y;
-
-            this.prevPoints = [[x, y]];
-            this.color = color;
-
-            this.alive = true;
-
-            this.size = opts.fireworkShardBaseSize + opts.fireworkShardAddedSize * Math.random();
-        }
-        Shard.prototype.step = function () {
-
-            this.x += this.vx;
-            this.y += this.vy += opts.gravity;
-
-            if (this.prevPoints.length > opts.fireworkShardPrevPoints)
-                this.prevPoints.shift();
-
-            this.prevPoints.push([this.x, this.y]);
-
-            var lineWidthProportion = this.size / this.prevPoints.length;
-
-            for (var k = 0; k < this.prevPoints.length - 1; ++k) {
-
-                var point = this.prevPoints[k],
-                    point2 = this.prevPoints[k + 1];
-
-                ctx.strokeStyle = this.color.replace('alp', k / this.prevPoints.length);
-                ctx.lineWidth = k * lineWidthProportion;
-                ctx.beginPath();
-                ctx.moveTo(point[0], point[1]);
-                ctx.lineTo(point2[0], point2[1]);
-                ctx.stroke();
+        // remove the dead fireworks
+        if (this.fireworks.length > 1000) this.fireworks = this.fireworks.filter(firework => !firework.dead)
+
+      }
+    }
+
+    class Firework {
+      constructor(x, y, targetX, targetY, shade, offsprings) {
+        this.dead = false
+        this.offsprings = offsprings
+
+        this.x = x
+        this.y = y
+        this.targetX = targetX
+        this.targetY = targetY
+
+        this.shade = shade
+        this.history = []
+      }
+      update(delta) {
+        if (this.dead) return
+
+        let xDiff = this.targetX - this.x
+        let yDiff = this.targetY - this.y
+        if (Math.abs(xDiff) > 3 || Math.abs(yDiff) > 3) { // is still moving
+          this.x += xDiff * 2 * delta
+          this.y += yDiff * 2 * delta
+
+          this.history.push({
+            x: this.x,
+            y: this.y
+          })
+
+          if (this.history.length > 25) this.history.shift()
+
+        } else {
+          if (this.offsprings && !this.madeChilds) {
+
+            let babies = this.offsprings / 2
+            for (let i = 0; i < babies; i++) {
+              let targetX = this.x + this.offsprings * Math.cos(PI2 * i / babies) | 0
+              let targetY = this.y + this.offsprings * Math.sin(PI2 * i / babies) | 0
+
+              birthday.fireworks.push(new Firework(this.x, this.y, targetX, targetY, this.shade, 0))
 
             }
 
-            if (this.prevPoints[0][1] > hh)
-                this.alive = false;
-        }
-        function generateBalloonPath(x, y, size) {
-
-            ctx.moveTo(x, y);
-            ctx.bezierCurveTo(x - size / 2, y - size / 2,
-                x - size / 4, y - size,
-                x, y - size);
-            ctx.bezierCurveTo(x + size / 4, y - size,
-                x + size / 2, y - size / 2,
-                x, y);
+          }
+          this.madeChilds = true
+          this.history.shift()
         }
 
-        function anim() {
-
-            window.requestAnimationFrame(anim);
-
-            ctx.fillStyle = '#111';
-            ctx.fillRect(0, 0, w, h);
-
-            ctx.translate(hw, hh);
-
-            var done = true;
-            for (var l = 0; l < letters.length; ++l) {
-
-                letters[l].step();
-                if (letters[l].phase !== 'done')
-                    done = false;
-            }
-
-            ctx.translate(-hw, -hh);
-
-            if (done)
-                for (var l = 0; l < letters.length; ++l)
-                    letters[l].reset();
+        if (this.history.length === 0) this.dead = true
+        else if (this.offsprings) {
+          for (let i = 0; this.history.length > i; i++) {
+            let point = this.history[i]
+            ctx.beginPath()
+            ctx.fillStyle = 'hsl(' + this.shade + ',100%,' + i + '%)'
+            ctx.arc(point.x, point.y, 1, 0, PI2, false)
+            ctx.fill()
+          }
+        } else {
+          ctx.beginPath()
+          ctx.fillStyle = 'hsl(' + this.shade + ',100%,50%)'
+          ctx.arc(this.x, this.y, 1, 0, PI2, false)
+          ctx.fill()
         }
 
+      }
+    }
 
-        for (var i = 0; i < opts.strings.length; ++i) {
-            for (var j = 0; j < opts.strings[i].length; ++j) {
-                letters.push(new Letter(opts.strings[i][j],
-                    j * opts.charSpacing + opts.charSpacing / 2 - opts.strings[i].length * opts.charSize / 2,
-                    i * opts.lineHeight + opts.lineHeight / 2 - opts.strings.length * opts.lineHeight / 2));
-            }
-        }
+    let canvas = document.getElementById('birthday')
+    let ctx = canvas.getContext('2d')
 
-        anim();
+    let then = timestamp()
 
-        window.addEventListener('resize', function () {
+    let birthday = new Birthday
+    window.onresize = () => birthday.resize()
+    document.onclick = evt => birthday.onClick(evt)
+    document.ontouchstart = evt => birthday.onClick(evt)
 
-            w = c.width = window.innerWidth;
-            h = c.height = window.innerHeight;
+      ; (function loop() {
+        requestAnimationFrame(loop)
 
-            hw = w / 2;
-            hh = h / 2;
+        let now = timestamp()
+        let delta = now - then
 
-            ctx.font = opts.charSize + 'px Verdana';
-        });
+        then = now
+        birthday.update(delta / 1000)
 
-    </script>
+
+      })()
+
+  </script>
+  <style>
+    body {
+      margin: 0;
+      background: #020202;
+      cursor: crosshair;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    canvas {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    @keyframes animate {
+      0% {
+        opacity: 0.7;
+        transform: skewy(3deg);
+        filter: hue-rotate(0deg);
+
+      }
+
+      100% {
+        transform: skewX(18deg);
+        opacity: 1;
+        filter: hue-rotate(360deg);
+      }
+    }
+
+    .birthday {
+      position: absolute;
+      top: 50%;
+      left: 42.8%;
+      color: blueviolet;
+      font-family: "Source Sans Pro";
+      animation: animate 4s linear 5;
+      font-size: 55px;
+      text-shadow:
+        0 0 5px #ff4a00,
+        0 0 18px #fff;
+    }
+
+    .birthday:hover {
+      color: orange;
+      text-shadow:
+        0 0 5px #00ffeb,
+        0 0 18px #fff;
+    }
+
+    .start-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      text-align: center;
+      width: 100%;
+      max-width: 600px;
+      padding: 20px;
+    }
+
+    .welcome-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2em;
+      font-weight: 700;
+      color: #6c5ce7;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+      margin: 20px 0;
+      animation: welcome-glow 2s ease-in-out infinite alternate;
+    }
+
+    .welcome-subtitle {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.2rem;
+      color: #45b7d1;
+      margin: 20px 0;
+      animation: fade-in-out 3s ease-in-out infinite;
+    }
+
+    @keyframes welcome-glow {
+      0% {
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3), 0 0 20px #6c5ce7;
+      }
+      100% {
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3), 0 0 40px #6c5ce7, 0 0 60px #6c5ce7;
+      }
+    }
+
+    @keyframes fade-in-out {
+      0%, 100% {
+        opacity: 0.7;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    .celebration-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      text-align: center;
+      width: 100%;
+      max-width: 800px;
+      padding: 20px;
+    }
+
+    .main-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3em;
+      font-weight: 700;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+      margin: 10px 0;
+      animation: colorChange 3s ease-in-out infinite, bounce 2s ease-in-out infinite;
+    }
+
+    .sub-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      font-weight: 600;
+      animation: colorChange 4s ease-in-out infinite reverse, pulse 1.5s ease-in-out infinite;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      margin: 20px 0;
+    }
+
+    @keyframes colorChange {
+      0% {
+        color: #ff6b6b;
+      }
+
+      16% {
+        color: #4ecdc4;
+      }
+
+      32% {
+        color: #45b7d1;
+      }
+
+      48% {
+        color: #f9ca24;
+      }
+
+      64% {
+        color: #f0932b;
+      }
+
+      80% {
+        color: #eb4d4b;
+      }
+
+      100% {
+        color: #6c5ce7;
+      }
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .heart {
+      display: inline-block;
+      color: #e74c3c;
+      animation: heartbeat 1.5s ease-in-out infinite;
+      margin: 0 10px;
+      font-size: 2rem;
+    }
+
+    @keyframes heartbeat {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.3);
+      }
+    }
+
+    .celebration-button {
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24);
+      background-size: 400% 400%;
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      padding: 15px 30px;
+      margin-top: 30px;
+      cursor: pointer;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      animation: gradientShift 3s ease infinite, buttonPulse 2s ease-in-out infinite;
+      position: relative;
+      z-index: 3;
+    }
+
+    .celebration-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
+      animation-play-state: paused;
+    }
+
+    .celebration-button:active {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @keyframes buttonPulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+    @media (max-width: 768px) {
+      .main-title {
+        font-size: 2em;
+      }
+      
+      .sub-title {
+        font-size: 1.5rem;
+      }
+      
+      .heart {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .main-title {
+        font-size: 1.5em;
+      }
+      
+      .sub-title {
+        font-size: 1.2rem;
+      }
+      
+      .heart {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
 </body>
 
 </html>

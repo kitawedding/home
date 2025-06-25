@@ -176,10 +176,27 @@
     --padding-left: 0px;
     --padding-right: 0px;
 }
+.elementor-21327 .elementor-element.elementor-element-56ae4a1f1 {
+    --display: flex;
+    --min-height: 70vh;
+    --justify-content: center;
+    --align-items: center;
+    --container-widget-width: calc((1 - var(--container-widget-flex-grow)) * 100%);
+    --padding-top: 0px;
+    --padding-bottom: 0px;
+    --padding-left: 0px;
+    --padding-right: 0px;
+}
 
 .elementor-21327 .elementor-element.elementor-element-56ae4a1f:not(.elementor-motion-effects-element-type-background),
 .elementor-21327 .elementor-element.elementor-element-56ae4a1f>.elementor-motion-effects-container>.elementor-motion-effects-layer {
-    background-image: url("../../2024/09/Mini-AWAL-1-1-1.webp");
+    background-image: url("../../2024/09/medaprofil.jpeg");
+    background-position: top center;
+    background-size: cover;
+}
+.elementor-21327 .elementor-element.elementor-element-56ae4a1f1:not(.elementor-motion-effects-element-type-background),
+.elementor-21327 .elementor-element.elementor-element-56ae4a1f1>.elementor-motion-effects-container>.elementor-motion-effects-layer {
+    background-image: url("../../2024/09/fatkhanprofil.jpeg");
     background-position: top center;
     background-size: cover;
 }

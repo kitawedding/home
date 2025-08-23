@@ -2406,8 +2406,7 @@
 							<div class="elementor-widget-container">
 								<img fetchpriority="high" decoding="async" width="798" height="1104"
 									src="wp-content/uploads/2025/04/SUJA-24SK1173-ALL-PII.webp"
-									class="attachment-full size-full wp-image-29390" alt=""
-									srcset=""
+									class="attachment-full size-full wp-image-29390" alt="" srcset=""
 									sizes="(max-width: 798px) 100vw, 798px" />
 							</div>
 						</div>
@@ -2558,8 +2557,7 @@
 							<div class="elementor-widget-container">
 								<img decoding="async" width="797" height="1073"
 									src="wp-content/uploads/2025/04/SUJA-24SK1173-W-PII.webp"
-									class="attachment-full size-full wp-image-29393" alt=""
-									srcset=""
+									class="attachment-full size-full wp-image-29393" alt="" srcset=""
 									sizes="(max-width: 797px) 100vw, 797px" />
 							</div>
 						</div>
@@ -2611,8 +2609,7 @@
 							<div class="elementor-widget-container">
 								<img decoding="async" width="798" height="1073"
 									src="wp-content/uploads/2025/04/SUJA-24SK1173-P-PII.webp"
-									class="attachment-full size-full wp-image-29394" alt=""
-									srcset=""
+									class="attachment-full size-full wp-image-29394" alt="" srcset=""
 									sizes="(max-width: 798px) 100vw, 798px" />
 							</div>
 						</div>
@@ -3484,7 +3481,7 @@
 								</div>
 								<script>
 									// Google Apps Script Web App URL
-									const scriptUrl = 'https://script.google.com/macros/s/AKfycbwIfCq7V4UByfxGnYvL1rhKxE7LQ_L5h3umElWbovoV_XxI4wcrBzhembrjGgu9-tnJ/exec';
+									const scriptUrl = 'https://script.google.com/macros/s/AKfycbwGS9lPsFi8Ulo6VNXfCOMZYEy6_MRfzlVO9cJMJ0ztim2oO6tKWmcdTcsuUq1Rc1Ca/exec';
 
 									document.addEventListener('DOMContentLoaded', function () {
 										// Load existing wishes when page loads
@@ -3500,26 +3497,28 @@
 
 											// Send data to Google Sheets
 											fetch(scriptUrl, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    action: 'add',
-    name: name,
-    message: message,
-    attendance: attendance
-  })
-})
-.then(response => response.json())
-.then(() => {
-  document.getElementById('wishForm').reset();
-  loadWishes();
-})
-.catch(error => {
-  console.error('Error:', error);
-});
+												method: 'POST',
+												mode: 'no-cors',
+												headers: {
+													'Content-Type': 'application/json',
+												},
+												body: JSON.stringify({
+													action: 'add',
+													name: name,
+													message: message,
+													attendance: attendance
+												})
+											})
+												.then(() => {
+													// Clear form
+													document.getElementById('wishForm').reset();
 
+													// Reload wishes
+													loadWishes();
+												})
+												.catch(error => {
+													console.error('Error:', error);
+												});
 										});
 									});
 
@@ -3615,8 +3614,7 @@
 							<div class="elementor-widget-container">
 								<img loading="lazy" decoding="async" width="982" height="982"
 									src="wp-content/uploads/2025/04/SUJA-24SK1173-PII-9-1-e1730097922583.jpg"
-									class="attachment-full size-full wp-image-29389" alt=""
-									srcset=""
+									class="attachment-full size-full wp-image-29389" alt="" srcset=""
 									sizes="(max-width: 982px) 100vw, 982px" />
 							</div>
 						</div>
@@ -3678,9 +3676,7 @@
 
 
 								<audio id="song" loop>
-									<source
-										src="wp-content/uploads/2025/04/music.mp3"
-										type="audio/mp3">
+									<source src="wp-content/uploads/2025/04/music.mp3" type="audio/mp3">
 								</audio>
 
 

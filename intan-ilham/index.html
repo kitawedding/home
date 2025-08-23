@@ -3484,7 +3484,7 @@
 								</div>
 								<script>
 									// Google Apps Script Web App URL
-									const scriptUrl = 'https://script.google.com/macros/s/AKfycbzKmybmLxKFEfvRFqaYJwvEzp6E1oSDv2LRTGUssYa43qVO9_Go3Whe0UQQhI-NmY5t/exec';
+									const scriptUrl = 'https://script.google.com/macros/s/AKfycby8u5obXic4kS4X1IX6CWUvYXIn4vPL5qODZzsCQD9jRbZkpfANTb7mUdn54A_xY_ep/exec';
 
 									document.addEventListener('DOMContentLoaded', function () {
 										// Load existing wishes when page loads
@@ -3500,28 +3500,26 @@
 
 											// Send data to Google Sheets
 											fetch(scriptUrl, {
-												method: 'POST',
-												mode: 'no-cors',
-												headers: {
-													'Content-Type': 'application/json',
-												},
-												body: JSON.stringify({
-													action: 'add',
-													name: name,
-													message: message,
-													attendance: attendance
-												})
-											})
-												.then(() => {
-													// Clear form
-													document.getElementById('wishForm').reset();
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    action: 'add',
+    name: name,
+    message: message,
+    attendance: attendance
+  })
+})
+.then(response => response.json())
+.then(() => {
+  document.getElementById('wishForm').reset();
+  loadWishes();
+})
+.catch(error => {
+  console.error('Error:', error);
+});
 
-													// Reload wishes
-													loadWishes();
-												})
-												.catch(error => {
-													console.error('Error:', error);
-												});
 										});
 									});
 

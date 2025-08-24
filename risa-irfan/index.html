@@ -2261,7 +2261,7 @@
 
 							// Ambil parameter nama dari URL
 							const urlParams = new URLSearchParams(window.location.search);
-							const namaParam = urlParams.get('nama')?.toLowerCase();
+							const namaParam = urlParams.get('to')?.toLowerCase();
 
 							// Fetch data dari Google Sheets
 							fetch(SHEET_URL)

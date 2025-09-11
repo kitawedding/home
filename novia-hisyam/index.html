@@ -4335,14 +4335,19 @@
 									<!-- Wishes will be loaded here -->
 								</div>
 								<script>
-									// Google Apps Script Web App URL
 									const scriptUrl = 'https://script.google.com/macros/s/AKfycbwzflv_QNCojDnm6H0-ZLsa8sxUVW5Jqt8cSANaSM-qkGihuZ7XXK_7IPTL92X1ek9aUA/exec';
 
-									document.addEventListener('DOMContentLoaded', function () {
-										// Load existing wishes when page loads
-										loadWishes();
+									// Ambil pengantin dari path URL, misalnya momenin.my.id/novia-hisyam/
+									function getPengantinId() {
+										const path = window.location.pathname;
+										const parts = path.split('/').filter(Boolean);
+										return parts[parts.length - 1];
+									}
 
-										// Handle form submission
+									document.addEventListener('DOMContentLoaded', function () {
+										const pengantinId = getPengantinId();
+										loadWishes(pengantinId);
+
 										document.getElementById('wishForm').addEventListener('submit', function (e) {
 											e.preventDefault();
 
@@ -4350,7 +4355,6 @@
 											const message = document.getElementById('message').value;
 											const attendance = document.getElementById('attendance').value;
 
-											// Send data to Google Sheets
 											fetch(scriptUrl, {
 												method: 'POST',
 												mode: 'no-cors',
@@ -4359,37 +4363,30 @@
 												},
 												body: JSON.stringify({
 													action: 'add',
+													pengantin: pengantinId,
 													name: name,
 													message: message,
 													attendance: attendance
 												})
 											})
 												.then(() => {
-													// Clear form
 													document.getElementById('wishForm').reset();
-
-													// Reload wishes
-													loadWishes();
+													loadWishes(pengantinId);
 												})
-												.catch(error => {
-													console.error('Error:', error);
-												});
+												.catch(error => console.error('Error:', error));
 										});
 									});
 
-									function loadWishes() {
-										// Get wishes from Google Sheets
-										fetch(`${scriptUrl}?action=get`)
+									function loadWishes(pengantinId) {
+										fetch(`${scriptUrl}?action=get&pengantin=${pengantinId}`)
 											.then(response => response.json())
 											.then(data => {
-												// Update counts
 												document.getElementById('comment-count').textContent = data.length;
 												document.getElementById('attend-count').textContent =
 													data.filter(item => item.attendance === 'Hadir').length;
 												document.getElementById('not-attend-count').textContent =
 													data.filter(item => item.attendance === 'Tidak Hadir').length;
 
-												// Display wishes
 												const container = document.getElementById('wishesContainer');
 												container.innerHTML = '';
 
@@ -4397,22 +4394,20 @@
 													const wishElement = document.createElement('div');
 													wishElement.className = 'wish';
 
-													// Determine icon based on attendance
 													const attendanceIcon = wish.attendance === 'Hadir'
 														? '<span class="attendance-icon" style="background-color: #4CAF50">✓</span>'
 														: '<span class="attendance-icon" style="background-color: #f44336">✗</span>';
 
 													wishElement.innerHTML = `
-														<div class="wish-name wish-attendance" style="font-color: white">${wish.name} ${attendanceIcon}</div>
-														<div class="wish-message" style="font-color: white">${wish.message}</div>`;
+            										<div class="wish-name wish-attendance">${wish.name} ${attendanceIcon}</div>
+            										<div class="wish-message">${wish.message}</div>`;
 													container.appendChild(wishElement);
 												});
 											})
-											.catch(error => {
-												console.error('Error:', error);
-											});
+											.catch(error => console.error('Error:', error));
 									}
 								</script>
+
 							</div>
 						</div>
 					</div>

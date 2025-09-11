@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel Komentar</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f8f9fa;
+    }
+    .comment-card {
+      margin-bottom: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .comment-body {
+      font-size: 15px;
+    }
+    .comment-meta {
+      font-size: 13px;
+      color: #6c757d;
+    }
+    .delete-btn {
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container my-4">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">📋 Panel Komentar</h2>
+      <p class="text-muted">Kelola komentar untuk: <span id="pengantinLabel" class="fw-semibold"></span></p>
+    </div>
+
+    <div id="commentList" class="row justify-content-center">
+      <div class="col-12 text-center text-muted">Loading komentar...</div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Ambil parameter dari URL
+    function getQueryParam(key) {
+      return new URLSearchParams(window.location.search).get(key);
+    }
+
+    async function loadConfig(pengantin) {
+      try {
+        const res = await fetch("config.json"); // ambil file config dari GitHub Pages
+        const config = await res.json();
+        return config[pengantin] || null;
+      } catch (err) {
+        console.error("Gagal load config:", err);
+        return null;
+      }
+    }
+
+    async function loadKomentar(pengantin, link) {
+      try {
+        const res = await fetch(link + "?action=get");
+        const data = await res.json();
+
+        let html = "";
+        if (data.length === 0) {
+          html = `<div class="col-12 text-center text-muted">Belum ada komentar.</div>`;
+        } else {
+          data.forEach((komen) => {
+            html += `
+              <div class="col-12 col-md-8">
+                <div class="card comment-card">
+                  <div class="card-body d-flex justify-content-between align-items-start">
+                    <div>
+                      <h6 class="card-title mb-1">${komen.name}</h6>
+                      <p class="card-text comment-body mb-1">${komen.message}</p>
+                      <p class="comment-meta mb-0">${komen.timestamp || ""}</p>
+                    </div>
+                    <button class="btn btn-sm btn-danger delete-btn" onclick="hapusKomentar('${link}', '${komen.timestamp}')">
+                      Hapus
+                    </button>
+                  </div>
+                </div>
+              </div>
+            `;
+          });
+        }
+        document.getElementById("commentList").innerHTML = html;
+      } catch (err) {
+        document.getElementById("commentList").innerHTML =
+          `<div class="col-12 text-center text-danger">❌ Gagal ambil data.</div>`;
+        console.error(err);
+      }
+    }
+
+    async function hapusKomentar(link, timestamp) {
+      if (!confirm("Yakin hapus komentar ini?")) return;
+      try {
+        await fetch(link + "?action=delete&timestamp=" + encodeURIComponent(timestamp));
+        loadKomentar(getQueryParam("pengantin"), link); // refresh list
+      } catch (err) {
+        alert("Gagal hapus komentar.");
+      }
+    }
+
+    // Main
+    (async () => {
+      const pengantin = getQueryParam("pengantin");
+      if (!pengantin) {
+        document.getElementById("commentList").innerHTML =
+          `<div class="col-12 text-center text-warning">⚠️ Nama pengantin tidak ditemukan di URL.</div>`;
+        return;
+      }
+      document.getElementById("pengantinLabel").textContent = pengantin;
+
+      const link = await loadConfig(pengantin);
+      if (!link) {
+        document.getElementById("commentList").innerHTML =
+          `<div class="col-12 text-center text-warning">⚠️ Link WebApp untuk pengantin ini belum diset di config.json</div>`;
+        return;
+      }
+      loadKomentar(pengantin, link);
+    })();
+  </script>
+</body>
+</html>

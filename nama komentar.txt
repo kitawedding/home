@@ -394,3 +394,62 @@
 ##################################################################################################################################################################
 ##################################################################################################################################################################
 ##################################################################################################################################################################                        
+
+
+
+	<!-- This site is optimized with the Yoast SEO plugin v24.9 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>The Wedding Of Diva & Heru</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta property="og:title" content="The Wedding Of Diva & Heru" />
+	<meta property="og:description" content="Minggu, 17 Agustus 2025" />
+	<meta property="og:image" content="https://momenin.my.id/diva-heru/wp-content/uploads/2024/09/banner.jpg" />
+	<meta property="og:url" content="https://momenin.my.id" />
+	<meta property="og:type" content="website" />
+	<meta name="twitter:card" content="summary_large_image">
+	<!-- / Yoast SEO plugin. -->
+
+
+
+
+
+
+##################################################################################################################################################################
+##################################################################################################################################################################
+##################################################################################################################################################################
+##################################################################################################################################################################
+##################################################################################################################################################################
+##################################################################################################################################################################
+##################################################################################################################################################################
+################################################################################################################################################################## 
+
+<!--INI PALING BAWAH-->
+							<style type="text/css">
+								.spancontent {
+									padding-bottom: 20px;
+								}
+
+								.copy-content {
+									color: #6EC1E4;
+									text-align: center;
+								}
+
+								.head-title {
+									color: #6EC1E4;
+									text-align: center;
+								}
+							</style>
+							<script>
+								async function copyText(textId, button) {
+									const textToCopy = document.getElementById(textId).textContent;
+									try {
+										await navigator.clipboard.writeText(textToCopy);
+										button.querySelector('.elementor-button-text').textContent = 'Tersalin';
+									} catch (err) {
+										button.querySelector('.elementor-button-text').textContent = 'Tidak Tersalin';
+									}
+									// Reset button text after 2 seconds
+									setTimeout(() => {
+										button.querySelector('.elementor-button-text').textContent = 'Copy';
+									}, 2000);
+								}
+							</script>

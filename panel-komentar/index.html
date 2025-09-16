@@ -6,8 +6,6 @@
   <title>Panel Komentar</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
     body {
       background: #f8f9fa;
@@ -19,8 +17,6 @@
     }
     .comment-body {
       font-size: 15px;
-      white-space: pre-wrap;
-      word-break: break-word;
     }
     .comment-meta {
       font-size: 13px;
@@ -29,29 +25,6 @@
     .delete-btn {
       font-size: 14px;
     }
-    .loading {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 200px;
-    }
-    .error-message {
-      background: #f8d7da;
-      color: #721c24;
-      border: 1px solid #f5c6cb;
-      border-radius: 5px;
-      padding: 15px;
-      margin: 10px 0;
-    }
-    .debug-info {
-      background: #e2e3e5;
-      border: 1px solid #d6d8db;
-      border-radius: 5px;
-      padding: 10px;
-      font-family: monospace;
-      font-size: 12px;
-      margin: 10px 0;
-    }
   </style>
 </head>
 <body>
@@ -59,100 +32,27 @@
     <div class="text-center mb-4">
       <h2 class="fw-bold">📋 Panel Komentar</h2>
       <p class="text-muted">Kelola komentar untuk: <span id="pengantinLabel" class="fw-semibold"></span></p>
-      <button class="btn btn-primary btn-sm" onclick="refreshKomentar()">
-        <i class="fas fa-sync-alt"></i> Refresh
-      </button>
-    </div>
-
-    <!-- Debug Info -->
-    <div id="debugInfo" class="row justify-content-center mb-3" style="display: none;">
-      <div class="col-12 col-md-8">
-        <div class="debug-info">
-          <strong>Debug Info:</strong><br>
-          <span id="debugContent"></span>
-        </div>
-      </div>
     </div>
 
     <div id="commentList" class="row justify-content-center">
-      <div class="col-12 loading">
-        <div class="spinner-border text-primary" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
-        <span class="ms-2">Loading komentar...</span>
-      </div>
+      <div class="col-12 text-center text-muted">Loading komentar...</div>
     </div>
   </div>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    let currentPengantin = null;
-    let currentLink = null;
-    let debugMode = false;
-
-    // Toggle debug mode dengan menekan Ctrl+D
-    document.addEventListener('keydown', function(e) {
-      if (e.ctrlKey && e.key === 'd') {
-        e.preventDefault();
-        debugMode = !debugMode;
-        document.getElementById('debugInfo').style.display = debugMode ? 'block' : 'none';
-        if (debugMode) {
-          addDebugInfo('Debug mode enabled');
-        }
-      }
-    });
-
-    function addDebugInfo(message) {
-      if (debugMode) {
-        const debugContent = document.getElementById('debugContent');
-        const timestamp = new Date().toLocaleTimeString();
-        debugContent.innerHTML += `[${timestamp}] ${message}<br>`;
-      }
-      console.log(message);
-    }
-
     // Ambil parameter dari URL
     function getQueryParam(key) {
-      const params = new URLSearchParams(window.location.search);
-      const value = params.get(key);
-      addDebugInfo(`Query param ${key}: ${value}`);
-      return value;
+      return new URLSearchParams(window.location.search).get(key);
     }
 
     async function loadConfig(pengantin) {
       try {
-        addDebugInfo(`Loading config for: ${pengantin}`);
-        
-        // Tambahkan cache busting
-        const timestamp = new Date().getTime();
-        const configUrl = `config.json?v=${timestamp}`;
-        addDebugInfo(`Config URL: ${configUrl}`);
-        
-        const res = await fetch(configUrl, {
-          method: 'GET',
-          cache: 'no-cache',
-          headers: {
-            'Cache-Control': 'no-cache',
-            'Pragma': 'no-cache'
-          }
-        });
-        
-        addDebugInfo(`Config response status: ${res.status}`);
-        
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        
+        const res = await fetch("config.json"); // ambil file config dari GitHub Pages
         const config = await res.json();
-        addDebugInfo(`Config loaded: ${JSON.stringify(config)}`);
-        
-        const link = config[pengantin];
-        addDebugInfo(`Link for ${pengantin}: ${link}`);
-        
-        return link || null;
+        return config[pengantin] || null;
       } catch (err) {
-        addDebugInfo(`Config load error: ${err.message}`);
         console.error("Gagal load config:", err);
         return null;
       }
@@ -160,298 +60,67 @@
 
     async function loadKomentar(pengantin, link) {
       try {
-        addDebugInfo(`Loading comments from: ${link}`);
-        
-        // Gunakan JSONP sebagai alternatif untuk mengatasi CORS
-        const getUrl = `${link}?action=get&callback=handleComments&_=${new Date().getTime()}`;
-        addDebugInfo(`GET URL: ${getUrl}`);
-        
-        // Coba fetch biasa dulu
-        let data;
-        try {
-          const res = await fetch(getUrl.replace('&callback=handleComments', ''), {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            }
-          });
-          
-          addDebugInfo(`Fetch response status: ${res.status}`);
-          
-          if (res.ok) {
-            data = await res.json();
-            addDebugInfo(`Comments loaded via fetch: ${data.length} items`);
-          } else {
-            throw new Error(`HTTP ${res.status}: ${res.statusText}`);
-          }
-        } catch (fetchError) {
-          addDebugInfo(`Fetch failed: ${fetchError.message}, trying JSONP...`);
-          
-          // Fallback ke JSONP
-          data = await loadViaJSONP(getUrl);
-        }
+        const res = await fetch(link + "?action=get");
+        const data = await res.json();
 
-        displayComments(data, link);
-        
-      } catch (err) {
-        addDebugInfo(`Load comments error: ${err.message}`);
-        console.error("Error loading comments:", err);
-        
-        document.getElementById("commentList").innerHTML =
-          `<div class="col-12 text-center">
-             <div class="error-message">
-               ❌ Gagal memuat komentar<br>
-               <strong>Error:</strong> ${err.message}<br>
-               <small>Tekan Ctrl+D untuk debug info</small><br>
-               <button class="btn btn-sm btn-secondary mt-2" onclick="testConnection()">Test Koneksi</button>
-             </div>
-           </div>`;
-      }
-    }
-
-    function loadViaJSONP(url) {
-      return new Promise((resolve, reject) => {
-        // Buat callback global
-        window.handleComments = function(data) {
-          addDebugInfo(`JSONP callback received: ${data.length} items`);
-          cleanup();
-          resolve(data);
-        };
-
-        const cleanup = () => {
-          if (script && script.parentNode) {
-            script.parentNode.removeChild(script);
-          }
-          delete window.handleComments;
-        };
-
-        const script = document.createElement('script');
-        script.src = url;
-        script.onerror = () => {
-          addDebugInfo('JSONP failed');
-          cleanup();
-          reject(new Error('JSONP request failed'));
-        };
-
-        // Timeout after 10 seconds
-        setTimeout(() => {
-          addDebugInfo('JSONP timeout');
-          cleanup();
-          reject(new Error('JSONP request timeout'));
-        }, 10000);
-
-        document.head.appendChild(script);
-      });
-    }
-
-    function displayComments(data, link) {
-      let html = "";
-      
-      if (!data || data.length === 0) {
-        html = `<div class="col-12 text-center text-muted">
-                  <div class="p-4">
-                    <i class="fas fa-comment-slash fa-3x mb-3"></i>
-                    <p>Belum ada komentar.</p>
-                  </div>
-                </div>`;
-      } else {
-        // Urutkan berdasarkan timestamp terbaru
-        if (Array.isArray(data)) {
-          data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-        }
-        
-        data.forEach((komen, index) => {
-          const safeName = escapeHtml(komen.name || 'Anonim');
-          const safeMessage = escapeHtml(komen.message || '');
-          const safeTimestamp = escapeHtml(komen.timestamp || '');
-          
-          html += `
-            <div class="col-12 col-md-8">
-              <div class="card comment-card">
-                <div class="card-body">
-                  <div class="d-flex justify-content-between align-items-start mb-2">
-                    <h6 class="card-title mb-0">${safeName}</h6>
-                    <button class="btn btn-sm btn-outline-danger delete-btn" 
-                            onclick="hapusKomentar('${escapeAttribute(link)}', '${escapeAttribute(komen.timestamp)}', ${index})"
-                            title="Hapus komentar ini">
-                      <i class="fas fa-trash"></i> Hapus
+        let html = "";
+        if (data.length === 0) {
+          html = `<div class="col-12 text-center text-muted">Belum ada komentar.</div>`;
+        } else {
+          data.forEach((komen) => {
+            html += `
+              <div class="col-12 col-md-8">
+                <div class="card comment-card">
+                  <div class="card-body d-flex justify-content-between align-items-start">
+                    <div>
+                      <h6 class="card-title mb-1">${komen.name}</h6>
+                      <p class="card-text comment-body mb-1">${komen.message}</p>
+                      <p class="comment-meta mb-0">${komen.timestamp || ""}</p>
+                    </div>
+                    <button class="btn btn-sm btn-danger delete-btn" onclick="hapusKomentar('${link}', '${komen.timestamp}')">
+                      Hapus
                     </button>
                   </div>
-                  <p class="card-text comment-body mb-2">${safeMessage}</p>
-                  <p class="comment-meta mb-0">
-                    <i class="fas fa-clock"></i> ${formatTimestamp(safeTimestamp)}
-                  </p>
                 </div>
               </div>
-            </div>
-          `;
-        });
-      }
-      
-      document.getElementById("commentList").innerHTML = html;
-    }
-
-    async function hapusKomentar(link, timestamp, index) {
-      if (!confirm("Yakin ingin menghapus komentar ini?")) return;
-      
-      try {
-        addDebugInfo(`Deleting comment: ${timestamp}`);
-        
-        // Nonaktifkan tombol hapus sementara
-        const deleteBtn = event.target.closest('button');
-        const originalText = deleteBtn.innerHTML;
-        deleteBtn.disabled = true;
-        deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menghapus...';
-        
-        const deleteUrl = `${link}?action=delete&timestamp=${encodeURIComponent(timestamp)}`;
-        addDebugInfo(`Delete URL: ${deleteUrl}`);
-        
-        // Coba beberapa method
-        const methods = ['GET', 'POST'];
-        let success = false;
-        
-        for (const method of methods) {
-          try {
-            addDebugInfo(`Trying ${method} method`);
-            
-            const response = await fetch(deleteUrl, {
-              method: method,
-              mode: 'cors',
-              headers: {
-                'Content-Type': 'application/json',
-              }
-            });
-            
-            addDebugInfo(`Delete response status (${method}): ${response.status}`);
-            
-            if (response.ok) {
-              success = true;
-              break;
-            }
-          } catch (methodError) {
-            addDebugInfo(`${method} failed: ${methodError.message}`);
-          }
+            `;
+          });
         }
-        
-        if (!success) {
-          throw new Error('Semua method gagal, kemungkinan masalah CORS');
-        }
-        
-        addDebugInfo('Delete successful');
-        alert('Komentar berhasil dihapus!');
-        
-        // Refresh list setelah berhasil hapus
-        setTimeout(() => {
-          loadKomentar(currentPengantin, currentLink);
-        }, 1000);
-        
+        document.getElementById("commentList").innerHTML = html;
       } catch (err) {
-        addDebugInfo(`Delete error: ${err.message}`);
-        console.error("Error deleting comment:", err);
-        alert(`Gagal menghapus komentar: ${err.message}`);
-        
-        // Aktifkan kembali tombol jika gagal
-        const deleteBtn = event.target.closest('button');
-        if (deleteBtn) {
-          deleteBtn.disabled = false;
-          deleteBtn.innerHTML = '<i class="fas fa-trash"></i> Hapus';
-        }
+        document.getElementById("commentList").innerHTML =
+          `<div class="col-12 text-center text-danger">❌ Gagal ambil data.</div>`;
+        console.error(err);
       }
     }
 
-    function refreshKomentar() {
-      if (currentPengantin && currentLink) {
-        addDebugInfo('Manual refresh triggered');
-        document.getElementById("commentList").innerHTML = `
-          <div class="col-12 loading">
-            <div class="spinner-border text-primary" role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div>
-            <span class="ms-2">Memuat ulang komentar...</span>
-          </div>`;
-        loadKomentar(currentPengantin, currentLink);
-      }
-    }
-
-    async function testConnection() {
-      if (!currentLink) return;
-      
-      addDebugInfo('Testing connection...');
+    async function hapusKomentar(link, timestamp) {
+      if (!confirm("Yakin hapus komentar ini?")) return;
       try {
-        const testUrl = currentLink + '?action=test';
-        const response = await fetch(testUrl, { mode: 'no-cors' });
-        addDebugInfo(`Test connection: ${response.type}`);
-        alert('Test koneksi berhasil (mode no-cors)');
+        await fetch(link + "?action=delete&timestamp=" + encodeURIComponent(timestamp));
+        loadKomentar(getQueryParam("pengantin"), link); // refresh list
       } catch (err) {
-        addDebugInfo(`Test connection failed: ${err.message}`);
-        alert(`Test koneksi gagal: ${err.message}`);
+        alert("Gagal hapus komentar.");
       }
     }
 
-    // Utility functions
-    function escapeHtml(text) {
-      const map = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#039;'
-      };
-      return text.toString().replace(/[&<>"']/g, function(m) { return map[m]; });
-    }
-
-    function escapeAttribute(text) {
-      return text.toString().replace(/"/g, '&quot;').replace(/'/g, '&#039;');
-    }
-
-    function formatTimestamp(timestamp) {
-      if (!timestamp) return 'Waktu tidak diketahui';
-      try {
-        const date = new Date(timestamp);
-        return date.toLocaleString('id-ID');
-      } catch (err) {
-        return timestamp;
-      }
-    }
-
-    // Main initialization
+    // Main
     (async () => {
-      addDebugInfo('Initializing application...');
-      
       const pengantin = getQueryParam("pengantin");
       if (!pengantin) {
         document.getElementById("commentList").innerHTML =
-          `<div class="col-12 text-center">
-             <div class="error-message">
-               ⚠️ Parameter 'pengantin' tidak ditemukan di URL.<br>
-               <small>Contoh URL yang benar: ?pengantin=nama_pengantin</small><br>
-               <small>Tekan Ctrl+D untuk debug mode</small>
-             </div>
-           </div>`;
+          `<div class="col-12 text-center text-warning">⚠️ Nama pengantin tidak ditemukan di URL.</div>`;
         return;
       }
-      
-      currentPengantin = pengantin;
       document.getElementById("pengantinLabel").textContent = pengantin;
 
       const link = await loadConfig(pengantin);
       if (!link) {
         document.getElementById("commentList").innerHTML =
-          `<div class="col-12 text-center">
-             <div class="error-message">
-               ⚠️ Link WebApp untuk pengantin "${pengantin}" belum diset di config.json<br>
-               <small>Pastikan config.json sudah ter-commit dan terdeploy</small><br>
-               <small>Tekan Ctrl+D untuk debug mode</small>
-             </div>
-           </div>`;
+          `<div class="col-12 text-center text-warning">⚠️ Link WebApp untuk pengantin ini belum diset di config.json</div>`;
         return;
       }
-      
-      currentLink = link;
-      addDebugInfo('Starting to load comments...');
-      await loadKomentar(pengantin, link);
+      loadKomentar(pengantin, link);
     })();
   </script>
 </body>

@@ -453,3 +453,68 @@
 									}, 2000);
 								}
 							</script>
+
+
+##################################################################################################################################
+#############################################################################################################################
+##################################################################################################################################
+
+function doGet(e) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+
+  // Ambil semua data
+  if (e.parameter.action === 'get') {
+    const data = sheet.getDataRange().getValues();
+    const wishes = [];
+
+    for (let i = 1; i < data.length; i++) {
+      wishes.push({
+        name: data[i][0],
+        message: data[i][1],
+        attendance: data[i][2],
+        timestamp: new Date(data[i][3]).toISOString() // pastikan format standar
+      });
+    }
+
+    return ContentService.createTextOutput(JSON.stringify(wishes))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
+  // Hapus berdasarkan timestamp
+  if (e.parameter.action === 'delete') {
+    const ts = e.parameter.timestamp;
+    if (!ts) {
+      return ContentService.createTextOutput('Invalid timestamp');
+    }
+
+    const data = sheet.getDataRange().getValues();
+    for (let i = 1; i < data.length; i++) {
+      const rowTs = new Date(data[i][3]).toISOString();
+      if (rowTs === ts) {
+        sheet.deleteRow(i + 1); // +1 karena header
+        return ContentService.createTextOutput('Deleted');
+      }
+    }
+    return ContentService.createTextOutput('Not found');
+  }
+
+  return ContentService.createTextOutput('Invalid request');
+}
+
+function doPost(e) {
+  const params = JSON.parse(e.postData.contents);
+
+  if (params.action === 'add') {
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    sheet.appendRow([
+      params.name,
+      params.message,
+      params.attendance,
+      new Date()
+    ]);
+
+    return ContentService.createTextOutput('Success');
+  }
+
+  return ContentService.createTextOutput('Invalid request');
+}

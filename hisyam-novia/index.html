@@ -4324,81 +4324,76 @@
 								</div>
 								<script>
 									// Google Apps Script Web App URL
-									const scriptUrl = 'https://script.google.com/macros/s/AKfycbxQiVRN_mj6kab6Yn5_Y45hKa424QotMcUxyGWTa4umjEm4TOnrYHirNJOf3mdwZEM/exec';
-	
+									//const scriptUrl = 'https://script.google.com/macros/s/AKfycbxQiVRN_mj6kab6Yn5_Y45hKa424QotMcUxyGWTa4umjEm4TOnrYHirNJOf3mdwZEM/exec';
+									const scriptUrl = 'https://script.google.com/macros/s/AKfycbwP1KhW6NRxehuyFyXMj8rJ9JDoVyPujuF_H_S5dbX5f3y4_KAFP3pfUETAOZudFUYN/exec';
+									// 🔄 Ambil nama pengantin dari URL undangan (mis: /fajri-ilmi?to=handoko)
+									const pengantin = window.location.pathname.replace('/', '').split('?')[0];
+
 									document.addEventListener('DOMContentLoaded', function () {
-										// Load existing wishes when page loads
 										loadWishes();
-	
-										// Handle form submission
+
 										document.getElementById('wishForm').addEventListener('submit', function (e) {
 											e.preventDefault();
-	
+
 											const name = document.getElementById('name').value;
 											const message = document.getElementById('message').value;
 											const attendance = document.getElementById('attendance').value;
-	
-											// Send data to Google Sheets
+
+											// 🔄 kirim data beserta pengantin
 											fetch(scriptUrl, {
 												method: 'POST',
-												mode: 'no-cors',
-												headers: {
-													'Content-Type': 'application/json',
-												},
+												headers: { 'Content-Type': 'application/json' },
 												body: JSON.stringify({
 													action: 'add',
+													pengantin: pengantin,
 													name: name,
 													message: message,
-													attendance: attendance
-												})
+													attendance: attendance,
+												}),
 											})
 												.then(() => {
-													// Clear form
 													document.getElementById('wishForm').reset();
-	
-													// Reload wishes
 													loadWishes();
 												})
-												.catch(error => {
-													console.error('Error:', error);
-												});
+												.catch((err) => console.error('Error:', err));
 										});
 									});
-	
+
 									function loadWishes() {
-										// Get wishes from Google Sheets
-										fetch(`${scriptUrl}?action=get`)
-											.then(response => response.json())
-											.then(data => {
-												// Update counts
-												document.getElementById('comment-count').textContent = data.length;
-												document.getElementById('attend-count').textContent =
-													data.filter(item => item.attendance === 'Hadir').length;
-												document.getElementById('not-attend-count').textContent =
-													data.filter(item => item.attendance === 'Tidak Hadir').length;
-	
-												// Display wishes
+										// 🔄 ambil komentar khusus pengantin ini
+										fetch(`${scriptUrl}?action=get&pengantin=${encodeURIComponent(pengantin)}`)
+											.then((res) => res.json())
+											.then((rows) => {
+												// Hitung statistik
+												document.getElementById('comment-count').textContent = rows.length;
+												document.getElementById('attend-count').textContent = rows.filter(
+													(r) => r.Attendance === 'Hadir'
+												).length;
+												document.getElementById('not-attend-count').textContent = rows.filter(
+													(r) => r.Attendance === 'Tidak Hadir'
+												).length;
+
+												// Render komentar
 												const container = document.getElementById('wishesContainer');
 												container.innerHTML = '';
-	
-												data.reverse().forEach(wish => {
-													const wishElement = document.createElement('div');
-													wishElement.className = 'wish';
-	
-													// Determine icon based on attendance
-													const attendanceIcon = wish.attendance === 'Hadir'
-														? '<span class="attendance-icon" style="background-color: #4CAF50">✓</span>'
-														: '<span class="attendance-icon" style="background-color: #f44336">✗</span>';
-	
-													wishElement.innerHTML = `
-														<div class="wish-name wish-attendance" style="font-color: white">${wish.name} ${attendanceIcon}</div>
-														<div class="wish-message" style="font-color: white">${wish.message}</div>`;
-													container.appendChild(wishElement);
+
+												rows.reverse().forEach((r) => {
+													const el = document.createElement('div');
+													el.className = 'wish';
+
+													const icon =
+														r.Attendance === 'Hadir'
+															? '<span class="attendance-icon" style="background:#4CAF50">✓</span>'
+															: '<span class="attendance-icon" style="background:#f44336">✗</span>';
+
+													el.innerHTML = `
+            <div class="wish-name wish-attendance">${r.Name} ${icon}</div>
+            <div class="wish-message">${r.Message}</div>
+          `;
+													container.appendChild(el);
 												});
 											})
-											.catch(error => {
-												console.error('Error:', error);
-											});
+											.catch((err) => console.error('Error:', err));
 									}
 								</script>
 							</div>

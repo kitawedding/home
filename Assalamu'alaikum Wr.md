@@ -5,11 +5,11 @@ Bismillahirahmanirrahim.
 
 Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i, teman sekaligus sahabat, untuk menghadiri acara pernikahan anak kami :
 
-*Wahid & Hikmah*
+*Vika & Tono*
 
 Berikut link undangan kami untuk info lengkap dari acara bisa kunjungi :
  
-https://momenin.my.id/wahid-hikmah?to=ini-diisi-nama-tamu
+https://momenin.my.id/vika-tono?to=ini-diisi-nama-tamu
 
 Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu.
 
@@ -20,24 +20,24 @@ Terima Kasih.
 
 
 
-*Tutorial penulisan link*
+📌 *Tutorial penulisan link*
 
-1. Bisa copy paste dari website generator
-    • https://momenin.my.id/generator.html?pengantin=wahid-hikmah
+⭕️ Bisa copy paste dari website generator
+    • https://momenin.my.id/generator?pengantin=vika-tono
 
-2. Bisa tulis manual seperti contoh :
-    • https://momenin.my.id/wahid-hikmah?to=fulan
-    • https://momenin.my.id/wahid-hikmah?to=fulan-kantor
-    • https://momenin.my.id/wahid-hikmah?to=fulan-kantor-jepara
+⭕️ Bisa tulis manual seperti contoh :
+    • https://momenin.my.id/vika-tono?to=fulan
+    • https://momenin.my.id/vika-tono?to=fulan-kantor
+    • https://momenin.my.id/vika-tono?to=fulan-kantor-jepara
 
-3. Besar kecil tidak masalah, sudah otomatis huruf kapital huruf pertama
+⭕️ Besar kecil tidak masalah, sudah otomatis huruf kapital huruf pertama
 
-4. tidak boleh mengandung kurung (beberapa HP tidak support) contohnya :
-    • https://momenin.my.id/wahid-hikmah?to=agus-(facebook) *JANGAN*
+⛔️ tidak boleh mengandung kurung (beberapa HP tidak support) contohnya :
+    • https://momenin.my.id/vika-tono?to=agus-(facebook) *JANGAN*
 
 
-*Panel Komentar*
+📌 *Panel Komentar*
 
 bertujuan untuk menghapus komentar yang tidak sopan/yang lainnya. 
-tinggal pilih hapus, lalu tunggu datanya hilang di tampilan (1-5 detik)
-https://momenin.my.id/panel-komentar/?pengantin=wahid-hikmah
+tinggal pilih hapus, *lalu tunggu datanya hilang di tampilan (1-5 detik)*
+https://momenin.my.id/panel-komentar?pengantin=vika-tono

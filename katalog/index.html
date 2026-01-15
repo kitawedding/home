@@ -27,7 +27,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
   
   <!-- Core CSS -->
-  <link href="../css/styles.css" rel="stylesheet" />
+  <link href="https://momenin.my.id/css/styles.css" rel="stylesheet" />
   
   <!-- Analytics -->
   <script src="https://cdn.counter.dev/script.js" data-id="83d83041-9c16-4469-8b0e-2d7e89ba18f5" data-utcoffset="7" defer></script>
@@ -121,12 +121,14 @@
     .feature-list {
       list-style-type: none;
       padding-left: 0;
+      margin-bottom: 1.5rem;
     }
     
     .feature-list li {
       padding: 0.25rem 0;
       position: relative;
       padding-left: 1.5rem;
+      font-size: 0.9rem;
     }
     
     .feature-list li:before {
@@ -172,6 +174,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      white-space: normal;
+      line-height: 1.3;
     }
     
     .filter-buttons .btn.active {
@@ -180,13 +184,15 @@
       box-shadow: 0 4px 12px rgba(74, 108, 247, 0.3);
     }
 
-    /* Pricing Cards */
+    /* Pricing Cards - Responsive Layout */
     .pricing-card {
       border: none;
-      border-radius: 20px;
+      border-radius: 15px;
       overflow: hidden;
       transition: var(--transition-smooth);
       height: 100%;
+      display: flex;
+      flex-direction: column;
     }
     
     .pricing-card:hover {
@@ -195,29 +201,137 @@
     
     .pricing-card .card-header {
       border: none;
-      padding: 1.5rem !important;
+      padding: 1.2rem !important;
     }
     
     .pricing-card-title {
       font-weight: 700;
-      margin: 1rem 0;
+      margin: 0.5rem 0;
+      line-height: 1.2;
     }
 
-    /* Responsive Typography */
-    .card-header h4 {
-      font-size: 1.25rem;
-      font-weight: 700;
+    /* Card Body dengan tinggi fleksibel */
+    .pricing-card .card-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 1.2rem !important;
     }
     
-    .pricing-card-title {
-      font-size: 2.5rem;
+    .pricing-card .card-body .btn {
+      margin-top: auto;
+    }
+
+    /* Responsive Layout untuk Paket */
+    /* Desktop - 4 kolom */
+    @media (min-width: 992px) {
+      .pricing-row .col-lg-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+      }
     }
     
-    .feature-list li {
-      font-size: 1rem;
+    /* Tablet - 2 kolom */
+    @media (min-width: 768px) and (max-width: 991px) {
+      .pricing-row .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+      }
+      
+      .pricing-card-title {
+        font-size: 1.8rem;
+      }
+      
+      .feature-list li {
+        font-size: 0.85rem;
+      }
     }
     
-    /* Responsive Design */
+    /* Mobile - 2 kolom */
+    @media (max-width: 767px) {
+      .pricing-row .col-sm-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+      }
+      
+      .pricing-card {
+        margin-bottom: 1rem;
+      }
+      
+      .pricing-card .card-header {
+        padding: 1rem !important;
+      }
+      
+      .pricing-card .card-body {
+        padding: 1rem !important;
+      }
+      
+      .pricing-card-title {
+        font-size: 1.5rem;
+      }
+      
+      .card-header h4 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+      }
+      
+      .feature-list {
+        margin-bottom: 1rem;
+      }
+      
+      .feature-list li {
+        font-size: 0.8rem;
+        padding: 0.2rem 0;
+        padding-left: 1.2rem;
+      }
+      
+      .btn-elegant {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+      }
+    }
+    
+    /* Mobile kecil - 2 kolom tetap, dengan penyesuaian */
+    @media (max-width: 576px) {
+      .pricing-card-title {
+        font-size: 1.3rem;
+      }
+      
+      .card-header h4 {
+        font-size: 0.9rem;
+      }
+      
+      .feature-list li {
+        font-size: 0.75rem;
+      }
+      
+      .pricing-card .card-header {
+        padding: 0.8rem !important;
+      }
+      
+      .pricing-card .card-body {
+        padding: 0.8rem !important;
+      }
+    }
+    
+    /* Extra small - tetap 2 kolom tapi lebih kompak */
+    @media (max-width: 400px) {
+      .pricing-card-title {
+        font-size: 1.1rem;
+      }
+      
+      .feature-list li {
+        font-size: 0.7rem;
+        padding-left: 1rem;
+      }
+      
+      .btn-elegant {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    /* Responsive Typography untuk konten lainnya */
     @media (max-width: 1399px) {
       .card-header h4 { font-size: 1.7rem; }
       .pricing-card-title { font-size: 2.3rem; }
@@ -231,29 +345,11 @@
       .card-header { padding: 1rem !important; }
     }
     
-    @media (max-width: 991px) {
-      .card-header h4 { font-size: 1.1rem; }
-      .pricing-card-title { font-size: 1.75rem; }
-      .feature-list li { font-size: 0.9rem; }
-      .card-header { padding: 0.75rem !important; }
-    }
-    
-    @media (max-width: 767px) {
-      .card-header h4 { font-size: 1rem; }
-      .pricing-card-title { font-size: 1.75rem; }
-      .feature-list li { font-size: 0.8rem; }
-    }
-    
     @media (max-width: 520px) {
-      .card-header h4 { font-size: 0.9rem; }
-      .pricing-card-title { font-size: 1.2rem; }
-      .feature-list li { font-size: 0.75rem; }
       .filter-buttons .btn { font-size: 0.8rem !important; }
     }
     
     @media (max-width: 450px) {
-      .card-header h4 { font-size: 0.85rem; }
-      .pricing-card-title { font-size: 1.1rem; }
       .feature-list li { font-size: 0.7rem; }
     }
 
@@ -315,26 +411,32 @@
           <p class="lead text-muted">Temukan paket yang sesuai dengan kebutuhan spesial hari bahagia Anda</p>
         </div>
         
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5 text-center">
+        <!-- Pricing Cards Grid - Responsive -->
+        <div class="row pricing-row g-4 mb-5 text-center">
           <!-- Card 1: Murmer -->
-          <div class="col">
-            <div class="pricing-card card shadow-lg border-success card-hover">
+          <div class="col-sm-6 col-md-6 col-lg-3">
+            <div class="pricing-card card shadow-lg border-success card-hover h-100">
               <div class="card-header py-4 text-bg-success">
                 <h4 class="my-0 fw-bold">Murmer</h4>
+                <p class="mb-0 opacity-75">Paket Hemat</p>
               </div>
-              <div class="card-body p-4">
-                <h1 class="card-title pricing-card-title">
-                  <s class="text-danger opacity-75">Rp. 20.000</s>
-                  <div class="text-success">Rp. 15.000</div>
-                </h1>
-                <ul class="list-unstyled mt-4 mb-4 feature-list">
+              <div class="card-body d-flex flex-column">
+                <div class="mb-3">
+                  <h1 class="card-title pricing-card-title">
+                    <s class="text-danger opacity-75">Rp. 20.000</s>
+                    <div class="text-dark">Rp. 15.000</div>
+                  </h1>
+                </div>
+                
+                <ul class="feature-list text-start">
                   <li>Masa Aktif 5 bulan</li>
                   <li>Gratis konsultasi</li>
                   <li class="cross">Nama tamu undangan</li>
                   <li class="cross">Komentar & Ucapan</li>
                 </ul>
+                
                 <a href="https://wa.me/6285262658655?text=Halo%20kak,%20saya%20minat%20paket%20Murmer" 
-                   class="btn btn-success btn-elegant w-100" target="_blank">
+                   class="btn btn-success btn-elegant mt-auto" target="_blank">
                   <i class="fab fa-whatsapp me-2"></i>Pesan Sekarang
                 </a>
               </div>
@@ -342,21 +444,26 @@
           </div>
 
           <!-- Card 2: Medium -->
-          <div class="col">
-            <div class="pricing-card card shadow-lg border-primary card-hover">
+          <div class="col-sm-6 col-md-6 col-lg-3">
+            <div class="pricing-card card shadow-lg border-primary card-hover h-100">
               <div class="card-header py-4 text-bg-primary">
                 <h4 class="my-0 fw-bold">Medium</h4>
+                <p class="mb-0 opacity-75">Paket Standar</p>
               </div>
-              <div class="card-body p-4">
-                <h1 class="card-title pricing-card-title">Rp. 20.000</h1>
-                <ul class="list-unstyled mt-4 mb-4 feature-list">
+              <div class="card-body d-flex flex-column">
+                <div class="mb-3">
+                  <h1 class="card-title pricing-card-title text-dark">Rp. 20.000</h1>
+                </div>
+                
+                <ul class="feature-list text-start">
                   <li>Masa Aktif 5 bulan</li>
                   <li>Gratis konsultasi</li>
                   <li>Nama tamu undangan</li>
                   <li class="cross">Komentar & Ucapan</li>
                 </ul>
+                
                 <a href="https://wa.me/6285262658655?text=Halo%20kak,%20saya%20minat%20paket%20Medium" 
-                   class="btn btn-primary btn-elegant w-100" target="_blank">
+                   class="btn btn-primary btn-elegant mt-auto" target="_blank">
                   <i class="fab fa-whatsapp me-2"></i>Pesan Sekarang
                 </a>
               </div>
@@ -364,21 +471,26 @@
           </div>
 
           <!-- Card 3: Enterprise -->
-          <div class="col">
-            <div class="pricing-card card shadow-lg border-danger card-hover">
+          <div class="col-sm-6 col-md-6 col-lg-3">
+            <div class="pricing-card card shadow-lg border-danger card-hover h-100">
               <div class="card-header py-4 text-bg-danger">
                 <h4 class="my-0 fw-bold">Enterprise</h4>
+                <p class="mb-0 opacity-75">Paket Lengkap</p>
               </div>
-              <div class="card-body p-4">
-                <h1 class="card-title pricing-card-title">Rp. 25.000</h1>
-                <ul class="list-unstyled mt-4 mb-4 feature-list">
+              <div class="card-body d-flex flex-column">
+                <div class="mb-3">
+                  <h1 class="card-title pricing-card-title text-dark">Rp. 25.000</h1>
+                </div>
+                
+                <ul class="feature-list text-start">
                   <li>Masa Aktif 5 bulan</li>
                   <li>Gratis konsultasi</li>
                   <li>Nama tamu undangan</li>
                   <li>Komentar & Ucapan</li>
                 </ul>
+                
                 <a href="https://wa.me/6285262658655?text=Halo%20kak,%20saya%20minat%20paket%20Enterprise" 
-                   class="btn btn-danger btn-elegant w-100" target="_blank">
+                   class="btn btn-danger btn-elegant mt-auto" target="_blank">
                   <i class="fab fa-whatsapp me-2"></i>Pesan Sekarang
                 </a>
               </div>
@@ -386,20 +498,27 @@
           </div>
 
           <!-- Card 4: Couple -->
-          <div class="col">
-            <div class="pricing-card card shadow-lg border-warning card-hover">
+          <div class="col-sm-6 col-md-6 col-lg-3">
+            <div class="pricing-card card shadow-lg border-warning card-hover h-100">
               <div class="card-header py-4 text-bg-warning">
                 <h4 class="my-0 fw-bold">Couple</h4>
+                <p class="mb-0 opacity-75">Paket Pasangan</p>
               </div>
-              <div class="card-body p-4">
-                <h1 class="card-title pricing-card-title text-dark">Disc. 10.000</h1>
-                <ul class="list-unstyled mt-4 mb-4 feature-list">
+              <div class="card-body d-flex flex-column">
+                <div class="mb-3">
+                  <h1 class="card-title pricing-card-title text-dark">Disc. 10.000</h1>
+                  <p class="text-dark opacity-90 mb-0">Dari paket pilihan</p>
+                </div>
+                
+                <ul class="feature-list text-start">
                   <li>Fitur sesuai paket</li>
-                  <li>Desain sama untuk kedua mempelai</li>
+                  <li>Desain sama untuk pasangan</li>
                   <li>Hemat untuk pasangan</li>
+                  <li>Gratis konsultasi</li>
                 </ul>
+                
                 <a href="https://wa.me/6285262658655?text=Halo%20kak,%20saya%20minat%20paket%20Couple" 
-                   class="btn btn-warning text-dark btn-elegant w-100" target="_blank">
+                   class="btn btn-warning btn-elegant mt-auto text-dark" target="_blank">
                   <i class="fab fa-whatsapp me-2"></i>Pesan Sekarang
                 </a>
               </div>
@@ -415,31 +534,31 @@
           <p class="text-muted">Filter berdasarkan kategori tema yang tersedia</p>
         </div>
         
+        <!-- Filter Buttons Grid - Juga responsive 2 kolom -->
         <div class="row row-cols-2 row-cols-md-4 g-3 filter-buttons">
-          <!-- Filter buttons -->
-          <div class="col d-grid">
-            <button class="btn btn-outline-primary active" onclick="filterKatalog('spesial', this)">Spesial Foto</button>
+          <div class="col">
+            <button class="btn btn-outline-primary active w-100" onclick="filterKatalog('spesial', this)">Spesial Foto</button>
           </div>
-          <div class="col d-grid">
-            <button class="btn btn-outline-primary" onclick="filterKatalog('spesial_lineart', this)">Spesial Lineart</button>
+          <div class="col">
+            <button class="btn btn-outline-primary w-100" onclick="filterKatalog('spesial_lineart', this)">Spesial Lineart</button>
           </div>
-          <div class="col d-grid">
-            <button class="btn btn-outline-primary" onclick="filterKatalog('luxury', this)">Luxury Foto</button>
+          <div class="col">
+            <button class="btn btn-outline-primary w-100" onclick="filterKatalog('luxury', this)">Luxury Foto</button>
           </div>
-          <div class="col d-grid">
-            <button class="btn btn-outline-primary" onclick="filterKatalog('luxury_lineart', this)">Luxury Lineart</button>
+          <div class="col">
+            <button class="btn btn-outline-primary w-100" onclick="filterKatalog('luxury_lineart', this)">Luxury Lineart</button>
           </div>
-          <div class="col d-grid">
-            <button class="btn btn-outline-primary" onclick="filterKatalog('premium', this)">Premium Vintage</button>
+          <div class="col">
+            <button class="btn btn-outline-primary w-100" onclick="filterKatalog('premium', this)">Premium Vintage</button>
           </div>
-          <div class="col d-grid">
-            <button class="btn btn-outline-primary" onclick="filterKatalog('premium_lineart', this)">Premium Lineart</button>
+          <div class="col">
+            <button class="btn btn-outline-primary w-100" onclick="filterKatalog('premium_lineart', this)">Premium Lineart</button>
           </div>
-          <div class="col d-grid">
-            <button class="btn btn-outline-primary" onclick="filterKatalog('adat', this)">Adat Foto</button>
+          <div class="col">
+            <button class="btn btn-outline-primary w-100" onclick="filterKatalog('adat', this)">Adat Foto</button>
           </div>
-          <div class="col d-grid">
-            <button class="btn btn-outline-primary" onclick="filterKatalog('adat_lineart', this)">Adat Lineart</button>
+          <div class="col">
+            <button class="btn btn-outline-primary w-100" onclick="filterKatalog('adat_lineart', this)">Adat Lineart</button>
           </div>
         </div>
       </div>
@@ -461,20 +580,10 @@
 
   <!-- Main Application Script -->
   <script>
-    // Katalog Data
+    // Katalog Data (disederhanakan untuk contoh)
     const katalogItems = [
       // Spesial category
       { category: "spesial", id: "01", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-01/index.html" },
-      { category: "spesial", id: "02", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-02/index.html" },
-      { category: "spesial", id: "03", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-03/index.html" },
-      { category: "spesial", id: "04", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-04/index.html" },
-      { category: "spesial", id: "05", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-05/index.html" },
-      { category: "spesial", id: "06", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-06/index.html" },
-      { category: "spesial", id: "07", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-07/index.html" },
-      { category: "spesial", id: "08", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-08/index.html" },
-      { category: "spesial", id: "09", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-09/index.html" },
-      { category: "spesial", id: "10", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-10/index.html" },
-{ category: "spesial", id: "01", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-01/index.html" },
       { category: "spesial", id: "02", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-02/index.html" },
       { category: "spesial", id: "03", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-03/index.html" },
       { category: "spesial", id: "04", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-04/index.html" },
@@ -595,37 +704,36 @@
       
       const formattedCategory = formatCategoryName(item.category);
       const title = `${formattedCategory} ${item.id}`;
-      const isLineart = item.category.includes('_lineart');
-      const price = isLineart ? '<s class="text-danger opacity-75">Rp. 20.000</s> Rp. 15.000' : '<s class="text-danger opacity-75">Rp. 20.000</s> Rp. 15.000';
+      const price = '<s class="text-danger opacity-75">Rp. 20.000</s> Rp. 15.000';
 
       return `
-        <div class="col-md-6 col-lg-4 col-xl-3 katalog-item fade-in" data-category="${item.category}">
+        <div class="col-sm-6 col-md-4 col-lg-3 katalog-item fade-in" data-category="${item.category}">
           <div class="card shadow border-0 rounded-4 overflow-hidden card-hover h-100">
             <div class="position-relative overflow-hidden">
               <picture>
                 <source srcset="${webpFile}" type="image/webp">
                 <source srcset="${pngFile}" type="image/png">
-                <img class="card-img-top" src="${pngFile}" alt="${title}" loading="lazy">
+                <img class="card-img-top" src="${pngFile}" alt="${title}" loading="lazy" style="height: 200px; object-fit: cover;">
               </picture>
               <div class="discount-badge pulse-gentle">Diskon!</div>
             </div>
-            <div class="card-body d-flex flex-column p-4">
-              <h5 class="card-title fw-bold mb-2">${title}</h5>
-              <p class="card-text mb-3 text-muted">
-                Tema ${formattedCategory.toLowerCase()} yang elegan untuk hari spesial Anda
+            <div class="card-body d-flex flex-column p-3">
+              <h5 class="card-title fw-bold mb-2 fs-6">${title}</h5>
+              <p class="card-text mb-2 text-muted small">
+                Tema ${formattedCategory.toLowerCase()} yang elegan
               </p>
               <div class="mt-auto">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <span class="h5 fw-bold text-dark">${price}</span>
-                  <span class="badge bg-primary bg-opacity-10 text-primary">Populer</span>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="h6 fw-bold text-dark">${price}</span>
+                  <span class="badge bg-primary bg-opacity-10 text-primary small">Populer</span>
                 </div>
                 <div class="d-flex gap-2">
-                  <a href="#" class="btn btn-outline-primary flex-grow-1 lihat-demo-btn" 
+                  <a href="#" class="btn btn-outline-primary flex-grow-1 lihat-demo-btn small" 
                      data-demo-link="${item.demoLink}" 
                      data-title="${title}"
                      data-bs-toggle="modal" 
                      data-bs-target="#demoModal">
-                    <i class="fas fa-eye me-2"></i>Demo
+                    <i class="fas fa-eye me-1"></i>Demo
                   </a>
                   <a href="https://wa.me/6285262658655?text=Halo%20kak.%0ASepertinya%20saya%20minat%20untuk%20desain%20ini%20%3A%20${encodeURIComponent(title)}" 
                      target="_blank" 
@@ -641,6 +749,10 @@
 
     // Initialize Catalog
     function initializeCatalog() {
+      // Kosongkan container dulu
+      container.innerHTML = '';
+      
+      // Tambahkan item katalog
       katalogItems.forEach(item => {
         container.insertAdjacentHTML("beforeend", generateCard(item));
       });

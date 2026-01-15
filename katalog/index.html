@@ -2,414 +2,479 @@
 <html lang="en">
 
 <head>
-  <script src="https://cdn.counter.dev/script.js" data-id="83d83041-9c16-4469-8b0e-2d7e89ba18f5"
-    data-utcoffset="7"></script>
+  <!-- Meta Tags & SEO -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Undangan Website Termurah - Momenin</title>
+  
+  <!-- Open Graph / Social Media -->
   <meta property="og:title" content="Undangan Website Termurah" />
   <meta property="og:description" content="Share Undangan Pernikahanmu Dengan Mudah, Murah, dan Elegan!" />
   <meta property="og:image" content="https://momenin.my.id/assets/profil.png" />
   <meta property="og:url" content="https://momenin.my.id" />
   <meta property="og:type" content="website" />
-  <title>Undangan Website Termurah</title>
-  <!-- Favicon-->
+  
+  <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="../assets/logofav.png" />
-  <!-- Custom Google font-->
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+  
+  <!-- Icons -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <!-- Bootstrap icons-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
-  <!-- Core theme CSS (includes Bootstrap)-->
+  
+  <!-- Core CSS -->
   <link href="../css/styles.css" rel="stylesheet" />
-  <style>
-    @keyframes pulse {
-      0% {
-        transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.05);
-      }
-
-      100% {
-        transform: scale(1);
-      }
-    }
-
-    .pulse-animation {
-      animation: pulse 1.5s infinite;
-    }
-
-
-    .katalog-item .card-img-top {
-      height: 300px;
-      object-fit: cover;
-    }
-
-    .feature-list {
-      list-style-type: none;
-      padding-left: 0;
-    }
-
-    .feature-list li:before {
-      content: "✓ ";
-      color: green;
-    }
-
-    .feature-list li.cross:before {
-      content: "✗ ";
-      color: red;
-    }
-
-    .progress-container {
-      width: 100%;
-      height: 4px;
-      background: #f1f1f1;
-    }
-
-    .progress-bar {
-      height: 100%;
-      width: 0%;
-      background: #3498db;
-      transition: width 0.3s ease;
-    }
-
-    /* Ukuran teks default (desktop) */
-    .card-header h4 {
-      font-size: 1.25rem;
-    }
-
-    .pricing-card-title {
-      font-size: 2.5rem;
-    }
-
-    .feature-list li {
-      font-size: 1rem;
-    }
-
-    .card-body {
-      max-height: 14rem;
-    }
-
-    /* Tablet (lebar ≤ 991px) */
-    @media (max-width: 1399px) {
-      .card-header h4 {
-        font-size: 1.7rem;
-      }
-
-      .pricing-card-title {
-        font-size: 2.3rem;
-      }
-
-      .feature-list li {
-        font-size: 0.9rem;
-      }
-
-      .card-header {
-        padding: 0.75rem !important;
-      }
-
-      .card-body {
-        max-height: 12rem;
-      }
-    }
-
-    /* Tablet (lebar ≤ 991px) */
-    @media (max-width: 1200px) {
-      .card-header h4 {
-        font-size: 1.5rem;
-      }
-
-      .pricing-card-title {
-        font-size: 2rem;
-      }
-
-      .feature-list li {
-        font-size: 0.9rem;
-      }
-
-      .card-header {
-        padding: 0.75rem !important;
-      }
-
-      .card-body {
-        max-height: 16rem;
-      }
-    }
-
-
-    /* Tablet (lebar ≤ 991px) */
-    @media (max-width: 991px) {
-      .card-header h4 {
-        font-size: 1.1rem;
-      }
-
-      .pricing-card-title {
-        font-size: 2rem;
-      }
-
-      .feature-list li {
-        font-size: 0.9rem;
-      }
-
-      .card-header {
-        padding: 0.75rem !important;
-      }
-
-      .card-body {
-        max-height: 12rem;
-      }
-    }
-
-    /* Handphone (lebar ≤ 767px) */
-    @media (max-width: 767px) {
-      .card-header h4 {
-        font-size: 1rem;
-      }
-
-      .pricing-card-title {
-        font-size: 1.75rem;
-      }
-
-      .feature-list li {
-        font-size: 0.8rem;
-      }
-
-      .card-body {
-        padding: 1rem !important;
-        max-height: 12rem;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .card-header h4 {
-        font-size: 1rem;
-      }
-
-      .pricing-card-title {
-        font-size: 1.2rem;
-      }
-
-      .feature-list li {
-        font-size: 0.8rem;
-      }
-
-      .card-body {
-        padding: 1rem !important;
-        max-height: 11rem;
-      }
-
-      .filter-buttons .btn {
-        font-size: 0.8rem !important;
-        height: 3.3rem;
-        align-items: center;
-
-      }
-    }
-
-    .feature-list .cross {
-      text-decoration: line-through;
-      opacity: 0.6;
-    }
-
-    .card {
-      height: 100%;
-    }
-
-    @media (max-width: 450px) {
-      .card-header h4 {
-        font-size: 0.8rem;
-      }
-
-      .pricing-card-title {
-        font-size: 1rem;
-      }
-
-      .feature-list li {
-        font-size: 0.8rem;
-      }
-
-      .card-body {
-        padding: 1rem !important;
-        max-height: 16rem;
-      }
-
-      .filter-buttons .btn {
-        font-size: 0.8rem !important;
-        height: 3.3rem;
-        align-items: center;
-
-      }
-    }
-
-    .feature-list .cross {
-      text-decoration: line-through;
-      opacity: 0.6;
-    }
-
-    .card {
-      height: 100%;
-    }
-  </style>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-16XKXN0RP0">
-  </script>
+  
+  <!-- Analytics -->
+  <script src="https://cdn.counter.dev/script.js" data-id="83d83041-9c16-4469-8b0e-2d7e89ba18f5" data-utcoffset="7" defer></script>
+  
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-16XKXN0RP0"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'G-16XKXN0RP0');
   </script>
+  
+  <!-- Custom Styles -->
+  <style>
+    :root {
+      --primary-color: #4a6cf7;
+      --success-color: #28a745;
+      --danger-color: #dc3545;
+      --warning-color: #ffc107;
+      --light-bg: #f8f9fa;
+      --shadow-subtle: 0 5px 20px rgba(0, 0, 0, 0.08);
+      --transition-smooth: all 0.3s ease;
+    }
+
+    /* Elegant Animations */
+    @keyframes pulse-gentle {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Reusable Classes */
+    .pulse-gentle {
+      animation: pulse-gentle 2s infinite ease-in-out;
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+    
+    .card-hover {
+      transition: var(--transition-smooth);
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-subtle);
+    }
+    
+    .btn-elegant {
+      border-radius: 50px;
+      padding: 0.6rem 1.5rem;
+      font-weight: 500;
+      transition: var(--transition-smooth);
+      border: 2px solid transparent;
+    }
+    
+    .btn-elegant:hover {
+      transform: translateY(-2px);
+    }
+    
+    .btn-elegant-primary {
+      background: var(--primary-color);
+      color: white;
+    }
+    
+    .btn-elegant-primary:hover {
+      background: white;
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+
+    /* Catalog Items */
+    .katalog-item .card-img-top {
+      height: 300px;
+      object-fit: cover;
+      transition: var(--transition-smooth);
+    }
+    
+    .katalog-item:hover .card-img-top {
+      transform: scale(1.02);
+    }
+
+    /* Feature List */
+    .feature-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    
+    .feature-list li {
+      padding: 0.25rem 0;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    
+    .feature-list li:before {
+      content: "✓";
+      color: var(--success-color);
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+    
+    .feature-list li.cross {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+    
+    .feature-list li.cross:before {
+      content: "✗";
+      color: var(--danger-color);
+    }
+
+    /* Discount Badge */
+    .discount-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: linear-gradient(135deg, var(--danger-color), #ff6b6b);
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      z-index: 2;
+      box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+    }
+
+    /* Filter Buttons */
+    .filter-buttons .btn {
+      transition: var(--transition-smooth);
+      border-radius: 10px;
+      padding: 0.75rem 0.5rem;
+      font-weight: 500;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .filter-buttons .btn.active {
+      background: var(--primary-color);
+      color: white;
+      box-shadow: 0 4px 12px rgba(74, 108, 247, 0.3);
+    }
+
+    /* Pricing Cards */
+    .pricing-card {
+      border: none;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: var(--transition-smooth);
+      height: 100%;
+    }
+    
+    .pricing-card:hover {
+      transform: translateY(-8px);
+    }
+    
+    .pricing-card .card-header {
+      border: none;
+      padding: 1.5rem !important;
+    }
+    
+    .pricing-card-title {
+      font-weight: 700;
+      margin: 1rem 0;
+    }
+
+    /* Responsive Typography */
+    .card-header h4 {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+    
+    .pricing-card-title {
+      font-size: 2.5rem;
+    }
+    
+    .feature-list li {
+      font-size: 1rem;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 1399px) {
+      .card-header h4 { font-size: 1.7rem; }
+      .pricing-card-title { font-size: 2.3rem; }
+      .feature-list li { font-size: 0.9rem; }
+      .card-header { padding: 1.25rem !important; }
+    }
+    
+    @media (max-width: 1200px) {
+      .card-header h4 { font-size: 1.5rem; }
+      .pricing-card-title { font-size: 2rem; }
+      .card-header { padding: 1rem !important; }
+    }
+    
+    @media (max-width: 991px) {
+      .card-header h4 { font-size: 1.1rem; }
+      .pricing-card-title { font-size: 1.75rem; }
+      .feature-list li { font-size: 0.9rem; }
+      .card-header { padding: 0.75rem !important; }
+    }
+    
+    @media (max-width: 767px) {
+      .card-header h4 { font-size: 1rem; }
+      .pricing-card-title { font-size: 1.75rem; }
+      .feature-list li { font-size: 0.8rem; }
+    }
+    
+    @media (max-width: 520px) {
+      .card-header h4 { font-size: 0.9rem; }
+      .pricing-card-title { font-size: 1.2rem; }
+      .feature-list li { font-size: 0.75rem; }
+      .filter-buttons .btn { font-size: 0.8rem !important; }
+    }
+    
+    @media (max-width: 450px) {
+      .card-header h4 { font-size: 0.85rem; }
+      .pricing-card-title { font-size: 1.1rem; }
+      .feature-list li { font-size: 0.7rem; }
+    }
+
+    /* Modal Styling */
+    .modal-elegant .modal-content {
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    
+    .modal-elegant .modal-header {
+      background: var(--light-bg);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    /* Progress Bar */
+    .progress-container {
+      width: 100%;
+      height: 4px;
+      background: var(--light-bg);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary-color), #6c8eff);
+      transition: width 0.5s ease;
+    }
+  </style>
 </head>
 
-<body class="d-flex flex-column ">
+<body class="d-flex flex-column bg-light">
   <main class="flex-shrink-0">
-    <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
-      <div class="container px-5">
-        <a class="navbar-brand" href="https://momenin.my.id/katalog"><span class="fw-bolder text-primary"><img class="logo-img"
-              style="max-width: 50px;" src="../assets/logoku.png" alt="..." /></span></a>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm">
+      <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="https://momenin.my.id/katalog">
+          <span class="fw-bolder text-primary">
+            <img class="logo-img" style="max-width: 50px;" src="../assets/logoku.png" alt="Momenin Logo" />
+          </span>
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
-            class="navbar-toggler-icon"></span></button>
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          
+          <!-- Navigation content here -->
         </div>
       </div>
     </nav>
+
+    <!-- Pricing Section -->
     <section class="py-5">
-      <div class="container px-5 mb-5 pricing-container">
-        <div class="row row-cols-2 row-cols-lg-4 g-4 mb-3 text-center paketan">
-          <!-- Card 1 -->
+      <div class="container px-4 px-lg-5 mb-5">
+        <div class="text-center mb-5 fade-in">
+          <h1 class="display-5 fw-bold mb-3">Pilihan Paket Undangan</h1>
+          <p class="lead text-muted">Temukan paket yang sesuai dengan kebutuhan spesial hari bahagia Anda</p>
+        </div>
+        
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5 text-center">
+          <!-- Card 1: Murmer -->
           <div class="col">
-            <div class="card mb-4 rounded-3 shadow-sm border-success">
-              <div class="card-header py-3 text-bg-success border-success">
-                <h4 class="my-0 fw-normal">Murmer</h4>
+            <div class="pricing-card card shadow-lg border-success card-hover">
+              <div class="card-header py-4 text-bg-success">
+                <h4 class="my-0 fw-bold">Murmer</h4>
               </div>
-              <div class="card-body">
-                <h1 class="card-title pricing-card-title"><s class=" text-danger">Rp. 20.000</s> <br>
-                    Rp. 15.000</h1>
-                <ul class="list-unstyled mt-3 mb-4 feature-list">
+              <div class="card-body p-4">
+                <h1 class="card-title pricing-card-title">
+                  <s class="text-danger opacity-75">Rp. 20.000</s>
+                  <div class="text-success">Rp. 15.000</div>
+                </h1>
+                <ul class="list-unstyled mt-4 mb-4 feature-list">
                   <li>Masa Aktif 5 bulan</li>
                   <li>Gratis konsultasi</li>
-                  <li class="cross">Nama tamu undangan*</li>
-                  <li class="cross">Komentar*</li>
+                  <li class="cross">Nama tamu undangan</li>
+                  <li class="cross">Komentar & Ucapan</li>
                 </ul>
+                <a href="https://wa.me/6285262658655?text=Halo%20kak,%20saya%20minat%20paket%20Murmer" 
+                   class="btn btn-success btn-elegant w-100" target="_blank">
+                  <i class="fab fa-whatsapp me-2"></i>Pesan Sekarang
+                </a>
               </div>
             </div>
           </div>
 
-          <!-- Card 2 -->
+          <!-- Card 2: Medium -->
           <div class="col">
-            <div class="card mb-4 rounded-3 shadow-sm border-primary">
-              <div class="card-header py-3 text-bg-primary border-primary">
-                <h4 class="my-0 fw-normal">Medium</h4>
+            <div class="pricing-card card shadow-lg border-primary card-hover">
+              <div class="card-header py-4 text-bg-primary">
+                <h4 class="my-0 fw-bold">Medium</h4>
               </div>
-              <div class="card-body">
+              <div class="card-body p-4">
                 <h1 class="card-title pricing-card-title">Rp. 20.000</h1>
-                <ul class="list-unstyled mt-3 mb-4 feature-list">
+                <ul class="list-unstyled mt-4 mb-4 feature-list">
                   <li>Masa Aktif 5 bulan</li>
                   <li>Gratis konsultasi</li>
                   <li>Nama tamu undangan</li>
-                  <li class="cross">Komentar*</li>
+                  <li class="cross">Komentar & Ucapan</li>
                 </ul>
+                <a href="https://wa.me/6285262658655?text=Halo%20kak,%20saya%20minat%20paket%20Medium" 
+                   class="btn btn-primary btn-elegant w-100" target="_blank">
+                  <i class="fab fa-whatsapp me-2"></i>Pesan Sekarang
+                </a>
               </div>
             </div>
           </div>
 
-          <!-- Card 3 -->
+          <!-- Card 3: Enterprise -->
           <div class="col">
-            <div class="card mb-4 rounded-3 shadow-sm border-danger">
-              <div class="card-header py-3 text-bg-danger border-danger">
-                <h4 class="my-0 fw-normal">Enterprise</h4>
+            <div class="pricing-card card shadow-lg border-danger card-hover">
+              <div class="card-header py-4 text-bg-danger">
+                <h4 class="my-0 fw-bold">Enterprise</h4>
               </div>
-              <div class="card-body">
+              <div class="card-body p-4">
                 <h1 class="card-title pricing-card-title">Rp. 25.000</h1>
-                <ul class="list-unstyled mt-3 mb-4 feature-list">
+                <ul class="list-unstyled mt-4 mb-4 feature-list">
                   <li>Masa Aktif 5 bulan</li>
                   <li>Gratis konsultasi</li>
                   <li>Nama tamu undangan</li>
-                  <li>Komentar</li>
+                  <li>Komentar & Ucapan</li>
                 </ul>
+                <a href="https://wa.me/6285262658655?text=Halo%20kak,%20saya%20minat%20paket%20Enterprise" 
+                   class="btn btn-danger btn-elegant w-100" target="_blank">
+                  <i class="fab fa-whatsapp me-2"></i>Pesan Sekarang
+                </a>
               </div>
             </div>
           </div>
 
-          <!-- Card 4 -->
+          <!-- Card 4: Couple -->
           <div class="col">
-            <div class="card mb-4 rounded-3 shadow-sm border-warning">
-              <div class="card-header py-3 text-bg-warning border-warning">
-                <h4 class="my-0 fw-normal">Couple</h4>
+            <div class="pricing-card card shadow-lg border-warning card-hover">
+              <div class="card-header py-4 text-bg-warning">
+                <h4 class="my-0 fw-bold">Couple</h4>
               </div>
-              <div class="card-body">
-                <h1 class="card-title pricing-card-title">Disc. 10.000</h1>
-                <ul class="list-unstyled mt-3 mb-4 feature-list">
+              <div class="card-body p-4">
+                <h1 class="card-title pricing-card-title text-dark">Disc. 10.000</h1>
+                <ul class="list-unstyled mt-4 mb-4 feature-list">
                   <li>Fitur sesuai paket</li>
-                  <li>Desain sama</li>
+                  <li>Desain sama untuk kedua mempelai</li>
+                  <li>Hemat untuk pasangan</li>
                 </ul>
+                <a href="https://wa.me/6285262658655?text=Halo%20kak,%20saya%20minat%20paket%20Couple" 
+                   class="btn btn-warning text-dark btn-elegant w-100" target="_blank">
+                  <i class="fab fa-whatsapp me-2"></i>Pesan Sekarang
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="container px-5 mb-5">
+
+      <!-- Filter Section -->
+      <div class="container px-4 px-lg-5 mb-5">
+        <div class="text-center mb-4">
+          <h2 class="h3 fw-bold">Temukan Tema Favorit Anda</h2>
+          <p class="text-muted">Filter berdasarkan kategori tema yang tersedia</p>
+        </div>
+        
         <div class="row row-cols-2 row-cols-md-4 g-3 filter-buttons">
+          <!-- Filter buttons -->
           <div class="col d-grid">
-            <button class="btn btn-outline-primary" onclick="filterKatalog('spesial', this)">Spesial Foto</button>
+            <button class="btn btn-outline-primary active" onclick="filterKatalog('spesial', this)">Spesial Foto</button>
           </div>
           <div class="col d-grid">
-            <button class="btn btn-outline-primary" onclick="filterKatalog('spesial_lineart', this)">Spesial Tanpa
-              Foto</button>
+            <button class="btn btn-outline-primary" onclick="filterKatalog('spesial_lineart', this)">Spesial Lineart</button>
           </div>
           <div class="col d-grid">
-            <button class="btn btn-outline-primary" onclick="filterKatalog('luxury', this)">Minimalist Luxury
-              Foto</button>
+            <button class="btn btn-outline-primary" onclick="filterKatalog('luxury', this)">Luxury Foto</button>
           </div>
           <div class="col d-grid">
-            <button class="btn btn-outline-primary" onclick="filterKatalog('luxury_lineart', this)">Minimalist
-              Luxury Tanpa Foto</button>
+            <button class="btn btn-outline-primary" onclick="filterKatalog('luxury_lineart', this)">Luxury Lineart</button>
           </div>
           <div class="col d-grid">
-            <button class="btn btn-outline-primary" onclick="filterKatalog('premium', this)">Premium Vintage
-              Foto</button>
+            <button class="btn btn-outline-primary" onclick="filterKatalog('premium', this)">Premium Vintage</button>
           </div>
           <div class="col d-grid">
-            <button class="btn btn-outline-primary" onclick="filterKatalog('premium_lineart', this)">Premium
-              Vintage Tanpa Foto</button>
+            <button class="btn btn-outline-primary" onclick="filterKatalog('premium_lineart', this)">Premium Lineart</button>
           </div>
           <div class="col d-grid">
             <button class="btn btn-outline-primary" onclick="filterKatalog('adat', this)">Adat Foto</button>
           </div>
           <div class="col d-grid">
-            <button class="btn btn-outline-primary" onclick="filterKatalog('adat_lineart', this)">Adat Tanpa
-              Foto</button>
+            <button class="btn btn-outline-primary" onclick="filterKatalog('adat_lineart', this)">Adat Lineart</button>
           </div>
         </div>
       </div>
-      <div class="container px-5 mb-5">
-        <!-- Catalog Items Container -->
-        <div class="row gx-4 gy-3 justify-content-center" id="katalog-container">
-          <!-- Items will be dynamically inserted here -->
+
+      <!-- Catalog Section -->
+      <div class="container px-4 px-lg-5 mb-5">
+        <div class="row g-4 justify-content-center" id="katalog-container">
+          <!-- Items akan dimuat secara dinamis -->
         </div>
       </div>
     </section>
   </main>
-  <!-- Bootstrap core JS-->
+
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Core theme JS-->
+  
+  <!-- Core JS -->
   <script src="js/scripts.js"></script>
+
+  <!-- Main Application Script -->
   <script>
+    // Katalog Data
     const katalogItems = [
-
-      //Pilihan Admin
-
-      // Spesial category (sudah ada index.html)
+      // Spesial category
       { category: "spesial", id: "01", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-01/index.html" },
+      { category: "spesial", id: "02", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-02/index.html" },
+      { category: "spesial", id: "03", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-03/index.html" },
+      { category: "spesial", id: "04", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-04/index.html" },
+      { category: "spesial", id: "05", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-05/index.html" },
+      { category: "spesial", id: "06", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-06/index.html" },
+      { category: "spesial", id: "07", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-07/index.html" },
+      { category: "spesial", id: "08", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-08/index.html" },
+      { category: "spesial", id: "09", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-09/index.html" },
+      { category: "spesial", id: "10", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-10/index.html" },
+{ category: "spesial", id: "01", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-01/index.html" },
       { category: "spesial", id: "02", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-02/index.html" },
       { category: "spesial", id: "03", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-03/index.html" },
       { category: "spesial", id: "04", demoLink: "https://momenin.my.id/datakatalog/spesial/spesial-04/index.html" },
@@ -460,14 +525,14 @@
 
 
       // Premium category (ditambahkan index.html)
-            { category: "premium", id: "01", demoLink: "https://mbrd.momenin.my.id/tema-premium/vintage-01/inv.punakawandigital.id/vintage-01.html" },
-            { category: "premium", id: "02", demoLink: "https://mbrd.momenin.my.id/tema-premium/vintage-02/inv.punakawandigital.id/vintage-02.html" },
-            { category: "premium", id: "03", demoLink: "https://mbrd.momenin.my.id/tema-premium/vintage-03/inv.punakawandigital.id/vintage-03.html" },
-            { category: "premium", id: "04", demoLink: "https://mbrd.momenin.my.id/tema-premium/vintage-04/inv.punakawandigital.id/vintage-04.html" },
-            { category: "premium", id: "05", demoLink: "https://mbrd.momenin.my.id/tema-premium/vintage-05/inv.punakawandigital.id/vintage-05.html" },
-            { category: "premium", id: "06", demoLink: "https://mbrd.momenin.my.id/tema-premium/vintage-06/inv.punakawandigital.id/vintage-06.html" },
-            { category: "premium", id: "07", demoLink: "https://mbrd.momenin.my.id/tema-premium/vintage-07/inv.punakawandigital.id/vintage-07.html" },
-            { category: "premium", id: "08", demoLink: "https://mbrd.momenin.my.id/tema-premium/vintage-08/inv.punakawandigital.id/vintage-08.html" },
+      { category: "premium", id: "01", demoLink: "https://mbrd.momenin.my.id/tema-premium/vintage-01/inv.punakawandigital.id/vintage-01.html" },
+      { category: "premium", id: "02", demoLink: "https://mbrd.momenin.my.id/tema-premium/vintage-02/inv.punakawandigital.id/vintage-02.html" },
+      { category: "premium", id: "03", demoLink: "https://mbrd.momenin.my.id/tema-premium/vintage-03/inv.punakawandigital.id/vintage-03.html" },
+      { category: "premium", id: "04", demoLink: "https://mbrd.momenin.my.id/tema-premium/vintage-04/inv.punakawandigital.id/vintage-04.html" },
+      { category: "premium", id: "05", demoLink: "https://mbrd.momenin.my.id/tema-premium/vintage-05/inv.punakawandigital.id/vintage-05.html" },
+      { category: "premium", id: "06", demoLink: "https://mbrd.momenin.my.id/tema-premium/vintage-06/inv.punakawandigital.id/vintage-06.html" },
+      { category: "premium", id: "07", demoLink: "https://mbrd.momenin.my.id/tema-premium/vintage-07/inv.punakawandigital.id/vintage-07.html" },
+      { category: "premium", id: "08", demoLink: "https://mbrd.momenin.my.id/tema-premium/vintage-08/inv.punakawandigital.id/vintage-08.html" },
 
       { category: "premium_lineart", id: "01", imageUrl: "https://punakawandigital.id/wp-content/uploads/2025/05/Premium-Vintage-01-1.webp", demoLink: "../datakatalog/premium/vintage-01-animasi/index.html" },
       { category: "premium_lineart", id: "02", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/11/Premium-Vintage-02-1.webp", demoLink: "../datakatalog/premium/vintage-02-animasi/index.html" },
@@ -502,245 +567,156 @@
       { category: "adat_lineart", id: "09", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/08/CHINESE-AN.webp", demoLink: "../datakatalog/adat/animasi-chinese/index.html" },
       { category: "adat_lineart", id: "10", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/08/TEMA-MELAYU-AN.webp", demoLink: "../datakatalog/adat/animasi-melayu/index.html" },
 
-      /*
-      { category: "adat", id: "11", imageUrl: "https://foreverr.net/wp-content/uploads/ar010-768x768.webp", demoLink: "https://foreverr.id/demo/ar010" },
-      { category: "adat", id: "12", imageUrl: "https://foreverr.net/wp-content/uploads/ar009-768x768.webp", demoLink: "https://foreverr.id/demo/ar009" },
-      { category: "adat", id: "13", imageUrl: "https://foreverr.net/wp-content/uploads/uw48-768x768.jpg", demoLink: "https://foreverr.id/demo/uw048" },
-      { category: "adat", id: "14", imageUrl: "https://foreverr.net/wp-content/uploads/uw47-768x768.jpg", demoLink: "https://foreverr.id/demo/uw047" },
-      { category: "adat", id: "15", imageUrl: "https://foreverr.net/wp-content/uploads/uw46-768x768.jpg", demoLink: "https://foreverr.id/demo/uw046" },
-      { category: "adat", id: "16", imageUrl: "https://foreverr.net/wp-content/uploads/uw44-768x768.jpg", demoLink: "https://foreverr.id/demo/uw044" },
-      { category: "adat", id: "17", imageUrl: "https://foreverr.net/wp-content/uploads/uw42-768x768.jpg", demoLink: "https://foreverr.id/demo/uw042" },
-      { category: "adat", id: "18", imageUrl: "https://foreverr.net/wp-content/uploads/uw40-768x768.jpg", demoLink: "https://foreverr.id/demo/uw040" },
-      { category: "adat", id: "19", imageUrl: "https://foreverr.net/wp-content/uploads/uw37-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw037" },
-      { category: "adat", id: "20", imageUrl: "https://foreverr.net/wp-content/uploads/uw35-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw035" },
-      { category: "adat", id: "21", imageUrl: "https://foreverr.net/wp-content/uploads/uw29-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw029" },
-      { category: "adat", id: "22", imageUrl: "https://foreverr.net/wp-content/uploads/uw28-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw028" },
-      { category: "adat", id: "23", imageUrl: "https://foreverr.net/wp-content/uploads/uw25-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw025" },
-      { category: "adat", id: "24", imageUrl: "https://foreverr.net/wp-content/uploads/uw24-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw024" },
-      { category: "adat", id: "25", imageUrl: "https://foreverr.net/wp-content/uploads/uw016-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw016" },
-      { category: "adat", id: "26", imageUrl: "https://foreverr.net/wp-content/uploads/uw012-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw012" },
-      { category: "adat", id: "27", imageUrl: "https://foreverr.net/wp-content/uploads/uw008-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw008" },
-      { category: "adat", id: "28", imageUrl: "https://foreverr.net/wp-content/uploads/005-768x768.jpg", demoLink: "https://foreverr.id/demo/uw005" },
-
-      // Luxury Art
-      { category: "luxury_++", id: "01", imageUrl: "https://foreverr.net/wp-content/uploads/MockTemplate-10-720x720.jpg", demoLink: "https://foreverr.id/demo/lx005", },
-      { category: "luxury_++", id: "02", imageUrl: "https://foreverr.net/wp-content/uploads/lx004-720x720.jpeg", demoLink: "https://foreverr.id/demo/lx004", },
-      { category: "luxury_++", id: "03", imageUrl: "https://foreverr.net/wp-content/uploads/lx003-720x720.jpeg", demoLink: "https://foreverr.id/demo/lx003", },
-      { category: "luxury_++", id: "04", imageUrl: "https://foreverr.net/wp-content/uploads/lx002-720x720.jpeg", demoLink: "https://foreverr.id/demo/lx002", },
-      { category: "luxury_++", id: "05", imageUrl: "https://foreverr.net/wp-content/uploads/lx001-720x720.jpeg", demoLink: "https://foreverr.id/demo/lx001", },
-      { category: "luxury_++", id: "06", imageUrl: "https://foreverr.net/wp-content/uploads/2025/04/ar-017-768x768.jpeg", demoLink: "http://foreverr.id/demo/ar017" },
-      { category: "luxury_++", id: "07", imageUrl: "https://foreverr.net/wp-content/uploads/2025/04/ar-016-768x768.jpeg", demoLink: "http://foreverr.id/demo/ar016" },
-      { category: "luxury_++", id: "08", imageUrl: "https://foreverr.net/wp-content/uploads/2025/04/ar-015-768x768.jpeg", demoLink: "http://foreverr.id/demo/ar015" },
-      { category: "luxury_++", id: "09", imageUrl: "https://foreverr.net/wp-content/uploads/2025/04/ar-014-768x768.jpeg", demoLink: "http://foreverr.id/demo/ar014" },
-      { category: "luxury_++", id: "10", imageUrl: "https://foreverr.net/wp-content/uploads/ar013-768x768.jpeg", demoLink: "http://foreverr.id/demo/ar013" },
-      { category: "luxury_++", id: "11", imageUrl: "https://foreverr.net/wp-content/uploads/ar007-768x768.webp", demoLink: "https://foreverr.id/demo/ar007" },
-      { category: "luxury_++", id: "12", imageUrl: "https://foreverr.net/wp-content/uploads/ar006-768x768.webp", demoLink: "https://foreverr.id/demo/ar006" },
-      { category: "luxury_++", id: "13", imageUrl: "https://foreverr.net/wp-content/uploads/ar005-768x768.webp", demoLink: "https://foreverr.id/demo/ar005" },
-      { category: "luxury_++", id: "14", imageUrl: "https://foreverr.net/wp-content/uploads/ar004-768x768.webp", demoLink: "https://foreverr.id/demo/ar004" },
-      { category: "luxury_++", id: "15", imageUrl: "https://foreverr.net/wp-content/uploads/ar003-768x768.webp", demoLink: "https://foreverr.id/demo/ar003" },
-      { category: "luxury_++", id: "16", imageUrl: "https://foreverr.net/wp-content/uploads/ar001-768x768.webp", demoLink: "https://foreverr.id/demo/ar001" },
-      { category: "luxury_++", id: "17", imageUrl: "https://foreverr.net/wp-content/uploads/ar012webp-768x768.jpg", demoLink: "http://foreverr.id/demo/ar012" },
-      { category: "luxury_++", id: "18", imageUrl: "https://foreverr.net/wp-content/uploads/MockTemplate-11-768x768.jpg", demoLink: "http://foreverr.id/demo/ar011" },
-      { category: "luxury_++", id: "19", imageUrl: "https://foreverr.net/wp-content/uploads/ar010-768x768.webp", demoLink: "http://foreverr.id/demo/ar010" },
-      { category: "luxury_++", id: "20", imageUrl: "https://foreverr.net/wp-content/uploads/ar009-768x768.webp", demoLink: "https://foreverr.id/demo/ar009" },
-      { category: "luxury_++", id: "21", imageUrl: "https://foreverr.net/wp-content/uploads/ar008-768x768.webp", demoLink: "https://foreverr.id/demo/ar008" },
-
-      // Wedding Floral
-      // Wedding Floral
-      { category: "wedding_floral", id: "01", imageUrl: "https://foreverr.net/wp-content/uploads/uw48-768x768.jpg", demoLink: "https://foreverr.id/demo/uw048" },
-      { category: "wedding_floral", id: "02", imageUrl: "https://foreverr.net/wp-content/uploads/uw47-768x768.jpg", demoLink: "https://foreverr.id/demo/uw047" },
-      { category: "wedding_floral", id: "03", imageUrl: "https://foreverr.net/wp-content/uploads/uw46-768x768.jpg", demoLink: "https://foreverr.id/demo/uw046" },
-      { category: "wedding_floral", id: "04", imageUrl: "https://foreverr.net/wp-content/uploads/uw45-768x768.jpg", demoLink: "https://foreverr.id/demo/uw045" },
-      { category: "wedding_floral", id: "05", imageUrl: "https://foreverr.net/wp-content/uploads/uw44-768x768.jpg", demoLink: "https://foreverr.id/demo/uw044" },
-      { category: "wedding_floral", id: "06", imageUrl: "https://foreverr.net/wp-content/uploads/uw43-768x768.jpg", demoLink: "https://foreverr.id/demo/uw043" },
-      { category: "wedding_floral", id: "07", imageUrl: "https://foreverr.net/wp-content/uploads/uw42-768x768.jpg", demoLink: "https://foreverr.id/demo/uw042" },
-      { category: "wedding_floral", id: "08", imageUrl: "https://foreverr.net/wp-content/uploads/uw41-768x768.jpg", demoLink: "https://foreverr.id/demo/uw041" },
-      { category: "wedding_floral", id: "09", imageUrl: "https://foreverr.net/wp-content/uploads/uw40-768x768.jpg", demoLink: "https://foreverr.id/demo/uw040" },
-      { category: "wedding_floral", id: "10", imageUrl: "https://foreverr.net/wp-content/uploads/uw39-768x768.jpg", demoLink: "https://foreverr.id/demo/uw039" },
-      { category: "wedding_floral", id: "11", imageUrl: "https://foreverr.net/wp-content/uploads/uw38-768x768.jpg", demoLink: "https://foreverr.id/demo/uw038" },
-      { category: "wedding_floral", id: "12", imageUrl: "https://foreverr.net/wp-content/uploads/uw37-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw037" },
-      { category: "wedding_floral", id: "13", imageUrl: "https://foreverr.net/wp-content/uploads/uw30-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw030" },
-      { category: "wedding_floral", id: "14", imageUrl: "https://foreverr.net/wp-content/uploads/uw29-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw029" },
-      { category: "wedding_floral", id: "15", imageUrl: "https://foreverr.net/wp-content/uploads/uw28-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw028" },
-      { category: "wedding_floral", id: "16", imageUrl: "https://foreverr.net/wp-content/uploads/uw27-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw027" },
-      { category: "wedding_floral", id: "17", imageUrl: "https://foreverr.net/wp-content/uploads/uw26-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw026" },
-      { category: "wedding_floral", id: "18", imageUrl: "https://foreverr.net/wp-content/uploads/uw25-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw025" },
-      { category: "wedding_floral", id: "19", imageUrl: "https://foreverr.net/wp-content/uploads/uw24-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw024" },
-      { category: "wedding_floral", id: "20", imageUrl: "https://foreverr.net/wp-content/uploads/uw23-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw023" },
-      { category: "wedding_floral", id: "21", imageUrl: "https://foreverr.net/wp-content/uploads/uw22-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw022" },
-      { category: "wedding_floral", id: "22", imageUrl: "https://foreverr.net/wp-content/uploads/uw021-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw021" },
-      { category: "wedding_floral", id: "23", imageUrl: "https://foreverr.net/wp-content/uploads/uw020-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw020" },
-      { category: "wedding_floral", id: "24", imageUrl: "https://foreverr.net/wp-content/uploads/uw019-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw019" },
-      { category: "wedding_floral", id: "25", imageUrl: "https://foreverr.net/wp-content/uploads/uw018-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw018" },
-      { category: "wedding_floral", id: "26", imageUrl: "https://foreverr.net/wp-content/uploads/uw017-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw017" },
-      { category: "wedding_floral", id: "27", imageUrl: "https://foreverr.net/wp-content/uploads/uw016-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw016" },
-      { category: "wedding_floral", id: "28", imageUrl: "https://foreverr.net/wp-content/uploads/uw015-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw015" },
-      { category: "wedding_floral", id: "29", imageUrl: "https://foreverr.net/wp-content/uploads/uw014-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw014" },
-      { category: "wedding_floral", id: "30", imageUrl: "https://foreverr.net/wp-content/uploads/uw013-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw013" },
-      { category: "wedding_floral", id: "31", imageUrl: "https://foreverr.net/wp-content/uploads/uw012-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw012" },
-      { category: "wedding_floral", id: "32", imageUrl: "https://foreverr.net/wp-content/uploads/uw011-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw011" },
-      { category: "wedding_floral", id: "33", imageUrl: "https://foreverr.net/wp-content/uploads/uw010-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw010" },
-      { category: "wedding_floral", id: "34", imageUrl: "https://foreverr.net/wp-content/uploads/uw009-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw009" },
-      { category: "wedding_floral", id: "35", imageUrl: "https://foreverr.net/wp-content/uploads/uw008-768x768.jpeg", demoLink: "https://foreverr.id/demo/uw008" },
-      { category: "wedding_floral", id: "36", imageUrl: "https://foreverr.net/wp-content/uploads/007-768x768.jpg", demoLink: "https://foreverr.id/demo/uw007" },
-      { category: "wedding_floral", id: "37", imageUrl: "https://foreverr.net/wp-content/uploads/006-768x768.jpg", demoLink: "https://foreverr.id/demo/uw006" },
-      { category: "wedding_floral", id: "38", imageUrl: "https://foreverr.net/wp-content/uploads/005-768x768.jpg", demoLink: "https://foreverr.id/demo/uw005" },
-      { category: "wedding_floral", id: "39", imageUrl: "https://foreverr.net/wp-content/uploads/004-768x768.jpg", demoLink: "https://foreverr.id/demo/uw004" },
-      { category: "wedding_floral", id: "40", imageUrl: "https://foreverr.net/wp-content/uploads/003-768x768.jpg", demoLink: "https://foreverr.id/demo/uw003" },
-      { category: "wedding_floral", id: "41", imageUrl: "https://foreverr.net/wp-content/uploads/002-768x768.jpg", demoLink: "https://foreverr.id/demo/uw002" },
-      { category: "wedding_floral", id: "42", imageUrl: "https://foreverr.net/wp-content/uploads/001-1-768x768.jpg", demoLink: "https://foreverr.id/demo/uw001" }
-    */
     ];
 
+    // Konfigurasi
     const baseImageUrl = "../assets/";
     const container = document.getElementById("katalog-container");
 
+    // Helper Functions
     function formatCategoryName(category) {
       const nameMap = {
         'spesial_lineart': 'Spesial Lineart',
         'luxury_lineart': 'Luxury Lineart',
         'premium_lineart': 'Premium Lineart',
-        'adat_lineart': 'Adat Lineart'
-        //'luxury_++': 'Luxury ++',
-        //'wedding_floral': 'Wedding Floral',
-        // Add other special cases if needed
+        'adat_lineart': 'Adat Lineart',
+        'spesial': 'Spesial',
+        'luxury': 'Luxury',
+        'premium': 'Premium',
+        'adat': 'Adat'
       };
-
-      return nameMap[category] ||
-        category.charAt(0).toUpperCase() + category.slice(1);
+      
+      return nameMap[category] || category.charAt(0).toUpperCase() + category.slice(1);
     }
 
     function generateCard(item) {
-      // Generate both webp and png file names
       const webpFile = item.imageUrl ? item.imageUrl : `${baseImageUrl}${item.category.toUpperCase()}-${item.id}.webp`;
       const pngFile = item.imageUrl ? item.imageUrl.replace('.webp', '.png') : `${baseImageUrl}${item.category.toUpperCase()}-${item.id}.png`;
-
+      
       const formattedCategory = formatCategoryName(item.category);
       const title = `${formattedCategory} ${item.id}`;
+      const isLineart = item.category.includes('_lineart');
+      const price = isLineart ? '<s class="text-danger opacity-75">Rp. 20.000</s> Rp. 15.000' : '<s class="text-danger opacity-75">Rp. 20.000</s> Rp. 15.000';
 
       return `
-    <div class="col-md-6 col-lg-3 katalog-item" data-category="${item.category}">
-      <div class="card shadow rounded-4 border-0 position-relative">
-        <picture>
-          <source srcset="${webpFile}" type="image/webp">
-          <source srcset="${pngFile}" type="image/png"> 
-          <img class="card-img-top" src="${pngFile}" alt="${title}" loading="lazy">
-        </picture>
-        <div class="position-absolute top-0 start-0 bg-danger text-white px-2 py-1 small fw-bold pulse-animation">Diskon !</div>
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title fw-bold">${title}</h5>
-          <p class="card-text flex-grow-1">
-            ${['adat_lineart', 'premium_lineart', 'luxury_lineart', 'spesial_lineart'].includes(item.category)
-          ? '<span class="fw-bold text-dark"><s class=" text-danger">Rp. 20.000</s> Rp. 15.000</span>'
-          : '<span class="fw-bold text-dark"><s class=" text-danger">Rp. 20.000</s> Rp. 15.000</span>'
-        }
-          </p>
-          <div class="d-flex justify-content-between align-items-center gap-2 mt-auto">
-            <a href="#" class="btn btn-outline-primary flex-grow-1 lihat-demo-btn" data-demo-link="${item.demoLink}" data-bs-toggle="modal" data-title="${title}" data-bs-target="#demoModal">Lihat Demo</a>
-            <a href="https://wa.me/6285262658655?text=Halo%20kak.%0ASepertinya%20saya%20minat%20untuk%20desain%20ini%20%3A%20${title}" target="_blank" class="btn btn-success px-3 py-2 pulse-animation"><i class="fab fa-whatsapp"></i></a>
+        <div class="col-md-6 col-lg-4 col-xl-3 katalog-item fade-in" data-category="${item.category}">
+          <div class="card shadow border-0 rounded-4 overflow-hidden card-hover h-100">
+            <div class="position-relative overflow-hidden">
+              <picture>
+                <source srcset="${webpFile}" type="image/webp">
+                <source srcset="${pngFile}" type="image/png">
+                <img class="card-img-top" src="${pngFile}" alt="${title}" loading="lazy">
+              </picture>
+              <div class="discount-badge pulse-gentle">Diskon!</div>
+            </div>
+            <div class="card-body d-flex flex-column p-4">
+              <h5 class="card-title fw-bold mb-2">${title}</h5>
+              <p class="card-text mb-3 text-muted">
+                Tema ${formattedCategory.toLowerCase()} yang elegan untuk hari spesial Anda
+              </p>
+              <div class="mt-auto">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <span class="h5 fw-bold text-dark">${price}</span>
+                  <span class="badge bg-primary bg-opacity-10 text-primary">Populer</span>
+                </div>
+                <div class="d-flex gap-2">
+                  <a href="#" class="btn btn-outline-primary flex-grow-1 lihat-demo-btn" 
+                     data-demo-link="${item.demoLink}" 
+                     data-title="${title}"
+                     data-bs-toggle="modal" 
+                     data-bs-target="#demoModal">
+                    <i class="fas fa-eye me-2"></i>Demo
+                  </a>
+                  <a href="https://wa.me/6285262658655?text=Halo%20kak.%0ASepertinya%20saya%20minat%20untuk%20desain%20ini%20%3A%20${encodeURIComponent(title)}" 
+                     target="_blank" 
+                     class="btn btn-success pulse-gentle px-3">
+                    <i class="fab fa-whatsapp"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>`;
-
+        </div>`;
     }
 
-    // Load all catalog items
-    katalogItems.forEach(item => {
-      container.insertAdjacentHTML("beforeend", generateCard(item));
-    });
-
-    function capitalize(str) {
-      return str.charAt(0).toUpperCase() + str.slice(1);
+    // Initialize Catalog
+    function initializeCatalog() {
+      katalogItems.forEach(item => {
+        container.insertAdjacentHTML("beforeend", generateCard(item));
+      });
+      
+      // Set active filter button
+      const firstButton = document.querySelector('.filter-buttons .btn');
+      if (firstButton) {
+        filterKatalog('spesial', firstButton);
+      }
+      
+      // Add event listeners for demo buttons
+      setupDemoButtons();
     }
 
+    // Filter Function
     function filterKatalog(category, clickedButton) {
       const items = document.querySelectorAll('.katalog-item');
-
+      
       items.forEach(item => {
         const itemCategory = item.getAttribute('data-category');
-        if (category === 'all' || itemCategory === category) {
-          item.style.display = 'block';
-        } else {
-          item.style.display = 'none';
-        }
+        item.style.display = (category === 'all' || itemCategory === category) ? 'block' : 'none';
       });
 
       // Update active button
-      const buttons = document.querySelectorAll('.filter-buttons .btn');
-      buttons.forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.filter-buttons .btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
       clickedButton.classList.add('active');
     }
 
-    // Initialize with 'All' filter active
-    window.onload = function () {
-      const btnAll = document.querySelector('.filter-buttons .btn');
-      filterKatalog('all', btnAll);
-    };
-
-  </script>
-  <script>
-    document.querySelectorAll('.lihat-demo-btn').forEach(button => {
-      button.addEventListener('click', function () {
-        const link = this.getAttribute('data-demo-link');
-        document.getElementById('demoIframe').src = link;
+    // Setup Demo Buttons
+    function setupDemoButtons() {
+      document.addEventListener('click', function(e) {
+        if (e.target.closest('.lihat-demo-btn')) {
+          const button = e.target.closest('.lihat-demo-btn');
+          const demoLink = button.getAttribute('data-demo-link');
+          const title = button.getAttribute('data-title');
+          
+          // Update iframe
+          document.getElementById('demoIframe').src = demoLink;
+          
+          // Update WhatsApp link
+          const whatsappBtn = document.querySelector('#demoModal .btn-success');
+          whatsappBtn.href = `https://wa.me/6285262658655?text=Halo%20kak.%0ASaya%20baru%20melihat%20demo%20${encodeURIComponent(title)}%20dan%20ingin%20bertanya%20lebih%20lanjut`;
+        }
       });
-    });
+    }
 
-    // Kosongkan iframe saat modal ditutup agar tidak tetap memutar di background
-    const demoModal = document.getElementById('demoModal');
-    demoModal.addEventListener('hidden.bs.modal', function () {
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', initializeCatalog);
+
+    // Clean up iframe when modal closes
+    document.getElementById('demoModal').addEventListener('hidden.bs.modal', function() {
       document.getElementById('demoIframe').src = '';
     });
   </script>
-  <!-- Modal Global -->
-  <div class="modal fade" id="demoModal" tabindex="-1" aria-labelledby="demoModalLabel" aria-hidden="true">
+
+  <!-- Demo Modal -->
+  <div class="modal fade modal-elegant" id="demoModal" tabindex="-1" aria-labelledby="demoModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
       <div class="modal-content">
         <div class="modal-header">
-          <a type="button" class="btn btn-success" href="#">
-            <i class="fab fa-whatsapp"></i> Pesan sekarang
-          </a>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+          <h5 class="modal-title">Demo Tema</h5>
+          <div class="d-flex gap-2">
+            <a href="#" class="btn btn-success btn-sm" id="modalWhatsappBtn" target="_blank">
+              <i class="fab fa-whatsapp me-1"></i> Pesan via WhatsApp
+            </a>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
         </div>
         <div class="modal-body p-0">
-          <iframe id="demoIframe" src="" width="100%" height="100%" style="min-height: 650px;" frameborder="0"
-            onload="hideProgressBar()"></iframe>
+          <iframe id="demoIframe" src="" width="100%" height="100%" style="border: none;" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
     </div>
   </div>
-  <script>
-    // Simulasi progress (bisa diganti dengan event loading asli)
-    //let progress = 0;
-    //const progressBar = document.getElementById("progress-bar");
-    //const interval = setInterval(() => {
-    //  progress += 10;
-    //  progressBar.style.width = progress + "%";
-    //  if (progress >= 100) clearInterval(interval);
-    //}, 300);
 
-    //function hideProgressBar() {
-    //  document.querySelector(".progress-container").style.display = "none";
-    //}
-    // Event delegation untuk tombol "Lihat Demo"
-    document.addEventListener('click', function (e) {
-      if (e.target.classList.contains('lihat-demo-btn')) {
-        const demoLink = e.target.getAttribute('data-demo-link');
-        const title = e.target.getAttribute('data-title');
-
-        document.getElementById('demoIframe').src = demoLink;
-
-        const whatsappBtn = document.querySelector('#demoModal .btn-success');
-        whatsappBtn.href = `https://wa.me/6285262658655?text=Halo%20kak.%0ASepertinya%20saya%20minat%20untuk%20desain%20ini%20%3A%20${encodeURIComponent(title)}`;
-      }
-    });
-
-    // Reset iframe saat modal ditutup
-    document.getElementById('demoModal').addEventListener('hidden.bs.modal', function () {
-      document.getElementById('demoIframe').src = '';
-    });
-  </script>
 </body>
-
 </html>

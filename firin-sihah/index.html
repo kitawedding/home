@@ -3443,83 +3443,80 @@
 									<!-- Wishes will be loaded here -->
 								</div>
 								<script>
-									// Google Apps Script Web App URL
-									const scriptUrl = 'https://script.google.com/macros/s/AKfycby9JFZL6fx5bF62GQFuciKmRVcbWfpnotpq46JDpZ7k1GJBGxnV-HrJt25HC3QaukSh/exec';
+									// CONFIG: Ganti dengan data dari Settings > API Supabase Anda
+        const SB_URL = 'https://occvvlzeynsjcgqqllky.supabase.co';
+        const SB_KEY = 'sb_publishable_2WD5XQaU228TsA-SiafWbQ_K2PHbRG4'; 
+        const supabase = supabase.createClient(SB_URL, SB_KEY);
 
-									document.addEventListener('DOMContentLoaded', function () {
-										// Load existing wishes when page loads
-										loadWishes();
+        // 2. DETEKSI SLUG (rahmad-ayu)
+        // Jika URL: momenin.my.id/rahmad-ayu?to=andin
+        // path.split('/') akan mengambil "rahmad-ayu" dan mengabaikan "?to=andin"
+        const path = window.location.pathname;
+        const currentSlug = path.split('/').filter(Boolean).pop() || 'umum';
 
-										// Handle form submission
-										document.getElementById('wishForm').addEventListener('submit', function (e) {
-											e.preventDefault();
+        document.addEventListener('DOMContentLoaded', () => {
+            loadWishes();
 
-											const name = document.getElementById('name').value;
-											const message = document.getElementById('message').value;
-											const attendance = document.getElementById('attendance').value;
+            document.getElementById('wishForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('submitBtn');
+                btn.disabled = true;
+                btn.innerText = 'MENGIRIM...';
 
-											// Send data to Google Sheets
-											fetch(scriptUrl, {
-												method: 'POST',
-												mode: 'no-cors',
-												headers: {
-													'Content-Type': 'application/json',
-												},
-												body: JSON.stringify({
-													action: 'add',
-													name: name,
-													message: message,
-													attendance: attendance
-												})
-											})
-												.then(() => {
-													// Clear form
-													document.getElementById('wishForm').reset();
+                const name = document.getElementById('name').value;
+                const message = document.getElementById('message').value;
+                const attendance = document.getElementById('attendance').value;
 
-													// Reload wishes
-													loadWishes();
-												})
-												.catch(error => {
-													console.error('Error:', error);
-												});
-										});
-									});
+                // Simpan ke database dengan slug pasangan
+                const { error } = await supabase
+                    .from('comments')
+                    .insert([{ 
+                        slug: currentSlug, 
+                        name: name, 
+                        message: message, 
+                        attendance: attendance 
+                    }]);
 
-									function loadWishes() {
-										// Get wishes from Google Sheets
-										fetch(`${scriptUrl}?action=get`)
-											.then(response => response.json())
-											.then(data => {
-												// Update counts
-												document.getElementById('comment-count').textContent = data.length;
-												document.getElementById('attend-count').textContent =
-													data.filter(item => item.attendance === 'Hadir').length;
-												document.getElementById('not-attend-count').textContent =
-													data.filter(item => item.attendance === 'Tidak Hadir').length;
+                if (error) {
+                    alert('Gagal mengirim pesan');
+                    console.error(error);
+                } else {
+                    document.getElementById('wishForm').reset();
+                    loadWishes();
+                }
+                btn.disabled = false;
+                btn.innerText = 'KIRIM UCAPAN';
+            });
+        });
 
-												// Display wishes
-												const container = document.getElementById('wishesContainer');
-												container.innerHTML = '';
+        async function loadWishes() {
+            // Ambil data yang slug-nya SAMA dengan folder URL saat ini
+            const { data, error } = await supabase
+                .from('comments')
+                .select('*')
+                .eq('slug', currentSlug)
+                .order('created_at', { ascending: false });
 
-												data.reverse().forEach(wish => {
-													const wishElement = document.createElement('div');
-													wishElement.className = 'wish';
+            if (error) return;
 
-													// Determine icon based on attendance
-													const attendanceIcon = wish.attendance === 'Hadir'
-														? '<span class="attendance-icon" style="background-color: #4CAF50">✓</span>'
-														: '<span class="attendance-icon" style="background-color: #f44336">✗</span>';
+            // Update Angka Statistik
+            document.getElementById('comment-count').textContent = data.length;
+            document.getElementById('attend-count').textContent = data.filter(i => i.attendance === 'Hadir').length;
+            document.getElementById('not-attend-count').textContent = data.filter(i => i.attendance !== 'Hadir').length;
 
-													wishElement.innerHTML = `
-														<div class="wish-name wish-attendance" style="font-color: white">${wish.name} ${attendanceIcon}</div>
-														<div class="wish-message" style="font-color: white">${wish.message}</div>`;
-													container.appendChild(wishElement);
-												});
-											})
-											.catch(error => {
-												console.error('Error:', error);
-											});
-									}
+            const container = document.getElementById('wishesContainer');
+            container.innerHTML = data.map(wish => `
+                <div class="wish">
+                    <div class="wish-name">
+                        <span>${wish.name}</span>
+                        <span class="attendance-icon" style="background:${wish.attendance === 'Hadir' ? '#4CAF50' : '#f44336'}">
+                            ${wish.attendance === 'Hadir' ? '✓' : '✗'}
+                        </span>
+                    </div>
+                    <div class="wish-message">${wish.message}</div>
+                </div>
+            `).join('');
+        }
 								</script>
 							</div>
 						</div>

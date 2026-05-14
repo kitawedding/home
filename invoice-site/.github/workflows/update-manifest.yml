@@ -1,0 +1,61 @@
+name: Update Invoice Manifest
+
+on:
+  push:
+    paths:
+      - 'invoice/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate images.json
+        run: |
+          echo "Scanning invoice folder..."
+          files=$(find invoice/ -type f \( \
+            -iname "*.jpg" -o -iname "*.jpeg" \
+            -o -iname "*.png" -o -iname "*.gif" \
+            -o -iname "*.webp" -o -iname "*.avif" \
+            -o -iname "*.pdf" \
+          \) | sort)
+
+          echo '{"images":[' > images.json
+          first=true
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            filename=$(basename "$file")
+            name="${filename%.*}"
+            ext="${filename##*.}"
+            size=$(stat -c%s "$file" 2>/dev/null || echo 0)
+            modified=$(git log -1 --format="%ai" -- "$file" 2>/dev/null || date -Iseconds)
+            if [ "$first" = true ]; then
+              first=false
+            else
+              echo ',' >> images.json
+            fi
+            printf '{"path":"%s","filename":"%s","name":"%s","ext":"%s","size":%d,"modified":"%s"}' \
+              "$file" "$filename" "$name" "$ext" "$size" "$modified" >> images.json
+          done <<< "$files"
+          echo ']}' >> images.json
+
+          echo "Generated images.json:"
+          cat images.json
+
+      - name: Commit manifest
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add images.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update invoice manifest [skip ci]"
+            git push
+          fi

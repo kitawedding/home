@@ -1,0 +1,5 @@
+# Invoice Folder
+
+Letakkan file invoice di sini (JPG, PNG, WEBP, PDF, dll).
+
+Setiap kali file baru di-push ke folder ini, GitHub Actions akan otomatis memperbarui `images.json` dan website akan menampilkan invoice terbaru.

@@ -563,7 +563,7 @@
       const res = await fetch(MANIFEST + '?t=' + Date.now());
       if (!res.ok) throw new Error('Gagal memuat manifest');
       const data = await res.json();
-      allImages = data.images || [];
+      allImages = (data.images || []).sort((a, b) => parseDateFromName(b.name) - parseDateFromName(a.name));
       buildFilters();
       applyFilter();
       document.getElementById('totalCount').textContent = allImages.length;
@@ -636,12 +636,13 @@
 
       const body = document.createElement('div');
       body.className = 'card-body';
+      const clientName = parsedClientName(img.name);
+      const dateLabel  = parsedDateLabel(img.name);
       body.innerHTML = `
-        <div class="card-name" title="${img.filename}">${img.name}</div>
+        <div class="card-name" title="${img.filename}">${clientName || img.name}</div>
         <div class="card-meta">
           <span class="badge">${img.ext.toUpperCase()}</span>
-          <span>${formatSize(img.size)}</span>
-          <span>${formatDate(img.modified)}</span>
+          ${dateLabel ? `<span>📅 ${dateLabel}</span>` : `<span>${formatSize(img.size)}</span>`}
         </div>`;
 
       card.appendChild(thumbWrap);
@@ -659,6 +660,27 @@
       </svg>
       <span>${ext}</span>
     </div>`;
+  }
+
+  function parseDateFromName(name) {
+    // Format: DD-M-YYYY atau DD-MM-YYYY (misal: 14-5-2026 rifai)
+    const match = name.match(/^(\d{1,2})-(\d{1,2})-(\d{4})/);
+    if (!match) return 0;
+    const [, d, m, y] = match;
+    return new Date(+y, +m - 1, +d).getTime();
+  }
+
+  function parsedDateLabel(name) {
+    const match = name.match(/^(\d{1,2})-(\d{1,2})-(\d{4})/);
+    if (!match) return '';
+    const [, d, m, y] = match;
+    return new Date(+y, +m - 1, +d).toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric' });
+  }
+
+  function parsedClientName(name) {
+    // Ambil bagian setelah "DD-M-YYYY " → nama pengantin/reseller
+    const match = name.match(/^\d{1,2}-\d{1,2}-\d{4}\s+(.+)$/);
+    return match ? match[1] : name;
   }
 
   function formatSize(b) {

@@ -1,0 +1,63 @@
+{
+  "wedding": {
+    "title": "The Wedding of",
+    "groom": {
+      "nickname": "Firin",
+      "fullName": "Firin Alamsyah, S.T.",
+      "parents": "Putra dari Bapak Ahmad & Ibu Siti",
+      "photo": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=500&q=80"
+    },
+    "bride": {
+      "nickname": "Sihah",
+      "fullName": "Sihah Nurul Fuadah, S.E.",
+      "parents": "Putri dari Bapak Budi & Ibu Aminah",
+      "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=500&q=80"
+    },
+    "initials": "FS",
+    "dateISO": "2025-10-20T08:00:00",
+    "dateFormatted": "20 Oktober 2025",
+    "verse": "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.",
+    "verseReference": "QS. Ar-Rum 30 : 21",
+    "greeting": "Assalamu'alaikum Warahmatullahi Wabarakatuh",
+    "introText": "Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri hari bahagia kami.",
+    "countdownText": "Dan kami bersyukur atas berkah yang melimpah, mengundang Anda untuk menjadi bagian dari momen spesial kami.",
+    "closingText": "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kedua mempelai.",
+    "musicUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+  },
+  "events": {
+    "akad": {
+      "name": "Akad Nikah",
+      "dayDate": "Senin, 20 Oktober 2025",
+      "time": "Pukul 08.00 - 10.00 WIB",
+      "address": "Masjid Agung Baiturrahman, Jl. Pahlawan No. 12, Kota Kediri",
+      "gmapsUrl": "https://maps.google.com"
+    },
+    "resepsi": {
+      "name": "Resepsi",
+      "dayDate": "Senin, 20 Oktober 2025",
+      "time": "Pukul 11.00 - 16.00 WIB",
+      "address": "Gedung Grand Ballroom, Jl. Pemuda No. 45, Kota Kediri",
+      "gmapsUrl": "https://maps.google.com"
+    }
+  },
+  "gifts": {
+    "text": "Bagi bapak/sdr/ibu yang ingin memberikan tanda kasih, dapat mengirimkannya melalui rekening berikut:",
+    "accounts": [
+      {
+        "bank": "Bank BCA",
+        "number": "1234567890",
+        "name": "Firin Alamsyah"
+      },
+      {
+        "bank": "Bank Mandiri",
+        "number": "9876543210",
+        "name": "Sihah Nurul"
+      }
+    ]
+  },
+  "footer": {
+    "text": "Made with love by momenin",
+    "instagramUrl": "https://instagram.com/momenin",
+    "whatsappUrl": "https://wa.me/628123456789"
+  }
+}

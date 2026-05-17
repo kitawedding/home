@@ -1,396 +1,349 @@
-let invitationData = {};
-let comments = JSON.parse(localStorage.getItem("comments")) || [];
-
-const body = document.body;
-const audio = document.getElementById("bgMusic");
-
-async function loadData() {
-  try {
-
-    const response = await fetch("data.json");
-    invitationData = await response.json();
-
-    setupContent();
-    setupCountdown();
-    renderGift();
-    renderComments();
-
-    document.getElementById("loader").style.display = "none";
-
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-function setupContent() {
-
-  const data = invitationData;
-
-  // COUPLE
-  const coupleName =
-    `${data.couple?.maleName || "Pria"} & ${data.couple?.femaleName || "Wanita"}`;
-
-  document.getElementById("coverCouple").innerText = coupleName;
-  document.getElementById("heroCouple").innerText = coupleName;
-  document.getElementById("closingCouple").innerText = coupleName;
-
-  // INITIAL
-  document.getElementById("initialText").innerText =
-    data.couple?.initial || "FS";
-
-  // HERO DATE
-  document.getElementById("heroDate").innerText =
-    new Date(data.date.weddingDate).toLocaleDateString("id-ID", {
-      day: "numeric",
-      month: "long",
-      year: "numeric"
-    });
-
-  // QUOTE
-  document.getElementById("quoteArabic").innerText =
-    data.quote?.arabic || "";
-
-  document.getElementById("quoteTranslation").innerText =
-    data.quote?.translation || "";
-
-  document.getElementById("quoteReference").innerText =
-    data.quote?.reference || "";
-
-  // GROOM
-  document.getElementById("groomName").innerText =
-    data.groom?.name || "";
-
-  document.getElementById("groomParent").innerText =
-    `Putra dari ${data.groom?.father || ""} & ${data.groom?.mother || ""}`;
-
-  document.getElementById("groomImage").src =
-    data.groom?.image || "";
-
-  // BRIDE
-  document.getElementById("brideName").innerText =
-    data.bride?.name || "";
-
-  document.getElementById("brideParent").innerText =
-    `Putri dari ${data.bride?.father || ""} & ${data.bride?.mother || ""}`;
-
-  document.getElementById("brideImage").src =
-    data.bride?.image || "";
-
-  // EVENT
-  document.getElementById("akadDate").innerText =
-    data.akad?.date || "";
-
-  document.getElementById("akadTime").innerText =
-    data.akad?.time || "";
-
-  document.getElementById("akadAddress").innerText =
-    data.akad?.address || "";
-
-  document.getElementById("akadMaps").href =
-    data.akad?.maps || "#";
-
-  document.getElementById("resepsiDate").innerText =
-    data.resepsi?.date || "";
-
-  document.getElementById("resepsiTime").innerText =
-    data.resepsi?.time || "";
-
-  document.getElementById("resepsiAddress").innerText =
-    data.resepsi?.address || "";
-
-  document.getElementById("resepsiMaps").href =
-    data.resepsi?.maps || "#";
-
-  // MUSIC
-  audio.src = data.music?.src || "";
-
-  // BACKGROUND
-  document.getElementById("cover").style.backgroundImage =
-    `url(${data.backgrounds?.cover || "assets/images/cover.jpg"})`;
-
-  document.getElementById("hero").style.backgroundImage =
-    `url(${data.backgrounds?.hero || "assets/images/hero.jpg"})`;
-
-  document.getElementById("closing").style.backgroundImage =
-    `url(${data.backgrounds?.closing || "assets/images/closing.jpg"})`;
-
-  // GUEST NAME
-  const params = new URLSearchParams(window.location.search);
-
-  const guest =
-    params.get("to") ||
-    data.guest?.defaultName ||
-    "Tamu Undangan";
-
-  document.getElementById("guestName").innerText = guest;
-}
-
-function setupCountdown() {
-
-  const target =
-    new Date(invitationData.date.weddingDate).getTime();
-
-  setInterval(() => {
-
-    const now = new Date().getTime();
-
-    const distance = target - now;
-
-    const days =
-      Math.floor(distance / (1000 * 60 * 60 * 24));
-
-    const hours =
-      Math.floor((distance % (1000 * 60 * 60 * 24))
-      / (1000 * 60 * 60));
-
-    const minutes =
-      Math.floor((distance % (1000 * 60 * 60))
-      / (1000 * 60));
-
-    const seconds =
-      Math.floor((distance % (1000 * 60))
-      / 1000);
-
-    document.getElementById("days").innerText = days;
-    document.getElementById("hours").innerText = hours;
-    document.getElementById("minutes").innerText = minutes;
-    document.getElementById("seconds").innerText = seconds;
-
-  }, 1000);
-}
-
-function renderGift() {
-
-  const wrapper = document.getElementById("giftWrapper");
-
-  wrapper.innerHTML = "";
-
-  invitationData.gift.forEach(item => {
-
-    const div = document.createElement("div");
-
-    div.className = "gift-card reveal";
-
-    div.innerHTML = `
-      <h3>${item.bank}</h3>
-
-      <p>${item.number}</p>
-
-      <p>a.n ${item.name}</p>
-
-      <button class="btn-gold copy-btn">
-        Copy Rekening
-      </button>
-    `;
-
-    div.querySelector(".copy-btn")
-      .addEventListener("click", () => {
-
-      navigator.clipboard.writeText(item.number);
-
-      showToast("Nomor rekening berhasil disalin");
-
-    });
-
-    wrapper.appendChild(div);
-
-  });
-}
-
-function showToast(text) {
-
-  const toast = document.getElementById("toast");
-
-  toast.innerText = text;
-
-  toast.classList.add("show");
-
-  setTimeout(() => {
-    toast.classList.remove("show");
-  }, 3000);
-}
-
-function renderComments() {
-
-  const wrapper =
-    document.getElementById("commentList");
-
-  wrapper.innerHTML = "";
-
-  const hadir =
-    comments.filter(c => c.attendance === "Hadir").length;
-
-  const tidak =
-    comments.filter(c => c.attendance === "Tidak Hadir").length;
-
-  document.getElementById("hadirCount").innerText = hadir;
-  document.getElementById("tidakHadirCount").innerText = tidak;
-  document.getElementById("commentCount").innerText = comments.length;
-
-  comments
-    .sort((a,b)=>b.time-a.time)
-    .forEach(comment => {
-
-    const div = document.createElement("div");
-
-    div.className = "comment-card reveal";
-
-    div.innerHTML = `
-      <h4>${comment.name}</h4>
-
-      <small>${comment.attendance}</small>
-
-      <p>${comment.message}</p>
-
-      <small>
-        ${new Date(comment.time)
-          .toLocaleString("id-ID")}
-      </small>
-    `;
-
-    wrapper.appendChild(div);
-
-  });
-}
-
-document.getElementById("rsvpForm")
-.addEventListener("submit", e => {
-
-  e.preventDefault();
-
-  const data = {
-    name: document.getElementById("name").value,
-    message: document.getElementById("message").value,
-    attendance: document.getElementById("attendance").value,
-    time: Date.now()
-  };
-
-  comments.push(data);
-
-  localStorage.setItem(
-    "comments",
-    JSON.stringify(comments)
-  );
-
-  renderComments();
-
-  e.target.reset();
-
-  showToast("Ucapan berhasil dikirim");
-});
-
-document.getElementById("openInvitation")
-.addEventListener("click", async () => {
-
-  body.classList.remove("lock");
-
-  try {
-    await audio.play();
-
-    localStorage.setItem("musicPlaying", "true");
-
-  } catch(err){
-    console.log(err);
-  }
-
-  document.getElementById("hero")
-    .scrollIntoView({
-      behavior:"smooth"
-    });
-
-});
-
-document.getElementById("saveDateBtn")
-.addEventListener("click", () => {
-
-  document.getElementById("event")
-    .scrollIntoView({
-      behavior:"smooth"
-    });
-
-});
-
-const observer = new IntersectionObserver(entries => {
-
-  entries.forEach(entry => {
-
-    if(entry.isIntersecting){
-
-      entry.target.classList.add("active");
-
+document.addEventListener("DOMContentLoaded", () => {
+    let appData = {};
+
+    // 1. FETCH JSON DATA INFRASTRUCTURE
+    fetch("data.json")
+        .then(response => {
+            if (!response.ok) throw new Error("Gagal memuat konfigurasi data.");
+            return response.json();
+        })
+        .then(data => {
+            appData = data;
+            initializeInvitation(data);
+        })
+        .catch(error => {
+            console.error("Error Core Config Initialization:", error);
+            // Dynamic Minimal Fallback
+            document.querySelector(".pair-names").innerText = "Firin & Sihah";
+        });
+
+    // 2. PARSE AND HYDRATE DOM DATA ENGINE
+    function initializeInvitation(data) {
+        // Handle Guest Parameters from URL string
+        const urlParams = new URLSearchParams(window.location.search);
+        const guestParam = urlParams.get("to");
+        const guestElement = document.getElementById("guest-name");
+        if (guestElement) {
+            guestElement.innerText = guestParam ? decodeURIComponent(guestParam) : data.guest.defaultName;
+        }
+
+        // Set Dynamic Global Names
+        const coupleString = `${data.couple.maleName} & ${data.couple.femaleName}`;
+        document.querySelector(".pair-names").innerText = coupleString;
+        document.querySelectorAll(".dynamic-couple-names").forEach(el => el.innerText = coupleString);
+        document.querySelectorAll(".dynamic-initial").forEach(el => el.innerText = data.couple.initial);
+
+        // Background Hero Images & Section Config
+        const heroSec = document.getElementById("hero");
+        if (heroSec && data.akad?.bgImage) heroSec.style.backgroundImage = `url('${data.akad.bgImage}')`;
+        const coverSec = document.getElementById("cover");
+        if (coverSec && data.resepsi?.bgImage) coverSec.style.backgroundImage = `url('${data.resepsi.bgImage}')`;
+
+        // Section #2 Date Text Update
+        const dateTextEl = document.querySelector(".wedding-date-text");
+        if (dateTextEl && data.akad?.date) dateTextEl.innerText = data.akad.date;
+
+        // Section #3 Quranic Quote Core
+        document.getElementById("quote-arabic").innerText = data.quote.arabic;
+        document.getElementById("quote-translation").innerText = data.quote.translation;
+        document.getElementById("quote-ref").innerText = data.quote.reference;
+
+        // Section #4 Mempelaifikasi
+        document.getElementById("groom-name").innerText = data.groom.name;
+        document.getElementById("groom-father").innerText = data.groom.father;
+        document.getElementById("groom-mother").innerText = data.groom.mother;
+        document.getElementById("groom-img").src = data.groom.image;
+
+        document.getElementById("bride-name").innerText = data.bride.name;
+        document.getElementById("bride-father").innerText = data.bride.father;
+        document.getElementById("bride-mother").innerText = data.bride.mother;
+        document.getElementById("bride-img").src = data.bride.image;
+
+        // Section #6 Acara
+        document.getElementById("akad-date").innerText = data.akad.date;
+        document.getElementById("akad-time").innerText = data.akad.time;
+        document.getElementById("akad-address").innerText = data.akad.address;
+        document.getElementById("akad-maps").href = data.akad.maps;
+
+        document.getElementById("resepsi-date").innerText = data.resepsi.date;
+        document.getElementById("resepsi-time").innerText = data.resepsi.time;
+        document.getElementById("resepsi-address").innerText = data.resepsi.address;
+        document.getElementById("resepsi-maps").href = data.resepsi.maps;
+
+        // Section #7 Build Custom Gift Cards Programmatically
+        const containerGift = document.getElementById("gift-cards-container");
+        if (containerGift && data.gift) {
+            containerGift.innerHTML = ""; // Flush
+            data.gift.forEach(item => {
+                const card = document.createElement("div");
+                card.className = "gift-card glassmorphism";
+                card.innerHTML = `
+                    <div class="bank-logo">${item.bank}</div>
+                    <div class="account-number">${item.number}</div>
+                    <div class="account-holder">a.n. ${item.name}</div>
+                    <button class="btn-copy" data-copy="${item.number}">Salin Rekening</button>
+                `;
+                containerGift.appendChild(card);
+            });
+            attachClipboardListeners();
+        }
+
+        // Initialize Embedded Real-time Countdown Execution
+        startCountdownClock(data.date.weddingDate);
+
+        // Initialize Audio Driver Configuration
+        const audioInstance = document.getElementById("wedding-audio");
+        if (audioInstance) audioInstance.src = data.music.src;
+
+        // Load Comment Board Execution
+        renderLiveComments();
+
+        // Bootstrapping Core Viewport Interaction Animators
+        initializeIntersectionObserver();
     }
 
-  });
+    // 3. CORE SOUND CONTROLLER & DEPLOY AUDIO LOGIC
+    const audioContainer = document.getElementById("audio-container");
+    const audio = document.getElementById("wedding-audio");
+    const musicToggleBtn = document.getElementById("music-toggle");
+    const playIcon = musicToggleBtn.querySelector(".icon-play");
+    const pauseIcon = musicToggleBtn.querySelector(".icon-pause");
 
-},{
-  threshold:0.15
-});
+    function playWeddingMusic() {
+        audio.play().then(() => {
+            localStorage.setItem("momenin_music_state", "playing");
+            playIcon.style.display = "none";
+            pauseIcon.style.display = "block";
+        }).catch(err => console.log("User Interaction Needed for Audio Playback."));
+    }
 
-document.querySelectorAll(".reveal")
-.forEach(el => observer.observe(el));
+    function pauseWeddingMusic() {
+        audio.pause();
+        localStorage.setItem("momenin_music_state", "paused");
+        playIcon.style.display = "block";
+        pauseIcon.style.display = "none";
+    }
 
-window.addEventListener("load", () => {
+    musicToggleBtn.addEventListener("click", () => {
+        if (audio.paused) {
+            playWeddingMusic();
+        } else {
+            pauseWeddingMusic();
+        }
+    });
 
-  body.classList.add("lock");
+    // 4. ACTION INTERFACES BUTTON (OPEN INVITATION & SCROLL MECHANICS)
+    const openBtn = document.getElementById("btn-open-invitation");
+    openBtn.addEventListener("click", () => {
+        document.body.classList.remove("scroll-locked");
+        document.getElementById("cover").classList.add("dismissed");
+        audioContainer.style.display = "flex";
+        
+        // Auto-Play State Manager
+        playWeddingMusic();
 
-  loadData();
+        // Cinematic smooth auto navigation scroll immediately after open button click
+        setTimeout(() => {
+            document.getElementById("hero").scrollIntoView({ behavior: "smooth" });
+        }, 300);
+    });
 
-});
+    document.getElementById("btn-save-date").addEventListener("click", () => {
+        document.getElementById("acara").scrollIntoView({ behavior: "smooth" });
+    });
 
-// MUSIC TOGGLE
-const musicBtn =
-  document.getElementById("musicControl");
+    // 5. INTERSECTION OBSERVER ANIMATION MOTOR
+    function initializeIntersectionObserver() {
+        const elementsToAnimate = document.querySelectorAll(".reveal-element");
+        const animationConfig = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
 
-musicBtn.addEventListener("click", () => {
+        const viewObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                    // Optimization Unobserve Once Triggered
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, animationConfig);
 
-  if(audio.paused){
+        elementsToAnimate.forEach(node => viewObserver.observe(node));
+    }
 
-    audio.play();
+    // 6. HIGH FREQUENCY REALTIME COUNTDOWN MATRIX ENGINE
+    function startCountdownClock(targetDateIsoString) {
+        const targetMs = new Date(targetDateIsoString).getTime();
 
-    localStorage.setItem("musicPlaying","true");
+        function evaluateTime() {
+            const currentMs = new Date().getTime();
+            const distance = targetMs - currentMs;
 
-  }else{
+            if (distance < 0) {
+                clearInterval(intervalId);
+                document.querySelector(".countdown-board").innerHTML = "<p class='text-gold'>Hari Bahagia Telah Tiba!</p>";
+                return;
+            }
 
-    audio.pause();
+            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((distance % (1000 * 60)) / 1000);
 
-    localStorage.setItem("musicPlaying","false");
+            document.getElementById("days").innerText = d < 10 ? "0" + d : d;
+            document.getElementById("hours").innerText = h < 10 ? "0" + h : h;
+            document.getElementById("minutes").innerText = m < 10 ? "0" + m : m;
+            document.getElementById("seconds").innerText = s < 10 ? "0" + s : s;
+        }
 
-  }
+        evaluateTime(); // Pre-execution fast load
+        const intervalId = setInterval(evaluateTime, 1000);
+    }
 
-});
+    // 7. DRAGGABLE FLOATING CONTROLLER PARADIGM LAYER (SUPPORT MOUSE & TOUCH SENSITIVE)
+    let activeDrag = false;
+    let currentX;
+    let currentY;
+    let initialX;
+    let initialY;
+    let xOffset = 0;
+    let yOffset = 0;
 
-// RESTORE MUSIC STATE
-window.addEventListener("load", () => {
+    audioContainer.addEventListener("touchstart", dragStart, { passive: true });
+    document.addEventListener("touchend", dragEnd, { passive: true });
+    document.addEventListener("touchmove", drag, { passive: false });
 
-  const isPlaying =
-    localStorage.getItem("musicPlaying");
+    audioContainer.addEventListener("mousedown", dragStart, false);
+    document.addEventListener("mouseup", dragEnd, false);
+    document.addEventListener("mousemove", drag, false);
 
-  if(isPlaying === "true"){
+    function dragStart(e) {
+        if (e.type === "touchstart") {
+            initialX = e.touches[0].clientX - xOffset;
+            initialY = e.touches[0].clientY - yOffset;
+        } else {
+            initialX = e.clientX - xOffset;
+            initialY = e.clientY - yOffset;
+        }
+        if (e.target === audioContainer || audioContainer.contains(e.target)) activeDrag = true;
+    }
 
-    audio.play();
+    function dragEnd() {
+        initialX = currentX;
+        initialY = currentY;
+        activeDrag = false;
+    }
 
-  }
+    function drag(e) {
+        if (!activeDrag) return;
+        
+        if (e.type === "touchmove") {
+            currentX = e.touches[0].clientX - initialX;
+            currentY = e.touches[0].clientY - initialY;
+        } else {
+            e.preventDefault(); // Lock cursor scroll leakage on desktop dragging
+            currentX = e.clientX - initialX;
+            currentY = e.clientY - initialY;
+        }
 
-});
+        xOffset = currentX;
+        yOffset = currentY;
 
-// DRAG MUSIC BUTTON
-let isDragging = false;
+        // Perform boundary tracking transformations
+        audioContainer.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+    }
 
-musicBtn.addEventListener("mousedown", () => {
-  isDragging = true;
-});
+    // 8. CLIPBOARD CONTROLLER WITH ANIMATED LUXURY TOAST WIDGET
+    function attachClipboardListeners() {
+        document.querySelectorAll(".btn-copy").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                const textToCopy = e.target.getAttribute("data-copy");
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    fireToastNotification();
+                });
+            });
+        });
+    }
 
-document.addEventListener("mousemove", (e) => {
+    function fireToastNotification() {
+        const toast = document.getElementById("toast");
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 3000);
+    }
 
-  if(isDragging){
+    // 9. RE-ENGINEERED RSVP DATA STORAGE MACHINE WITHOUT BACKEND
+    const rsvpForm = document.getElementById("rsvp-form");
+    rsvpForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const inputName = document.getElementById("rsvp-name").value.trim();
+        const inputStatus = document.getElementById("rsvp-status").value;
+        const inputMessage = document.getElementById("rsvp-message").value.trim();
 
-    musicBtn.style.left = `${e.pageX - 30}px`;
-    musicBtn.style.top = `${e.pageY - 30}px`;
+        if (!inputName || !inputStatus || !inputMessage) return;
 
-  }
+        const newCommentPayload = {
+            id: Date.now(),
+            name: inputName,
+            status: inputStatus,
+            message: inputMessage,
+            timestamp: new Date().toLocaleString("id-ID", { dateStyle: "short", timeStyle: "short" })
+        };
 
-});
+        let currentHistory = JSON.parse(localStorage.getItem("momenin_rsvp_data")) || [];
+        currentHistory.unshift(newCommentPayload); // Newest elements go first
+        localStorage.setItem("momenin_rsvp_data", JSON.stringify(currentHistory));
 
-document.addEventListener("mouseup", () => {
-  isDragging = false;
+        rsvpForm.reset();
+        renderLiveComments();
+    });
+
+    function renderLiveComments() {
+        const commentsWrapper = document.getElementById("comments-timeline");
+        const totalCountEl = document.getElementById("count-total");
+        const hadirCountEl = document.getElementById("count-hadir");
+        const tidakCountEl = document.getElementById("count-tidak");
+
+        const dataCollection = JSON.parse(localStorage.getItem("momenin_rsvp_data")) || [];
+
+        // Counters Calculation Engine
+        let totalHadir = 0;
+        let totalAbsen = 0;
+        commentsWrapper.innerHTML = "";
+
+        if (dataCollection.length === 0) {
+            commentsWrapper.innerHTML = `<p class="text-muted text-center" style="padding: 1rem;">Belum ada ucapan. Menjadi yang pertama?</p>`;
+        } else {
+            dataCollection.forEach(node => {
+                if (node.status === "Hadir") totalHadir++;
+                else totalAbsen++;
+
+                const statusClass = node.status === "Hadir" ? "hadir" : "absen";
+
+                const cardNode = document.createElement("div");
+                cardNode.className = "comment-card glassmorphism";
+                cardNode.innerHTML = `
+                    <div class="comment-header">
+                        <span class="comment-name">${escapeHtml(node.name)}</span>
+                        <span class="badge-status ${statusClass}">${node.status}</span>
+                    </div>
+                    <p class="comment-text">${escapeHtml(node.message)}</p>
+                    <div class="comment-time">${node.timestamp} WIB</div>
+                `;
+                commentsWrapper.appendChild(cardNode);
+            });
+        }
+
+        totalCountEl.innerText = dataCollection.length;
+        hadirCountEl.innerText = totalHadir;
+        tidakCountEl.innerText = totalAbsen;
+    }
+
+    // Security sanitization method against XSS injection vulnerabilities
+    function escapeHtml(string) {
+        return string
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
 });

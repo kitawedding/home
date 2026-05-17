@@ -1,325 +1,228 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Luxury Wedding Invitation</title>
-
-  <meta name="description" content="Luxury Wedding Invitation" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wedding Celebration</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-
-  <!-- LOADER -->
-  <div id="loader">
-    <div class="loader-ring"></div>
-  </div>
-
-  <!-- MUSIC -->
-  <audio id="bgMusic" loop></audio>
-
-  <!-- FLOATING MUSIC BUTTON -->
-  <button id="musicControl" class="music-btn">
-    ♫
-  </button>
-
-  <!-- COVER -->
-  <section class="cover section fullscreen" id="cover">
-    <div class="overlay"></div>
-
-    <div class="content reveal">
-      <p class="small-title">The Wedding Of</p>
-
-      <h1 id="coverCouple" class="cover-title">
-        Firin & Sihah
-      </h1>
-
-      <div class="guest-box">
-        <p>Dear</p>
-        <h3 id="guestName">Tamu Undangan</h3>
-      </div>
-
-      <button id="openInvitation" class="btn-gold">
-        Buka Undangan
-      </button>
-    </div>
-  </section>
-
-  <!-- HERO -->
-  <section class="hero section fullscreen parallax-section" id="hero">
-    <div class="overlay"></div>
-
-    <div class="content reveal">
-      <p class="small-title">The Wedding Of</p>
-
-      <h1 id="heroCouple" class="hero-title">
-        Firin & Sihah
-      </h1>
-
-      <p id="heroDate" class="hero-date">
-        20 Oktober 2025
-      </p>
-
-      <button class="btn-outline" id="saveDateBtn">
-        Save The Date
-      </button>
-    </div>
-  </section>
-
-  <!-- QUOTE -->
-  <section class="quote section" id="quote">
-    <div class="container reveal">
-
-      <div class="initial">
-        <span id="initialText">FS</span>
-      </div>
-
-      <div class="divider"></div>
-
-      <p id="quoteArabic" class="arabic">
-        وَمِنْ آيَاتِهِ...
-      </p>
-
-      <p id="quoteTranslation" class="translation">
-        Dan di antara tanda-tanda kekuasaan-Nya...
-      </p>
-
-      <p id="quoteReference" class="reference">
-        QS Ar Rum : 21
-      </p>
-
-    </div>
-  </section>
-
-  <!-- MEMPELAI -->
-  <section class="couple section fullscreen" id="couple">
-    <div class="container">
-
-      <div class="section-header reveal">
-        <p class="small-title">Assalamu'alaikum Wr. Wb.</p>
-
-        <h2>Tanpa mengurangi rasa hormat</h2>
-      </div>
-
-      <div class="couple-wrapper">
-
-        <div class="couple-card reveal">
-          <img id="groomImage" loading="lazy" />
-
-          <h3 id="groomName">Firin</h3>
-
-          <p id="groomParent">
-            Putra dari Bapak & Ibu
-          </p>
-        </div>
-
-        <div class="heart reveal">
-          ❤
-        </div>
-
-        <div class="couple-card reveal">
-          <img id="brideImage" loading="lazy" />
-
-          <h3 id="brideName">Sihah</h3>
-
-          <p id="brideParent">
-            Putri dari Bapak & Ibu
-          </p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- COUNTDOWN -->
-  <section class="countdown section" id="countdown">
-    <div class="container reveal">
-
-      <p class="small-title">Save The Date</p>
-
-      <h2>Dan kami bersyukur...</h2>
-
-      <div class="countdown-wrapper">
-
-        <div class="count-card">
-          <span id="days">0</span>
-          <p>Hari</p>
-        </div>
-
-        <div class="count-card">
-          <span id="hours">0</span>
-          <p>Jam</p>
-        </div>
-
-        <div class="count-card">
-          <span id="minutes">0</span>
-          <p>Menit</p>
-        </div>
-
-        <div class="count-card">
-          <span id="seconds">0</span>
-          <p>Detik</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ACARA -->
-  <section class="event section fullscreen" id="event">
-    <div class="container">
-
-      <div class="section-header reveal">
-        <p class="small-title">Wedding Event</p>
-        <h2>Acara Pernikahan</h2>
-      </div>
-
-      <div class="event-wrapper">
-
-        <div class="event-card reveal">
-          <h3>Akad Nikah</h3>
-
-          <p id="akadDate"></p>
-          <p id="akadTime"></p>
-          <p id="akadAddress"></p>
-
-          <a id="akadMaps" target="_blank" class="btn-outline">
-            Google Maps
-          </a>
-        </div>
-
-        <div class="event-card reveal">
-          <h3>Resepsi</h3>
-
-          <p id="resepsiDate"></p>
-          <p id="resepsiTime"></p>
-          <p id="resepsiAddress"></p>
-
-          <a id="resepsiMaps" target="_blank" class="btn-outline">
-            Google Maps
-          </a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- GIFT -->
-  <section class="gift section" id="gift">
-    <div class="container">
-
-      <div class="section-header reveal">
-        <p class="small-title">Wedding Gift</p>
-
-        <h2>Tanda Kasih</h2>
-
-        <p>
-          Bagi Bapak/Ibu/Saudara/i yang ingin memberikan tanda kasih
-        </p>
-      </div>
-
-      <div id="giftWrapper" class="gift-wrapper"></div>
-    </div>
-  </section>
-
-  <!-- RSVP -->
-  <section class="rsvp section" id="rsvp">
-    <div class="container">
-
-      <div class="section-header reveal">
-        <p class="small-title">Wedding Wishes</p>
-
-        <h2>Ucapkan Sesuatu</h2>
-
-        <p>Berikan ucapan dan doa terbaik</p>
-      </div>
-
-      <div class="stats reveal">
-        <div class="stat-card">
-          <span id="hadirCount">0</span>
-          <p>Hadir</p>
-        </div>
-
-        <div class="stat-card">
-          <span id="tidakHadirCount">0</span>
-          <p>Tidak Hadir</p>
-        </div>
-
-        <div class="stat-card">
-          <span id="commentCount">0</span>
-          <p>Komentar</p>
-        </div>
-      </div>
-
-      <form id="rsvpForm" class="rsvp-form reveal">
-
-        <input
-          type="text"
-          id="name"
-          placeholder="Nama"
-          required
-        />
-
-        <textarea
-          id="message"
-          placeholder="Ucapan..."
-          required
-        ></textarea>
-
-        <select id="attendance">
-          <option value="Hadir">Hadir</option>
-          <option value="Tidak Hadir">Tidak Hadir</option>
-        </select>
-
-        <button type="submit" class="btn-gold">
-          Kirim Ucapan
+<body class="scroll-locked">
+
+    <!-- Luxury Audio Controller -->
+    <div id="audio-container" class="floating-music" style="display: none;">
+        <button id="music-toggle" aria-label="Toggle Music">
+            <svg class="icon-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+            <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;"><path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
         </button>
-
-      </form>
-
-      <div id="commentList" class="comment-list"></div>
-
+        <audio id="wedding-audio" loop></audio>
     </div>
-  </section>
 
-  <!-- PENUTUP -->
-  <section class="closing section fullscreen" id="closing">
-    <div class="overlay"></div>
+    <!-- Toast Notification -->
+    <div id="toast" class="toast-notification">Salin Berhasil!</div>
 
-    <div class="content reveal">
-      <p>
-        Merupakan suatu kehormatan dan kebahagiaan bagi kami
-      </p>
+    <!-- #1 COVER SECTION -->
+    <section id="cover" class="fullscreen-sec center-flex cinematic-bg">
+        <div class="luxury-overlay"></div>
+        <div class="content-wrapper reveal-element text-center">
+            <p class="subtitle-serif">The Wedding Of</p>
+            <h1 class="main-title pair-names">Loading...</h1>
+            <div class="guest-box glassmorphism">
+                <p>Dear</p>
+                <h3 id="guest-name">Tamu Undangan</h3>
+                <p class="small-text">Kami Mengundang Anda Untuk Hadir Di Hari Bahagia Kami</p>
+            </div>
+            <button id="btn-open-invitation" class="btn-luxury">Buka Undangan</button>
+        </div>
+    </section>
 
-      <h1 id="closingCouple">
-        Firin & Sihah
-      </h1>
-    </div>
-  </section>
+    <main id="main-content">
+        <!-- #2 HERO SECTION -->
+        <section id="hero" class="fullscreen-sec center-flex cinematic-bg">
+            <div class="luxury-overlay"></div>
+            <div class="content-wrapper reveal-element text-center">
+                <p class="subtitle-serif">The Wedding Of</p>
+                <h2 class="hero-names dynamic-couple-names">... & ...</h2>
+                <div class="elegant-line"></div>
+                <h3 class="wedding-date-text text-gold">...</h3>
+                <button id="btn-save-date" class="btn-luxury-outline">Save The Date</button>
+            </div>
+        </section>
 
-  <!-- FOOTER -->
-  <footer class="footer section">
-    <p>
-      Made with love by Momenin
-    </p>
+        <!-- #3 QUOTE SECTION -->
+        <section id="quote" class="auto-height-sec center-flex">
+            <div class="blur-glow-ornament"></div>
+            <div class="content-wrapper reveal-element text-center max-w-md">
+                <span class="big-initial dynamic-initial">FS</span>
+                <p class="arabic-text" id="quote-arabic">...</p>
+                <p class="quote-translation" id="quote-translation">...</p>
+                <p class="quote-ref text-gold" id="quote-ref">...</p>
+                <div class="elegant-divider"><span></span><div class="diamond"></div><span></span></div>
+            </div>
+        </section>
 
-    <div class="footer-icons">
-      <a href="#">Instagram</a>
-      <a href="#">WhatsApp</a>
-    </div>
-  </footer>
+        <!-- #4 MEMPELAI SECTION -->
+        <section id="mempelai" class="fullscreen-sec center-flex">
+            <div class="content-wrapper reveal-element text-center w-full">
+                <p class="subtitle-serif">Assalamu'alaikum Wr. Wb.</p>
+                <p class="intro-text max-w-md mx-auto">Tanpa mengurangi rasa hormat, kami mengundang Anda untuk menghadiri hari pernikahan kami:</p>
+                
+                <div class="couple-container">
+                    <!-- Groom -->
+                    <div class="mempelai-card glassmorphism">
+                        <div class="photo-frame">
+                            <img id="groom-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Groom" loading="lazy">
+                        </div>
+                        <h3 id="groom-name" class="mempelai-name">...</h3>
+                        <p class="parents-info">Putra Dari:</p>
+                        <p id="groom-father" class="parent-name">...</p>
+                        <p id="groom-mother" class="parent-name">& ...</p>
+                    </div>
 
-  <!-- TOAST -->
-  <div id="toast" class="toast">
-    Berhasil disalin
-  </div>
+                    <span class="ampersand-divider">&</span>
 
-  <script src="script.js"></script>
+                    <!-- Bride -->
+                    <div class="mempelai-card glassmorphism">
+                        <div class="photo-frame">
+                            <img id="bride-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Bride" loading="lazy">
+                        </div>
+                        <h3 id="bride-name" class="mempelai-name">...</h3>
+                        <p class="parents-info">Putri Dari:</p>
+                        <p id="bride-father" class="parent-name">...</p>
+                        <p id="bride-mother" class="parent-name">& ...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- #5 COUNTDOWN SECTION -->
+        <section id="countdown-sec" class="auto-height-sec center-flex">
+            <div class="content-wrapper reveal-element text-center w-full">
+                <h2 class="section-title">Save The Date</h2>
+                <p class="small-text mb-2">Dan kami bersyukur atas berkah cinta yang menyatukan langkah kami.</p>
+                <div class="countdown-board">
+                    <div class="countdown-item glassmorphism"><span id="days">00</span><p>Hari</p></div>
+                    <div class="countdown-item glassmorphism"><span id="hours">00</span><p>Jam</p></div>
+                    <div class="countdown-item glassmorphism"><span id="minutes">00</span><p>Menit</p></div>
+                    <div class="countdown-item glassmorphism"><span id="seconds">00</span><p>Detik</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- #6 ACARA SECTION -->
+        <section id="acara" class="fullscreen-sec center-flex">
+            <div class="content-wrapper reveal-element text-center w-full">
+                <h2 class="section-title">Waktu & Tempat Acara</h2>
+                <div class="events-grid">
+                    <div id="card-akad" class="event-card glassmorphism cinematic-bg-node">
+                        <div class="luxury-overlay"></div>
+                        <div class="card-inner">
+                            <div class="event-icon">💍</div>
+                            <h3>Akad Nikah</h3>
+                            <div class="elegant-line-short"></div>
+                            <p class="event-date" id="akad-date">...</p>
+                            <p class="event-time" id="akad-time">...</p>
+                            <p class="event-address" id="akad-address">...</p>
+                            <a id="akad-maps" href="#" target="_blank" class="btn-luxury-sm">Buka Google Maps</a>
+                        </div>
+                    </div>
+                    <div id="card-resepsi" class="event-card glassmorphism cinematic-bg-node">
+                        <div class="luxury-overlay"></div>
+                        <div class="card-inner">
+                            <div class="event-icon">🥂</div>
+                            <h3>Resepsi</h3>
+                            <div class="elegant-line-short"></div>
+                            <p class="event-date" id="resepsi-date">...</p>
+                            <p class="event-time" id="resepsi-time">...</p>
+                            <p class="event-address" id="resepsi-address">...</p>
+                            <a id="resepsi-maps" href="#" target="_blank" class="btn-luxury-sm">Buka Google Maps</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- #7 WEDDING GIFT SECTION -->
+        <section id="gift" class="auto-height-sec center-flex">
+            <div class="blur-glow-ornament right-side"></div>
+            <div class="content-wrapper reveal-element text-center w-full">
+                <h2 class="section-title">Wedding Gift</h2>
+                <p class="max-w-md mx-auto mb-3 text-muted">Bagi Bapak/Ibu/Saudara/i yang ingin memberikan tanda kasih, dapat mengirimkannya melalui dompet digital atau rekening berikut:</p>
+                <div id="gift-cards-container" class="gift-container">
+                    <!-- Cards are appended by Javascript dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- #8 RSVP & UCAPAN SECTION -->
+        <section id="rsvp" class="auto-height-sec center-flex">
+            <div class="content-wrapper reveal-element w-full max-w-lg">
+                <div class="text-center">
+                    <h2 class="section-title">Ucapkan Sesuatu</h2>
+                    <p class="text-muted mb-3">Berikan ucapan, doa terbaik, serta konfirmasi kehadiran Anda.</p>
+                </div>
+                
+                <form id="rsvp-form" class="glassmorphism p-4">
+                    <div class="form-group">
+                        <label for="rsvp-name">Nama Anda</label>
+                        <input type="text" id="rsvp-name" required placeholder="Masukkan Nama Lengkap">
+                    </div>
+                    <div class="form-group">
+                        <label for="rsvp-status">Konfirmasi Kehadiran</label>
+                        <select id="rsvp-status" required>
+                            <option value="" disabled selected>Pilih Kehadiran</option>
+                            <option value="Hadir">Hadir</option>
+                            <option value="Tidak Hadir">Tidak Hadir</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="rsvp-message">Ucapan / Doa</label>
+                        <textarea id="rsvp-message" rows="4" required placeholder="Tulis ucapan manis Anda di sini..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-luxury w-full">Kirim Ucapan</button>
+                </form>
+
+                <div class="rsvp-stats glassmorphism">
+                    <div class="stat-item"><span id="count-total">0</span><p>Komentar</p></div>
+                    <div class="stat-item"><span id="count-hadir">0</span><p>Hadir</p></div>
+                    <div class="stat-item"><span id="count-tidak">0</span><p>Absen</p></div>
+                </div>
+
+                <div id="comments-timeline" class="comments-container">
+                    <!-- Live Comments rendered here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- #9 PENUTUP SECTION -->
+        <section id="penutup" class="fullscreen-sec center-flex cinematic-bg">
+            <div class="luxury-overlay"></div>
+            <div class="content-wrapper reveal-element text-center">
+                <p class="closing-statement max-w-md mx-auto">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kedua mempelai.</p>
+                <p class="small-text mt-3 text-gold">Kami yang berbahagia,</p>
+                <h2 class="closing-names dynamic-couple-names">... & ...</h2>
+            </div>
+        </section>
+
+        <!-- #10 FOOTER SECTION -->
+        <footer id="main-footer" class="auto-height-sec text-center">
+            <p>Made with love by <a href="#" target="_blank" class="brand-link">Momenin</a></p>
+            <div class="social-icons">
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6m12.4 11a1 1 0 1 1 0-2 1 1 0 0 1 0 2m-8 1a4 4 0 1 1 0-8 4 4 0 0 1 0 8m0-2a2 2 0 1 0 0-4 2 2 0 0 1 0 4z"/></svg>
+                </a>
+                <a href="https://whatsapp.com" target="_blank" aria-label="WhatsApp">
+                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91c0-2.65-1.03-5.14-2.9-7.01A9.819 9.819 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23c-1.45 0-2.88-.38-4.13-1.11l-.3-.18l-3.07.81l.83-2.99l-.21-.33a8.203 8.203 0 0 1-1.26-4.44c0-4.54 3.7-8.23 8.24-8.23m-3.9 3.82c-.22 0-.37.08-.51.23c-.14.15-.55.54-.55 1.31c0 .77.56 1.51.64 1.62c.07.11 1.09 1.67 2.65 2.34c.37.16.66.26.89.33c.37.12.71.1 1 .05c.31-.05.96-.39 1.1-.77c.14-.38.14-.71.1-.77c-.04-.07-.15-.11-.32-.19c-.17-.09-1.02-.5-1.17-.56c-.15-.06-.26-.09-.37.08c-.11.17-.43.55-.53.66c-.09.11-.19.13-.36.04c-.17-.08-.72-.26-1.37-.84c-.51-.45-.85-.1-1.05-.23c-.17-.1-.02-.23.07-.33c.09-.1.2-.24.3-.36c.09-.12.13-.21.19-.35c.06-.14.03-.26-.01-.35c-.05-.09-.37-.9-.51-1.24c-.13-.32-.27-.28-.37-.28c-.1-.01-.21-.01-.32-.01z"/></svg>
+                </a>
+            </div>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>

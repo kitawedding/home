@@ -8,52 +8,60 @@
     "defaultName": "Tamu Undangan"
   },
   "date": {
-    "weddingDate": "2026-10-20T08:00:00"
+    "weddingDate": "2025-10-20T08:00:00"
   },
   "music": {
     "src": "assets/music/music.mp3"
   },
+  "backgrounds": {
+    "cover": "assets/images/bg-cover.jpg",
+    "hero": "assets/images/bg-hero.jpg",
+    "quote": "assets/images/bg-quote.jpg",
+    "mempelai": "assets/images/bg-mempelai.jpg",
+    "countdown": "assets/images/bg-countdown.jpg",
+    "acara": "assets/images/bg-acara.jpg",
+    "gift": "assets/images/bg-gift.jpg",
+    "rsvp": "assets/images/bg-rsvp.jpg",
+    "penutup": "assets/images/bg-penutup.jpg"
+  },
   "quote": {
-    "arabic": "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِقَوْمٍ يَتَفَكَّرُونَ",
-    "translation": "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berpikir.",
-    "reference": "QS. Ar-Rum : 21"
+    "arabic": "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ",
+    "translation": "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu istri-istri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berpikir.",
+    "reference": "QS Ar-Rum : 21"
   },
   "groom": {
-    "name": "Firin, S.Kom.",
+    "name": "Firin Ramadhan",
     "image": "assets/images/groom.jpg",
-    "father": "Bapak Ahmad Mudatsir",
-    "mother": "Ibu Siti Aminah"
+    "father": "Bapak Ahmad",
+    "mother": "Ibu Siti"
   },
   "bride": {
-    "name": "Sihah, S.Ds.",
+    "name": "Sihah Anggraini",
     "image": "assets/images/bride.jpg",
-    "father": "Bapak Budi Santoso",
-    "mother": "Ibu Rahmawati"
+    "father": "Bapak Hasan",
+    "mother": "Ibu Rahmi"
   },
   "akad": {
-    "bgImage": "assets/images/bg-akad.jpg",
-    "date": "Senin, 20 Oktober 2026",
-    "time": "08:00 - 10:00 WIB",
-    "address": "Masjid Agung Baiturrahman, Jl. Pemuda No. 45, Kota Pusat",
+    "date": "Senin, 20 Oktober 2025",
+    "time": "08:00 WIB",
+    "address": "Jl. Melati No. 12, Jakarta Selatan",
     "maps": "https://maps.google.com"
   },
   "resepsi": {
-    "bgImage": "assets/images/bg-resepsi.jpg",
-    "date": "Senin, 20 Oktober 2026",
-    "time": "10:00 WIB - Selesai",
-    "address": "Grand Luxury Ballroom, Gedung Persada Lantai 3, Kota Pusat",
+    "date": "Senin, 20 Oktober 2025",
+    "time": "10:00 WIB",
+    "address": "Gedung Serbaguna, Jakarta Selatan",
     "maps": "https://maps.google.com"
   },
   "gift": [
-    {
-      "bank": "BCA",
-      "name": "Firin",
-      "number": "123456789"
-    },
-    {
-      "bank": "Bank Mandiri",
-      "name": "Sihah",
-      "number": "987654321"
-    }
-  ]
+    { "bank": "BCA", "name": "Firin Ramadhan", "number": "1234567890" },
+    { "bank": "Mandiri", "name": "Sihah Anggraini", "number": "9876543210" }
+  ],
+  "social": {
+    "instagram": "https://instagram.com",
+    "whatsapp": "https://wa.me/6281234567890"
+  },
+  "closing": {
+    "text": "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kami."
+  }
 }

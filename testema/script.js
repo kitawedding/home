@@ -1,349 +1,347 @@
-document.addEventListener("DOMContentLoaded", () => {
-    let appData = {};
+/* ==========================================================
+   Wedding Invitation - Vanilla JS
+   Semua data dimuat dari data.json
+   ========================================================== */
 
-    // 1. FETCH JSON DATA INFRASTRUCTURE
-    fetch("data.json")
-        .then(response => {
-            if (!response.ok) throw new Error("Gagal memuat konfigurasi data.");
-            return response.json();
-        })
-        .then(data => {
-            appData = data;
-            initializeInvitation(data);
-        })
-        .catch(error => {
-            console.error("Error Core Config Initialization:", error);
-            // Dynamic Minimal Fallback
-            document.querySelector(".pair-names").innerText = "Firin & Sihah";
-        });
+const STORAGE_KEY_MUSIC = 'wedding_music_playing';
+const STORAGE_KEY_COMMENTS = 'wedding_comments';
+const STORAGE_KEY_MUSICPOS = 'wedding_music_pos';
 
-    // 2. PARSE AND HYDRATE DOM DATA ENGINE
-    function initializeInvitation(data) {
-        // Handle Guest Parameters from URL string
-        const urlParams = new URLSearchParams(window.location.search);
-        const guestParam = urlParams.get("to");
-        const guestElement = document.getElementById("guest-name");
-        if (guestElement) {
-            guestElement.innerText = guestParam ? decodeURIComponent(guestParam) : data.guest.defaultName;
-        }
+let DATA = {};
 
-        // Set Dynamic Global Names
-        const coupleString = `${data.couple.maleName} & ${data.couple.femaleName}`;
-        document.querySelector(".pair-names").innerText = coupleString;
-        document.querySelectorAll(".dynamic-couple-names").forEach(el => el.innerText = coupleString);
-        document.querySelectorAll(".dynamic-initial").forEach(el => el.innerText = data.couple.initial);
+/* ---------- Util ---------- */
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
 
-        // Background Hero Images & Section Config
-        const heroSec = document.getElementById("hero");
-        if (heroSec && data.akad?.bgImage) heroSec.style.backgroundImage = `url('${data.akad.bgImage}')`;
-        const coverSec = document.getElementById("cover");
-        if (coverSec && data.resepsi?.bgImage) coverSec.style.backgroundImage = `url('${data.resepsi.bgImage}')`;
+function getGuestFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  const to = params.get('to');
+  return to ? decodeURIComponent(to.replace(/\+/g, ' ')) : null;
+}
 
-        // Section #2 Date Text Update
-        const dateTextEl = document.querySelector(".wedding-date-text");
-        if (dateTextEl && data.akad?.date) dateTextEl.innerText = data.akad.date;
+function showToast(msg) {
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 2200);
+}
 
-        // Section #3 Quranic Quote Core
-        document.getElementById("quote-arabic").innerText = data.quote.arabic;
-        document.getElementById("quote-translation").innerText = data.quote.translation;
-        document.getElementById("quote-ref").innerText = data.quote.reference;
+/* ---------- Load Data ---------- */
+async function loadData() {
+  try {
+    const res = await fetch('data.json', { cache: 'no-store' });
+    DATA = await res.json();
+  } catch (e) {
+    console.error('Gagal load data.json', e);
+    DATA = {};
+  }
+  renderAll();
+}
 
-        // Section #4 Mempelaifikasi
-        document.getElementById("groom-name").innerText = data.groom.name;
-        document.getElementById("groom-father").innerText = data.groom.father;
-        document.getElementById("groom-mother").innerText = data.groom.mother;
-        document.getElementById("groom-img").src = data.groom.image;
+/* ---------- Render ---------- */
+function renderAll() {
+  const c = DATA.couple || {};
+  const coupleStr = `${c.maleName || ''} & ${c.femaleName || ''}`;
+  $$('[data-bind="couple"]').forEach(el => el.textContent = coupleStr);
 
-        document.getElementById("bride-name").innerText = data.bride.name;
-        document.getElementById("bride-father").innerText = data.bride.father;
-        document.getElementById("bride-mother").innerText = data.bride.mother;
-        document.getElementById("bride-img").src = data.bride.image;
+  // Guest
+  const guest = getGuestFromURL() || (DATA.guest && DATA.guest.defaultName) || 'Tamu Undangan';
+  $('#guestName').textContent = guest;
 
-        // Section #6 Acara
-        document.getElementById("akad-date").innerText = data.akad.date;
-        document.getElementById("akad-time").innerText = data.akad.time;
-        document.getElementById("akad-address").innerText = data.akad.address;
-        document.getElementById("akad-maps").href = data.akad.maps;
+  // Hero date
+  if (DATA.date && DATA.date.weddingDate) {
+    const d = new Date(DATA.date.weddingDate);
+    $('#heroDate').textContent = d.toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' });
+  }
 
-        document.getElementById("resepsi-date").innerText = data.resepsi.date;
-        document.getElementById("resepsi-time").innerText = data.resepsi.time;
-        document.getElementById("resepsi-address").innerText = data.resepsi.address;
-        document.getElementById("resepsi-maps").href = data.resepsi.maps;
+  // Music src
+  const audio = $('#audio');
+  if (DATA.music && DATA.music.src) audio.src = DATA.music.src;
 
-        // Section #7 Build Custom Gift Cards Programmatically
-        const containerGift = document.getElementById("gift-cards-container");
-        if (containerGift && data.gift) {
-            containerGift.innerHTML = ""; // Flush
-            data.gift.forEach(item => {
-                const card = document.createElement("div");
-                card.className = "gift-card glassmorphism";
-                card.innerHTML = `
-                    <div class="bank-logo">${item.bank}</div>
-                    <div class="account-number">${item.number}</div>
-                    <div class="account-holder">a.n. ${item.name}</div>
-                    <button class="btn-copy" data-copy="${item.number}">Salin Rekening</button>
-                `;
-                containerGift.appendChild(card);
-            });
-            attachClipboardListeners();
-        }
-
-        // Initialize Embedded Real-time Countdown Execution
-        startCountdownClock(data.date.weddingDate);
-
-        // Initialize Audio Driver Configuration
-        const audioInstance = document.getElementById("wedding-audio");
-        if (audioInstance) audioInstance.src = data.music.src;
-
-        // Load Comment Board Execution
-        renderLiveComments();
-
-        // Bootstrapping Core Viewport Interaction Animators
-        initializeIntersectionObserver();
-    }
-
-    // 3. CORE SOUND CONTROLLER & DEPLOY AUDIO LOGIC
-    const audioContainer = document.getElementById("audio-container");
-    const audio = document.getElementById("wedding-audio");
-    const musicToggleBtn = document.getElementById("music-toggle");
-    const playIcon = musicToggleBtn.querySelector(".icon-play");
-    const pauseIcon = musicToggleBtn.querySelector(".icon-pause");
-
-    function playWeddingMusic() {
-        audio.play().then(() => {
-            localStorage.setItem("momenin_music_state", "playing");
-            playIcon.style.display = "none";
-            pauseIcon.style.display = "block";
-        }).catch(err => console.log("User Interaction Needed for Audio Playback."));
-    }
-
-    function pauseWeddingMusic() {
-        audio.pause();
-        localStorage.setItem("momenin_music_state", "paused");
-        playIcon.style.display = "block";
-        pauseIcon.style.display = "none";
-    }
-
-    musicToggleBtn.addEventListener("click", () => {
-        if (audio.paused) {
-            playWeddingMusic();
-        } else {
-            pauseWeddingMusic();
-        }
+  // Backgrounds
+  if (DATA.backgrounds) {
+    $$('[data-bg]').forEach(el => {
+      const key = el.dataset.bg;
+      const url = DATA.backgrounds[key];
+      if (url) el.style.backgroundImage = `url('${url}')`;
     });
+  }
 
-    // 4. ACTION INTERFACES BUTTON (OPEN INVITATION & SCROLL MECHANICS)
-    const openBtn = document.getElementById("btn-open-invitation");
-    openBtn.addEventListener("click", () => {
-        document.body.classList.remove("scroll-locked");
-        document.getElementById("cover").classList.add("dismissed");
-        audioContainer.style.display = "flex";
-        
-        // Auto-Play State Manager
-        playWeddingMusic();
+  // Quote
+  if (DATA.quote) {
+    $('#quoteArabic').textContent = DATA.quote.arabic || '';
+    $('#quoteTrans').textContent = DATA.quote.translation || '';
+    $('#quoteRef').textContent = DATA.quote.reference || '';
+  }
+  if (c.initial) $('#initial').textContent = c.initial;
 
-        // Cinematic smooth auto navigation scroll immediately after open button click
-        setTimeout(() => {
-            document.getElementById("hero").scrollIntoView({ behavior: "smooth" });
-        }, 300);
+  // Mempelai
+  if (DATA.groom) {
+    $('#groomName').textContent = DATA.groom.name || '';
+    $('#groomFather').textContent = DATA.groom.father || '';
+    $('#groomMother').textContent = DATA.groom.mother || '';
+    if (DATA.groom.image) $('#groomImg').src = DATA.groom.image;
+  }
+  if (DATA.bride) {
+    $('#brideName').textContent = DATA.bride.name || '';
+    $('#brideFather').textContent = DATA.bride.father || '';
+    $('#brideMother').textContent = DATA.bride.mother || '';
+    if (DATA.bride.image) $('#brideImg').src = DATA.bride.image;
+  }
+
+  // Acara
+  if (DATA.akad) {
+    $('#akadDate').textContent = DATA.akad.date || '';
+    $('#akadTime').textContent = DATA.akad.time || '';
+    $('#akadAddr').textContent = DATA.akad.address || '';
+    if (DATA.akad.maps) $('#akadMaps').href = DATA.akad.maps;
+  }
+  if (DATA.resepsi) {
+    $('#resDate').textContent = DATA.resepsi.date || '';
+    $('#resTime').textContent = DATA.resepsi.time || '';
+    $('#resAddr').textContent = DATA.resepsi.address || '';
+    if (DATA.resepsi.maps) $('#resMaps').href = DATA.resepsi.maps;
+  }
+
+  // Gift
+  const giftGrid = $('#giftGrid');
+  giftGrid.innerHTML = '';
+  (DATA.gift || []).forEach(g => {
+    const div = document.createElement('div');
+    div.className = 'gift-card reveal';
+    div.innerHTML = `
+      <div class="bank-name">${g.bank || ''}</div>
+      <div class="rek-no">${g.number || ''}</div>
+      <div class="rek-name">a.n. ${g.name || ''}</div>
+      <button class="btn btn-gold sm copy-btn" data-num="${g.number || ''}">Salin Nomor</button>
+    `;
+    giftGrid.appendChild(div);
+  });
+  $$('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const num = btn.dataset.num;
+      navigator.clipboard.writeText(num).then(() => showToast('Nomor rekening disalin'));
     });
+  });
 
-    document.getElementById("btn-save-date").addEventListener("click", () => {
-        document.getElementById("acara").scrollIntoView({ behavior: "smooth" });
+  // Closing
+  if (DATA.closing) $('#closingText').textContent = DATA.closing.text || '';
+
+  // Social
+  if (DATA.social) {
+    if (DATA.social.instagram) $('#igLink').href = DATA.social.instagram;
+    if (DATA.social.whatsapp) $('#waLink').href = DATA.social.whatsapp;
+  }
+
+  // Re-observe new elements
+  observeReveals();
+  renderComments();
+}
+
+/* ---------- Open Invitation ---------- */
+$('#openBtn').addEventListener('click', () => {
+  const cover = $('#cover');
+  const main = $('#main');
+  cover.style.transition = 'opacity 1s ease, transform 1.2s ease';
+  cover.style.opacity = '0';
+  cover.style.transform = 'scale(1.05)';
+  setTimeout(() => {
+    cover.style.display = 'none';
+    main.classList.remove('hidden');
+    document.body.classList.remove('locked');
+    playMusic();
+    $('#musicBtn').classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    setTimeout(() => $('#hero').scrollIntoView({ behavior: 'smooth' }), 300);
+    observeReveals();
+  }, 1000);
+});
+
+$('#saveBtn').addEventListener('click', () => {
+  $('#acara').scrollIntoView({ behavior: 'smooth' });
+});
+
+/* ---------- Music ---------- */
+const audio = $('#audio');
+const musicBtn = $('#musicBtn');
+
+function playMusic() {
+  const savedPos = parseFloat(localStorage.getItem(STORAGE_KEY_MUSICPOS)) || 0;
+  if (savedPos) audio.currentTime = savedPos;
+  audio.play().then(() => {
+    musicBtn.classList.add('playing');
+    localStorage.setItem(STORAGE_KEY_MUSIC, '1');
+  }).catch(() => {});
+}
+function pauseMusic() {
+  audio.pause();
+  musicBtn.classList.remove('playing');
+  localStorage.setItem(STORAGE_KEY_MUSIC, '0');
+}
+musicBtn.addEventListener('click', (e) => {
+  if (musicBtn._dragged) { musicBtn._dragged = false; return; }
+  audio.paused ? playMusic() : pauseMusic();
+});
+
+// Save position
+setInterval(() => {
+  if (!audio.paused) localStorage.setItem(STORAGE_KEY_MUSICPOS, audio.currentTime);
+}, 1500);
+
+// Resume on reload (if opened before)
+window.addEventListener('load', () => {
+  if (localStorage.getItem(STORAGE_KEY_MUSIC) === '1' && !$('#main').classList.contains('hidden')) {
+    playMusic();
+  }
+});
+
+/* ---------- Draggable music button ---------- */
+(() => {
+  let startX, startY, origX, origY, dragging = false;
+  const onDown = (e) => {
+    dragging = true;
+    musicBtn._dragged = false;
+    const p = e.touches ? e.touches[0] : e;
+    startX = p.clientX; startY = p.clientY;
+    const rect = musicBtn.getBoundingClientRect();
+    origX = rect.left; origY = rect.top;
+    musicBtn.style.transition = 'none';
+  };
+  const onMove = (e) => {
+    if (!dragging) return;
+    const p = e.touches ? e.touches[0] : e;
+    const dx = p.clientX - startX, dy = p.clientY - startY;
+    if (Math.abs(dx) + Math.abs(dy) > 5) musicBtn._dragged = true;
+    let nx = origX + dx, ny = origY + dy;
+    nx = Math.max(8, Math.min(window.innerWidth - 60, nx));
+    ny = Math.max(8, Math.min(window.innerHeight - 60, ny));
+    musicBtn.style.left = nx + 'px';
+    musicBtn.style.top = ny + 'px';
+    musicBtn.style.right = 'auto';
+    musicBtn.style.bottom = 'auto';
+  };
+  const onUp = () => { dragging = false; musicBtn.style.transition = ''; };
+  musicBtn.addEventListener('mousedown', onDown);
+  musicBtn.addEventListener('touchstart', onDown, { passive: true });
+  window.addEventListener('mousemove', onMove);
+  window.addEventListener('touchmove', onMove, { passive: true });
+  window.addEventListener('mouseup', onUp);
+  window.addEventListener('touchend', onUp);
+})();
+
+/* ---------- Countdown ---------- */
+function startCountdown() {
+  const target = DATA.date && DATA.date.weddingDate ? new Date(DATA.date.weddingDate).getTime() : 0;
+  if (!target) return;
+  const tick = () => {
+    const diff = Math.max(0, target - Date.now());
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    $('#cdDays').textContent = d;
+    $('#cdHours').textContent = String(h).padStart(2,'0');
+    $('#cdMin').textContent = String(m).padStart(2,'0');
+    $('#cdSec').textContent = String(s).padStart(2,'0');
+  };
+  tick();
+  setInterval(tick, 1000);
+}
+
+/* ---------- Reveal on scroll ---------- */
+let revealObserver;
+function observeReveals() {
+  if (!revealObserver) {
+    revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          revealObserver.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.15 });
+  }
+  $$('.reveal:not(.in)').forEach(el => revealObserver.observe(el));
+}
+
+/* ---------- Parallax ---------- */
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      const y = window.scrollY;
+      $$('.section[data-bg]').forEach(s => {
+        const rect = s.getBoundingClientRect();
+        if (rect.bottom > 0 && rect.top < window.innerHeight) {
+          const offset = (rect.top * 0.15);
+          s.style.backgroundPosition = `center calc(50% + ${offset}px)`;
+        }
+      });
+      ticking = false;
     });
+    ticking = true;
+  }
+});
 
-    // 5. INTERSECTION OBSERVER ANIMATION MOTOR
-    function initializeIntersectionObserver() {
-        const elementsToAnimate = document.querySelectorAll(".reveal-element");
-        const animationConfig = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+/* ---------- RSVP / Comments ---------- */
+$('#rsvpForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = $('#rName').value.trim();
+  const msg = $('#rMsg').value.trim();
+  const status = $('#rStatus').value;
+  if (!name || !msg || !status) return;
+  const comments = getComments();
+  comments.unshift({ name, msg, status, time: Date.now() });
+  localStorage.setItem(STORAGE_KEY_COMMENTS, JSON.stringify(comments));
+  e.target.reset();
+  renderComments();
+  showToast('Terima kasih atas ucapannya');
+});
 
-        const viewObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("active");
-                    // Optimization Unobserve Once Triggered
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, animationConfig);
+function getComments() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY_COMMENTS)) || []; }
+  catch { return []; }
+}
 
-        elementsToAnimate.forEach(node => viewObserver.observe(node));
-    }
+function formatTime(ts) {
+  const diff = Date.now() - ts;
+  if (diff < 60000) return 'Baru saja';
+  if (diff < 3600000) return Math.floor(diff/60000) + ' menit lalu';
+  if (diff < 86400000) return Math.floor(diff/3600000) + ' jam lalu';
+  return new Date(ts).toLocaleDateString('id-ID', { day:'numeric', month:'short', year:'numeric' });
+}
 
-    // 6. HIGH FREQUENCY REALTIME COUNTDOWN MATRIX ENGINE
-    function startCountdownClock(targetDateIsoString) {
-        const targetMs = new Date(targetDateIsoString).getTime();
+function renderComments() {
+  const list = getComments();
+  const wrap = $('#comments');
+  wrap.innerHTML = '';
+  let hadir = 0, tidak = 0;
+  list.forEach(c => {
+    if (c.status === 'hadir') hadir++; else tidak++;
+    const el = document.createElement('div');
+    el.className = 'comment';
+    el.innerHTML = `
+      <div class="c-head">
+        <span class="c-name">${escapeHtml(c.name)}</span>
+        <span class="c-status ${c.status}">${c.status === 'hadir' ? 'Hadir' : 'Tidak Hadir'}</span>
+      </div>
+      <div class="c-msg">${escapeHtml(c.msg)}</div>
+      <div class="c-time">${formatTime(c.time)}</div>
+    `;
+    wrap.appendChild(el);
+  });
+  $('#stHadir').textContent = hadir;
+  $('#stTidak').textContent = tidak;
+  $('#stKom').textContent = list.length;
+}
 
-        function evaluateTime() {
-            const currentMs = new Date().getTime();
-            const distance = targetMs - currentMs;
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
 
-            if (distance < 0) {
-                clearInterval(intervalId);
-                document.querySelector(".countdown-board").innerHTML = "<p class='text-gold'>Hari Bahagia Telah Tiba!</p>";
-                return;
-            }
-
-            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerText = d < 10 ? "0" + d : d;
-            document.getElementById("hours").innerText = h < 10 ? "0" + h : h;
-            document.getElementById("minutes").innerText = m < 10 ? "0" + m : m;
-            document.getElementById("seconds").innerText = s < 10 ? "0" + s : s;
-        }
-
-        evaluateTime(); // Pre-execution fast load
-        const intervalId = setInterval(evaluateTime, 1000);
-    }
-
-    // 7. DRAGGABLE FLOATING CONTROLLER PARADIGM LAYER (SUPPORT MOUSE & TOUCH SENSITIVE)
-    let activeDrag = false;
-    let currentX;
-    let currentY;
-    let initialX;
-    let initialY;
-    let xOffset = 0;
-    let yOffset = 0;
-
-    audioContainer.addEventListener("touchstart", dragStart, { passive: true });
-    document.addEventListener("touchend", dragEnd, { passive: true });
-    document.addEventListener("touchmove", drag, { passive: false });
-
-    audioContainer.addEventListener("mousedown", dragStart, false);
-    document.addEventListener("mouseup", dragEnd, false);
-    document.addEventListener("mousemove", drag, false);
-
-    function dragStart(e) {
-        if (e.type === "touchstart") {
-            initialX = e.touches[0].clientX - xOffset;
-            initialY = e.touches[0].clientY - yOffset;
-        } else {
-            initialX = e.clientX - xOffset;
-            initialY = e.clientY - yOffset;
-        }
-        if (e.target === audioContainer || audioContainer.contains(e.target)) activeDrag = true;
-    }
-
-    function dragEnd() {
-        initialX = currentX;
-        initialY = currentY;
-        activeDrag = false;
-    }
-
-    function drag(e) {
-        if (!activeDrag) return;
-        
-        if (e.type === "touchmove") {
-            currentX = e.touches[0].clientX - initialX;
-            currentY = e.touches[0].clientY - initialY;
-        } else {
-            e.preventDefault(); // Lock cursor scroll leakage on desktop dragging
-            currentX = e.clientX - initialX;
-            currentY = e.clientY - initialY;
-        }
-
-        xOffset = currentX;
-        yOffset = currentY;
-
-        // Perform boundary tracking transformations
-        audioContainer.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
-    }
-
-    // 8. CLIPBOARD CONTROLLER WITH ANIMATED LUXURY TOAST WIDGET
-    function attachClipboardListeners() {
-        document.querySelectorAll(".btn-copy").forEach(btn => {
-            btn.addEventListener("click", (e) => {
-                const textToCopy = e.target.getAttribute("data-copy");
-                navigator.clipboard.writeText(textToCopy).then(() => {
-                    fireToastNotification();
-                });
-            });
-        });
-    }
-
-    function fireToastNotification() {
-        const toast = document.getElementById("toast");
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 3000);
-    }
-
-    // 9. RE-ENGINEERED RSVP DATA STORAGE MACHINE WITHOUT BACKEND
-    const rsvpForm = document.getElementById("rsvp-form");
-    rsvpForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const inputName = document.getElementById("rsvp-name").value.trim();
-        const inputStatus = document.getElementById("rsvp-status").value;
-        const inputMessage = document.getElementById("rsvp-message").value.trim();
-
-        if (!inputName || !inputStatus || !inputMessage) return;
-
-        const newCommentPayload = {
-            id: Date.now(),
-            name: inputName,
-            status: inputStatus,
-            message: inputMessage,
-            timestamp: new Date().toLocaleString("id-ID", { dateStyle: "short", timeStyle: "short" })
-        };
-
-        let currentHistory = JSON.parse(localStorage.getItem("momenin_rsvp_data")) || [];
-        currentHistory.unshift(newCommentPayload); // Newest elements go first
-        localStorage.setItem("momenin_rsvp_data", JSON.stringify(currentHistory));
-
-        rsvpForm.reset();
-        renderLiveComments();
-    });
-
-    function renderLiveComments() {
-        const commentsWrapper = document.getElementById("comments-timeline");
-        const totalCountEl = document.getElementById("count-total");
-        const hadirCountEl = document.getElementById("count-hadir");
-        const tidakCountEl = document.getElementById("count-tidak");
-
-        const dataCollection = JSON.parse(localStorage.getItem("momenin_rsvp_data")) || [];
-
-        // Counters Calculation Engine
-        let totalHadir = 0;
-        let totalAbsen = 0;
-        commentsWrapper.innerHTML = "";
-
-        if (dataCollection.length === 0) {
-            commentsWrapper.innerHTML = `<p class="text-muted text-center" style="padding: 1rem;">Belum ada ucapan. Menjadi yang pertama?</p>`;
-        } else {
-            dataCollection.forEach(node => {
-                if (node.status === "Hadir") totalHadir++;
-                else totalAbsen++;
-
-                const statusClass = node.status === "Hadir" ? "hadir" : "absen";
-
-                const cardNode = document.createElement("div");
-                cardNode.className = "comment-card glassmorphism";
-                cardNode.innerHTML = `
-                    <div class="comment-header">
-                        <span class="comment-name">${escapeHtml(node.name)}</span>
-                        <span class="badge-status ${statusClass}">${node.status}</span>
-                    </div>
-                    <p class="comment-text">${escapeHtml(node.message)}</p>
-                    <div class="comment-time">${node.timestamp} WIB</div>
-                `;
-                commentsWrapper.appendChild(cardNode);
-            });
-        }
-
-        totalCountEl.innerText = dataCollection.length;
-        hadirCountEl.innerText = totalHadir;
-        tidakCountEl.innerText = totalAbsen;
-    }
-
-    // Security sanitization method against XSS injection vulnerabilities
-    function escapeHtml(string) {
-        return string
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-    }
+/* ---------- Init ---------- */
+loadData().then(() => {
+  startCountdown();
+  observeReveals();
 });

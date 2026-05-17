@@ -1,0 +1,73 @@
+{
+  "couple": {
+    "maleName": "Firin",
+    "femaleName": "Sihah",
+    "initial": "FS"
+  },
+
+  "guest": {
+    "defaultName": "Tamu Undangan"
+  },
+
+  "date": {
+    "weddingDate": "2025-10-20T08:00:00"
+  },
+
+  "music": {
+    "src": "assets/music/music.mp3"
+  },
+
+  "backgrounds": {
+    "cover": "assets/images/cover.jpg",
+    "hero": "assets/images/hero.jpg",
+    "closing": "assets/images/closing.jpg"
+  },
+
+  "quote": {
+    "arabic": "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا",
+    "translation": "Dan di antara tanda-tanda kekuasaan-Nya...",
+    "reference": "QS Ar Rum : 21"
+  },
+
+  "groom": {
+    "name": "Firin",
+    "image": "assets/images/groom.jpg",
+    "father": "Bapak Firdaus",
+    "mother": "Ibu Rahma"
+  },
+
+  "bride": {
+    "name": "Sihah",
+    "image": "assets/images/bride.jpg",
+    "father": "Bapak Ahmad",
+    "mother": "Ibu Aisyah"
+  },
+
+  "akad": {
+    "date": "Senin, 20 Oktober 2025",
+    "time": "08:00 WIB",
+    "address": "Gedung Mawar Jakarta",
+    "maps": "https://maps.google.com"
+  },
+
+  "resepsi": {
+    "date": "Senin, 20 Oktober 2025",
+    "time": "10:00 WIB",
+    "address": "Gedung Mawar Jakarta",
+    "maps": "https://maps.google.com"
+  },
+
+  "gift": [
+    {
+      "bank": "BCA",
+      "name": "Firin",
+      "number": "123456789"
+    },
+
+    {
+      "bank": "Mandiri",
+      "name": "Sihah",
+      "number": "987654321"
+    }
+  ]
+}

@@ -2171,9 +2171,9 @@
     /* Container utama galeri */
     .momenin-gallery {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsif */
-        gap: 15px; /* Jarak antar foto */
-        padding: 20px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px; /* Jarak antar foto */
+        padding: 10px;
         max-width: 1200px;
         margin: 0 auto;
     }
@@ -2181,10 +2181,10 @@
     /* Styling setiap kotak foto */
     .momenin-gallery .galeri-item {
         overflow: hidden;
-        border-radius: 12px; /* Sudut membulat ala flat design */
+        border-radius: 8px; /* Sudut membulat ala flat design */
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        aspect-ratio: 3/4; /* Memaksa rasio foto agar seragam, sesuaikan jika perlu */
+        width: 100%;
     }
 
     .momenin-gallery .galeri-item:hover {
@@ -2195,8 +2195,8 @@
     /* Styling gambar di dalam kotak */
     .momenin-gallery img {
         width: 100%;
-        height: 100%;
-        object-fit: cover; /* Agar gambar tidak gepeng */
+        height: auto;
+		border-radius: 8px;
         display: block;
         transition: transform 0.5s ease;
     }

@@ -2168,48 +2168,37 @@
 			transform: scale(1.0);
 			/* Ensures correct scaling */
 		}
-    /* Container utama galeri */
-    .momenin-gallery {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-		grid-auto-flow: dense; /* Mengisi area kosong secara otomatis */
-        gap: 10px; /* Jarak antar foto */
-        padding: 10px;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-	
-/* Khusus untuk foto horizontal agar melebar 2 kolom */
-    .galeri-item.horizontal {
-        grid-column: span 2; 
-    }
-    /* Styling setiap kotak foto */
-    .momenin-gallery .galeri-item {
-        overflow: hidden;
-        border-radius: 8px; /* Sudut membulat ala flat design */
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        width: 100%;
-    }
+/* Container utama galeri */
+        .momenin-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 kolom */
+            grid-auto-flow: dense; /* Otomatis mengisi area kosong */
+            gap: 10px; /* Jarak antar foto */
+            padding: 10px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-    .momenin-gallery .galeri-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-    }
+        /* Container setiap item foto */
+        .galeri-item {
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 1 / 1; /* Rasio kotak standar */
+        }
 
-    /* Styling gambar di dalam kotak */
-    .momenin-gallery img {
-        width: 100%;
-        height: auto;
-		border-radius: 8px;
-        display: block;
-        transition: transform 0.5s ease;
-    }
+        /* Kelas khusus untuk foto horizontal agar melebar 2 kolom */
+        .galeri-item.horizontal {
+            grid-column: span 2;
+            aspect-ratio: 2 / 1; /* Rasio untuk foto lebar */
+        }
 
-    /* Efek zoom saat dihover */
-    .momenin-gallery .galeri-item:hover img {
-        transform: scale(1.05);
-    }
+        /* Styling gambar agar pas di dalam container */
+        .galeri-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
 	</style>
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0, viewport-fit=cover maximum-scale=1.0, user-scalable=no">

@@ -2168,6 +2168,48 @@
 			transform: scale(1.0);
 			/* Ensures correct scaling */
 		}
+		    /* Container utama galeri */
+    .momenin-gallery {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+		grid-auto-flow: dense; /* Mengisi area kosong secara otomatis */
+        gap: 10px; /* Jarak antar foto */
+        padding: 10px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+	
+/* Khusus untuk foto horizontal agar melebar 2 kolom */
+    .galeri-item.horizontal {
+        grid-column: span 2; 
+    }
+    /* Styling setiap kotak foto */
+    .momenin-gallery .galeri-item {
+        overflow: hidden;
+        border-radius: 8px; /* Sudut membulat ala flat design */
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        width: 100%;
+    }
+
+    .momenin-gallery .galeri-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+
+    /* Styling gambar di dalam kotak */
+    .momenin-gallery img {
+        width: 100%;
+        height: auto;
+		border-radius: 8px;
+        display: block;
+        transition: transform 0.5s ease;
+    }
+
+    /* Efek zoom saat dihover */
+    .momenin-gallery .galeri-item:hover img {
+        transform: scale(1.05);
+    }
 	</style>
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0, viewport-fit=cover maximum-scale=1.0, user-scalable=no">
@@ -3535,117 +3577,59 @@ Untuk itu insyaAllah kami mengikrarkan JANJI SUCI pernikahan pada hari Jumat 24 
 								data-widget_type="gallery.default">
 								<div class="elementor-widget-container">
 									<div class="elementor-gallery__container">
-										<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-											href="wp-content/uploads/2024/09/11.jpg"
-											data-elementor-open-lightbox="yes"
-											data-elementor-lightbox-slideshow="5660ac10"
-											data-elementor-lightbox-title=".jpg"
-											data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjM2MjYsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNFwvMDlcL0ZvdG8tMi53ZWJwIiwic2xpZGVzaG93IjoiNTY2MGFjMTAifQ%3D%3D">
-											<div class="e-gallery-image elementor-gallery-item__image"
-												data-thumbnail="wp-content/uploads/2024/09/11.jpg"
-												data-width="1024" data-height="682" aria-label="" role="img"></div>
-											<div class="elementor-gallery-item__overlay"></div>
-										</a>
-										<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-											href="wp-content/uploads/2024/09/1.jpg"
-											data-elementor-open-lightbox="yes"
-											data-elementor-lightbox-slideshow="5660ac10"
-											data-elementor-lightbox-title=".jpg"
-											data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjM2MjYsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNFwvMDlcL0ZvdG8tMi53ZWJwIiwic2xpZGVzaG93IjoiNTY2MGFjMTAifQ%3D%3D">
-											<div class="e-gallery-image elementor-gallery-item__image"
-												data-thumbnail="wp-content/uploads/2024/09/1.jpg"
-												data-width="1024" data-height="682" aria-label="" role="img"></div>
-											<div class="elementor-gallery-item__overlay"></div>
-										</a>
-										<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-											href="wp-content/uploads/2024/09/2.jpg"
-											data-elementor-open-lightbox="yes"
-											data-elementor-lightbox-slideshow="5660ac10"
-											data-elementor-lightbox-title=".jpg"
-											data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjM2MjYsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNFwvMDlcL0ZvdG8tMi53ZWJwIiwic2xpZGVzaG93IjoiNTY2MGFjMTAifQ%3D%3D">
-											<div class="e-gallery-image elementor-gallery-item__image"
-												data-thumbnail="wp-content/uploads/2024/09/2.jpg"
-												data-width="1024" data-height="682" aria-label="" role="img"></div>
-											<div class="elementor-gallery-item__overlay"></div>
-										</a><a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-											href="wp-content/uploads/2024/09/5.jpg"
-											data-elementor-open-lightbox="yes"
-											data-elementor-lightbox-slideshow="5660ac10"
-											data-elementor-lightbox-title=".jpg"
-											data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjM2MjYsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNFwvMDlcL0ZvdG8tMi53ZWJwIiwic2xpZGVzaG93IjoiNTY2MGFjMTAifQ%3D%3D">
-											<div class="e-gallery-image elementor-gallery-item__image"
-												data-thumbnail="wp-content/uploads/2024/09/5.jpg"
-												data-width="1024" data-height="682" aria-label="" role="img"></div>
-											<div class="elementor-gallery-item__overlay"></div>
-										</a>
-										<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-											href="wp-content/uploads/2024/09/3.jpg"
-											data-elementor-open-lightbox="yes"
-											data-elementor-lightbox-slideshow="5660ac10"
-											data-elementor-lightbox-title=".jpg"
-											data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjM2MjYsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNFwvMDlcL0ZvdG8tMi53ZWJwIiwic2xpZGVzaG93IjoiNTY2MGFjMTAifQ%3D%3D">
-											<div class="e-gallery-image elementor-gallery-item__image"
-												data-thumbnail="wp-content/uploads/2024/09/3.jpg"
-												data-width="1024" data-height="682" aria-label="" role="img"></div>
-											<div class="elementor-gallery-item__overlay"></div>
-										</a>
-										
-										<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-											href="wp-content/uploads/2024/09/4.jpg"
-											data-elementor-open-lightbox="yes"
-											data-elementor-lightbox-slideshow="5660ac10"
-											data-elementor-lightbox-title=".jpg"
-											data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjM2MjYsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNFwvMDlcL0ZvdG8tMi53ZWJwIiwic2xpZGVzaG93IjoiNTY2MGFjMTAifQ%3D%3D">
-											<div class="e-gallery-image elementor-gallery-item__image"
-												data-thumbnail="wp-content/uploads/2024/09/4.jpg"
-												data-width="1024" data-height="682" aria-label="" role="img"></div>
-											<div class="elementor-gallery-item__overlay"></div>
-										</a>
-										
-										<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-											href="wp-content/uploads/2024/09/6.jpg"
-											data-elementor-open-lightbox="yes"
-											data-elementor-lightbox-slideshow="5660ac10"
-											data-elementor-lightbox-title=".jpg"
-											data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjM2MjYsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNFwvMDlcL0ZvdG8tMi53ZWJwIiwic2xpZGVzaG93IjoiNTY2MGFjMTAifQ%3D%3D">
-											<div class="e-gallery-image elementor-gallery-item__image"
-												data-thumbnail="wp-content/uploads/2024/09/6.jpg"
-												data-width="1024" data-height="682" aria-label="" role="img"></div>
-											<div class="elementor-gallery-item__overlay"></div>
-										</a>
-										<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-											href="wp-content/uploads/2024/09/7.jpg"
-											data-elementor-open-lightbox="yes"
-											data-elementor-lightbox-slideshow="5660ac10"
-											data-elementor-lightbox-title=".jpg"
-											data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjM2MjYsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNFwvMDlcL0ZvdG8tMi53ZWJwIiwic2xpZGVzaG93IjoiNTY2MGFjMTAifQ%3D%3D">
-											<div class="e-gallery-image elementor-gallery-item__image"
-												data-thumbnail="wp-content/uploads/2024/09/7.jpg"
-												data-width="1024" data-height="682" aria-label="" role="img"></div>
-											<div class="elementor-gallery-item__overlay"></div>
-										</a>
-										<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-											href="wp-content/uploads/2024/09/8.jpg"
-											data-elementor-open-lightbox="yes"
-											data-elementor-lightbox-slideshow="5660ac10"
-											data-elementor-lightbox-title=".jpg"
-											data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjM2MjYsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNFwvMDlcL0ZvdG8tMi53ZWJwIiwic2xpZGVzaG93IjoiNTY2MGFjMTAifQ%3D%3D">
-											<div class="e-gallery-image elementor-gallery-item__image"
-												data-thumbnail="wp-content/uploads/2024/09/8.jpg"
-												data-width="1024" data-height="682" aria-label="" role="img"></div>
-											<div class="elementor-gallery-item__overlay"></div>
-										</a>
-										<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-											href="wp-content/uploads/2024/09/13.jpg"
-											data-elementor-open-lightbox="yes"
-											data-elementor-lightbox-slideshow="5660ac10"
-											data-elementor-lightbox-title=".jpg"
-											data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjM2MjYsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNFwvMDlcL0ZvdG8tMi53ZWJwIiwic2xpZGVzaG93IjoiNTY2MGFjMTAifQ%3D%3D">
-											<div class="e-gallery-image elementor-gallery-item__image"
-												data-thumbnail="wp-content/uploads/2024/09/13.jpg"
-												data-width="1024" data-height="682" aria-label="" role="img"></div>
-											<div class="elementor-gallery-item__overlay"></div>
-										</a>
+										  <!-- Foto 1 -->
+     <!-- Foto 11 -->
+  <div class="galeri-item">
+    <img src="wp-content/uploads/2024/09/11.jpg" alt="Momenin Gallery 11" loading="lazy">
+  </div>
+  <div class="galeri-item">
+    <img src="wp-content/uploads/2024/09/1.jpg" alt="Momenin Gallery 1" loading="lazy">
+  </div>
+
+  <!-- Foto 2 -->
+  <div class="galeri-item">
+    <img src="wp-content/uploads/2024/09/2.jpg" alt="Momenin Gallery 2" loading="lazy">
+  </div>
+
+  <!-- Foto 3 -->
+  <div class="galeri-item horizontal">
+    <img src="wp-content/uploads/2024/09/3.jpg" alt="Momenin Gallery 3" loading="lazy">
+  </div>
+
+  <!-- Foto 4 -->
+  <div class="galeri-item">
+    <img src="wp-content/uploads/2024/09/4.jpg" alt="Momenin Gallery 4" loading="lazy">
+  </div>
+
+  <!-- Foto 5 -->
+  <div class="galeri-item">
+    <img src="wp-content/uploads/2024/09/5.jpg" alt="Momenin Gallery 5" loading="lazy">
+  </div>
+
+  <!-- Foto 6 -->
+  <div class="galeri-item">
+    <img src="wp-content/uploads/2024/09/6.jpg" alt="Momenin Gallery 6" loading="lazy">
+  </div>
+
+  <!-- Foto 7 -->
+  <div class="galeri-item horizontal">
+    <img src="wp-content/uploads/2024/09/7.jpg" alt="Momenin Gallery 7" loading="lazy">
+  </div>
+
+  <!-- Foto 8 -->
+  <div class="galeri-item">
+    <img src="wp-content/uploads/2024/09/8.jpg" alt="Momenin Gallery 8" loading="lazy">
+  </div>
+
+  <!-- Foto 9 -->
+  <div class="galeri-item">
+    <img src="wp-content/uploads/2024/09/12.jpg" alt="Momenin Gallery 9" loading="lazy">
+  </div>
+
+  <!-- Foto 10 -->
+  <div class="galeri-item">
+    <img src="wp-content/uploads/2024/09/13.jpg" alt="Momenin Gallery 10" loading="lazy">
+  </div>
 									</div>
 								</div>
 							</div>

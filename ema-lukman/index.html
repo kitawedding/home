@@ -2172,12 +2172,17 @@
     .momenin-gallery {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+		grid-auto-flow: dense; /* Mengisi area kosong secara otomatis */
         gap: 10px; /* Jarak antar foto */
         padding: 10px;
         max-width: 1200px;
         margin: 0 auto;
     }
-
+	
+/* Khusus untuk foto horizontal agar melebar 2 kolom */
+    .galeri-item.horizontal {
+        grid-column: span 2; 
+    }
     /* Styling setiap kotak foto */
     .momenin-gallery .galeri-item {
         overflow: hidden;
@@ -3588,7 +3593,7 @@ Untuk itu insyaAllah kami mengikrarkan JANJI SUCI pernikahan pada hari Jumat 24 
   </div>
 
   <!-- Foto 3 -->
-  <div class="galeri-item">
+  <div class="galeri-item horizontal">
     <img src="wp-content/uploads/2024/09/3.jpg" alt="Momenin Gallery 3" loading="lazy">
   </div>
 
@@ -3608,7 +3613,7 @@ Untuk itu insyaAllah kami mengikrarkan JANJI SUCI pernikahan pada hari Jumat 24 
   </div>
 
   <!-- Foto 7 -->
-  <div class="galeri-item">
+  <div class="galeri-item horizontal">
     <img src="wp-content/uploads/2024/09/7.jpg" alt="Momenin Gallery 7" loading="lazy">
   </div>
 
@@ -3619,12 +3624,12 @@ Untuk itu insyaAllah kami mengikrarkan JANJI SUCI pernikahan pada hari Jumat 24 
 
   <!-- Foto 9 -->
   <div class="galeri-item">
-    <img src="wp-content/uploads/2024/09/9.jpg" alt="Momenin Gallery 9" loading="lazy">
+    <img src="wp-content/uploads/2024/09/12.jpg" alt="Momenin Gallery 9" loading="lazy">
   </div>
 
   <!-- Foto 10 -->
   <div class="galeri-item">
-    <img src="wp-content/uploads/2024/09/10.jpg" alt="Momenin Gallery 10" loading="lazy">
+    <img src="wp-content/uploads/2024/09/13.jpg" alt="Momenin Gallery 10" loading="lazy">
   </div>
 
 </div>

@@ -3301,6 +3301,284 @@
 							</div>
 						</div>
 					</div>
+					<div class="elementor-element elementor-element-49349b69 e-con-full revealatas e-flex e-con e-child"
+						data-id="49349b69" data-element_type="container"
+						data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-element elementor-element-1c3099a2 elementor-widget elementor-widget-spacer"
+							data-id="1c3099a2" data-element_type="widget" data-widget_type="spacer.default">
+							<div class="elementor-widget-container">
+								<div class="elementor-spacer">
+									<div class="elementor-spacer-inner"></div>
+								</div>
+							</div>
+						</div>
+						<div class="elementor-element elementor-element-5f1d4bf4 revealatas elementor-widget elementor-widget-text-editor"
+							data-id="5f1d4bf4" data-element_type="widget" data-widget_type="text-editor.default">
+							<div class="elementor-widget-container">
+								<p>Ucapkan Sesuatu</p>
+							</div>
+						</div>
+						<div class="elementor-element elementor-element-66a108ca revealatas elementor-widget elementor-widget-weddingpress-kit2"
+							data-id="66a108ca" data-element_type="widget"
+							data-settings="{&quot;attendence&quot;:&quot;yes&quot;,&quot;show_date&quot;:&quot;yes&quot;}"
+							data-widget_type="weddingpress-kit2.default">
+							<div class="elementor-widget-container">
+							<style>
+								.stats {
+									display: flex;
+									justify-content: space-around;
+									margin: 10px 0;
+									text-align: center;
+								}
+
+								.stat-box {
+									background: white;
+									width: 90px;
+									height: 90px;
+									border-radius: 8px;
+									align-content: center;
+									box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+								}
+
+								.stat-number {
+									font-size: 24px;
+									font-weight: bold;
+									color: #865c00;
+								}
+
+								form {
+									background: white;
+									padding: 20px;
+									border-radius: 8px;
+									box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+								}
+
+								label {
+									display: block;
+									margin-bottom: 8px;
+									font-weight: bold;
+								}
+
+								input,
+								textarea,
+								select {
+									width: 100%;
+									padding: 10px;
+									margin-bottom: 15px;
+									border: 1px solid #ddd;
+									border-radius: 4px;
+									box-sizing: border-box;
+								}
+
+								textarea {
+									height: 100px;
+									resize: vertical;
+								}
+
+								.button1 {
+									background-color: #d89400;
+									color: white;
+									border: none;
+									padding: 12px 20px;
+									border-radius: 4px;
+									cursor: pointer;
+									font-size: 16px;
+									width: 100%;
+								}
+
+								.button1:hover {
+									background-color: #865c00;
+								}
+
+								.wishes-container {
+									margin-top: 30px;
+									max-width: 100%;
+									height: 300px;
+									/* fixed height to enable scrolling */
+									padding: 10px;
+									overflow-y: auto;
+								}
+
+								.wish {
+									max-width: 100%;
+									padding: 5px;
+									margin-bottom: 5px;
+									border-radius: 14px;
+									box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+								}
+
+								.wish-name {
+									font-weight: bold;
+									color: #be8200;
+									margin-bottom: 2px;
+								}
+
+								.wish-message {
+									margin-bottom: 2px;
+									color: #ffffff;
+								}
+
+								.wish-attendance {
+									color: #b87d00;
+								}
+
+								.attendance-icon {
+									display: inline-block;
+									width: 20px;
+									height: 20px;
+									text-align: center;
+									line-height: 20px;
+									border-radius: 50%;
+									margin-right: 5px;
+								}
+
+								.wish-attendance span[class="attendance-icon"] {
+									/* Checkmark (Hadir) */
+									background-color: #4CAF50;
+									color: white;
+								}
+
+								.wish-attendance span[class="attendance-icon"] {
+									/* Cross (Tidak Hadir) - will override if Hadir */
+									background-color: #f44336;
+								}
+							</style>
+							<div class='cui-wrapper cui-facebook cui-border' style='overflow: hidden;'>
+								<div class="stats">
+									<div class="stat-box">
+										<div class="stat-number" id="comment-count">0</div>
+										<div>Comment</div>
+									</div>
+									<div class="stat-box">
+										<div class="stat-number" id="attend-count">0</div>
+										<div>Hadir</div>
+									</div>
+									<div class="stat-box">
+										<div class="stat-number" id="not-attend-count">0</div>
+										<div>Tidak Hadir</div>
+									</div>
+								</div>
+								<div class="cui-clearfix cui-wrap-form ">
+									<div id='cui-container-form-27181' class='cui-container-form cui-no-login'>
+										<div id='respond-27181' class='respond cui-clearfix'>
+											<form id="wishForm">
+												<input type="text" id="name" name="name" required placeholder="Nama">
+												<textarea id="message" name="message" required
+													placeholder="Ucapan"></textarea>
+												<select id="attendance" name="attendance" required>
+													<option value="" disabled selected hidden>Pilih Konfirmasi Kehadiran
+													</option>
+													<option value="Hadir">Hadir</option>
+													<option value="Tidak Hadir">Tidak Hadir</option>
+												</select>
+
+												<button type="submit" class="button1">KIRIM</button>
+											</form>
+										</div>
+									</div><!--.cui-container-form-->
+								</div><!--.cui-clearfix cui-relative-->
+							</div><!--.cui-wrap-form-->
+							<div class="wishes-container" id="wishesContainer">
+								<!-- Wishes will be loaded here -->
+							</div>
+							<script>
+								// Google Apps Script Web App URL
+								const scriptUrl = 'https://script.google.com/macros/s/AKfycbyKNRIeLDohcginOMSIPMyiw9ReczoKLfpu6FhOUMxHqBJh_L-RMeS7ociAya_TEBWr/exec';
+
+								document.addEventListener('DOMContentLoaded', function () {
+									// Load existing wishes when page loads
+									loadWishes();
+
+									// Handle form submission
+									document.getElementById('wishForm').addEventListener('submit', function (e) {
+										e.preventDefault();
+
+										const name = document.getElementById('name').value;
+										const message = document.getElementById('message').value;
+										const attendance = document.getElementById('attendance').value;
+
+										// Send data to Google Sheets
+										fetch(scriptUrl, {
+											method: 'POST',
+											mode: 'no-cors',
+											headers: {
+												'Content-Type': 'application/json',
+											},
+											body: JSON.stringify({
+												action: 'add',
+												name: name,
+												message: message,
+												attendance: attendance
+											})
+										})
+											.then(() => {
+												// Clear form
+												document.getElementById('wishForm').reset();
+
+												// Reload wishes
+												loadWishes();
+											})
+											.catch(error => {
+												console.error('Error:', error);
+											});
+									});
+								});
+
+								function loadWishes() {
+									// Get wishes from Google Sheets
+									fetch(`${scriptUrl}?action=get`)
+										.then(response => response.json())
+										.then(data => {
+											// Update counts
+											document.getElementById('comment-count').textContent = data.length;
+											document.getElementById('attend-count').textContent =
+												data.filter(item => item.attendance === 'Hadir').length;
+											document.getElementById('not-attend-count').textContent =
+												data.filter(item => item.attendance === 'Tidak Hadir').length;
+
+											// Display wishes
+											const container = document.getElementById('wishesContainer');
+											container.innerHTML = '';
+
+											data.reverse().forEach(wish => {
+												const wishElement = document.createElement('div');
+												wishElement.className = 'wish';
+
+												// Determine icon based on attendance
+												const attendanceIcon = wish.attendance === 'Hadir'
+													? '<span class="attendance-icon" style="background-color: #4CAF50">✓</span>'
+													: '<span class="attendance-icon" style="background-color: #f44336">✗</span>';
+
+												wishElement.innerHTML = `
+														<div class="wish-name wish-attendance" style="font-color: white">${wish.name} ${attendanceIcon}</div>
+														<div class="wish-message" style="font-color: white">${wish.message}</div>`;
+												container.appendChild(wishElement);
+											});
+										})
+										.catch(error => {
+											console.error('Error:', error);
+										});
+								}
+							</script>
+						</div>
+						</div>
+						<div class="elementor-element elementor-element-42730ff9 elementor-widget elementor-widget-spacer"
+							data-id="42730ff9" data-element_type="widget" data-widget_type="spacer.default">
+							<div class="elementor-widget-container">
+								<div class="elementor-spacer">
+									<div class="elementor-spacer-inner"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="elementor-element elementor-element-c857372 elementor-widget elementor-widget-spacer"
+						data-id="c857372" data-element_type="widget" data-widget_type="spacer.default">
+						<div class="elementor-widget-container">
+							<div class="elementor-spacer">
+								<div class="elementor-spacer-inner"></div>
+							</div>
+						</div>
+					</div>
 
 				</div>
 			</div>

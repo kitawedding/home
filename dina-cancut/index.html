@@ -3151,41 +3151,36 @@
 						data-widget_type="gallery.default">
 						<div class="elementor-widget-container">
 							<div class="elementor-gallery__container">
+								<!-- Bagian CSS -->
 								<style>
-									/* Container utama galeri */
 									.momenin-gallery {
 										display: grid;
 										grid-template-columns: repeat(2, 1fr);
 										grid-auto-flow: dense;
-										/* Mengisi area kosong secara otomatis */
 										gap: 10px;
-										/* Jarak antar foto */
 										padding: 10px;
 										max-width: 1200px;
 										margin: 0 auto;
 									}
 
-									/* Khusus untuk foto horizontal agar melebar 2 kolom */
-									.galeri-item.horizontal {
-										grid-column: span 2;
-									}
-
-									/* Styling setiap kotak foto */
-									.momenin-gallery .galeri-item {
+									.galeri-item {
 										overflow: hidden;
 										border-radius: 8px;
-										/* Sudut membulat ala flat design */
 										box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 										transition: transform 0.3s ease, box-shadow 0.3s ease;
 										width: 100%;
+										cursor: pointer;
 									}
 
-									.momenin-gallery .galeri-item:hover {
+									.galeri-item:hover {
 										transform: translateY(-5px);
 										box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 									}
 
-									/* Styling gambar di dalam kotak */
+									.galeri-item.horizontal {
+										grid-column: span 2;
+									}
+
 									.momenin-gallery img {
 										width: 100%;
 										height: auto;
@@ -3194,74 +3189,77 @@
 										transition: transform 0.5s ease;
 									}
 
-									/* Efek zoom saat dihover */
-									.momenin-gallery .galeri-item:hover img {
+									.galeri-item:hover img {
 										transform: scale(1.05);
+									}
+
+									/* Styling Popup */
+									#photoPopup {
+										border: none;
+										padding: 20px;
+										background: rgba(0, 0, 0, 0.9);
+										border-radius: 12px;
+										max-width: 90vw;
+										max-height: 90vh;
+									}
+
+									#photoPopup img {
+										max-width: 100%;
+										max-height: 85vh;
+										display: block;
+										margin: 0 auto;
+									}
+
+									#photoPopup::backdrop {
+										background: rgba(0, 0, 0, 0.8);
 									}
 								</style>
 
-								<div class="momenin-gallery">
+								<!-- Elemen Dialog Popup -->
+								<dialog id="photoPopup" onclick="this.close()">
+									<img id="popupImg" src="" alt="Full View">
+								</dialog>
 
-									<!-- Foto 1 -->
-									<div class="galeri-item">
-										<img src="wp-content/uploads/2024/09/1.jpg" alt="Momenin Gallery 1"
-											loading="lazy">
-									</div>
+								<!-- Container Galeri -->
+								<div class="momenin-gallery" id="galleryContainer"></div>
 
-									<!-- Foto 2 -->
-									<div class="galeri-item">
-										<img src="wp-content/uploads/2024/09/2.jpg" alt="Momenin Gallery 2"
-											loading="lazy">
-									</div>
+								<!-- Skrip Pembuat Galeri Otomatis -->
+								<script>
+									// --- KONFIGURASI ---
+									const totalFoto = 10; // Ubah angka ini sesuai jumlah foto
+									const folderPath = "wp-content/uploads/2024/09/"; // Lokasi folder foto
+									// Daftar nomor foto yang ingin dijadikan Horizontal (lebar) sisakan [] jika tanpa horizontal
+									const horizontalPhotos = [];
+									// -------------------
 
-									<!-- Foto 3 -->
-									<div class="galeri-item">
-										<img src="wp-content/uploads/2024/09/3.jpg" alt="Momenin Gallery 3"
-											loading="lazy">
-									</div>
+									const container = document.getElementById('galleryContainer');
 
-									<!-- Foto 4 -->
-									<div class="galeri-item">
-										<img src="wp-content/uploads/2024/09/4.jpg" alt="Momenin Gallery 4"
-											loading="lazy">
-									</div>
+									for (let i = 1; i <= totalFoto; i++) {
+										// Penyesuaian nama file (urutan sesuai contoh Anda)
+										// Jika ada urutan khusus, bisa disesuaikan di sini
+										const imgSrc = `${folderPath}${i}.jpg`;
 
-									<!-- Foto 5 -->
-									<div class="galeri-item">
-										<img src="wp-content/uploads/2024/09/5.jpg" alt="Momenin Gallery 5"
-											loading="lazy">
-									</div>
+										const item = document.createElement('div');
+										item.className = 'galeri-item';
 
-									<!-- Foto 6 -->
-									<div class="galeri-item">
-										<img src="wp-content/uploads/2024/09/6.jpg" alt="Momenin Gallery 6"
-											loading="lazy">
-									</div>
+										if (horizontalPhotos.includes(i)) {
+											item.classList.add('horizontal');
+										}
 
-									<!-- Foto 7 -->
-									<div class="galeri-item">
-										<img src="wp-content/uploads/2024/09/7.jpg" alt="Momenin Gallery 7"
-											loading="lazy">
-									</div>
+										item.onclick = function () {
+											document.getElementById('popupImg').src = imgSrc;
+											document.getElementById('photoPopup').showModal();
+										};
 
-									<!-- Foto 8 -->
-									<div class="galeri-item">
-										<img src="wp-content/uploads/2024/09/8.jpg" alt="Momenin Gallery 8"
-											loading="lazy">
-									</div>
+										const img = document.createElement('img');
+										img.src = imgSrc;
+										img.alt = `Gallery ${i}`;
+										img.loading = "lazy";
 
-									<!-- Foto 9 -->
-									<div class="galeri-item">
-										<img src="wp-content/uploads/2024/09/9.jpg" alt="Momenin Gallery 9"
-											loading="lazy">
-									</div>
-
-									<!-- Foto 10 -->
-									<div class="galeri-item">
-										<img src="wp-content/uploads/2024/09/10.jpg" alt="Momenin Gallery 10"
-											loading="lazy">
-									</div>
-								</div>
+										item.appendChild(img);
+										container.appendChild(item);
+									}
+								</script>
 							</div>
 						</div>
 					</div>

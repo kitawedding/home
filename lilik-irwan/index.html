@@ -16,11 +16,11 @@
 	</style>
 
 	<!-- This site is optimized with the Yoast SEO plugin v24.9 - https://yoast.com/wordpress/plugins/seo/ -->
-	<title>The Wedding Of &</title>
+	<title>The Wedding Of Lilik & Irwan</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<meta property="og:title" content="The Wedding Of &" />
-	<meta property="og:description" content=",  2026" />
-	<meta property="og:image" content="https://momenin.my.id//wp-content/uploads/2024/09/banner.jpg" />
+	<meta property="og:title" content="The Wedding Of Lilik & Irwan" />
+	<meta property="og:description" content="Jum'at, 28 Agustus 2026" />
+	<meta property="og:image" content="https://momenin.my.id/lilik-irwan/wp-content/uploads/2024/09/banner.jpg" />
 	<meta property="og:url" content="https://momenin.my.id" />
 	<meta property="og:type" content="website" />
 	<meta name="twitter:card" content="summary_large_image">
@@ -2203,7 +2203,7 @@
 				<div class="elementor-element elementor-element-450f2ed5 af zoom-out elementor-widget elementor-widget-heading"
 					data-id="450f2ed5" data-element_type="widget" data-widget_type="heading.default">
 					<div class="elementor-widget-container">
-						<h2 class="elementor-heading-title elementor-size-default">Habib & Adiba</h2>
+						<h2 class="elementor-heading-title elementor-size-default">Lilik & Irwan</h2>
 					</div>
 				</div>
 				<div class="elementor-element elementor-element-232aee44 af slide-up elementor-widget elementor-widget-heading"
@@ -2215,8 +2215,131 @@
 				<div class="elementor-element elementor-element-158c616e af slide-up elementor-widget elementor-widget-heading"
 					data-id="158c616e" data-element_type="widget" data-widget_type="heading.default">
 					<div class="elementor-widget-container">
-						<h2 class="elementor-heading-title elementor-size-default">Nama Tamu</h2>
-					</div>
+							<p class="elementor-heading-title elementor-size-default" id="nama-tamu-undangan">Tamu Undangan
+							</p>
+						</div>
+						<script>
+							// Fungsi untuk memformat nama dengan memperhatikan kurung
+							function formatNamaWithParentheses(nama) {
+								// Pertama pisahkan bagian yang ada dalam kurung
+								let formattedName = '';
+								let insideParentheses = false;
+								let currentWord = '';
+								let result = [];
+
+								// Tangani kasus khusus untuk format "Aku-(Bensin)" -> "Aku (Bensin)"
+								nama = nama.replace(/-\(/g, ' (');
+
+								// Pisahkan menjadi array kata-kata
+								const words = nama.split(' ');
+
+								// Proses setiap kata
+								for (let i = 0; i < words.length; i++) {
+									let word = words[i];
+
+									// Cek apakah kata mengandung tanda kurung buka
+									if (word.includes('(')) {
+										// Pisahkan bagian sebelum kurung dan kurungnya
+										const parts = word.split('(');
+										if (parts[0]) {
+											// Kapitalkan bagian sebelum kurung
+											result.push(parts[0].charAt(0).toUpperCase() + parts[0].slice(1));
+										}
+										// Tambahkan kurung dengan huruf kapital di dalamnya
+										if (parts[1]) {
+											result.push('(' + parts[1].charAt(0).toUpperCase() + parts[1].slice(1));
+										} else {
+											result.push('(');
+										}
+									}
+									// Cek apakah kata mengandung tanda kurung tutup
+									else if (word.includes(')')) {
+										const parts = word.split(')');
+										if (parts[0]) {
+											result.push(parts[0] + ')');
+										} else {
+											result.push(')');
+										}
+										if (parts[1]) {
+											result.push(parts[1].charAt(0).toUpperCase() + parts[1].slice(1));
+										}
+									}
+									// Kata normal, kapitalkan huruf pertama
+									else {
+										result.push(word.charAt(0).toUpperCase() + word.slice(1));
+									}
+								}
+
+								return result.join(' ');
+							}
+
+							// URL Google Sheets (ganti dengan URL publik Anda)
+							const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQIrdtalsnQ-MI5vI2SX7qjBEpvgetjQZD9dAsXW5BBsXyUiGht18rBEB8txjnkgseOCalgAw8lLhvh/pub?gid=0&single=true&output=csv";
+
+							// Ambil parameter nama dari URL
+							const urlParams = new URLSearchParams(window.location.search);
+							const namaParam = urlParams.get('to')?.toLowerCase();
+
+							// Fetch data dari Google Sheets
+							fetch(SHEET_URL)
+								.then(res => {
+									if (!res.ok) throw new Error("Network response was not ok");
+									return res.text();
+								})
+								.then(csvData => {
+									console.log("CSV data diterima:", csvData); // Debug log
+
+									// Parse CSV data - memisahkan baris
+									const rows = csvData.split('\n').filter(row => row.trim() !== '');
+
+									// Cek apakah ada parameter nama dari URL
+									if (namaParam) {
+										// Format nama dari parameter URL (ganti tanda - dengan spasi)
+										const formattedNamaParam = namaParam.replace(/-/g, ' ');
+										console.log("Mencari nama:", formattedNamaParam); // Debug log
+
+										// Cari nama yang cocok di data CSV (case insensitive)
+										let found = false;
+										for (let i = 0; i < rows.length; i++) {
+											const rowData = rows[i].split(',');
+											if (rowData.length > 0) {
+												const namaDariSheet = rowData[0].trim().toLowerCase();
+												console.log("Membandingkan dengan:", namaDariSheet); // Debug log
+
+												if (namaDariSheet === formattedNamaParam) {
+													// Jika nama ditemukan, tampilkan dengan format yang benar
+													const displayName = formatNamaWithParentheses(formattedNamaParam);
+
+													document.getElementById('nama-tamu-undangan').innerHTML = displayName;
+													found = true;
+													break;
+												}
+											}
+										}
+
+										// Jika nama tidak ditemukan di sheet, tetap tampilkan dari parameter URL
+										if (!found) {
+											const displayName = formatNamaWithParentheses(formattedNamaParam);
+
+											document.getElementById('nama-tamu-undangan').innerHTML = displayName;
+											console.log("Nama tidak ditemukan di sheet, menampilkan dari URL:", displayName);
+										}
+									} else {
+										// Jika tidak ada parameter nama, tampilkan default
+										document.getElementById('nama-tamu-undangan').innerHTML = "Tamu Undangan";
+									}
+								})
+								.catch(err => {
+									console.error("Error mengambil data:", err);
+									// Fallback jika terjadi error
+									if (namaParam) {
+										const formattedNamaParam = namaParam.replace(/-/g, ' ');
+										const displayName = formatNamaWithParentheses(formattedNamaParam);
+
+										document.getElementById('nama-tamu-undangan').innerHTML = displayName;
+									}
+								});
+						</script>
 				</div>
 				<div class="elementor-element elementor-element-3699a421 elementor-align-center af slide-up elementor-widget elementor-widget-button"
 					data-id="3699a421" data-element_type="widget" id="open" data-widget_type="button.default">
@@ -2254,13 +2377,13 @@
 				<div class="elementor-element elementor-element-4e0f7785 af zoom-out elementor-widget elementor-widget-heading"
 					data-id="4e0f7785" data-element_type="widget" data-widget_type="heading.default">
 					<div class="elementor-widget-container">
-						<p class="elementor-heading-title elementor-size-default">Habib & Adiba</p>
+						<p class="elementor-heading-title elementor-size-default">Lilik & Irwan</p>
 					</div>
 				</div>
 				<div class="elementor-element elementor-element-7d3d4964 af slide-up elementor-widget elementor-widget-heading"
 					data-id="7d3d4964" data-element_type="widget" data-widget_type="heading.default">
 					<div class="elementor-widget-container">
-						<p class="elementor-heading-title elementor-size-default">29 . 12. 2025</p>
+						<p class="elementor-heading-title elementor-size-default">28 . 08. 2026</p>
 					</div>
 				</div>
 			</div>
@@ -2290,7 +2413,7 @@
 								<img fetchpriority="high" decoding="async" width="1000" height="1498"
 									src="wp-content/uploads/2025/04/23RSW2031-co.jpg"
 									class="attachment-full size-full wp-image-29435" alt=""
-									srcset="wp-content/uploads/2025/04/23RSW2031-co.jpg 1000w, wp-content/uploads/2025/04/23RSW2031-co-200x300.jpg 200w, wp-content/uploads/2025/04/23RSW2031-co-684x1024.jpg 684w, wp-content/uploads/2025/04/23RSW2031-co-768x1150.jpg 768w"
+									srcset=""
 									sizes="(max-width: 1000px) 100vw, 1000px" />
 							</div>
 						</div>
@@ -2299,7 +2422,7 @@
 							data-settings="{&quot;_animation&quot;:&quot;fadeInUp&quot;,&quot;_animation_delay&quot;:12000}"
 							data-widget_type="heading.default">
 							<div class="elementor-widget-container">
-								<h2 class="elementor-heading-title elementor-size-default">Habib & Adiba</h2>
+								<h2 class="elementor-heading-title elementor-size-default">Lilik & Irwan</h2>
 							</div>
 						</div>
 						<div class="elementor-element elementor-element-7b6c1b21 animated-slow elementor-invisible elementor-widget elementor-widget-text-editor"
@@ -2307,7 +2430,7 @@
 							data-settings="{&quot;_animation&quot;:&quot;fadeInUp&quot;,&quot;_animation_delay&quot;:12000}"
 							data-widget_type="text-editor.default">
 							<div class="elementor-widget-container">
-								<p>Minggu, 30 Desember 2025</p>
+								<p>Jum'at, 28 Agustus 2026</p>
 							</div>
 						</div>
 						<div class="elementor-element elementor-element-72e6d39e elementor-align-center elementor-mobile-align-center animated-slow elementor-invisible elementor-widget elementor-widget-button"
@@ -2452,22 +2575,22 @@
 						data-id="193c1490" data-element_type="widget" data-widget_type="image.default">
 						<div class="elementor-widget-container">
 							<img fetchpriority="high" decoding="async" width="1000" height="1498"
-								src="wp-content/uploads/2025/04/23RSW2031-co.jpg"
+								src="wp-content/uploads/2025/04/perempuan.jpg"
 								class="attachment-full size-full wp-image-29435" alt=""
-								srcset="wp-content/uploads/2025/04/23RSW2031-co.jpg 1000w, wp-content/uploads/2025/04/23RSW2031-co-200x300.jpg 200w, wp-content/uploads/2025/04/23RSW2031-co-684x1024.jpg 684w, wp-content/uploads/2025/04/23RSW2031-co-768x1150.jpg 768w"
+								srcset=""
 								sizes="(max-width: 1000px) 100vw, 1000px" />
 						</div>
 					</div>
 					<div class="elementor-element elementor-element-2844ca20 ef slide-up elementor-widget elementor-widget-heading"
 						data-id="2844ca20" data-element_type="widget" data-widget_type="heading.default">
 						<div class="elementor-widget-container">
-							<p class="elementor-heading-title elementor-size-default">Adiba Putri Syakilla</p>
+							<p class="elementor-heading-title elementor-size-default">Lilik Hidayati</p>
 						</div>
 					</div>
 					<div class="elementor-element elementor-element-6720848b ef slide-up elementor-widget elementor-widget-text-editor"
 						data-id="6720848b" data-element_type="widget" data-widget_type="text-editor.default">
 						<div class="elementor-widget-container">
-							<p>Putri dari Pasangan Bapak Anas Rifai<br />&amp; Ibu Kholifah</p>
+							<p>Putri dari Pasangan Bapak Suparmin<br />&amp; Ibu Sunarti</p>
 						</div>
 					</div>
 					<div class="elementor-element elementor-element-23ac6c64 ef slide-up elementor-shape-rounded elementor-grid-0 e-grid-align-center elementor-widget elementor-widget-social-icons"
@@ -2476,7 +2599,7 @@
 							<div class="elementor-social-icons-wrapper elementor-grid">
 								<span class="elementor-grid-item">
 									<a class="elementor-icon elementor-social-icon elementor-social-icon-instagram elementor-repeater-item-0f94d9a"
-										href="https://instagram.com/" target="_blank">
+										href="https://instagram.com/lilikhd04" target="_blank">
 										<span class="elementor-screen-only">Instagram</span>
 										<i class="fab fa-instagram"></i> </a>
 								</span>
@@ -2493,22 +2616,22 @@
 						data-id="53fcafd2" data-element_type="widget" data-widget_type="image.default">
 						<div class="elementor-widget-container">
 							<img loading="lazy" decoding="async" width="497" height="662"
-								src="wp-content/uploads/2025/04/awal-3.jpg"
+								src="wp-content/uploads/2025/04/pria.jpg"
 								class="attachment-full size-full wp-image-29443" alt=""
-								srcset="wp-content/uploads/2025/04/awal-3.jpg 497w, wp-content/uploads/2025/04/awal-3-225x300.jpg 225w"
+								srcset=""
 								sizes="(max-width: 497px) 100vw, 497px" />
 						</div>
 					</div>
 					<div class="elementor-element elementor-element-63ec1def ef slide-up elementor-widget elementor-widget-heading"
 						data-id="63ec1def" data-element_type="widget" data-widget_type="heading.default">
 						<div class="elementor-widget-container">
-							<p class="elementor-heading-title elementor-size-default">Habib Yulianto</p>
+							<p class="elementor-heading-title elementor-size-default">Irwan Maulana</p>
 						</div>
 					</div>
 					<div class="elementor-element elementor-element-d33bbe5 ef slide-up elementor-widget elementor-widget-text-editor"
 						data-id="d33bbe5" data-element_type="widget" data-widget_type="text-editor.default">
 						<div class="elementor-widget-container">
-							<p>Putra dari Pasangan Bapak H. M. Dawam<br />&amp; Ibu Dewi Sudarwati (Almh)</p>
+							<p>Putra dari Pasangan Bapak Suwarto<br />&amp; Ibu Sumiyati</p>
 						</div>
 					</div>
 					<div class="elementor-element elementor-element-36e2d5a5 ef slide-up elementor-shape-rounded elementor-grid-0 e-grid-align-center elementor-widget elementor-widget-social-icons"
@@ -2517,7 +2640,7 @@
 							<div class="elementor-social-icons-wrapper elementor-grid">
 								<span class="elementor-grid-item">
 									<a class="elementor-icon elementor-social-icon elementor-social-icon-instagram elementor-repeater-item-0f94d9a"
-										href="https://instagram.com" target="_blank">
+										href="https://instagram.com/maull21 " target="_blank">
 										<span class="elementor-screen-only">Instagram</span>
 										<i class="fab fa-instagram"></i> </a>
 								</span>
@@ -2594,7 +2717,7 @@
 									<div
 										class="wpkoi-elements-countdown-container wpkoi-elements-countdown-label-block ">
 										<ul id="wpkoi-elements-countdown-df93eca" class="wpkoi-elements-countdown-items"
-											data-date="Feb 04 2026 10:00:00">
+											data-date="Aug 28 2026 08:00:00">
 											<li class="wpkoi-elements-countdown-item">
 												<div class="wpkoi-elements-countdown-days"><span data-days
 														class="wpkoi-elements-countdown-digits">00</span><span
@@ -2675,20 +2798,20 @@
 						<div class="elementor-element elementor-element-66a55246 ef slide-up elementor-widget elementor-widget-text-editor"
 							data-id="66a55246" data-element_type="widget" data-widget_type="text-editor.default">
 							<div class="elementor-widget-container">
-								<p>Minggu, 30 Desember 2025</p>
+								<p>Jum'at, 28 Agustus 2026</p>
 							</div>
 						</div>
 						<div class="elementor-element elementor-element-1fb7705e ef slide-up elementor-widget elementor-widget-text-editor"
 							data-id="1fb7705e" data-element_type="widget" data-widget_type="text-editor.default">
 							<div class="elementor-widget-container">
-								<p>Pukul : 09.00 WIB</p>
+								<p>Pukul : 08.00 WIB</p>
 							</div>
 						</div>
 						<div class="elementor-element elementor-element-6db84a8b ef slide-up elementor-widget elementor-widget-text-editor"
 							data-id="6db84a8b" data-element_type="widget" data-widget_type="text-editor.default">
 							<div class="elementor-widget-container">
 								<p>Alamat : Kediaman Mempelai Wanita</p>
-								<p>Ds Pagu Kec. Wates Kab. Kediri</p>
+								<p>Desa Teguhan RT 02 RW 02 Kec Grobogan Kab Grobogan</p>
 							</div>
 						</div>
 						<div class="elementor-element elementor-element-6b9c8661 elementor-align-center ef slide-up elementor-widget elementor-widget-button"
@@ -2696,7 +2819,7 @@
 							<div class="elementor-widget-container">
 								<div class="elementor-button-wrapper">
 									<a class="elementor-button elementor-button-link elementor-size-sm"
-										href="https://www.google.com/maps" target="_blank">
+										href="https://maps.app.goo.gl/ECBNR7qrFzNmXaXf8" target="_blank">
 										<span class="elementor-button-content-wrapper">
 											<span class="elementor-button-icon">
 												<i aria-hidden="true" class="fas fa-map-marker-alt"></i> </span>
@@ -2728,20 +2851,20 @@
 						<div class="elementor-element elementor-element-157db3a4 ef slide-up elementor-widget elementor-widget-text-editor"
 							data-id="157db3a4" data-element_type="widget" data-widget_type="text-editor.default">
 							<div class="elementor-widget-container">
-								<p>Minggu, 30 Desember 2025</p>
+								<p>Jum'at, 28 Agustus 2026</p>
 							</div>
 						</div>
 						<div class="elementor-element elementor-element-581fe9b5 ef slide-up elementor-widget elementor-widget-text-editor"
 							data-id="581fe9b5" data-element_type="widget" data-widget_type="text-editor.default">
 							<div class="elementor-widget-container">
-								<p>Pukul : 10.00 WIB &#8211; Selesai</p>
+								<p>Pukul : 08.00 WIB &#8211; Selesai</p>
 							</div>
 						</div>
 						<div class="elementor-element elementor-element-336beba3 ef slide-up elementor-widget elementor-widget-text-editor"
 							data-id="336beba3" data-element_type="widget" data-widget_type="text-editor.default">
 							<div class="elementor-widget-container">
 								<p>Alamat : Kediaman Mempelai Wanita</p>
-								<p>Ds Pagu Kec. Wates Kab. Kediri</p>
+								<p>Desa Teguhan RT 02 RW 02 Kec Grobogan Kab Grobogan</p>
 							</div>
 						</div>
 						<div class="elementor-element elementor-element-6b4b0633 elementor-align-center ef slide-up elementor-widget elementor-widget-button"
@@ -2749,7 +2872,7 @@
 							<div class="elementor-widget-container">
 								<div class="elementor-button-wrapper">
 									<a class="elementor-button elementor-button-link elementor-size-sm"
-										href="https://www.google.com/maps" target="_blank">
+										href="https://maps.app.goo.gl/ECBNR7qrFzNmXaXf8" target="_blank">
 										<span class="elementor-button-content-wrapper">
 											<span class="elementor-button-icon">
 												<i aria-hidden="true" class="fas fa-map-marker-alt"></i> </span>
@@ -2760,59 +2883,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="elementor-element elementor-element-7f7291a6 e-con-full ef zoom-out e-flex e-con e-child"
-						data-id="7f7291a6" data-element_type="container"
-						data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
-						<div class="elementor-element elementor-element-7fe31517 ef slide-up elementor-widget elementor-widget-heading"
-							data-id="7fe31517" data-element_type="widget" data-widget_type="heading.default">
-							<div class="elementor-widget-container">
-								<h2 class="elementor-heading-title elementor-size-default">Live Streaming</h2>
-							</div>
-						</div>
-						<div class="elementor-element elementor-element-6c363f38 ef slide-up elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
-							data-id="6c363f38" data-element_type="widget" data-widget_type="divider.default">
-							<div class="elementor-widget-container">
-								<div class="elementor-divider">
-									<span class="elementor-divider-separator">
-									</span>
-								</div>
-							</div>
-						</div>
-						<div class="elementor-element elementor-element-7f11568b ef slide-up elementor-widget elementor-widget-text-editor"
-							data-id="7f11568b" data-element_type="widget" data-widget_type="text-editor.default">
-							<div class="elementor-widget-container">
-								<p>Kami mengundang Bapak/Ibu/Saudara/i untuk menyaksikan pernikahan kami secara virtual
-									yang disiarkan langsung melalui media sosial di bawah ini:</p>
-							</div>
-						</div>
-						<div class="elementor-element elementor-element-64c5d5df ef slide-up elementor-widget elementor-widget-text-editor"
-							data-id="64c5d5df" data-element_type="widget" data-widget_type="text-editor.default">
-							<div class="elementor-widget-container">
-								<p>Minggu, 30 Desember 2025</p>
-							</div>
-						</div>
-						<div class="elementor-element elementor-element-452035cd ef slide-up elementor-widget elementor-widget-text-editor"
-							data-id="452035cd" data-element_type="widget" data-widget_type="text-editor.default">
-							<div class="elementor-widget-container">
-								<p>Pukul : 10.00 WIB</p>
-							</div>
-						</div>
-						<div class="elementor-element elementor-element-1cf974f8 elementor-align-center ef slide-up elementor-widget elementor-widget-button"
-							data-id="1cf974f8" data-element_type="widget" data-widget_type="button.default">
-							<div class="elementor-widget-container">
-								<div class="elementor-button-wrapper">
-									<a class="elementor-button elementor-button-link elementor-size-sm"
-										href="https://www.instagram.com/" target="_blank">
-										<span class="elementor-button-content-wrapper">
-											<span class="elementor-button-icon">
-												<i aria-hidden="true" class="fab fa-instagram"></i> </span>
-											<span class="elementor-button-text">Klik Disini</span>
-										</span>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
+					
 					<div class="elementor-element elementor-element-48ee4084 elementor-widget elementor-widget-spacer"
 						data-id="48ee4084" data-element_type="widget" data-widget_type="spacer.default">
 						<div class="elementor-widget-container">
@@ -2857,104 +2928,118 @@
 						data-id="2215c311" data-element_type="widget"
 						data-settings="{&quot;gallery_layout&quot;:&quot;justified&quot;,&quot;ideal_row_height&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:300,&quot;sizes&quot;:[]},&quot;ideal_row_height_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:300,&quot;sizes&quot;:[]},&quot;ideal_row_height_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:400,&quot;sizes&quot;:[]},&quot;gap&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:10,&quot;sizes&quot;:[]},&quot;gap_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:10,&quot;sizes&quot;:[]},&quot;gap_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:10,&quot;sizes&quot;:[]},&quot;link_to&quot;:&quot;file&quot;,&quot;content_hover_animation&quot;:&quot;fade-in&quot;}"
 						data-widget_type="gallery.default">
-						<div class="elementor-widget-container">
-							<div class="elementor-gallery__container">
-								<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-									href="wp-content/uploads/2025/04/awal-3-1.jpg" data-elementor-open-lightbox="yes"
-									data-elementor-lightbox-slideshow="2215c311"
-									data-elementor-lightbox-title="awal-3-1.jpg"
-									data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6Mjk0NTAsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNVwvMDRcL2F3YWwtMy0xLmpwZyIsInNsaWRlc2hvdyI6IjIyMTVjMzExIn0%3D">
-									<div class="e-gallery-image elementor-gallery-item__image"
-										data-thumbnail="https://inv.punakawandigital.id/wp-content/uploads/2025/04/awal-3-1.jpg"
-										data-width="497" data-height="662" aria-label="" role="img"></div>
-								</a>
-								<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-									href="wp-content/uploads/2025/04/23RSW2031-co-2.jpg"
-									data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="2215c311"
-									data-elementor-lightbox-title="23RSW2031-co-2.jpg"
-									data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6Mjk0NTEsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNVwvMDRcLzIzUlNXMjAzMS1jby0yLmpwZyIsInNsaWRlc2hvdyI6IjIyMTVjMzExIn0%3D">
-									<div class="e-gallery-image elementor-gallery-item__image"
-										data-thumbnail="https://inv.punakawandigital.id/wp-content/uploads/2025/04/23RSW2031-co-2.jpg"
-										data-width="1000" data-height="1498" aria-label="" role="img"></div>
-								</a>
-								<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-									href="wp-content/uploads/2025/04/8-.jpg" data-elementor-open-lightbox="yes"
-									data-elementor-lightbox-slideshow="2215c311" data-elementor-lightbox-title="8-.jpg"
-									data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6Mjk0NTIsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNVwvMDRcLzgtLmpwZyIsInNsaWRlc2hvdyI6IjIyMTVjMzExIn0%3D">
-									<div class="e-gallery-image elementor-gallery-item__image"
-										data-thumbnail="https://inv.punakawandigital.id/wp-content/uploads/2025/04/8-.jpg"
-										data-width="640" data-height="958" aria-label="" role="img"></div>
-								</a>
-								<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-									href="wp-content/uploads/2025/04/7-.jpg" data-elementor-open-lightbox="yes"
-									data-elementor-lightbox-slideshow="2215c311" data-elementor-lightbox-title="7-.jpg"
-									data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6Mjk0NTMsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNVwvMDRcLzctLmpwZyIsInNsaWRlc2hvdyI6IjIyMTVjMzExIn0%3D">
-									<div class="e-gallery-image elementor-gallery-item__image"
-										data-thumbnail="https://inv.punakawandigital.id/wp-content/uploads/2025/04/7-.jpg"
-										data-width="640" data-height="958" aria-label="" role="img"></div>
-								</a>
-								<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-									href="wp-content/uploads/2025/04/5-.jpg" data-elementor-open-lightbox="yes"
-									data-elementor-lightbox-slideshow="2215c311" data-elementor-lightbox-title="5-.jpg"
-									data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6Mjk0NTQsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNVwvMDRcLzUtLmpwZyIsInNsaWRlc2hvdyI6IjIyMTVjMzExIn0%3D">
-									<div class="e-gallery-image elementor-gallery-item__image"
-										data-thumbnail="https://inv.punakawandigital.id/wp-content/uploads/2025/04/5-.jpg"
-										data-width="719" data-height="480" aria-label="" role="img"></div>
-								</a>
-								<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-									href="wp-content/uploads/2025/04/4-e1692005649211.jpg"
-									data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="2215c311"
-									data-elementor-lightbox-title="4-e1692005649211.jpg"
-									data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6Mjk0NTUsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNVwvMDRcLzQtZTE2OTIwMDU2NDkyMTEuanBnIiwic2xpZGVzaG93IjoiMjIxNWMzMTEifQ%3D%3D">
-									<div class="e-gallery-image elementor-gallery-item__image"
-										data-thumbnail="https://inv.punakawandigital.id/wp-content/uploads/2025/04/4-e1692005649211.jpg"
-										data-width="663" data-height="370" aria-label="" role="img"></div>
-								</a>
-								<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-									href="wp-content/uploads/2025/04/4-1-1.jpg" data-elementor-open-lightbox="yes"
-									data-elementor-lightbox-slideshow="2215c311"
-									data-elementor-lightbox-title="4-1-1.jpg"
-									data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6Mjk0NTYsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNVwvMDRcLzQtMS0xLmpwZyIsInNsaWRlc2hvdyI6IjIyMTVjMzExIn0%3D">
-									<div class="e-gallery-image elementor-gallery-item__image"
-										data-thumbnail="https://inv.punakawandigital.id/wp-content/uploads/2025/04/4-1-1.jpg"
-										data-width="663" data-height="480" aria-label="" role="img"></div>
-								</a>
-								<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-									href="wp-content/uploads/2025/04/3-.jpg" data-elementor-open-lightbox="yes"
-									data-elementor-lightbox-slideshow="2215c311" data-elementor-lightbox-title="3-.jpg"
-									data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6Mjk0NTcsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNVwvMDRcLzMtLmpwZyIsInNsaWRlc2hvdyI6IjIyMTVjMzExIn0%3D">
-									<div class="e-gallery-image elementor-gallery-item__image"
-										data-thumbnail="https://inv.punakawandigital.id/wp-content/uploads/2025/04/3-.jpg"
-										data-width="640" data-height="958" aria-label="" role="img"></div>
-								</a>
-								<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-									href="wp-content/uploads/2025/04/2-1-2.jpg" data-elementor-open-lightbox="yes"
-									data-elementor-lightbox-slideshow="2215c311"
-									data-elementor-lightbox-title="2-1-2.jpg"
-									data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6Mjk0NTgsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNVwvMDRcLzItMS0yLmpwZyIsInNsaWRlc2hvdyI6IjIyMTVjMzExIn0%3D">
-									<div class="e-gallery-image elementor-gallery-item__image"
-										data-thumbnail="https://inv.punakawandigital.id/wp-content/uploads/2025/04/2-1-2.jpg"
-										data-width="640" data-height="958" aria-label="" role="img"></div>
-								</a>
-								<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-									href="wp-content/uploads/2025/04/6-.jpg" data-elementor-open-lightbox="yes"
-									data-elementor-lightbox-slideshow="2215c311" data-elementor-lightbox-title="6-.jpg"
-									data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6Mjk0NTksInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNVwvMDRcLzYtLmpwZyIsInNsaWRlc2hvdyI6IjIyMTVjMzExIn0%3D">
-									<div class="e-gallery-image elementor-gallery-item__image"
-										data-thumbnail="https://inv.punakawandigital.id/wp-content/uploads/2025/04/6-.jpg"
-										data-width="640" data-height="958" aria-label="" role="img"></div>
-								</a>
-								<a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-									href="wp-content/uploads/2025/04/1-e1740985931589.jpg"
-									data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="2215c311"
-									data-elementor-lightbox-title="1-e1740985931589.jpg"
-									data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6Mjk0NDUsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNVwvMDRcLzEtZTE3NDA5ODU5MzE1ODkuanBnIiwic2xpZGVzaG93IjoiMjIxNWMzMTEifQ%3D%3D">
-									<div class="e-gallery-image elementor-gallery-item__image"
-										data-thumbnail="https://inv.punakawandigital.id/wp-content/uploads/2025/04/1-e1740985931589.jpg"
-										data-width="597" data-height="480" aria-label="" role="img"></div>
-								</a>
+						<div class="elementor-gallery__container">
+								<!-- Bagian CSS -->
+								<style>
+									.momenin-gallery {
+										display: grid;
+										grid-template-columns: repeat(2, 1fr);
+										grid-auto-flow: dense;
+										gap: 10px;
+										padding: 10px;
+										max-width: 1200px;
+										margin: 0 auto;
+									}
+
+									.galeri-item {
+										overflow: hidden;
+										border-radius: 8px;
+										box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+										transition: transform 0.3s ease, box-shadow 0.3s ease;
+										width: 100%;
+										cursor: pointer;
+									}
+
+									.galeri-item:hover {
+										transform: translateY(-5px);
+										box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+									}
+
+									.galeri-item.horizontal {
+										grid-column: span 2;
+									}
+
+									.momenin-gallery img {
+										width: 100%;
+										height: auto;
+										border-radius: 8px;
+										display: block;
+										transition: transform 0.5s ease;
+									}
+
+									.galeri-item:hover img {
+										transform: scale(1.05);
+									}
+
+									/* Styling Popup */
+									#photoPopup {
+										border: none;
+										padding: 20px;
+										background: rgba(0, 0, 0, 0.9);
+										border-radius: 12px;
+										max-width: 90vw;
+										max-height: 90vh;
+									}
+
+									#photoPopup img {
+										max-width: 100%;
+										max-height: 85vh;
+										display: block;
+										margin: 0 auto;
+									}
+
+									#photoPopup::backdrop {
+										background: rgba(0, 0, 0, 0.8);
+									}
+								</style>
+
+								<!-- Elemen Dialog Popup -->
+								<dialog id="photoPopup" onclick="this.close()">
+									<img id="popupImg" src="" alt="Full View">
+								</dialog>
+
+								<!-- Container Galeri -->
+								<div class="momenin-gallery" id="galleryContainer"></div>
+
+								<!-- Skrip Pembuat Galeri Otomatis -->
+								<script>
+									// --- KONFIGURASI ---
+									const totalFoto = 10; // Ubah angka ini sesuai jumlah foto
+									const folderPath = "wp-content/uploads/2024/11/"; // Lokasi folder foto
+									// Daftar nomor foto yang ingin dijadikan Horizontal (lebar) sisakan [] jika tanpa horizontal
+									const horizontalPhotos = [3, 7];
+									// -------------------
+
+									const container = document.getElementById('galleryContainer');
+
+									for (let i = 1; i <= totalFoto; i++) {
+										// Penyesuaian nama file (urutan sesuai contoh Anda)
+										// Jika ada urutan khusus, bisa disesuaikan di sini
+										const imgSrc = `${folderPath}${i}.jpg`;
+
+										const item = document.createElement('div');
+										item.className = 'galeri-item';
+
+										if (horizontalPhotos.includes(i)) {
+											item.classList.add('horizontal');
+										}
+
+										item.onclick = function () {
+											document.getElementById('popupImg').src = imgSrc;
+											document.getElementById('photoPopup').showModal();
+										};
+
+										const img = document.createElement('img');
+										img.src = imgSrc;
+										img.alt = `Gallery ${i}`;
+										img.loading = "lazy";
+
+										item.appendChild(img);
+										container.appendChild(item);
+									}
+								</script>
 							</div>
-						</div>
+
 					</div>
 					<div class="elementor-element elementor-element-7bdcb2d6 elementor-widget elementor-widget-spacer"
 						data-id="7bdcb2d6" data-element_type="widget" data-widget_type="spacer.default">
@@ -2976,84 +3061,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="elementor-element elementor-element-44e8a0b1 e-con-full ef slide-up e-flex e-con e-child"
-						data-id="44e8a0b1" data-element_type="container"
-						data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
-						<div class="elementor-element elementor-element-57322234 ef zoom-in  elementor-widget elementor-widget-heading"
-							data-id="57322234" data-element_type="widget" data-widget_type="heading.default">
-							<div class="elementor-widget-container">
-								<h2 class="elementor-heading-title elementor-size-default">Love Story</h2>
-							</div>
-						</div>
-						<div class="elementor-element elementor-element-6381f21d ef zoom-out acara elementor-widget elementor-widget-image"
-							data-id="6381f21d" data-element_type="widget" data-widget_type="image.default">
-							<div class="elementor-widget-container">
-								<img loading="lazy" decoding="async" width="597" height="480"
-									src="wp-content/uploads/2025/04/1-e1740985931589.jpg"
-									class="attachment-full size-full wp-image-29445" alt=""
-									srcset="wp-content/uploads/2025/04/1-e1740985931589.jpg 597w, wp-content/uploads/2025/04/1-e1740985931589-300x241.jpg 300w"
-									sizes="(max-width: 597px) 100vw, 597px" />
-							</div>
-						</div>
-						<div class="elementor-element elementor-element-5ce34622 elementor-widget elementor-widget-spacer"
-							data-id="5ce34622" data-element_type="widget" data-widget_type="spacer.default">
-							<div class="elementor-widget-container">
-								<div class="elementor-spacer">
-									<div class="elementor-spacer-inner"></div>
-								</div>
-							</div>
-						</div>
-						<div class="elementor-element elementor-element-27b92ef5 ef zoom-in  elementor-widget elementor-widget-text-editor"
-							data-id="27b92ef5" data-element_type="widget" data-widget_type="text-editor.default">
-							<div class="elementor-widget-container">
-								<p>Awal Bertemu</p>
-							</div>
-						</div>
-						<div class="elementor-element elementor-element-726e1221 ef zoom-in  elementor-widget elementor-widget-text-editor"
-							data-id="726e1221" data-element_type="widget" data-widget_type="text-editor.default">
-							<div class="elementor-widget-container">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-									incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-									exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-							</div>
-						</div>
-						<div class="elementor-element elementor-element-402aeed6 ef zoom-in  elementor-widget elementor-widget-text-editor"
-							data-id="402aeed6" data-element_type="widget" data-widget_type="text-editor.default">
-							<div class="elementor-widget-container">
-								<p>Lamaran</p>
-							</div>
-						</div>
-						<div class="elementor-element elementor-element-2f3cc530 ef zoom-in  elementor-widget elementor-widget-text-editor"
-							data-id="2f3cc530" data-element_type="widget" data-widget_type="text-editor.default">
-							<div class="elementor-widget-container">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-									incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-									exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-							</div>
-						</div>
-						<div class="elementor-element elementor-element-39cb305f ef zoom-in  elementor-widget elementor-widget-text-editor"
-							data-id="39cb305f" data-element_type="widget" data-widget_type="text-editor.default">
-							<div class="elementor-widget-container">
-								<p>Pernikahan</p>
-							</div>
-						</div>
-						<div class="elementor-element elementor-element-428ab1a7 ef zoom-in  elementor-widget elementor-widget-text-editor"
-							data-id="428ab1a7" data-element_type="widget" data-widget_type="text-editor.default">
-							<div class="elementor-widget-container">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-									incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-									exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-							</div>
-						</div>
-						<div class="elementor-element elementor-element-3a3618f7 elementor-widget elementor-widget-spacer"
-							data-id="3a3618f7" data-element_type="widget" data-widget_type="spacer.default">
-							<div class="elementor-widget-container">
-								<div class="elementor-spacer">
-									<div class="elementor-spacer-inner"></div>
-								</div>
-							</div>
-						</div>
-					</div>
+				
 					<div class="elementor-element elementor-element-75636cd7 e-con-full e-flex e-con e-child"
 						data-id="75636cd7" data-element_type="container"
 						data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
@@ -3102,9 +3110,9 @@
 									data-id="78c21db3" data-element_type="widget" data-widget_type="image.default">
 									<div class="elementor-widget-container">
 										<img loading="lazy" decoding="async" width="2560" height="813"
-											src="wp-content/uploads/2025/04/BCA_logo_Bank_Central_Asia-1-3-5-scaled-1.png"
+											src="wp-content/uploads/2025/04/bri.png"
 											class="attachment-full size-full wp-image-29461" alt=""
-											srcset="wp-content/uploads/2025/04/BCA_logo_Bank_Central_Asia-1-3-5-scaled-1.png 2560w, wp-content/uploads/2025/04/BCA_logo_Bank_Central_Asia-1-3-5-scaled-1-300x95.png 300w, wp-content/uploads/2025/04/BCA_logo_Bank_Central_Asia-1-3-5-scaled-1-1024x325.png 1024w, wp-content/uploads/2025/04/BCA_logo_Bank_Central_Asia-1-3-5-scaled-1-768x244.png 768w, wp-content/uploads/2025/04/BCA_logo_Bank_Central_Asia-1-3-5-scaled-1-1536x488.png 1536w, wp-content/uploads/2025/04/BCA_logo_Bank_Central_Asia-1-3-5-scaled-1-2048x650.png 2048w"
+											srcset=""
 											sizes="(max-width: 2560px) 100vw, 2560px" />
 									</div>
 								</div>
@@ -3119,13 +3127,13 @@
 								<div class="elementor-element elementor-element-4cf2fe40 elementor-widget elementor-widget-heading"
 									data-id="4cf2fe40" data-element_type="widget" data-widget_type="heading.default">
 									<div class="elementor-widget-container">
-										<p class="elementor-heading-title elementor-size-default">1234 5678 90</p>
+										<p class="elementor-heading-title elementor-size-default" id="rek1">599401063285530</p>
 									</div>
 								</div>
 								<div class="elementor-element elementor-element-1979f7ae elementor-widget elementor-widget-heading"
 									data-id="1979f7ae" data-element_type="widget" data-widget_type="heading.default">
 									<div class="elementor-widget-container">
-										<p class="elementor-heading-title elementor-size-default">Habib</p>
+										<p class="elementor-heading-title elementor-size-default">Lilik hidayati</p>
 									</div>
 								</div>
 								<div class="elementor-element elementor-element-5128c028 elementor-align-right elementor-tablet-align-right elementor-mobile-align-right elementor-widget elementor-widget-weddingpress-copy-text"
@@ -3139,7 +3147,7 @@
 										<div class="elementor-button-wrapper">
 											<div class="copy-content spancontent" style="display: none;"></div>
 
-											<a style="cursor:pointer;" onclick="copyText(this)"
+											<a style="cursor:pointer;" onclick="copyText('rek1',this)"
 												data-message="berhasil disalin" class="elementor-button" role="button">
 
 												<div class="elementor-button-content-wrapper">
@@ -3151,171 +3159,40 @@
 
 										</div>
 
-										<style type="text/css">
-											.spancontent {
-												padding-bottom: 20px;
-											}
-
-											.copy-content {
-												color: #6EC1E4;
-												text-align: center;
-											}
-
-											.head-title {
-												color: #6EC1E4;
-												text-align: center;
-											}
-										</style>
-
-										<script>
-											function copyText(el) {
-												var content = jQuery(el).siblings('div.copy-content').html()
-												var temp = jQuery("<textarea>");
-												jQuery("body").append(temp);
-												temp.val(content.replace(/<br ?\/?>/g, "\n")).select();
-												document.execCommand("copy");
-												temp.remove();
-												var text = jQuery(el).html()
-												jQuery(el).html(jQuery(el).data('message'))
-												var counter = 0;
-												var interval = setInterval(function () {
-													counter++;
-													if (counter == 1) {
-														jQuery(el).html(text)
-													}
-												}, 500);
-											}
-
-										</script>
-
 									</div>
 								</div>
 							</div>
-							<div class="elementor-element elementor-element-7889e35a e-con-full animated-slow e-flex elementor-invisible e-con e-child"
-								data-id="7889e35a" data-element_type="container"
-								data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;animation&quot;:&quot;zoomIn&quot;}">
-								<div class="elementor-element elementor-element-525c962f elementor-widget elementor-widget-image"
-									data-id="525c962f" data-element_type="widget" data-widget_type="image.default">
-									<div class="elementor-widget-container">
-										<img loading="lazy" decoding="async" width="1200" height="342"
-											src="wp-content/uploads/2025/04/1200px-Logo_dana_blue.svg-1-1-1.png"
-											class="attachment-full size-full wp-image-29359" alt=""
-											srcset="wp-content/uploads/2025/04/1200px-Logo_dana_blue.svg-1-1-1.png 1200w, wp-content/uploads/2025/04/1200px-Logo_dana_blue.svg-1-1-1-300x86.png 300w, wp-content/uploads/2025/04/1200px-Logo_dana_blue.svg-1-1-1-1024x292.png 1024w, wp-content/uploads/2025/04/1200px-Logo_dana_blue.svg-1-1-1-768x219.png 768w"
-											sizes="(max-width: 1200px) 100vw, 1200px" />
-									</div>
-								</div>
-								<div class="elementor-element elementor-element-66dcb744 elementor-widget elementor-widget-spacer"
-									data-id="66dcb744" data-element_type="widget" data-widget_type="spacer.default">
-									<div class="elementor-widget-container">
-										<div class="elementor-spacer">
-											<div class="elementor-spacer-inner"></div>
-										</div>
-									</div>
-								</div>
-								<div class="elementor-element elementor-element-540915e9 elementor-widget elementor-widget-heading"
-									data-id="540915e9" data-element_type="widget" data-widget_type="heading.default">
-									<div class="elementor-widget-container">
-										<p class="elementor-heading-title elementor-size-default">1234 5678 90</p>
-									</div>
-								</div>
-								<div class="elementor-element elementor-element-1371a7f6 elementor-widget elementor-widget-heading"
-									data-id="1371a7f6" data-element_type="widget" data-widget_type="heading.default">
-									<div class="elementor-widget-container">
-										<p class="elementor-heading-title elementor-size-default">Habib</p>
-									</div>
-								</div>
-								<div class="elementor-element elementor-element-95cf44e elementor-align-right elementor-tablet-align-right elementor-mobile-align-right elementor-widget elementor-widget-weddingpress-copy-text"
-									data-id="95cf44e" data-element_type="widget"
-									data-widget_type="weddingpress-copy-text.default">
-									<div class="elementor-widget-container">
+							<!--INI PALING BAWAH-->
+							<style type="text/css">
+								.spancontent {
+									padding-bottom: 20px;
+								}
 
-										<div class="elementor-image img"></div>
+								.copy-content {
+									color: #6EC1E4;
+									text-align: center;
+								}
 
-										<div class="head-title"></div>
-										<div class="elementor-button-wrapper">
-											<div class="copy-content spancontent" style="display: none;"></div>
-
-											<a style="cursor:pointer;" onclick="copyText(this)"
-												data-message="berhasil disalin" class="elementor-button" role="button">
-
-												<div class="elementor-button-content-wrapper">
-													<span class="elementor-button-icon elementor-align-icon-">
-														<i aria-hidden="true" class="far fa-copy"></i> </span>
-													<span class="elementor-button-text">Copy </span>
-												</div>
-											</a>
-
-										</div>
-
-										<style type="text/css">
-											.spancontent {
-												padding-bottom: 20px;
-											}
-
-											.copy-content {
-												color: #6EC1E4;
-												text-align: center;
-											}
-
-											.head-title {
-												color: #6EC1E4;
-												text-align: center;
-											}
-										</style>
-
-										<script>
-											function copyText(el) {
-												var content = jQuery(el).siblings('div.copy-content').html()
-												var temp = jQuery("<textarea>");
-												jQuery("body").append(temp);
-												temp.val(content.replace(/<br ?\/?>/g, "\n")).select();
-												document.execCommand("copy");
-												temp.remove();
-												var text = jQuery(el).html()
-												jQuery(el).html(jQuery(el).data('message'))
-												var counter = 0;
-												var interval = setInterval(function () {
-													counter++;
-													if (counter == 1) {
-														jQuery(el).html(text)
-													}
-												}, 500);
-											}
-
-										</script>
-
-									</div>
-								</div>
-							</div>
-							<div class="elementor-element elementor-element-63208ef e-con-full animated-slow e-flex elementor-invisible e-con e-child"
-								data-id="63208ef" data-element_type="container"
-								data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;animation&quot;:&quot;zoomIn&quot;}">
-								<div class="elementor-element elementor-element-64be1537 elementor-view-default elementor-widget elementor-widget-icon"
-									data-id="64be1537" data-element_type="widget" data-widget_type="icon.default">
-									<div class="elementor-widget-container">
-										<div class="elementor-icon-wrapper">
-											<div class="elementor-icon">
-												<i aria-hidden="true" class="fas fa-gift"></i>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="elementor-element elementor-element-6fff17fb elementor-widget elementor-widget-heading"
-									data-id="6fff17fb" data-element_type="widget" data-widget_type="heading.default">
-									<div class="elementor-widget-container">
-										<p class="elementor-heading-title elementor-size-default">Kirim Hadiah</p>
-									</div>
-								</div>
-								<div class="elementor-element elementor-element-55a1ebd5 elementor-widget elementor-widget-text-editor"
-									data-id="55a1ebd5" data-element_type="widget"
-									data-widget_type="text-editor.default">
-									<div class="elementor-widget-container">
-										<p>Nama Penerima : Habib Yulianto</p>
-										<p>No. HP : 1234 5678 90</p>
-										<p>Ds Pagu Kec.Wates Kab. Kediri</p>
-									</div>
-								</div>
-							</div>
+								.head-title {
+									color: #6EC1E4;
+									text-align: center;
+								}
+							</style>
+							<script>
+								async function copyText(textId, button) {
+									const textToCopy = document.getElementById(textId).textContent;
+									try {
+										await navigator.clipboard.writeText(textToCopy);
+										button.querySelector('.elementor-button-text').textContent = 'Tersalin';
+									} catch (err) {
+										button.querySelector('.elementor-button-text').textContent = 'Tidak Tersalin';
+									}
+									// Reset button text after 2 seconds
+									setTimeout(() => {
+										button.querySelector('.elementor-button-text').textContent = 'Copy';
+									}, 2000);
+								}
+							</script>
 						</div>
 						<div class="elementor-element elementor-element-47ed1b81 elementor-widget elementor-widget-spacer"
 							data-id="47ed1b81" data-element_type="widget" data-widget_type="spacer.default">
@@ -3346,135 +3223,243 @@
 						data-settings="{&quot;attendence&quot;:&quot;yes&quot;,&quot;show_date&quot;:&quot;yes&quot;}"
 						data-widget_type="weddingpress-kit2.default">
 						<div class="elementor-widget-container">
+							<style>
+								.stats {
+									display: flex;
+									justify-content: space-around;
+									margin: 10px 0;
+									text-align: center;
+								}
+
+								.stat-box {
+									background: white;
+									width: 90px;
+									height: 90px;
+									border-radius: 8px;
+									align-content: center;
+									box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+								}
+
+								.stat-number {
+									font-size: 24px;
+									font-weight: bold;
+									color: #865c00;
+								}
+
+								form {
+									background: white;
+									padding: 20px;
+									border-radius: 8px;
+									box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+								}
+
+								label {
+									display: block;
+									margin-bottom: 8px;
+									font-weight: bold;
+								}
+
+								input,
+								textarea,
+								select {
+									width: 100%;
+									padding: 10px;
+									margin-bottom: 15px;
+									border: 1px solid #ddd;
+									border-radius: 4px;
+									box-sizing: border-box;
+								}
+
+								textarea {
+									height: 100px;
+									resize: vertical;
+								}
+
+								.button1 {
+									background-color: #d89400;
+									color: white;
+									border: none;
+									padding: 12px 20px;
+									border-radius: 4px;
+									cursor: pointer;
+									font-size: 16px;
+									width: 100%;
+								}
+
+								.button1:hover {
+									background-color: #865c00;
+								}
+
+								.wishes-container {
+									margin-top: 30px;
+									max-width: 100%;
+									height: 300px;
+									/* fixed height to enable scrolling */
+									padding: 10px;
+									overflow-y: auto;
+								}
+
+								.wish {
+									max-width: 100%;
+									padding: 5px;
+									margin-bottom: 5px;
+									border-radius: 14px;
+									box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+								}
+
+								.wish-name {
+									font-weight: bold;
+									color: #865c00;
+									margin-bottom: 2px;
+								}
+
+								.wish-message {
+									margin-bottom: 2px;
+									color: #ffffff;
+								}
+
+								.wish-attendance {
+									color: #865c00;
+								}
+
+								.attendance-icon {
+									display: inline-block;
+									width: 20px;
+									height: 20px;
+									text-align: center;
+									line-height: 20px;
+									border-radius: 50%;
+									margin-right: 5px;
+								}
+
+								.wish-attendance span[class="attendance-icon"] {
+									/* Checkmark (Hadir) */
+									background-color: #4CAF50;
+									color: white;
+								}
+
+								.wish-attendance span[class="attendance-icon"] {
+									/* Cross (Tidak Hadir) - will override if Hadir */
+									background-color: #f44336;
+								}
+							</style>
 							<div class='cui-wrapper cui-facebook cui-border' style='overflow: hidden;'>
-								<div class='cui-wrap-link'>
-									<div class='header-cui'><a id='cui-link-21433'
-											class='cui-link cui-icon-link cui-icon-link-true auto-load-true'
-											href='vintage-03/index.html@post_id=21433&amp;comments=2&amp;get=500&amp;order=DESC.html'
-											title='2 Comment'><span>2</span> Comments</a></div>
-								</div><!--.cui-wrap-link-->
-								<div id='cui-wrap-commnent-21433' class='cui-wrap-comments' style='display:none;'>
-									<div id='cui-wrap-form-21433' class='cui-clearfix'>
-										<div class="cui-comment-attendence">
-											<div id="invitation-count-21433" class="cui_comment_count_card_wrap">
-												<div class="cui_comment_count_card_row_2">
-													<div class="cui_comment_count_card cui_card-hadir">
-														<span>1</span><span>Hadir</span></div>
-													<div class="cui_comment_count_card cui_card-tidak_hadir">
-														<span>1</span><span>Tidak hadir</span></div>
-												</div>
-											</div>
-										</div>
-										<div class="cui-clearfix cui-wrap-form ">
-											<div id='cui-container-form-21433' class='cui-container-form cui-no-login'>
-												<div id='respond-21433' class='respond cui-clearfix'>
-													<form action='https://inv.punakawandigital.id/wp-comments-post.php'
-														method='post' id='commentform-21433'>
-														<p class="comment-form-author cui-field-1"><input id="author"
-																name="author" type="text" aria-required="true"
-																class="cui-input" placeholder="Nama" /><span
-																class="cui-required">*</span><span
-																class="cui-error-info cui-error-info-name">Mohon maaf!
-																Khusus untuk tamu undangan</span></p>
-														<div class="cui-wrap-textarea"><textarea id="cui-textarea-21433"
-																class="waci_comment cui-textarea autosize-textarea"
-																name="comment" aria-required="true" placeholder="Ucapan"
-																rows="2"></textarea><span
-																class="cui-required">*</span><span
-																class="cui-error-info cui-error-info-text">2 characters
-																minimum.</span></div>
-														<div class="nm-wrap-comments">
-															<div class="row">
-															</div>
-														</div>
-														<div
-															class="cui-clearfix cui-wrap-select cui-field-wrap cui-select-attending">
-
-															<select class="waci_comment cui-select" name="konfirmasi"
-																id="konfirmasi">
-																<option value="" disabled selected>Konfirmasi Kehadiran
-																</option>
-																<option value="Hadir">Datang</option>
-																<option value="Tidak hadir">Absen</option>
-															</select><span class="cui-required"></span><span
-																class="cui-error-info cui-error-info-confirm"></span>
-														</div>
-														<div class='cui-wrap-submit cui-clearfix'>
-															<p class='form-submit'><span class="cui-hide">Do not change
-																	these fields following</span><input type="text"
-																	class="cui-hide" name="name" value="username"><input
-																	type="text" class="cui-hide" name="nombre"
-																	value=""><input type="text" class="cui-hide"
-																	name="form-cui" value=""><input type="button"
-																	class="cui-form-btn cui-cancel-btn"
-																	value="Cancel"><input name='submit'
-																	id='submit-21433' value='Kirim'
-																	type='submit' /><input type='hidden'
-																	name='commentpress' value='true' /><input
-																	type='hidden' name='comment_post_ID' value='21433'
-																	id='comment_post_ID' />
-																<input type='hidden' name='comment_parent'
-																	id='comment_parent' value='0' />
-															</p>
-														</div>
-													</form>
-												</div>
-											</div><!--.cui-container-form-->
-										</div><!--.cui-clearfix cui-relative-->
-									</div><!--.cui-wrap-form-->
-									<div id='cui-comment-status-21433' class='cui-comment-status'></div>
-									<div id='cui-box' class='cui-box'>
-										<ul id='cui-container-comment-21433'
-											class='cui-container-comments cui-order-DESC  cui-has-2-comments cui-multiple-comments'
-											data-order='DESC'></ul>
+								<div class="stats">
+									<div class="stat-box">
+										<div class="stat-number" id="comment-count">0</div>
+										<div>Comment</div>
 									</div>
-									<div id='cui-holder-id-21433' class='cui-holder-21433 cui-holder'></div>
-								</div><!--.cui-wrap-comments-->
-							</div><!--.cui-wrapper-->
-							<style>
-								.cui-wrapper .cui-holder {
-									display: block !important;
-								}
-							</style>
+									<div class="stat-box">
+										<div class="stat-number" id="attend-count">0</div>
+										<div>Hadir</div>
+									</div>
+									<div class="stat-box">
+										<div class="stat-number" id="not-attend-count">0</div>
+										<div>Tidak Hadir</div>
+									</div>
+								</div>
+								<div class="cui-clearfix cui-wrap-form ">
+									<div id='cui-container-form-27181' class='cui-container-form cui-no-login'>
+										<div id='respond-27181' class='respond cui-clearfix'>
+											<form id="wishForm">
+												<input type="text" id="name" name="name" required placeholder="Nama">
+												<textarea id="message" name="message" required
+													placeholder="Ucapan"></textarea>
+												<select id="attendance" name="attendance" required>
+													<option value="" disabled selected hidden>Pilih Konfirmasi Kehadiran
+													</option>
+													<option value="Hadir">Hadir</option>
+													<option value="Tidak Hadir">Tidak Hadir</option>
+												</select>
 
-
-
-							<style>
-								.cui-comment-content {
-									margin-left: 0 !important;
-								}
-
-								.cui-comment-avatar {
-									display: none !important;
-								}
-							</style>
+												<button type="submit" class="button1">KIRIM</button>
+											</form>
+										</div>
+									</div><!--.cui-container-form-->
+								</div><!--.cui-clearfix cui-relative-->
+							</div><!--.cui-wrap-form-->
+							<div class="wishes-container" id="wishesContainer">
+								<!-- Wishes will be loaded here -->
+							</div>
 							<script>
+								// Google Apps Script Web App URL
+								const scriptUrl = 'https://script.google.com/macros/s/AKfycbx4GC89YDNh5k_95dG2sS05hhALsG6DiIKR2n3KZvy5Vj0PzbEPVhuNPutf7Bq_Ri--RA/exec';
 
-								var txt = document.getElementById('cui-link-21433').innerHTML;
-								var pos = txt
-									.replace(/Comments/g, "Comments")
-								document.getElementById('cui-link-21433').innerHTML = pos;
+								document.addEventListener('DOMContentLoaded', function () {
+									// Load existing wishes when page loads
+									loadWishes();
 
-								var txt1 = document.getElementById('invitation-count-21433').innerHTML;
-								var pos1 = txt1
-									.replace(/Hadir/g, "Hadir")
-									.replace(/Tidak hadir/g, "Tidak Hadir")
-									.replace(/Masih Ragu/g, "Masih Ragu");
-								document.getElementById('invitation-count-21433').innerHTML = pos1;
+									// Handle form submission
+									document.getElementById('wishForm').addEventListener('submit', function (e) {
+										e.preventDefault();
 
-								var txt2 = document.getElementById('commentform-21433').innerHTML;
-								var pos2 = txt2
-									.replace(/Nama/g, "Nama")
-									.replace(/Ucapan/g, "Ucapan")
-									.replace(/Konfirmasi Kehadiran/g, "Konfirmasi Kehadiran")
-									.replace(/Datang/g, "Hadir")
-									.replace(/Absen/g, "Tidak Hadir")
-									.replace(/Mungkin/g, "Masih Ragu")
-									.replace(/Kirim/g, "Kirim");
-								document.getElementById('commentform-21433').innerHTML = pos2;
+										const name = document.getElementById('name').value;
+										const message = document.getElementById('message').value;
+										const attendance = document.getElementById('attendance').value;
 
+										// Send data to Google Sheets
+										fetch(scriptUrl, {
+											method: 'POST',
+											mode: 'no-cors',
+											headers: {
+												'Content-Type': 'application/json',
+											},
+											body: JSON.stringify({
+												action: 'add',
+												name: name,
+												message: message,
+												attendance: attendance
+											})
+										})
+											.then(() => {
+												// Clear form
+												document.getElementById('wishForm').reset();
+
+												// Reload wishes
+												loadWishes();
+											})
+											.catch(error => {
+												console.error('Error:', error);
+											});
+									});
+								});
+
+								function loadWishes() {
+									// Get wishes from Google Sheets
+									fetch(`${scriptUrl}?action=get`)
+										.then(response => response.json())
+										.then(data => {
+											// Update counts
+											document.getElementById('comment-count').textContent = data.length;
+											document.getElementById('attend-count').textContent =
+												data.filter(item => item.attendance === 'Hadir').length;
+											document.getElementById('not-attend-count').textContent =
+												data.filter(item => item.attendance === 'Tidak Hadir').length;
+
+											// Display wishes
+											const container = document.getElementById('wishesContainer');
+											container.innerHTML = '';
+
+											data.reverse().forEach(wish => {
+												const wishElement = document.createElement('div');
+												wishElement.className = 'wish';
+
+												// Determine icon based on attendance
+												const attendanceIcon = wish.attendance === 'Hadir'
+													? '<span class="attendance-icon" style="background-color: #4CAF50">✓</span>'
+													: '<span class="attendance-icon" style="background-color: #f44336">✗</span>';
+
+												wishElement.innerHTML = `
+														<div class="wish-name wish-attendance" style="font-color: white">${wish.name} ${attendanceIcon}</div>
+														<div class="wish-message" style="font-color: white">${wish.message}</div>`;
+												container.appendChild(wishElement);
+											});
+										})
+										.catch(error => {
+											console.error('Error:', error);
+										});
+								}
 							</script>
-
 						</div>
 					</div>
 				</div>
@@ -3505,7 +3490,7 @@
 							<img fetchpriority="high" decoding="async" width="1000" height="1498"
 								src="wp-content/uploads/2025/04/23RSW2031-co.jpg"
 								class="attachment-full size-full wp-image-29435" alt=""
-								srcset="wp-content/uploads/2025/04/23RSW2031-co.jpg 1000w, wp-content/uploads/2025/04/23RSW2031-co-200x300.jpg 200w, wp-content/uploads/2025/04/23RSW2031-co-684x1024.jpg 684w, wp-content/uploads/2025/04/23RSW2031-co-768x1150.jpg 768w"
+								srcset=""
 								sizes="(max-width: 1000px) 100vw, 1000px" />
 						</div>
 					</div>
@@ -3534,7 +3519,7 @@
 					<div class="elementor-element elementor-element-1c2afd51 ef slide-up elementor-widget elementor-widget-heading"
 						data-id="1c2afd51" data-element_type="widget" data-widget_type="heading.default">
 						<div class="elementor-widget-container">
-							<h2 class="elementor-heading-title elementor-size-default">Habib & Adiba</h2>
+							<h2 class="elementor-heading-title elementor-size-default">Lilik & Irwan</h2>
 						</div>
 					</div>
 					<div class="elementor-element elementor-element-716ae6f3 elementor-widget elementor-widget-spacer"
@@ -3575,26 +3560,14 @@
 						data-id="70da8581" data-element_type="widget" data-widget_type="text-editor.default">
 						<div class="elementor-widget-container">
 							<p>Made with <img decoding="async" class="emoji" role="img" draggable="false"
-									src="https://s.w.org/images/core/emoji/13.0.1/svg/2764.svg" alt="❤" /> by Punakawan
-								Digital</p>
+									src="https://s.w.org/images/core/emoji/13.0.1/svg/2764.svg" alt="❤" /> by <a href="https://pwd.momenin.my.id" style="color: white;">momenin</a></p>
 						</div>
 					</div>
 					<div class="elementor-element elementor-element-22a54c39 elementor-shape-rounded elementor-grid-0 e-grid-align-center elementor-widget elementor-widget-social-icons"
 						data-id="22a54c39" data-element_type="widget" data-widget_type="social-icons.default">
 						<div class="elementor-widget-container">
 							<div class="elementor-social-icons-wrapper elementor-grid">
-								<span class="elementor-grid-item">
-									<a class="elementor-icon elementor-social-icon elementor-social-icon-instagram elementor-repeater-item-d0d1213"
-										href="https://www.instagram.com/punakawandigital/" target="_blank">
-										<span class="elementor-screen-only">Instagram</span>
-										<i class="fab fa-instagram"></i> </a>
-								</span>
-								<span class="elementor-grid-item">
-									<a class="elementor-icon elementor-social-icon elementor-social-icon-whatsapp elementor-repeater-item-6dd95be"
-										href="https://api.whatsapp.com/message/OB5KMSEJ3Z6LL1" target="_blank">
-										<span class="elementor-screen-only">Whatsapp</span>
-										<i class="fab fa-whatsapp"></i> </a>
-								</span>
+								
 							</div>
 						</div>
 					</div>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel Komentar</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f8f9fa;
+    }
+    .comment-card {
+      margin-bottom: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .comment-body {
+      font-size: 15px;
+      white-space: pre-line;
+    }
+    .comment-meta {
+      font-size: 13px;
+      color: #6c757d;
+    }
+    .delete-btn {
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container my-4">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">📋 Panel Komentar</h2>
+      <p class="text-muted">Kelola komentar untuk: <span id="pengantinLabel" class="fw-semibold"></span></p>
+    </div>
+
+    <div id="commentList" class="row justify-content-center">
+      <div class="col-12 text-center text-muted">Loading komentar...</div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // URL tunggal Apps Script milikmu
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwbfN5UwHfxvu1HVNwua3zd4grbCaItI_nQKO6w9hglkGjOdWMJ2qAatAPHmE9x0yjSIfawfg/exec";
+
+    // Ambil parameter pengantin dari URL (?pengantin=mukhlis-diana)
+    function getQueryParam(key) {
+      return new URLSearchParams(window.location.search).get(key);
+    }
+
+    // Fungsi Sanitisasi Teks
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.innerText = text || "";
+      return div.innerHTML;
+    }
+
+    async function loadKomentar(weddingId) {
+      const container = document.getElementById("commentList");
+      try {
+        const res = await fetch(`${SCRIPT_URL}?action=get&wedding_id=${encodeURIComponent(weddingId)}`);
+        const data = await res.json();
+
+        let html = "";
+        if (!Array.isArray(data) || data.length === 0) {
+          html = `<div class="col-12 text-center text-muted">Belum ada komentar.</div>`;
+        } else {
+          // Tampilkan dari yang paling baru
+          data.reverse().forEach((komen) => {
+            const formattedDate = komen.timestamp 
+              ? new Date(komen.timestamp).toLocaleString("id-ID", { dateStyle: "medium", timeStyle: "short" })
+              : "";
+
+            const attendanceBadge = komen.attendance === "Hadir" 
+              ? '<span class="badge bg-success">Hadir</span>' 
+              : '<span class="badge bg-danger">Tidak Hadir</span>';
+
+            html += `
+              <div class="col-12 col-md-8">
+                <div class="card comment-card">
+                  <div class="card-body d-flex justify-content-between align-items-start">
+                    <div class="pe-3">
+                      <h6 class="card-title mb-1 fw-bold">${escapeHtml(komen.name)} ${attendanceBadge}</h6>
+                      <p class="card-text comment-body mb-1">${escapeHtml(komen.message)}</p>
+                      <p class="comment-meta mb-0">${formattedDate}</p>
+                    </div>
+                    <button class="btn btn-sm btn-outline-danger delete-btn" onclick="hapusKomentar('${weddingId}', '${komen.timestamp}', this)">
+                      Hapus
+                    </button>
+                  </div>
+                </div>
+              </div>
+            `;
+          });
+        }
+        container.innerHTML = html;
+      } catch (err) {
+        container.innerHTML = `<div class="col-12 text-center text-danger">❌ Gagal mengambil data ucapan.</div>`;
+        console.error(err);
+      }
+    }
+
+    async function hapusKomentar(weddingId, timestamp, btn) {
+      if (!confirm("Yakin ingin menghapus komentar ini?")) return;
+
+      btn.disabled = true;
+      btn.innerText = "Menghapus...";
+
+      try {
+        const res = await fetch(`${SCRIPT_URL}?action=delete&wedding_id=${encodeURIComponent(weddingId)}&timestamp=${encodeURIComponent(timestamp)}`);
+        const resultText = await res.text();
+
+        if (resultText.trim() === "Deleted") {
+          loadKomentar(weddingId); // Refresh daftar komentar
+        } else {
+          alert("Gagal menghapus komentar: " + resultText);
+          btn.disabled = false;
+          btn.innerText = "Hapus";
+        }
+      } catch (err) {
+        alert("Terjadi kesalahan jaringan saat menghapus.");
+        btn.disabled = false;
+        btn.innerText = "Hapus";
+        console.error(err);
+      }
+    }
+
+    // Main Execution
+    document.addEventListener("DOMContentLoaded", () => {
+      const pengantin = getQueryParam("pengantin");
+      
+      if (!pengantin) {
+        document.getElementById("commentList").innerHTML =
+          `<div class="col-12 text-center text-warning">⚠️ Parameter pengantin tidak ditemukan pada URL (?pengantin=slug).</div>`;
+        return;
+      }
+
+      document.getElementById("pengantinLabel").textContent = pengantin;
+      loadKomentar(pengantin);
+    });
+  </script>
+</body>
+</html>

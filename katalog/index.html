@@ -1,1094 +1,424 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-  <!-- Meta Tags & SEO -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>Katalog Undangan - Momenin</title>
-
-  <!-- Open Graph / Social Media -->
-  <meta property="og:title" content="Undangan Website Termurah Momenin" />
-  <meta property="og:description" content="Share Undangan Pernikahanmu Dengan Mudah, Murah, dan Elegan!" />
-  <meta property="og:image" content="https://momenin.my.id/assets/profil.png" />
-  <meta property="og:url" content="https://momenin.my.id" />
-  <meta property="og:type" content="website" />
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="../assets/logofav.png" />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap"
-    rel="stylesheet" />
-
-  <!-- Icons -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
-
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-  <!-- Analytics -->
-  <script src="https://cdn.counter.dev/script.js" data-id="83d83041-9c16-4469-8b0e-2d7e89ba18f5" data-utcoffset="7" defer></script>
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-16XKXN0RP0"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-16XKXN0RP0');
-  </script>
-
-  <!-- Custom Styles -->
-  <style>
-    :root {
-      --gold: #d4af37;
-      --gold-light: #f5e6a3;
-      --gold-dark: #a8871c;
-      --gold-gradient: linear-gradient(135deg, #f5e6a3 0%, #d4af37 50%, #a8871c 100%);
-      --bg-deep: #0c0c10;
-      --bg-dark: #14141a;
-      --bg-card: #1b1b24;
-      --bg-card-hover: #22222e;
-      --text-light: #f5f0e6;
-      --text-muted: #a8a29a;
-      --border-gold: rgba(212, 175, 55, 0.25);
-      --shadow-gold: 0 12px 40px rgba(212, 175, 55, 0.18);
-      --shadow-subtle: 0 8px 24px rgba(0, 0, 0, 0.45);
-      --transition-smooth: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
-    }
-
-    * {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-
-    body {
-      background: var(--bg-deep);
-      color: var(--text-light);
-      overflow-x: hidden;
-    }
-
-    .display-font, h1, h2, h3, h4, h5, .brand-name {
-      font-family: 'Playfair Display', serif;
-    }
-
-    /* ---------- Decorative Background ---------- */
-    .bg-decoration {
-      position: relative;
-    }
-
-    .bg-decoration::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(ellipse 60% 50% at 20% -10%, rgba(212, 175, 55, 0.12), transparent 60%),
-        radial-gradient(ellipse 50% 45% at 90% 0%, rgba(212, 175, 55, 0.08), transparent 60%),
-        radial-gradient(ellipse 70% 60% at 50% 110%, rgba(212, 175, 55, 0.06), transparent 60%);
-      z-index: 0;
-    }
-
-    .gold-ornament {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      justify-content: center;
-      color: var(--gold);
-      margin: 1rem auto;
-    }
-
-    .gold-ornament .line {
-      height: 1px;
-      width: 60px;
-      background: var(--gold-gradient);
-    }
-
-    .gold-ornament i {
-      font-size: 0.8rem;
-    }
-
-    /* ---------- Animations ---------- */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes shimmer {
-      0% { background-position: -200% center; }
-      100% { background-position: 200% center; }
-    }
-
-    @keyframes pulseGold {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5); }
-      50% { box-shadow: 0 0 0 12px rgba(212, 175, 55, 0); }
-    }
-
-    .fade-in {
-      opacity: 0;
-      animation: fadeInUp 0.7s ease-out forwards;
-    }
-
-    .delay-1 { animation-delay: 0.15s; }
-    .delay-2 { animation-delay: 0.3s; }
-    .delay-3 { animation-delay: 0.45s; }
-
-    .gold-text {
-      background: var(--gold-gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    /* ---------- Navbar ---------- */
-    .navbar {
-      background: rgba(12, 12, 16, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-gold);
-      z-index: 1030;
-    }
-
-    .brand-name {
-      font-size: 1.4rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      color: var(--text-light);
-      text-decoration: none;
-    }
-
-    .brand-name span {
-      color: var(--gold);
-    }
-
-    /* ---------- Hero / Section Title ---------- */
-    .section-hero {
-      padding-top: 6rem;
-      padding-bottom: 2.5rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .badge-pill-gold {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.45rem 1.2rem;
-      border-radius: 50px;
-      border: 1px solid var(--border-gold);
-      background: rgba(212, 175, 55, 0.08);
-      color: var(--gold-light);
-      font-size: 0.8rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
-    .section-hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: 700;
-      line-height: 1.15;
-      color: var(--text-light);
-    }
-
-    .section-hero .lead {
-      color: var(--text-muted);
-      font-weight: 300;
-      max-width: 640px;
-      margin: 0 auto;
-    }
-
-    /* ---------- Pricing Cards ---------- */
-    .pricing-card {
-      border: 1px solid var(--border-gold);
-      border-radius: 20px;
-      overflow: hidden;
-      background: linear-gradient(160deg, var(--bg-card) 0%, var(--bg-dark) 100%);
-      transition: var(--transition-smooth);
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-
-    .pricing-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 20px;
-      padding: 1px;
-      background: linear-gradient(160deg, rgba(212,175,55,0.5), transparent 40%);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-    }
-
-    .pricing-card:hover {
-      transform: translateY(-10px);
-      box-shadow: var(--shadow-gold);
-      background: linear-gradient(160deg, var(--bg-card-hover) 0%, var(--bg-dark) 100%);
-    }
-
-    .pricing-card.featured {
-      background: linear-gradient(160deg, rgba(212,175,55,0.12) 0%, var(--bg-dark) 100%);
-    }
-
-    .pricing-card.featured::after {
-      content: "Terpopuler";
-      position: absolute;
-      top: 20px;
-      right: -34px;
-      transform: rotate(45deg);
-      background: var(--gold-gradient);
-      color: #1a1405;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      padding: 0.35rem 2.5rem;
-      text-transform: uppercase;
-      z-index: 3;
-    }
-
-    .pricing-card .card-header-gold {
-      text-align: center;
-      padding: 1.5rem 1.25rem 1rem;
-      position: relative;
-    }
-
-    .pricing-card h4 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-bottom: 0.25rem;
-      color: var(--gold-light);
-    }
-
-    .pricing-card .card-header-gold p {
-      color: var(--text-muted);
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin: 0;
-    }
-
-    .pricing-divider {
-      width: 50%;
-      height: 1px;
-      background: var(--gold-gradient);
-      margin: 0 auto;
-      opacity: 0.6;
-    }
-
-    .pricing-card .card-body-gold {
-      padding: 1.25rem;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .price-box {
-      text-align: center;
-      padding: 0.5rem 0 1rem;
-    }
-
-    .price-old {
-      color: var(--text-muted);
-      text-decoration: line-through;
-      font-size: 1rem;
-      opacity: 0.7;
-    }
-
-    .price-current {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--gold);
-    }
-
-    .price-note {
-      color: var(--text-muted);
-      font-size: 0.8rem;
-    }
-
-    .feature-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 1.25rem;
-      flex: 1;
-    }
-
-    .feature-list li {
-      padding: 0.4rem 0 0.4rem 1.9rem;
-      position: relative;
-      font-size: 0.9rem;
-      color: var(--text-light);
-    }
-
-    .feature-list li::before {
-      content: "\f00c";
-      font-family: "Font Awesome 6 Free";
-      font-weight: 900;
-      position: absolute;
-      left: 0.2rem;
-      top: 0.42rem;
-      color: var(--gold);
-      font-size: 0.85rem;
-    }
-
-    .feature-list li.cross {
-      text-decoration: line-through;
-      color: var(--text-muted);
-      opacity: 0.75;
-    }
-
-    .feature-list li.cross::before {
-      content: "\f00d";
-      color: #7a6f5c;
-    }
-
-    .btn-gold {
-      background: var(--gold-gradient);
-      color: #1a1405;
-      border: none;
-      font-weight: 700;
-      border-radius: 50px;
-      padding: 0.7rem 1.4rem;
-      transition: var(--transition-smooth);
-      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.25);
-    }
-
-    .btn-gold:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(212, 175, 55, 0.35);
-      color: #1a1405;
-    }
-
-    .btn-outline-gold {
-      background: transparent;
-      color: var(--gold);
-      border: 1px solid var(--border-gold);
-      font-weight: 600;
-      border-radius: 50px;
-      padding: 0.7rem 1.4rem;
-      transition: var(--transition-smooth);
-    }
-
-    .btn-outline-gold:hover {
-      background: rgba(212, 175, 55, 0.12);
-      color: var(--gold-light);
-      border-color: var(--gold);
-    }
-
-    /* ---------- Filter Buttons ---------- */
-    .filter-buttons .btn {
-      border: 1px solid var(--border-gold);
-      color: var(--text-muted);
-      background: rgba(255, 255, 255, 0.02);
-      border-radius: 14px;
-      padding: 0.9rem 0.5rem;
-      font-weight: 600;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      white-space: normal;
-      line-height: 1.2;
-      transition: var(--transition-smooth);
-      font-size: 0.85rem;
-    }
-
-    .filter-buttons .btn:hover {
-      color: var(--gold-light);
-      border-color: var(--gold);
-      transform: translateY(-2px);
-    }
-
-    .filter-buttons .btn.active {
-      background: var(--gold-gradient);
-      color: #1a1405;
-      border-color: transparent;
-      font-weight: 700;
-      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
-    }
-
-    /* ---------- Catalog Cards ---------- */
-    .katalog-item .card {
-      border: 1px solid var(--border-gold);
-      border-radius: 18px;
-      overflow: hidden;
-      background: var(--bg-card);
-      transition: var(--transition-smooth);
-      box-shadow: var(--shadow-subtle);
-    }
-
-    .katalog-item .card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-gold);
-      border-color: var(--gold);
-    }
-
-    .katalog-item .card-img-top {
-      height: 200px;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .katalog-item .card:hover .card-img-top {
-      transform: scale(1.06);
-    }
-
-    .discount-badge {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      background: var(--gold-gradient);
-      color: #1a1405;
-      padding: 0.35rem 0.9rem;
-      border-radius: 50px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      z-index: 2;
-      box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4);
-    }
-
-    .katalog-item .card-body {
-      padding: 1.1rem;
-    }
-
-    .katalog-item .card-title {
-      color: var(--text-light);
-      font-weight: 700;
-      font-size: 0.95rem;
-      margin-bottom: 0.85rem;
-    }
-
-    .btn-demo {
-      background: transparent;
-      color: var(--gold);
-      border: 1px solid var(--border-gold);
-      border-radius: 50px;
-      font-weight: 600;
-      transition: var(--transition-smooth);
-    }
-
-    .btn-demo:hover {
-      background: rgba(212, 175, 55, 0.12);
-      color: var(--gold-light);
-      border-color: var(--gold);
-    }
-
-    .btn-wa-pop {
-      background: transparent;
-      border: 1px solid rgba(37, 211, 102, 0.4);
-      color: #25d366;
-      border-radius: 50px;
-      transition: var(--transition-smooth);
-      animation: pulseGold 2.5s infinite;
-    }
-
-    .btn-wa-pop:hover {
-      background: rgba(37, 211, 102, 0.12);
-      color: #25d366;
-    }
-
-    /* ---------- Modal ---------- */
-    .modal-elegant .modal-content {
-      background: var(--bg-dark);
-      border: 1px solid var(--border-gold);
-      border-radius: 20px;
-      overflow: hidden;
-    }
-
-    .modal-elegant .modal-header {
-      background: linear-gradient(160deg, var(--bg-card), var(--bg-dark));
-      border-bottom: 1px solid var(--border-gold);
-    }
-
-    .modal-elegant .modal-title {
-      color: var(--gold-light);
-      font-family: 'Playfair Display', serif;
-    }
-
-    .modal-elegant .btn-close {
-      filter: invert(1) brightness(2);
-    }
-
-    .modal-elegant .modal-body iframe {
-      background: #fff;
-    }
-
-    /* ---------- Footer ---------- */
-    .site-footer {
-      border-top: 1px solid var(--border-gold);
-      background: rgba(0, 0, 0, 0.2);
-      position: relative;
-      z-index: 1;
-    }
-
-    .site-footer p {
-      color: var(--text-muted);
-    }
-
-    .site-footer .brand-name {
-      font-size: 1.2rem;
-    }
-
-    /* ---------- Responsive ---------- */
-    @media (max-width: 767px) {
-      .section-hero {
-        padding-top: 5rem;
-      }
-      .pricing-card h4 {
-        font-size: 1.2rem;
-      }
-      .pricing-card .card-header-gold p {
-        font-size: 0.7rem;
-      }
-      .price-old {
-        font-size: 0.85rem;
-      }
-      .price-current {
-        font-size: 1.35rem;
-      }
-      .price-note {
-        font-size: 0.7rem;
-      }
-      .pricing-card .card-body-gold {
-        padding: 1rem;
-      }
-      .feature-list {
-        margin-bottom: 0.9rem;
-      }
-      .feature-list li {
-        font-size: 0.72rem;
-        padding: 0.3rem 0 0.3rem 1.5rem;
-      }
-      .feature-list li::before {
-        top: 0.32rem;
-        font-size: 0.72rem;
-      }
-      .btn-gold, .btn-outline-gold {
-        padding: 0.55rem 0.8rem;
-        font-size: 0.78rem;
-      }
-      .btn-gold i, .btn-outline-gold i {
-        margin-right: 0.35rem;
-        margin-left: 0 !important;
-      }
-    }
-
-    @media (max-width: 400px) {
-      .pricing-card h4 {
-        font-size: 1.05rem;
-      }
-      .price-current {
-        font-size: 1.15rem;
-      }
-      .price-old {
-        font-size: 0.75rem;
-      }
-      .feature-list li {
-        font-size: 0.64rem;
-        padding-left: 1.25rem;
-      }
-      .feature-list li::before {
-        font-size: 0.64rem;
-      }
-      .btn-gold, .btn-outline-gold {
-        font-size: 0.72rem;
-        padding: 0.5rem 0.45rem;
-        line-height: 1.25;
-      }
-      .filter-buttons .btn {
-        font-size: 0.78rem;
-      }
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Katalog Undangan - Momenin</title>
+<meta property="og:title" content="Undangan Website Termurah Momenin" />
+<meta property="og:description" content="Share Undangan Pernikahanmu Dengan Mudah, Murah, dan Elegan!" />
+<meta property="og:image" content="https://momenin.my.id/assets/profil.png" />
+<meta property="og:url" content="https://momenin.my.id" />
+<meta property="og:type" content="website" />
+<link rel="icon" type="image/x-icon" href="../assets/logofav.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://cdn.counter.dev/script.js" data-id="83d83041-9c16-4469-8b0e-2d7e89ba18f5" data-utcoffset="7" defer></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-16XKXN0RP0"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-16XKXN0RP0');
+</script>
+<style>
+:root{
+  --ink:#26204a; --sky:#bde6ff; --paper:#fffdf7; --pink:#ff6fa5; --sun:#ffcf3f; --mint:#3dd6a5; --violet:#8b6cff;
+  --bd:3px solid var(--ink); --pop:5px 5px 0 var(--ink);
+}
+*{font-family:'Nunito',sans-serif}
+h1,h2,h3,h4,h5,.brand,.btn-cartoon,.chip{font-family:'Baloo 2',cursive}
+body{background:var(--sky);color:var(--ink);overflow-x:hidden;
+  background-image:radial-gradient(#fff 2px,transparent 2.5px);background-size:34px 34px;background-position:0 0}
+a{color:inherit}
+:focus-visible{outline:4px solid var(--violet);outline-offset:3px}
+
+/* buttons */
+.btn-cartoon{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border:var(--bd);border-radius:999px;
+  padding:.5rem 1.3rem;font-weight:700;font-size:1.05rem;background:var(--sun);color:var(--ink);text-decoration:none;
+  box-shadow:4px 4px 0 var(--ink);transition:transform .12s,box-shadow .12s;cursor:pointer;line-height:1.3}
+.btn-cartoon:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink);color:var(--ink)}
+.btn-cartoon:active{transform:translate(4px,4px);box-shadow:0 0 0 var(--ink)}
+.btn-cartoon.pink{background:var(--pink)}
+.btn-cartoon.mint{background:var(--mint)}
+.btn-cartoon.white{background:#fff}
+
+/* nav */
+.nav-wrap{padding:1rem 0;position:relative;z-index:5}
+.nav-pill{background:var(--paper);border:var(--bd);border-radius:999px;box-shadow:var(--pop);padding:.5rem .6rem .5rem 1rem}
+.brand{font-size:1.7rem;font-weight:800;text-decoration:none;display:flex;align-items:center;gap:.5rem;color:var(--ink)}
+.brand img{width:40px;border-radius:12px;border:2px solid var(--ink)}
+.brand b{color:var(--pink)}
+.nav-link{font-weight:800;color:var(--ink)!important;padding:.4rem .9rem!important;border-radius:999px}
+.nav-link:hover{background:var(--sun)}
+.navbar-toggler{border:var(--bd);border-radius:14px;background:var(--sun)}
+.navbar-toggler:focus{box-shadow:none}
+
+/* hero */
+.hero{padding:2.5rem 0 3.5rem;position:relative}
+.hero h1{font-size:clamp(2.6rem,6.5vw,4.6rem);font-weight:800;line-height:1.02;margin-bottom:1rem}
+.hero h1 .hl{background:var(--sun);border:var(--bd);border-radius:18px;padding:0 .35em;display:inline-block;transform:rotate(-2deg);box-shadow:var(--pop)}
+.hero p.lead{font-size:1.2rem;font-weight:600;max-width:34ch}
+.hero-art{width:100%;max-width:470px;margin:0 auto;display:block}
+.floaty{animation:floaty 4s ease-in-out infinite;transform-origin:center}
+.floaty.b{animation-delay:-1.5s}.floaty.c{animation-delay:-2.6s}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+@media(prefers-reduced-motion:reduce){.floaty,.btn-wa-pop{animation:none!important}}
+
+/* section titles */
+.sec-title{display:inline-block;font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;background:var(--paper);border:var(--bd);
+  border-radius:20px;padding:.2rem 1.2rem;box-shadow:var(--pop);transform:rotate(-1deg);margin-bottom:.8rem}
+.sec-sub{font-weight:700;font-size:1.05rem}
+.wave{display:block;width:100%;height:44px}
+
+/* pricing */
+.price-band{background:var(--paper);border-top:var(--bd);border-bottom:var(--bd);padding:4rem 0}
+.plan{background:var(--c,#fff);border:var(--bd);border-radius:26px;box-shadow:var(--pop);height:100%;display:flex;flex-direction:column;
+  padding:1.4rem 1.2rem;position:relative;transition:transform .15s}
+.plan:hover{transform:translateY(-6px) rotate(-.6deg)}
+.plan h4{font-size:1.9rem;font-weight:800;margin:0}
+.plan .tag{font-weight:800;opacity:.85;margin-bottom:.6rem}
+.plan .price{background:#fff;border:var(--bd);border-radius:18px;padding:.5rem;margin-bottom:1rem;text-align:center}
+.plan .old{text-decoration:line-through;font-weight:700;opacity:.55;font-size:.95rem;line-height:1}
+.plan .now{font-family:'Baloo 2';font-weight:800;font-size:1.9rem;line-height:1.1}
+.plan .note{font-size:.8rem;font-weight:700}
+.plan ul{list-style:none;padding:0;margin:0 0 1.2rem;flex:1;text-align:left}
+.plan li{position:relative;padding:.25rem 0 .25rem 2rem;font-weight:700;font-size:.95rem}
+.plan li::before{content:"\f00c";font-family:"Font Awesome 6 Free";font-weight:900;position:absolute;left:0;top:.28rem;width:1.35rem;height:1.35rem;
+  border:2px solid var(--ink);border-radius:50%;background:var(--mint);font-size:.65rem;display:grid;place-items:center}
+.plan li.no{text-decoration:line-through;opacity:.55}
+.plan li.no::before{content:"\f00d";background:#fff}
+.sticker{position:absolute;top:-18px;right:-10px;background:var(--pink);color:#fff;border:var(--bd);border-radius:14px;padding:.1rem .8rem;
+  font-family:'Baloo 2';font-weight:800;transform:rotate(8deg);box-shadow:3px 3px 0 var(--ink);text-shadow:1px 1px 0 var(--ink)}
+
+/* filters */
+.chip{width:100%;height:100%;border:var(--bd);border-radius:18px;background:#fff;color:var(--ink);font-weight:700;font-size:1.05rem;padding:.6rem .4rem;
+  box-shadow:4px 4px 0 var(--ink);transition:transform .12s,box-shadow .12s;line-height:1.2}
+.chip:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.chip.active{background:var(--violet);color:#fff;transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+
+/* catalog */
+.theme-card{background:#fff;border:var(--bd);border-radius:24px;box-shadow:var(--pop);overflow:hidden;height:100%;display:flex;flex-direction:column;transition:transform .15s}
+.theme-card:hover{transform:translateY(-6px) rotate(.6deg)}
+.theme-card .thumb{position:relative;border-bottom:var(--bd);background:var(--sun);overflow:hidden}
+.theme-card img{width:100%;height:210px;object-fit:cover;display:block}
+.sale{position:absolute;top:10px;left:10px;background:var(--pink);color:#fff;border:2.5px solid var(--ink);border-radius:999px;
+  padding:0 .8rem;font-family:'Baloo 2';font-weight:700;font-size:.9rem;transform:rotate(-6deg);text-shadow:1px 1px 0 var(--ink)}
+.theme-card .body{padding:1rem;display:flex;flex-direction:column;gap:.8rem;flex:1}
+.theme-card h5{font-size:1.25rem;font-weight:800;margin:0}
+.theme-card .acts{display:flex;gap:.6rem;margin-top:auto}
+.theme-card .btn-cartoon{padding:.3rem 1rem;font-size:1rem}
+.btn-wa-pop{animation:wob 3s ease-in-out infinite}
+@keyframes wob{0%,85%,100%{transform:rotate(0)}90%{transform:rotate(-12deg)}95%{transform:rotate(12deg)}}
+
+/* modal */
+.modal-content{border:var(--bd);border-radius:0;background:var(--paper)}
+.modal-header{border-bottom:var(--bd);background:var(--sun)}
+.modal-title{font-family:'Baloo 2';font-weight:800;font-size:1.5rem}
+.btn-close{background-color:#fff;border:2.5px solid var(--ink);border-radius:50%;opacity:1;padding:.6rem}
+.modal-body iframe{background:#fff}
+
+/* footer */
+.site-footer{background:var(--ink);color:#fff;padding:2rem 0;margin-top:3rem}
+.site-footer .brand{color:#fff;font-size:1.4rem}
+.site-footer .brand img{width:34px}
+.soc a{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--sun);color:var(--ink);border:2.5px solid #fff;text-decoration:none}
+.soc a:hover{background:var(--pink)}
+
+@media(max-width:767px){
+  .plan{padding:1rem .8rem;border-radius:20px}
+  .plan h4{font-size:1.35rem}.plan .now{font-size:1.3rem}.plan li{font-size:.78rem;padding-left:1.7rem}
+  .plan .btn-cartoon{font-size:.85rem;padding:.4rem .5rem}
+  .chip{font-size:.92rem}
+  .theme-card img{height:180px}
+}
+</style>
 </head>
 
-<body class="bg-decoration d-flex flex-column min-vh-100">
-  <main class="flex-shrink-0 w-100" style="position: relative; z-index: 1;">
+<body class="d-flex flex-column min-vh-100">
+<main class="flex-shrink-0 w-100">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg py-3">
-      <div class="container px-4 px-lg-5">
-        <a class="navbar-brand brand-name d-flex align-items-center gap-2" href="https://momenin.my.id/katalog">
-          <img class="logo-img" style="max-width: 44px; border-radius: 10px;" src="../assets/logoku.png" alt="Momenin Logo" />
-          <span>Momen<span>in</span></span>
+  <!-- Navbar -->
+  <div class="nav-wrap">
+    <div class="container px-3 px-lg-5">
+      <nav class="navbar navbar-expand-lg nav-pill">
+        <a class="brand" href="https://momenin.my.id/katalog">
+          <img src="../assets/logoku.png" alt="Logo Momenin" /><span>Momen<b>in</b></span>
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon" style="filter: invert(1) brightness(2);"></span>
+        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Buka menu">
+          <i class="fas fa-bars"></i>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link px-3" style="color: var(--text-muted);" href="#paket">Paket</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-3" style="color: var(--text-muted);" href="#tema">Tema</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link btn btn-gold ms-2" style="padding: 0.5rem 1.2rem;" href="https://wa.me/6285262658655"
-                target="_blank"><i class="fab fa-whatsapp me-1"></i>Hubungi Kami</a>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1 pt-2 pt-lg-0">
+            <li class="nav-item"><a class="nav-link" href="#paket">Paket</a></li>
+            <li class="nav-item"><a class="nav-link" href="#tema">Tema</a></li>
+            <li class="nav-item mt-2 mt-lg-0 ms-lg-2">
+              <a class="btn-cartoon mint" href="https://wa.me/6285262658655" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i>Hubungi Kami</a>
             </li>
           </ul>
         </div>
-      </div>
-    </nav>
-
-    <!-- Hero / Title Section -->
-    <section class="section-hero">
-      <div class="container px-4 px-lg-5 text-center">
-        <span class="badge-pill-gold fade-in"><i class="fas fa-crown"></i> Momenin Wedding Invitation</span>
-        <h1 class="fw-bold mt-3 fade-in delay-1">
-          Katalog <span class="gold-text">Undangan</span> Elegan
-        </h1>
-        <div class="gold-ornament fade-in delay-2">
-          <span class="line"></span>
-          <i class="fas fa-heart"></i>
-          <span class="line"></span>
-        </div>
-        <p class="lead text-center mt-2 fade-in delay-2">
-          Semuanya dalam satu momen. Pilih paket, pilih tema, share dengan mudah, murah dan elegan.
-        </p>
-      </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section id="paket" class="py-5">
-      <div class="container px-4 px-lg-5 mb-4">
-        <div class="text-center mb-2">
-          <h2 class="h2 fw-bold">Pilihan Paket Undangan</h2>
-          <div class="gold-ornament">
-            <span class="line"></span>
-            <i class="fas fa-gem"></i>
-            <span class="line"></span>
-          </div>
-          <p class="text-muted">Temukan paket yang sesuai dengan kebutuhan spesial hari bahagia Anda</p>
-        </div>
-
-        <!-- Pricing Cards Grid - Responsive -->
-        <div class="row g-4 mb-5 text-center">
-          <!-- Card 1: Murmer -->
-          <div class="col-6 col-md-6 col-lg-3 fade-in delay-1">
-            <div class="pricing-card h-100">
-              <div class="card-header-gold">
-                <h4>Murmer</h4>
-                <p>Paket Hemat</p>
-              </div>
-              <div class="pricing-divider"></div>
-              <div class="card-body-gold">
-                <div class="price-box">
-                  <div class="price-old">Rp. 20.000</div>
-                  <div class="price-current">Rp. 15.000</div>
-                </div>
-                <ul class="feature-list text-start">
-                  <li>Masa Aktif 5 bulan</li>
-                  <li>Gratis konsultasi</li>
-                  <li class="cross">Nama tamu undangan</li>
-                  <li class="cross">Komentar & Ucapan</li>
-                </ul>
-                <a href="https://wa.me/6285262658655?text=Halo%20kak,%20saya%20minat%20paket%20Murmer"
-                  class="btn btn-outline-gold mt-auto" target="_blank">
-                  <i class="fab fa-whatsapp me-2"></i>Pesan Sekarang
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 2: Medium -->
-          <div class="col-6 col-md-6 col-lg-3 fade-in delay-2">
-            <div class="pricing-card featured h-100">
-              <div class="card-header-gold">
-                <h4>Medium</h4>
-                <p>Paket Standar</p>
-              </div>
-              <div class="pricing-divider"></div>
-              <div class="card-body-gold">
-                <div class="price-box">
-                  <div class="price-current">Rp. 20.000</div>
-                </div>
-                <ul class="feature-list text-start">
-                  <li>Masa Aktif 5 bulan</li>
-                  <li>Gratis konsultasi</li>
-                  <li>Nama tamu undangan</li>
-                  <li class="cross">Komentar & Ucapan</li>
-                </ul>
-                <a href="https://wa.me/6285262658655?text=Halo%20kak,%20saya%20minat%20paket%20Medium"
-                  class="btn btn-gold mt-auto" target="_blank">
-                  <i class="fab fa-whatsapp me-2"></i>Pesan Sekarang
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 3: Enterprise -->
-          <div class="col-6 col-md-6 col-lg-3 fade-in delay-3">
-            <div class="pricing-card h-100">
-              <div class="card-header-gold">
-                <h4>Enterprise</h4>
-                <p>Paket Lengkap</p>
-              </div>
-              <div class="pricing-divider"></div>
-              <div class="card-body-gold">
-                <div class="price-box">
-                  <div class="price-current">Rp. 25.000</div>
-                </div>
-                <ul class="feature-list text-start">
-                  <li>Masa Aktif 5 bulan</li>
-                  <li>Gratis konsultasi</li>
-                  <li>Nama tamu undangan</li>
-                  <li>Komentar & Ucapan</li>
-                </ul>
-                <a href="https://wa.me/6285262658655?text=Halo%20kak,%20saya%20minat%20paket%20Enterprise"
-                  class="btn btn-outline-gold mt-auto" target="_blank">
-                  <i class="fab fa-whatsapp me-2"></i>Pesan Sekarang
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 4: Couple -->
-          <div class="col-6 col-md-6 col-lg-3 fade-in delay-3">
-            <div class="pricing-card h-100">
-              <div class="card-header-gold">
-                <h4>Couple</h4>
-                <p>Paket Pasangan</p>
-              </div>
-              <div class="pricing-divider"></div>
-              <div class="card-body-gold">
-                <div class="price-box">
-                  <div class="price-current">Disc. 10.000</div>
-                  <div class="price-note">Dari paket pilihan</div>
-                </div>
-                <ul class="feature-list text-start">
-                  <li>Fitur sesuai paket</li>
-                  <li>Desain sama untuk pasangan</li>
-                  <li>Hemat untuk pasangan</li>
-                  <li>Gratis konsultasi</li>
-                </ul>
-                <a href="https://wa.me/6285262658655?text=Halo%20kak,%20saya%20minat%20paket%20Couple"
-                  class="btn btn-outline-gold mt-auto" target="_blank">
-                  <i class="fab fa-whatsapp me-2"></i>Pesan Sekarang
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Filter Section -->
-      <div id="tema" class="container px-4 px-lg-5 mb-4">
-        <div class="text-center mb-4">
-          <h2 class="h3 fw-bold">Temukan Tema Favorit Anda</h2>
-          <div class="gold-ornament">
-            <span class="line"></span>
-            <i class="fas fa-star"></i>
-            <span class="line"></span>
-          </div>
-          <p class="text-muted">Filter berdasarkan kategori tema yang tersedia</p>
-        </div>
-
-        <!-- Filter Buttons Grid - Responsive 2 kolom -->
-        <div class="row row-cols-2 row-cols-md-4 g-3 filter-buttons">
-          <div class="col">
-            <button class="btn w-100 active" onclick="filterKatalog('spesial', this)">Spesial Foto</button>
-          </div>
-          <div class="col">
-            <button class="btn w-100" onclick="filterKatalog('spesial_lineart', this)">Spesial Lineart</button>
-          </div>
-          <div class="col">
-            <button class="btn w-100" onclick="filterKatalog('luxury', this)">Luxury Foto</button>
-          </div>
-          <div class="col">
-            <button class="btn w-100" onclick="filterKatalog('luxury_lineart', this)">Luxury Lineart</button>
-          </div>
-          <div class="col">
-            <button class="btn w-100" onclick="filterKatalog('premium', this)">Premium Vintage</button>
-          </div>
-          <div class="col">
-            <button class="btn w-100" onclick="filterKatalog('premium_lineart', this)">Premium Lineart</button>
-          </div>
-          <div class="col">
-            <button class="btn w-100" onclick="filterKatalog('adat', this)">Adat Foto</button>
-          </div>
-          <div class="col">
-            <button class="btn w-100" onclick="filterKatalog('adat_lineart', this)">Adat Lineart</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Catalog Section -->
-      <div class="container px-4 px-lg-5 mb-5">
-        <div class="row g-4 justify-content-center" id="katalog-container">
-          <!-- Items are loaded dynamically -->
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="site-footer mt-auto py-4 w-100" style="position: relative; z-index: 1;">
-    <div class="container px-4 px-lg-5 d-flex flex-column flex-md-row align-items-center justify-content-between gap-2">
-      <a class="brand-name d-flex align-items-center gap-2 text-decoration-none" href="https://momenin.my.id">
-        <img style="max-width: 32px; border-radius: 6px;" src="../assets/logoku.png" alt="Momenin" />
-        <span>Momen<span>in</span></span>
-      </a>
-      <p class="mb-0 small">© 2026 Momenin. Dibuat dengan <i class="fas fa-heart text-danger"></i> untuk momen spesial Anda.</p>
-      <div class="d-flex gap-3">
-        <a href="https://wa.me/6285262658655" target="_blank" style="color: var(--text-muted);" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://instagram.com" target="_blank" style="color: var(--text-muted);" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="https://facebook.com" target="_blank" style="color: var(--text-muted);" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Main Application Script -->
-  <script>
-    // Katalog Data
-    const katalogItems = [
-      // Spesial category
-      { category: "spesial", id: "01", demoLink: "https://datakatalog.momenin.my.id/spesial-01/index.html" },
-      { category: "spesial", id: "02", demoLink: "https://datakatalog.momenin.my.id/spesial-02/index.html" },
-      { category: "spesial", id: "03", demoLink: "https://datakatalog.momenin.my.id/spesial-03/index.html" },
-      { category: "spesial", id: "04", demoLink: "https://datakatalog.momenin.my.id/spesial-04/index.html" },
-      { category: "spesial", id: "05", demoLink: "https://datakatalog.momenin.my.id/spesial-05/index.html" },
-      { category: "spesial", id: "06", demoLink: "https://datakatalog.momenin.my.id/spesial-06/index.html" },
-      { category: "spesial", id: "07", demoLink: "https://datakatalog.momenin.my.id/spesial-07/index.html" },
-      { category: "spesial", id: "08", demoLink: "https://datakatalog.momenin.my.id/spesial-08/index.html" },
-      { category: "spesial", id: "09", demoLink: "https://datakatalog.momenin.my.id/spesial-09/index.html" },
-      { category: "spesial", id: "10", demoLink: "https://datakatalog.momenin.my.id/spesial-10/index.html" },
-
-      { category: "spesial_lineart", id: "01", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/TEMA-01-1.webp", demoLink: "https://datakatalog.momenin.my.id/spesial-01-animasi/index.html" },
-      { category: "spesial_lineart", id: "02", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/TEMA-02-1.webp", demoLink: "https://datakatalog.momenin.my.id/spesial-02-animasi/index.html" },
-      { category: "spesial_lineart", id: "03", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/TEMA-03-1.webp", demoLink: "https://datakatalog.momenin.my.id/spesial-03-animasi/index.html" },
-      { category: "spesial_lineart", id: "04", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/TEMA-04-1.webp", demoLink: "https://datakatalog.momenin.my.id/spesial-04-animasi/index.html" },
-      { category: "spesial_lineart", id: "05", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/TEMA-05-1.webp", demoLink: "https://datakatalog.momenin.my.id/spesial-05-animasi/index.html" },
-      { category: "spesial_lineart", id: "06", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/TEMA-06-1.webp", demoLink: "https://datakatalog.momenin.my.id/spesial-06-animasi/index.html" },
-      { category: "spesial_lineart", id: "07", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/TEMA-07-1.webp", demoLink: "https://datakatalog.momenin.my.id/spesial-07-animasi/index.html" },
-      { category: "spesial_lineart", id: "08", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/TEMA-08-1.webp", demoLink: "https://datakatalog.momenin.my.id/spesial-08-animasi/index.html" },
-      { category: "spesial_lineart", id: "09", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/TEMA-09-1.webp", demoLink: "https://datakatalog.momenin.my.id/spesial-09-animasi/index.html" },
-      { category: "spesial_lineart", id: "10", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/TEMA-10-1.webp", demoLink: "https://datakatalog.momenin.my.id/spesial-10-animasi/index.html" },
-
-      // Luxury category
-      { category: "luxury", id: "01", demoLink: "https://datakatalog.momenin.my.id/luxury-01/index.html" },
-      { category: "luxury", id: "02", demoLink: "https://datakatalog.momenin.my.id/luxury-02/index.html" },
-      { category: "luxury", id: "03", demoLink: "https://datakatalog.momenin.my.id/luxury-03/index.html" },
-      { category: "luxury", id: "04", demoLink: "https://datakatalog.momenin.my.id/luxury-04/index.html" },
-      { category: "luxury", id: "05", demoLink: "https://datakatalog.momenin.my.id/luxury-05/index.html" },
-      { category: "luxury", id: "06", demoLink: "https://datakatalog.momenin.my.id/luxury-06/index.html" },
-      { category: "luxury", id: "07", demoLink: "https://datakatalog.momenin.my.id/luxury-07/index.html" },
-      { category: "luxury", id: "08", demoLink: "https://datakatalog.momenin.my.id/luxury-08/index.html" },
-      { category: "luxury", id: "09", demoLink: "https://datakatalog.momenin.my.id/luxury-09/index.html" },
-      { category: "luxury", id: "10", demoLink: "https://datakatalog.momenin.my.id/luxury-10/index.html" },
-      { category: "luxury", id: "11", demoLink: "https://datakatalog.momenin.my.id/luxury-11/index.html" },
-
-      { category: "luxury_lineart", id: "01", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/09/LUXURY-01-AN.webp", demoLink: "https://datakatalog.momenin.my.id/animasi-luxury-01/index.html" },
-      { category: "luxury_lineart", id: "02", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/LUXURY-02-2.webp", demoLink: "https://datakatalog.momenin.my.id/animasi-luxury-02/index.html" },
-      { category: "luxury_lineart", id: "03", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/LUXURY-03-1.webp", demoLink: "https://datakatalog.momenin.my.id/animasi-luxury-03/index.html" },
-      { category: "luxury_lineart", id: "04", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/LUXURY-04-2.webp", demoLink: "https://datakatalog.momenin.my.id/animasi-luxury-04/index.html" },
-      { category: "luxury_lineart", id: "05", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/11/MINIMALIST-LUXURY-05-2.webp", demoLink: "https://datakatalog.momenin.my.id/animasi-luxury-05/index.html" },
-      { category: "luxury_lineart", id: "06", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/11/MINIMALIST-LUXURY-06-2.webp", demoLink: "https://datakatalog.momenin.my.id/animasi-luxury-06/index.html" },
-      { category: "luxury_lineart", id: "07", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/11/MINIMALIST-LUXURY-07-3.webp", demoLink: "https://datakatalog.momenin.my.id/animasi-luxury-07/index.html" },
-      { category: "luxury_lineart", id: "08", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/11/MINIMALIST-LUXURY-08-1.webp", demoLink: "https://datakatalog.momenin.my.id/animasi-luxury-08/index.html" },
-      { category: "luxury_lineart", id: "09", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/11/MINIMALIST-LUXURY-09-1.webp", demoLink: "https://datakatalog.momenin.my.id/animasi-luxury-09/index.html" },
-      { category: "luxury_lineart", id: "10", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/11/MINIMALIST-LUXURY-10-2.webp", demoLink: "https://datakatalog.momenin.my.id/animasi-luxury-10/index.html" },
-      { category: "luxury_lineart", id: "11", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/11/MINIMALIST-LUXURY-11-1.webp", demoLink: "https://datakatalog.momenin.my.id/animasi-luxury-11/index.html" },
-
-      // Premium category
-      { category: "premium", id: "01", demoLink: "https://datakatalog.momenin.my.id/vintage-01/index.html" },
-      { category: "premium", id: "02", demoLink: "https://datakatalog.momenin.my.id/vintage-02/index.html" },
-      { category: "premium", id: "03", demoLink: "https://datakatalog.momenin.my.id/vintage-03/index.html" },
-      { category: "premium", id: "04", demoLink: "https://datakatalog.momenin.my.id/vintage-04/index.html" },
-      { category: "premium", id: "05", demoLink: "https://datakatalog.momenin.my.id/vintage-05/index.html" },
-      { category: "premium", id: "06", demoLink: "https://datakatalog.momenin.my.id/vintage-06/index.html" },
-      { category: "premium", id: "07", demoLink: "https://datakatalog.momenin.my.id/vintage-07/index.html" },
-      { category: "premium", id: "08", demoLink: "https://datakatalog.momenin.my.id/vintage-08/index.html" },
-
-      { category: "premium_lineart", id: "01", imageUrl: "https://punakawandigital.id/wp-content/uploads/2025/05/Premium-Vintage-01-1.webp", demoLink: "https://datakatalog.momenin.my.id/vintage-01-animasi/index.html" },
-      { category: "premium_lineart", id: "02", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/11/Premium-Vintage-02-1.webp", demoLink: "https://datakatalog.momenin.my.id/vintage-02-animasi/index.html" },
-      { category: "premium_lineart", id: "03", imageUrl: "https://punakawandigital.id/wp-content/uploads/2025/05/Premium-Vintage-03-2.webp", demoLink: "https://datakatalog.momenin.my.id/vintage-03-animasi/index.html" },
-      { category: "premium_lineart", id: "04", imageUrl: "https://punakawandigital.id/wp-content/uploads/2025/05/Premium-Vintage-04-3.webp", demoLink: "https://datakatalog.momenin.my.id/vintage-04-animasi/index.html" },
-      { category: "premium_lineart", id: "05", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/vintage-05-1.webp", demoLink: "https://datakatalog.momenin.my.id/vintage-05-animasi/index.html" },
-      { category: "premium_lineart", id: "06", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/vintage-06-2.webp", demoLink: "https://datakatalog.momenin.my.id/vintage-06-animasi/index.html" },
-      { category: "premium_lineart", id: "07", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/11/Premium-Vintage-08-2.webp", demoLink: "https://datakatalog.momenin.my.id/vintage-07-animasi/index.html" },
-      { category: "premium_lineart", id: "08", imageUrl: "https://punakawandigital.id/wp-content/uploads/2025/05/Premium-Vintage-08-2.webp", demoLink: "https://datakatalog.momenin.my.id/vintage-08-animasi/index.html" },
-
-      // Adat category
-      { category: "adat", id: "01", demoLink: "https://datakatalog.momenin.my.id/wayang-01/index.html" },
-      { category: "adat", id: "02", demoLink: "https://datakatalog.momenin.my.id/wayang-02/index.html" },
-      { category: "adat", id: "03", demoLink: "https://datakatalog.momenin.my.id/wayang-03/index.html" },
-      { category: "adat", id: "04", demoLink: "https://datakatalog.momenin.my.id/wayang-04/index.html" },
-      { category: "adat", id: "05", demoLink: "https://datakatalog.momenin.my.id/bugis/index.html" },
-      { category: "adat", id: "06", demoLink: "https://datakatalog.momenin.my.id/minang/index.html" },
-      { category: "adat", id: "07", demoLink: "https://datakatalog.momenin.my.id/batak/index.html" },
-      { category: "adat", id: "08", demoLink: "https://datakatalog.momenin.my.id/bali/index.html" },
-      { category: "adat", id: "09", demoLink: "https://datakatalog.momenin.my.id/chinese/index.html" },
-      { category: "adat", id: "10", demoLink: "https://datakatalog.momenin.my.id/melayu/index.html" },
-
-      // Adat Lineart category
-      { category: "adat_lineart", id: "01", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/08/Slide11-1.webp", demoLink: "https://datakatalog.momenin.my.id/animasi-wayang-01/index.html" },
-      { category: "adat_lineart", id: "02", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/08/Slide12-1.webp", demoLink: "https://datakatalog.momenin.my.id/animasi-wayang-02/index.html" },
-      { category: "adat_lineart", id: "03", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/WAYANG-03-4.webp", demoLink: "https://datakatalog.momenin.my.id/animasi-wayang-03/index.html" },
-      { category: "adat_lineart", id: "04", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/05/WAYANG-04-1.webp", demoLink: "https://datakatalog.momenin.my.id/animasi-wayang-04/index.html" },
-      { category: "adat_lineart", id: "05", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/08/Tema-bugis-an.webp", demoLink: "https://datakatalog.momenin.my.id/animasi-bugis/index.html" },
-      { category: "adat_lineart", id: "06", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/08/tema-minang-animasi.webp", demoLink: "https://datakatalog.momenin.my.id/animasi-minang/index.html" },
-      { category: "adat_lineart", id: "07", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/08/Slide2-1.webp", demoLink: "https://datakatalog.momenin.my.id/animasi-bali/index.html" },
-      { category: "adat_lineart", id: "08", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/08/TUMB-TEMA-BATAK-ANIMASI.webp", demoLink: "https://datakatalog.momenin.my.id/animasi-batak/index.html" },
-      { category: "adat_lineart", id: "09", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/08/CHINESE-AN.webp", demoLink: "https://datakatalog.momenin.my.id/animasi-chinese/index.html" },
-      { category: "adat_lineart", id: "10", imageUrl: "https://punakawandigital.id/wp-content/uploads/2024/08/TEMA-MELAYU-AN.webp", demoLink: "https://datakatalog.momenin.my.id/animasi-melayu/index.html" },
-    ];
-
-    // Konfigurasi
-    const baseImageUrl = "../assets/";
-    const container = document.getElementById("katalog-container");
-
-    // Helper Functions
-    function formatCategoryName(category) {
-      const nameMap = {
-        'spesial_lineart': 'Spesial Lineart',
-        'luxury_lineart': 'Luxury Lineart',
-        'premium_lineart': 'Premium Lineart',
-        'adat_lineart': 'Adat Lineart',
-        'spesial': 'Spesial',
-        'luxury': 'Luxury',
-        'premium': 'Premium',
-        'adat': 'Adat'
-      };
-      return nameMap[category] || category.charAt(0).toUpperCase() + category.slice(1);
-    }
-
-    function generateCard(item) {
-      const webpFile = item.imageUrl ? item.imageUrl : `${baseImageUrl}${item.category.toUpperCase()}-${item.id}.webp`;
-      const pngFile = item.imageUrl ? item.imageUrl.replace('.webp', '.png') : `${baseImageUrl}${item.category.toUpperCase()}-${item.id}.png`;
-
-      const formattedCategory = formatCategoryName(item.category);
-      const title = `${formattedCategory} ${item.id}`;
-
-      return `
-        <div class="col-sm-6 col-md-4 col-lg-3 katalog-item" data-category="${item.category}">
-          <div class="card h-100">
-            <div class="position-relative overflow-hidden">
-              <picture>
-                <source srcset="${webpFile}" type="image/webp">
-                <source srcset="${pngFile}" type="image/png">
-                <img class="card-img-top" src="${pngFile}" alt="${title}" loading="lazy">
-              </picture>
-              <div class="discount-badge"><i class="fas fa-tag me-1"></i>Diskon!</div>
-            </div>
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">${title}</h5>
-              <div class="mt-auto">
-                <div class="d-flex gap-2">
-                  <a href="#" class="btn btn-demo flex-grow-1 lihat-demo-btn small"
-                     data-demo-link="${item.demoLink}"
-                     data-title="${title}"
-                     data-bs-toggle="modal"
-                     data-bs-target="#demoModal">
-                    <i class="fas fa-eye me-1"></i>Demo
-                  </a>
-                  <a href="https://wa.me/6285262658655?text=Halo%20kak.%0ASepertinya%20saya%20minat%20untuk%20desain%20ini%20%3A%20${encodeURIComponent(title)}"
-                     target="_blank"
-                     class="btn btn-wa-pop px-3">
-                    <i class="fab fa-whatsapp"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>`;
-    }
-
-    // Initialize Catalog
-    function initializeCatalog() {
-      container.innerHTML = '';
-
-      katalogItems.forEach(item => {
-        container.insertAdjacentHTML("beforeend", generateCard(item));
-      });
-
-      const firstButton = document.querySelector('.filter-buttons .btn');
-      if (firstButton) {
-        filterKatalog('spesial', firstButton);
-      }
-
-      setupDemoButtons();
-    }
-
-    // Filter Function
-    function filterKatalog(category, clickedButton) {
-      const items = document.querySelectorAll('.katalog-item');
-
-      items.forEach(item => {
-        const itemCategory = item.getAttribute('data-category');
-        item.style.display = (category === 'all' || itemCategory === category) ? 'block' : 'none';
-      });
-
-      document.querySelectorAll('.filter-buttons .btn').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      clickedButton.classList.add('active');
-    }
-
-    // Setup Demo Buttons
-    function setupDemoButtons() {
-      document.addEventListener('click', function(e) {
-        if (e.target.closest('.lihat-demo-btn')) {
-          const button = e.target.closest('.lihat-demo-btn');
-          const demoLink = button.getAttribute('data-demo-link');
-          const title = button.getAttribute('data-title');
-
-          document.getElementById('demoIframe').src = demoLink;
-
-          const whatsappBtn = document.querySelector('#demoModal .btn-success');
-          if (whatsappBtn) {
-            whatsappBtn.href = `https://wa.me/6285262658655?text=Halo%20kak.%0ASaya%20baru%20melihat%20demo%20${encodeURIComponent(title)}%20dan%20ingin%20bertanya%20lebih%20lanjut`;
-          }
-        }
-      });
-    }
-
-    // Initialize on load
-    document.addEventListener('DOMContentLoaded', initializeCatalog);
-
-    // Clean up iframe when modal closes
-    document.addEventListener('DOMContentLoaded', function() {
-      const demoModal = document.getElementById('demoModal');
-      if (demoModal) {
-        demoModal.addEventListener('hidden.bs.modal', function() {
-          document.getElementById('demoIframe').src = '';
-        });
-      }
-    });
-  </script>
-
-  <!-- Demo Modal -->
-  <div class="modal fade modal-elegant" id="demoModal" tabindex="-1" aria-labelledby="demoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title"><i class="fas fa-eye me-2 gold-text"></i>Demo Tema</h5>
-          <div class="d-flex gap-2">
-            <a href="#" class="btn btn-success btn-sm" id="modalWhatsappBtn" target="_blank">
-              <i class="fab fa-whatsapp me-1"></i> Pesan via WhatsApp
-            </a>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-        </div>
-        <div class="modal-body p-0">
-          <iframe id="demoIframe" src="" width="100%" height="100%" style="border: none;" frameborder="0" allowfullscreen></iframe>
-        </div>
-      </div>
+      </nav>
     </div>
   </div>
 
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container px-3 px-lg-5">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-6 text-center text-lg-start">
+          <h1>Undangan nikah online yang <span class="hl">gampang</span> dibagikan</h1>
+          <p class="lead mx-auto mx-lg-0">Pilih paket, pilih tema, kirim lewat WhatsApp. Murah, rapi, dan siap dalam hitungan hari.</p>
+          <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start mt-4">
+            <a href="#tema" class="btn-cartoon pink"><i class="fas fa-palette"></i>Lihat tema</a>
+            <a href="#paket" class="btn-cartoon white"><i class="fas fa-tags"></i>Cek harga</a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <svg class="hero-art" viewBox="0 0 480 400" role="img" aria-label="Ilustrasi kartun pasangan pengantin di depan layar ponsel undangan">
+            <g stroke="#26204a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+              <!-- clouds -->
+              <g fill="#fff"><path d="M30 120h95a24 24 0 0 0-8-46 34 34 0 0 0-62-6 28 28 0 0 0-25 52z"/><path d="M360 70h90a20 20 0 0 0-5-38 28 28 0 0 0-52-4 24 24 0 0 0-33 42z"/></g>
+              <!-- ground -->
+              <ellipse cx="240" cy="372" rx="200" ry="22" fill="#3dd6a5"/>
+              <!-- phone -->
+              <rect x="150" y="60" width="180" height="300" rx="30" fill="#fffdf7"/>
+              <rect x="166" y="92" width="148" height="196" rx="14" fill="#ffcf3f"/>
+              <circle cx="240" cy="76" r="5" fill="#26204a"/>
+              <path d="M240 232c-42-28-34-58-12-58 10 0 12 8 12 8s2-8 12-8c22 0 30 30-12 58z" fill="#ff6fa5"/>
+              <rect x="190" y="248" width="100" height="10" rx="5" fill="#fff"/>
+              <rect x="206" y="266" width="68" height="8" rx="4" fill="#fff"/>
+              <rect x="190" y="302" width="100" height="38" rx="19" fill="#3dd6a5"/>
+              <path d="M222 321h36" />
+              <!-- groom -->
+              <g>
+                <path d="M62 372v-96a36 36 0 0 1 72 0v96z" fill="#26204a"/>
+                <path d="M88 276l10 34 10-34z" fill="#fff"/><path d="M94 288l4 6 4-6-4-4z" fill="#ff6fa5"/>
+                <circle cx="98" cy="226" r="34" fill="#ffd2a8"/>
+                <path d="M64 220c0-26 16-38 34-38s36 12 34 38c-10-14-22-18-34-18s-24 4-34 18z" fill="#26204a"/>
+                <circle cx="86" cy="230" r="3.5" fill="#26204a"/><circle cx="110" cy="230" r="3.5" fill="#26204a"/>
+                <path d="M88 243q10 9 20 0" fill="none"/>
+                <circle cx="78" cy="241" r="5" fill="#ff6fa5" stroke="none" opacity=".6"/><circle cx="118" cy="241" r="5" fill="#ff6fa5" stroke="none" opacity=".6"/>
+              </g>
+              <!-- bride -->
+              <g>
+                <path d="M346 372l-18-100a38 38 0 0 1 76 0l-18 100z" fill="#fff"/>
+                <path d="M340 372l18-74 18 74" fill="#bde6ff"/>
+                <circle cx="366" cy="226" r="34" fill="#ffd2a8"/>
+                <path d="M330 232c-6-40 16-56 36-56s42 16 36 56c-6-18-10-28-36-28s-30 10-36 28z" fill="#8b4a2b"/>
+                <path d="M336 192q30-32 60 0l-8 6q-22-20-44 0z" fill="#fff"/>
+                <circle cx="354" cy="232" r="3.5" fill="#26204a"/><circle cx="378" cy="232" r="3.5" fill="#26204a"/>
+                <path d="M356 245q10 9 20 0" fill="none"/>
+                <circle cx="346" cy="243" r="5" fill="#ff6fa5" stroke="none" opacity=".6"/><circle cx="386" cy="243" r="5" fill="#ff6fa5" stroke="none" opacity=".6"/>
+                <g transform="translate(336 296)"><circle r="9" cx="0" cy="0" fill="#ff6fa5"/><circle r="9" cx="14" cy="-4" fill="#ffcf3f"/><circle r="9" cx="10" cy="10" fill="#8b6cff"/></g>
+              </g>
+              <!-- floating hearts -->
+              <path class="floaty" d="M70 150c-20-14-16-30-5-30 6 0 5 5 5 5s0-5 6-5c11 0 15 16-6 30z" fill="#ff6fa5"/>
+              <path class="floaty b" d="M410 170c-18-12-14-26-4-26 5 0 4 4 4 4s0-4 5-4c10 0 14 14-5 26z" fill="#8b6cff"/>
+              <path class="floaty c" d="M300 30c-14-10-11-20-3-20 4 0 3 3 3 3s0-3 4-3c8 0 11 10-4 20z" fill="#ffcf3f"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <svg class="wave" viewBox="0 0 1200 44" preserveAspectRatio="none" aria-hidden="true"><path d="M0 44V22Q50 0 100 22T200 22 300 22 400 22 500 22 600 22 700 22 800 22 900 22 1000 22 1100 22 1200 22V44z" fill="#fffdf7" stroke="#26204a" stroke-width="3"/></svg>
+
+  <!-- Paket -->
+  <section id="paket" class="price-band" style="margin-top:-3px">
+    <div class="container px-3 px-lg-5">
+      <div class="text-center mb-5">
+        <h2 class="sec-title">Pilih paket undangan</h2>
+        <p class="sec-sub">Semua paket berlaku 5 bulan dan gratis konsultasi.</p>
+      </div>
+      <div class="row g-4 g-lg-4 text-center">
+        <div class="col-6 col-lg-3">
+          <div class="plan" style="--c:#bde6ff">
+            <h4>Murmer</h4><div class="tag">Paket Hemat</div>
+            <div class="price"><div class="old">Rp. 20.000</div><div class="now">Rp. 15.000</div></div>
+            <ul><li>Masa Aktif 5 bulan</li><li>Gratis konsultasi</li><li class="no">Nama tamu undangan</li><li class="no">Komentar &amp; Ucapan</li></ul>
+            <a class="btn-cartoon white" href="https://wa.me/6285262658655?text=Halo%20kak,%20saya%20minat%20paket%20Murmer" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i>Pesan</a>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="plan" style="--c:#ffcf3f">
+            <span class="sticker">Terpopuler</span>
+            <h4>Medium</h4><div class="tag">Paket Standar</div>
+            <div class="price"><div class="now">Rp. 20.000</div></div>
+            <ul><li>Masa Aktif 5 bulan</li><li>Gratis konsultasi</li><li>Nama tamu undangan</li><li class="no">Komentar &amp; Ucapan</li></ul>
+            <a class="btn-cartoon pink" href="https://wa.me/6285262658655?text=Halo%20kak,%20saya%20minat%20paket%20Medium" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i>Pesan</a>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="plan" style="--c:#c9b8ff">
+            <h4>Enterprise</h4><div class="tag">Paket Lengkap</div>
+            <div class="price"><div class="now">Rp. 25.000</div></div>
+            <ul><li>Masa Aktif 5 bulan</li><li>Gratis konsultasi</li><li>Nama tamu undangan</li><li>Komentar &amp; Ucapan</li></ul>
+            <a class="btn-cartoon white" href="https://wa.me/6285262658655?text=Halo%20kak,%20saya%20minat%20paket%20Enterprise" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i>Pesan</a>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="plan" style="--c:#ffb3cf">
+            <h4>Couple</h4><div class="tag">Paket Pasangan</div>
+            <div class="price"><div class="now">Disc. 10.000</div><div class="note">Dari paket pilihan</div></div>
+            <ul><li>Fitur sesuai paket</li><li>Desain sama untuk pasangan</li><li>Hemat untuk pasangan</li><li>Gratis konsultasi</li></ul>
+            <a class="btn-cartoon white" href="https://wa.me/6285262658655?text=Halo%20kak,%20saya%20minat%20paket%20Couple" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i>Pesan</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tema -->
+  <section id="tema" class="pt-5">
+    <div class="container px-3 px-lg-5">
+      <div class="text-center mb-4">
+        <h2 class="sec-title" style="transform:rotate(1deg)">Cari tema favoritmu</h2>
+        <p class="sec-sub">Pilih kategori, lalu tekan Demo untuk melihat contoh undangannya.</p>
+      </div>
+      <div class="row row-cols-2 row-cols-md-4 g-3 g-md-4 mb-5" id="filters">
+        <div class="col"><button class="chip active" data-cat="spesial">Spesial Foto</button></div>
+        <div class="col"><button class="chip" data-cat="spesial_lineart">Spesial Lineart</button></div>
+        <div class="col"><button class="chip" data-cat="luxury">Luxury Foto</button></div>
+        <div class="col"><button class="chip" data-cat="luxury_lineart">Luxury Lineart</button></div>
+        <div class="col"><button class="chip" data-cat="premium">Premium Vintage</button></div>
+        <div class="col"><button class="chip" data-cat="premium_lineart">Premium Lineart</button></div>
+        <div class="col"><button class="chip" data-cat="adat">Adat Foto</button></div>
+        <div class="col"><button class="chip" data-cat="adat_lineart">Adat Lineart</button></div>
+      </div>
+      <div class="row g-4 justify-content-center" id="katalog-container"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container px-3 px-lg-5 d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+    <a class="brand" href="https://momenin.my.id"><img src="../assets/logoku.png" alt="Momenin" /><span>Momen<b>in</b></span></a>
+    <p class="mb-0 small fw-bold text-center">© 2026 Momenin. Dibuat dengan <i class="fas fa-heart" style="color:var(--pink)"></i> untuk momen spesialmu.</p>
+    <div class="soc d-flex gap-2">
+      <a href="https://wa.me/6285262658655" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+    </div>
+  </div>
+</footer>
+
+<!-- Modal Demo -->
+<div class="modal fade" id="demoModal" tabindex="-1" aria-labelledby="demoTitle" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="demoTitle"><i class="fas fa-eye me-2"></i>Demo Tema</h5>
+        <div class="d-flex align-items-center gap-2">
+          <a href="#" class="btn-cartoon mint" id="modalWhatsappBtn" target="_blank" rel="noopener" style="padding:.25rem .9rem;font-size:.95rem"><i class="fab fa-whatsapp"></i>Pesan</a>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+      </div>
+      <div class="modal-body p-0">
+        <iframe id="demoIframe" src="" width="100%" height="100%" style="border:none" allowfullscreen title="Demo tema undangan"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// ---- Data katalog (URL dipersingkat dengan prefix) ----
+const U = "https://punakawandigital.id/wp-content/uploads/";
+const D = "https://datakatalog.momenin.my.id/";
+const pad = n => String(n).padStart(2, "0");
+const rng = n => Array.from({ length: n }, (_, i) => pad(i + 1));
+const items = [];
+const add = (c, id, d, img) => items.push({ c, id, demo: D + d + "/index.html", img: img ? U + img : null });
+
+rng(10).forEach(i => add("spesial", i, `spesial-${i}`));
+rng(10).forEach(i => add("spesial_lineart", i, `spesial-${i}-animasi`, `2024/05/TEMA-${i}-1.webp`));
+
+rng(11).forEach(i => add("luxury", i, `luxury-${i}`));
+["2024/09/LUXURY-01-AN.webp","2024/05/LUXURY-02-2.webp","2024/05/LUXURY-03-1.webp","2024/05/LUXURY-04-2.webp",
+ "2024/11/MINIMALIST-LUXURY-05-2.webp","2024/11/MINIMALIST-LUXURY-06-2.webp","2024/11/MINIMALIST-LUXURY-07-3.webp",
+ "2024/11/MINIMALIST-LUXURY-08-1.webp","2024/11/MINIMALIST-LUXURY-09-1.webp","2024/11/MINIMALIST-LUXURY-10-2.webp",
+ "2024/11/MINIMALIST-LUXURY-11-1.webp"].forEach((p, k) => add("luxury_lineart", pad(k + 1), `animasi-luxury-${pad(k + 1)}`, p));
+
+rng(8).forEach(i => add("premium", i, `vintage-${i}`));
+["2025/05/Premium-Vintage-01-1.webp","2024/11/Premium-Vintage-02-1.webp","2025/05/Premium-Vintage-03-2.webp",
+ "2025/05/Premium-Vintage-04-3.webp","2024/05/vintage-05-1.webp","2024/05/vintage-06-2.webp",
+ "2024/11/Premium-Vintage-08-2.webp","2025/05/Premium-Vintage-08-2.webp"].forEach((p, k) => add("premium_lineart", pad(k + 1), `vintage-${pad(k + 1)}-animasi`, p));
+
+["wayang-01","wayang-02","wayang-03","wayang-04","bugis","minang","batak","bali","chinese","melayu"]
+  .forEach((s, k) => add("adat", pad(k + 1), s));
+[["animasi-wayang-01","2024/08/Slide11-1.webp"],["animasi-wayang-02","2024/08/Slide12-1.webp"],
+ ["animasi-wayang-03","2024/05/WAYANG-03-4.webp"],["animasi-wayang-04","2024/05/WAYANG-04-1.webp"],
+ ["animasi-bugis","2024/08/Tema-bugis-an.webp"],["animasi-minang","2024/08/tema-minang-animasi.webp"],
+ ["animasi-bali","2024/08/Slide2-1.webp"],["animasi-batak","2024/08/TUMB-TEMA-BATAK-ANIMASI.webp"],
+ ["animasi-chinese","2024/08/CHINESE-AN.webp"],["animasi-melayu","2024/08/TEMA-MELAYU-AN.webp"]]
+  .forEach(([d, p], k) => add("adat_lineart", pad(k + 1), d, p));
+
+// ---- Konfigurasi & helper ----
+const baseImageUrl = "../assets/";
+const WA = "https://wa.me/6285262658655";
+const container = document.getElementById("katalog-container");
+const names = { spesial_lineart: "Spesial Lineart", luxury_lineart: "Luxury Lineart", premium_lineart: "Premium Lineart",
+  adat_lineart: "Adat Lineart", spesial: "Spesial", luxury: "Luxury", premium: "Premium", adat: "Adat" };
+
+function generateCard(it) {
+  const webp = it.img || `${baseImageUrl}${it.c.toUpperCase()}-${it.id}.webp`;
+  const png = webp.replace(".webp", ".png");
+  const title = `${names[it.c] || it.c} ${it.id}`;
+  return `
+  <div class="col-sm-6 col-md-4 col-lg-3 katalog-item" data-category="${it.c}">
+    <div class="theme-card">
+      <div class="thumb">
+        <picture>
+          <source srcset="${webp}" type="image/webp">
+          <source srcset="${png}" type="image/png">
+          <img src="${png}" alt="${title}" loading="lazy">
+        </picture>
+        <span class="sale"><i class="fas fa-tag me-1"></i>Diskon!</span>
+      </div>
+      <div class="body">
+        <h5>${title}</h5>
+        <div class="acts">
+          <a href="#" class="btn-cartoon pink flex-grow-1 lihat-demo-btn" data-demo-link="${it.demo}" data-title="${title}"
+             data-bs-toggle="modal" data-bs-target="#demoModal"><i class="fas fa-eye"></i>Demo</a>
+          <a href="${WA}?text=Halo%20kak.%0ASepertinya%20saya%20minat%20untuk%20desain%20ini%20%3A%20${encodeURIComponent(title)}"
+             target="_blank" rel="noopener" class="btn-cartoon mint btn-wa-pop" aria-label="Pesan ${title} via WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function filterKatalog(category, btn) {
+  document.querySelectorAll(".katalog-item").forEach(el => {
+    el.style.display = (category === "all" || el.dataset.category === category) ? "block" : "none";
+  });
+  document.querySelectorAll("#filters .chip").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  container.innerHTML = items.map(generateCard).join("");
+  const first = document.querySelector("#filters .chip");
+  filterKatalog("spesial", first);
+
+  document.getElementById("filters").addEventListener("click", e => {
+    const b = e.target.closest(".chip");
+    if (b) filterKatalog(b.dataset.cat, b);
+  });
+
+  document.addEventListener("click", e => {
+    const b = e.target.closest(".lihat-demo-btn");
+    if (!b) return;
+    document.getElementById("demoIframe").src = b.dataset.demoLink;
+    document.getElementById("demoTitle").innerHTML = `<i class="fas fa-eye me-2"></i>${b.dataset.title}`;
+    document.getElementById("modalWhatsappBtn").href =
+      `${WA}?text=Halo%20kak.%0ASaya%20baru%20melihat%20demo%20${encodeURIComponent(b.dataset.title)}%20dan%20ingin%20bertanya%20lebih%20lanjut`;
+  });
+
+  document.getElementById("demoModal").addEventListener("hidden.bs.modal", () => {
+    document.getElementById("demoIframe").src = "";
+  });
+});
+</script>
 </body>
 </html>

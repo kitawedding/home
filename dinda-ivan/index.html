@@ -3908,10 +3908,10 @@
 								<!-- Skrip Pembuat Galeri Otomatis -->
 								<script>
 									// --- KONFIGURASI ---
-									const totalFoto = 9; // Ubah angka ini sesuai jumlah foto
+									const totalFoto = 1; // Ubah angka ini sesuai jumlah foto
 									const folderPath = "wp-content/uploads/2024/09/"; // Lokasi folder foto
 									// Daftar nomor foto yang ingin dijadikan Horizontal (lebar) sisakan [] jika tanpa horizontal
-									const horizontalPhotos = [1,2,3,4,7];
+									const horizontalPhotos = [1];
 									// -------------------
 
 									const container = document.getElementById('galleryContainer');
@@ -3919,7 +3919,7 @@
 									for (let i = 1; i <= totalFoto; i++) {
 										// Penyesuaian nama file (urutan sesuai contoh Anda)
 										// Jika ada urutan khusus, bisa disesuaikan di sini
-										const imgSrc = `${folderPath}${i}.jpeg`;
+										const imgSrc = `${folderPath}${i}.jpg`;
 
 										const item = document.createElement('div');
 										item.className = 'galeri-item';

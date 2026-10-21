@@ -1,0 +1,39 @@
+PANDUAN PLACEHOLDER GAMBAR, GALERI OTOMATIS, DAN KOMENTAR
+
+1. Struktur folder
+   index.html
+   style.css
+   script.js
+   images/
+     logo-1.png ... logo-12.png
+     foto-awal.jpg
+     foto-section-1.jpg
+     1.jpg, 2.jpg, 3.jpg, ... untuk galeri otomatis
+
+2. Logo dan foto utama
+   Letakkan file logo dan foto utama di folder images/ sesuai nama yang dipakai di index.html.
+   Untuk nama file berbeda, ubah atribut src pada index.html.
+
+3. Galeri otomatis
+   Pengaturan berada di bagian bawah index.html pada window.GALLERY_CONFIG:
+   - totalFoto: jumlah file foto yang ingin ditampilkan.
+   - folderPath: folder foto, default "images/".
+   - extension: ekstensi file, misalnya "jpg", "png", atau "webp".
+   - horizontalPhotos: nomor foto yang tampil melebar, misalnya [2, 5]. Gunakan [] jika tidak ada.
+   Nama foto galeri harus berurutan: 1.jpg, 2.jpg, 3.jpg, dst. Jika folderPath "images/" dan extension "jpg",
+   file foto pertama adalah images/1.jpg.
+   Klik foto untuk melihat ukuran penuh; klik area gelap atau tombol × untuk menutup.
+
+4. Komentar dan konfirmasi kehadiran
+   Komentar memakai Google Apps Script URL yang diberikan pada konfigurasi WISH_CONFIG.
+   ID undangan diambil dari parameter URL ?id=nama-acara; jika tidak ada, script menggunakan slug path URL.
+   Backend Apps Script harus mendukung:
+   - GET ?action=get&wedding_id=ID -> mengembalikan JSON array berisi name, message, attendance.
+   - POST JSON dengan action=add, wedding_id, name, message, attendance.
+   Pastikan Apps Script telah di-deploy sebagai Web App dan aksesnya sesuai kebutuhan tamu.
+   Mode no-cors membuat browser tidak dapat membaca balasan POST; daftar akan dimuat ulang setelah pengiriman.
+   Jadi, tampilan "terkirim" belum menjadi bukti backend menyimpan data jika endpoint Apps Script tidak sesuai.
+
+5. Catatan
+   Front-end hanya menghubungkan form ke Apps Script. Jika Apps Script saat ini memakai nama parameter/kolom berbeda,
+   sesuaikan Apps Script atau mapping field pada script.js.

@@ -537,3 +537,65 @@ body.is-locked { overflow: hidden; }
   font-size: 12px;
 }
 .wish-stats strong { font-weight: 700; }
+/* RESPONSIVE UNDANGAN */
+html,
+body {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.app {
+  width: min(100%, 430px);
+  max-width: 430px;
+  min-width: 0;
+  margin: 0 auto;
+  overflow-x: clip;
+}
+
+.cover {
+  width: min(100vw, 430px);
+  max-width: 430px;
+}
+
+/* HP: gunakan seluruh lebar layar */
+@media (max-width: 430px) {
+  .app {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    box-shadow: none;
+  }
+
+  .cover {
+    width: 100vw;
+    max-width: 100vw;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
+
+/* Tablet dan PC: ukuran seperti HP, posisi tengah */
+@media (min-width: 431px) {
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .app {
+    flex: 0 0 430px;
+    width: 430px;
+  }
+
+  .cover {
+    left: 50%;
+    width: 430px;
+  }
+}

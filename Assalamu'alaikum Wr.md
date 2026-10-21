@@ -1,37 +1,14 @@
-Assalamu'alaikum Wr. Wb
-Bismillahirahmanirrahim.
-
-*Yth. (NAMA TAMU)*
-
-Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i, teman sekaligus sahabat, untuk menghadiri acara pernikahan kami :
-
-*Lukman & Ema*
-
-Berikut link undangan kami untuk info lengkap dari acara bisa kunjungi :
- 
-https://momenin.my.id/?to=nama-tamu
-
-Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu.
-
-Mohon maaf perihal undangan hanya di bagikan melalui pesan ini. Terima kasih banyak atas perhatiannya.
-
-Wassalamu'alaikum Wr. Wb.
-Terima Kasih.
-
-
-
 📌 *Tutorial penulisan link*
 
 ⭕️ Bisa copy paste dari website generator
-    • https://momenin.my.id/generator?pengantin=lukman-ema
+    • https://momenin.my.id/generator?pengantin=dinda-ivan
 
 ⛔️ tidak boleh mengandung kurung (beberapa HP tidak support) contohnya :
-    • https://momenin.my.id/lukman-ema?to=agus-(facebook) *JANGAN*
+    • https://momenin.my.id/dinda-ivan?to=agus-(facebook) *JANGAN*
 
 
 📌 *Panel Komentar*
 
 bertujuan untuk menghapus komentar yang tidak sopan/yang lainnya. 
 tinggal pilih hapus, *lalu tunggu datanya hilang di tampilan (1-5 detik)*
-https://momenin.my.id/komentar?pengantin=lukman-ema
-
+https://momenin.my.id/ruang-komentar?pengantin=isada-haul

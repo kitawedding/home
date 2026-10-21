@@ -140,8 +140,8 @@ body.is-locked { overflow: hidden; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  padding: 34px 28px;
+  gap: 5px;
+  padding: 10px 10px;
   text-align: center;
 }
 .cover__text { font-size: 14px; line-height: 1.75; font-weight: 400; color: var(--cream); }
@@ -494,10 +494,19 @@ body.is-locked { overflow: hidden; }
   max-width: 94vw;
   max-height: 92vh;
   padding: 42px 12px 12px;
-  border: 1px solid rgba(236, 213, 147, .65);
+  border: 1px solid rgba(236, 213,   147, .65);
   border-radius: 14px;
   background: #071d13;
   overflow: auto;
+  
+  
+}
+dialog.photo-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
 }
 .photo-popup::backdrop { background: rgba(0, 0, 0, .86); }
 .photo-popup img {

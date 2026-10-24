@@ -12,10 +12,87 @@
     content.removeAttribute('aria-hidden');
     cover.classList.add('is-open');
     section1.scrollIntoView({ behavior: 'auto', block: 'start' });
+    startMusic();
     observeReveals();
     setTimeout(function () { cover.style.display = 'none'; }, 1100);
   }
   if (btnOpen) btnOpen.addEventListener('click', openInvitation);
+
+  /* ---------- Musik latar: tombol play/pause melayang ---------- */
+  var musicConfig = window.MUSIC_CONFIG || {};
+  var musicBtn = document.getElementById('musicToggle');
+  var bgMusic = document.getElementById('bgMusic');
+  var musicSrc = String(musicConfig.src || '');
+  var userPaused = false;      // true bila tamu sendiri yang menekan pause
+  var resumeAfterHide = false; // lanjutkan musik saat tab kembali aktif
+
+  if (bgMusic && musicSrc) {
+    var vol = parseFloat(musicConfig.volume);
+    bgMusic.src = musicSrc;
+    bgMusic.loop = true;
+    bgMusic.volume = isNaN(vol) ? 0.7 : Math.min(1, Math.max(0, vol));
+  }
+
+  function setMusicState(playing) {
+    if (!musicBtn) return;
+    musicBtn.classList.toggle('is-playing', playing);
+    musicBtn.setAttribute('aria-pressed', playing ? 'true' : 'false');
+    musicBtn.setAttribute('aria-label', playing ? 'Jeda musik' : 'Putar musik');
+  }
+
+  function playMusic() {
+    if (!bgMusic || !musicSrc) return;
+    var promise = bgMusic.play();
+    if (promise && typeof promise.catch === 'function') {
+      promise.catch(function (error) {
+        console.warn('Musik belum dapat diputar:', error);
+        setMusicState(false);
+      });
+    }
+  }
+
+  function startMusic() {
+    if (!musicBtn || !bgMusic || !musicSrc) return;
+    musicBtn.hidden = false;
+    // beri jeda 1 frame agar transisi muncul berjalan
+    requestAnimationFrame(function () { musicBtn.classList.add('is-visible'); });
+    userPaused = false;
+    playMusic();
+  }
+
+  if (bgMusic) {
+    bgMusic.addEventListener('play', function () { setMusicState(true); });
+    bgMusic.addEventListener('pause', function () { setMusicState(false); });
+    bgMusic.addEventListener('error', function () {
+      console.warn('File musik tidak ditemukan: ' + musicSrc);
+      setMusicState(false);
+    });
+  }
+
+  if (musicBtn) {
+    musicBtn.addEventListener('click', function () {
+      if (!bgMusic) return;
+      if (bgMusic.paused) {
+        userPaused = false;
+        playMusic();
+      } else {
+        userPaused = true;
+        bgMusic.pause();
+      }
+    });
+  }
+
+  // Hemat baterai & sopan: jeda saat tab disembunyikan, lanjut jika sebelumnya menyala
+  document.addEventListener('visibilitychange', function () {
+    if (!bgMusic || !musicSrc) return;
+    if (document.hidden) {
+      resumeAfterHide = !bgMusic.paused && !userPaused;
+      if (resumeAfterHide) bgMusic.pause();
+    } else if (resumeAfterHide && !userPaused) {
+      resumeAfterHide = false;
+      playMusic();
+    }
+  });
 
   /* ---------- Reveal bertahap saat scroll ---------- */
   var observer = null;

@@ -605,3 +605,62 @@ body {
     width: 430px;
   }
 }
+
+
+/* ============ TOMBOL MUSIK MELAYANG (PLAY / PAUSE) ============ */
+.music-btn {
+  --music-ink: #007506;
+  position: fixed;
+  z-index: 45;
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  /* HP: menempel di kanan layar. Tablet/PC: ikut tepi kanan bingkai 430px */
+  right: max(14px, calc((100% - var(--max-w)) / 2 + 14px));
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  color: var(--music-ink);
+  background: #ffffff;
+  border: 1px solid rgba(18, 65, 127, .12);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .35), 0 0 0 3px rgba(255, 255, 255, .18);
+  -webkit-tap-highlight-color: transparent;
+  opacity: 0;
+  transform: scale(.6);
+  pointer-events: none;
+  transition: opacity .5s ease, transform .5s cubic-bezier(.34, 1.56, .64, 1), box-shadow .2s;
+}
+.music-btn[hidden] { display: none; }
+.music-btn.is-visible {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+.music-btn.is-visible:hover { box-shadow: 0 8px 22px rgba(0, 0, 0, .45), 0 0 0 3px rgba(255, 255, 255, .3); }
+.music-btn.is-visible:active { transform: scale(.92); }
+.music-btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+.music-btn__icon {
+  display: block;
+  animation: musicSpin 4s linear infinite;
+  animation-play-state: paused;
+}
+.music-btn.is-playing .music-btn__icon { animation-play-state: running; }
+@keyframes musicSpin { to { transform: rotate(360deg); } }
+
+/* Garis coret = musik sedang dijeda */
+.music-btn::after {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 2.5px;
+  border-radius: 2px;
+  background: var(--music-ink);
+  box-shadow: 0 0 0 1.5px #ffffff;
+  transform: rotate(-45deg);
+  opacity: 1;
+  transition: opacity .2s ease;
+}
+.music-btn.is-playing::after { opacity: 0; }

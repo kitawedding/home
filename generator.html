@@ -528,7 +528,7 @@
             const namaTamu = capitalizeName(namaTamuInput);
             
             // Buat link undangan dengan parameter tamu
-            const linkUndangan = baseLink + "?to=" + encodeURIComponent(namaTamu.replace(/\s+/g, '-').toLowerCase());
+            const linkUndangan = baseLink + "/?to=" + encodeURIComponent(namaTamu.replace(/\s+/g, '-').toLowerCase());
             
             // Template teks undangan yang lebih menarik
             generatedText = `Assalamu'alaikum Wr. Wb.
